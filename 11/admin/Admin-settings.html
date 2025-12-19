@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cài đặt - Paw Joy Admin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles/Admin-settings.css">
+</head>
+
+<body class="font-sans text-dark bg-cream">
+
+  <!-- SIDEBAR -->
+  <aside class="fixed left-0 top-0 h-screen bg-white shadow-lg w-64 z-40">
+    <div class="flex flex-col h-full">
+      <div class="h-20 flex items-center px-6 border-b border-gray-100">
+        <a href="Admin-dashboard.html" class="flex items-center gap-3 group">
+          <div class="relative w-10 h-10 flex-shrink-0">
+            <!-- Chân mèo màu vàng (dưới) -->
+            <i
+              class="fas fa-paw absolute bottom-0 left-0 text-[#EAB308] text-2xl transform -rotate-12 translate-y-1 -translate-x-1 opacity-80"></i>
+            <!-- Chân mèo màu đen (trên) -->
+            <i
+              class="fas fa-paw absolute top-0 right-0 text-black text-2xl transform rotate-12 translate-x-1 -translate-y-1"></i>
+          </div>
+          <span class="font-serif font-bold text-xl md:text-2xl tracking-tight text-dark">
+            Paw
+            <span class="text-brand italic">Joy</span>
+            .
+          </span>
+        </a>
+      </div>
+
+      <nav class="flex-1 overflow-y-auto py-6 px-4">
+        <div class="space-y-1">
+          <a href="Admin-dashboard.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-chart-line"></i><span>Dashboard</span>
+          </a>
+          <a href="Admin-orders.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-calendar-check"></i><span>Đơn đặt lịch</span>
+          </a>
+          <a href="Admin-partners.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-store"></i><span>Đối tác</span>
+          </a>
+          <a href="Admin-customers.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-users"></i><span>Khách hàng</span>
+          </a>
+          <a href="Admin-finance.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-wallet"></i><span>Tài chính</span>
+          </a>
+          <a href="Admin-vouchers.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-ticket"></i><span>Khuyến mãi</span>
+          </a>
+          <a href="Admin-settings.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-r from-brand/10 to-brand/5 text-brand font-semibold">
+            <i class="fas fa-cog"></i><span>Cài đặt</span>
+          </a>
+        </div>
+      </nav>
+
+      <div class="border-t border-gray-100 p-4">
+        <div class="flex items-center gap-3">
+          <div
+            class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand to-brandDark text-white flex items-center justify-center font-bold">
+            A</div>
+          <div>
+            <p class="font-semibold text-dark text-sm">Trần Thị Minh Anh</p>
+            <p class="text-xs text-gray-500">anhtran.31231023215@...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Success Alert -->
+  <div id="successAlert" class="fixed top-24 right-6 z-50 hidden alert-slide-in">
+    <div class="bg-white rounded-2xl shadow-xl border-l-4 border-green-500 p-4 flex items-center gap-3">
+      <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+        <i class="fas fa-check text-green-600"></i>
+      </div>
+      <div>
+        <p class="font-semibold text-dark" id="alertMessage"></p>
+      </div>
+      <button onclick="hideAlert()" class="ml-4 text-gray-400 hover:text-gray-600">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="ml-64">
+    <header class="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-gray-100 shadow-sm">
+      <div class="h-20 px-6 flex items-center justify-between">
+        <div>
+          <h2 class="text-xl font-bold text-dark">Cài đặt hệ thống</h2>
+        </div>
+        <div
+          class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand to-brandDark text-white flex items-center justify-center font-bold">
+          A</div>
+      </div>
+    </header>
+
+    <main class="p-6">
+      <div class="space-y-6">
+        <div>
+          <h1 class="text-3xl font-serif font-bold text-dark mb-2">Cài đặt</h1>
+          <p class="text-gray-500">Quản lý cấu hình hệ thống</p>
+        </div>
+
+        <!-- Profile Settings -->
+        <div class="card">
+          <h3 class="text-xl font-bold text-dark mb-6 flex items-center gap-2">
+            <i class="fas fa-user-circle text-brand"></i> Thông tin cá nhân
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm font-semibold text-dark mb-2">Họ và tên</label>
+              <input type="text" id="profileName" value="Trần Thị Minh Anh"
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20">
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-dark mb-2">Email</label>
+              <input type="email" id="profileEmail" value="anhtran.31231023215@..."
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20">
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-dark mb-2">Số điện thoại</label>
+              <input type="tel" id="profilePhone" value="+84 889 659 267"
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20">
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-dark mb-2">Vai trò</label>
+              <input type="text" value="Quản trị viên" disabled
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-500 cursor-not-allowed">
+            </div>
+          </div>
+          <div class="mt-6 flex gap-3">
+            <button onclick="saveProfile()"
+              class="px-6 py-3 bg-brand text-white rounded-xl font-bold hover:bg-brandDark transition">
+              <i class="fas fa-save mr-2"></i>Lưu thay đổi
+            </button>
+            <button onclick="resetProfile()"
+              class="px-6 py-3 bg-gray-100 text-dark rounded-xl font-semibold hover:bg-gray-200 transition">Hủy</button>
+          </div>
+        </div>
+
+        <!-- Password Change -->
+        <div class="card">
+          <h3 class="text-xl font-bold text-dark mb-6 flex items-center gap-2">
+            <i class="fas fa-lock text-brand"></i> Đổi mật khẩu
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="md:col-span-2">
+              <label class="block text-sm font-semibold text-dark mb-2">Mật khẩu hiện tại</label>
+              <input type="password" id="currentPassword" placeholder="Nhập mật khẩu hiện tại"
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20">
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-dark mb-2">Mật khẩu mới</label>
+              <input type="password" id="newPassword" placeholder="Nhập mật khẩu mới"
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20">
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-dark mb-2">Xác nhận mật khẩu</label>
+              <input type="password" id="confirmPassword" placeholder="Nhập lại mật khẩu mới"
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20">
+            </div>
+          </div>
+          <button onclick="changePassword()"
+            class="mt-6 px-6 py-3 bg-brand text-white rounded-xl font-bold hover:bg-brandDark transition">
+            <i class="fas fa-key mr-2"></i>Đổi mật khẩu
+          </button>
+        </div>
+
+        <!-- System Settings -->
+        <div class="card">
+          <h3 class="text-xl font-bold text-dark mb-6 flex items-center gap-2">
+            <i class="fas fa-cog text-brand"></i> Cài đặt hệ thống
+          </h3>
+          <div class="space-y-4">
+            <div class="flex items-center justify-between p-4 bg-cream/50 rounded-xl hover:bg-cream transition">
+              <div>
+                <p class="font-semibold text-dark">Thông báo Email</p>
+                <p class="text-sm text-gray-500">Nhận thông báo qua email</p>
+              </div>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="emailNotification" checked class="sr-only peer"
+                  onchange="toggleSetting('emailNotification')">
+                <div
+                  class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-brand/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand">
+                </div>
+              </label>
+            </div>
+
+            <div class="flex items-center justify-between p-4 bg-cream/50 rounded-xl hover:bg-cream transition">
+              <div>
+                <p class="font-semibold text-dark">Thông báo SMS</p>
+                <p class="text-sm text-gray-500">Nhận thông báo qua tin nhắn</p>
+              </div>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="smsNotification" checked class="sr-only peer"
+                  onchange="toggleSetting('smsNotification')">
+                <div
+                  class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-brand/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand">
+                </div>
+              </label>
+            </div>
+
+            <div class="flex items-center justify-between p-4 bg-cream/50 rounded-xl hover:bg-cream transition">
+              <div>
+                <p class="font-semibold text-dark">Xác nhận tự động</p>
+                <p class="text-sm text-gray-500">Tự động xác nhận lịch hẹn</p>
+              </div>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="autoConfirm" class="sr-only peer" onchange="toggleSetting('autoConfirm')">
+                <div
+                  class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-brand/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand">
+                </div>
+              </label>
+            </div>
+
+            <div class="flex items-center justify-between p-4 bg-cream/50 rounded-xl hover:bg-cream transition">
+              <div>
+                <p class="font-semibold text-dark">Chế độ bảo trì</p>
+                <p class="text-sm text-gray-500">Tạm ngưng nhận lịch hẹn mới</p>
+              </div>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="maintenanceMode" class="sr-only peer"
+                  onchange="toggleSetting('maintenanceMode')">
+                <div
+                  class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-brand/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand">
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Appearance -->
+        <div class="card">
+          <h3 class="text-xl font-bold text-dark mb-6 flex items-center gap-2">
+            <i class="fas fa-palette text-brand"></i> Giao diện
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm font-semibold text-dark mb-2">Ngôn ngữ</label>
+              <select id="language"
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20">
+                <option value="vi">Tiếng Việt</option>
+                <option value="en">English</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-dark mb-2">Múi giờ</label>
+              <select id="timezone"
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20">
+                <option value="GMT+7">GMT+7 (Việt Nam)</option>
+                <option value="GMT+8">GMT+8 (Singapore)</option>
+                <option value="GMT+9">GMT+9 (Nhật Bản)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Business Settings -->
+        <div class="card">
+          <h3 class="text-xl font-bold text-dark mb-6 flex items-center gap-2">
+            <i class="fas fa-briefcase text-brand"></i> Cài đặt doanh nghiệp
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm font-semibold text-dark mb-2">Tên doanh nghiệp</label>
+              <input type="text" value="PawJoy Pet Care"
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20">
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-dark mb-2">Mã số thuế</label>
+              <input type="text" value="0123456789"
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20">
+            </div>
+            <div class="md:col-span-2">
+              <label class="block text-sm font-semibold text-dark mb-2">Địa chỉ</label>
+              <input type="text" value="135 Trần Hưng Đạo, Phường cầu Ông Lãnh, TP.HCM"
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20">
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-dark mb-2">Email liên hệ</label>
+              <input type="email" value="contact@pawjoy.vn"
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20">
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-dark mb-2">Hotline</label>
+              <input type="tel" value="1900-xxxx"
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20">
+            </div>
+          </div>
+          <button class="mt-6 px-6 py-3 bg-brand text-white rounded-xl font-bold hover:bg-brandDark transition">
+            <i class="fas fa-save mr-2"></i>Cập nhật thông tin
+          </button>
+        </div>
+
+        <!-- Commission Settings -->
+        <div class="card">
+          <h3 class="text-xl font-bold text-dark mb-6 flex items-center gap-2">
+            <i class="fas fa-hand-holding-usd text-brand"></i> Cài đặt phí dịch vụ
+          </h3>
+          <div class="space-y-4">
+            <div class="flex items-center justify-between p-4 bg-cream/50 rounded-xl">
+              <div class="flex-1">
+                <p class="font-semibold text-dark">Spa</p>
+                <p class="text-sm text-gray-500">Phí dịch vụ mỗi lần đặt lịch</p>
+              </div>
+              <div class="flex items-center gap-3">
+                <input type="number" id="spaFee" value="15000" min="0" step="1000"
+                  class="w-32 px-3 py-2 rounded-lg border border-gray-200 focus:border-brand focus:outline-none text-center font-semibold">
+                <span class="text-gray-600 font-semibold">VNĐ</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between p-4 bg-cream/50 rounded-xl">
+              <div class="flex-1">
+                <p class="font-semibold text-dark">Thăm khám</p>
+                <p class="text-sm text-gray-500">Phí dịch vụ mỗi lần đặt lịch</p>
+              </div>
+              <div class="flex items-center gap-3">
+                <input type="number" id="medicalFee" value="15000" min="0" step="1000"
+                  class="w-32 px-3 py-2 rounded-lg border border-gray-200 focus:border-brand focus:outline-none text-center font-semibold">
+                <span class="text-gray-600 font-semibold">VNĐ</span>
+              </div>
+            </div>
+          </div>
+          <div class="mt-6 p-4 bg-gray-50 rounded-xl">
+            <div class="flex items-start gap-3">
+              <i class="fas fa-calculator text-gray-600 mt-1"></i>
+              <div class="flex-1">
+                <p class="font-semibold text-dark mb-2">Ví dụ tính phí:</p>
+                <ul class="text-sm text-gray-600 space-y-1">
+                  <li>• Khách đặt dịch vụ Spa → Thu phí: <span class="font-bold text-brand">15.000 VNĐ</span></li>
+                  <li>• Khách đặt dịch vụ Thăm khám → Thu phí: <span class="font-bold text-brand">15.000 VNĐ</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <button onclick="saveCommissionSettings()"
+            class="mt-6 px-6 py-3 bg-brand text-white rounded-xl font-bold hover:bg-brandDark transition">
+            <i class="fas fa-save mr-2"></i>Lưu cài đặt phí dịch vụ
+          </button>
+        </div>
+
+        <!-- Danger Zone -->
+        <div class="bg-red-50 border-2 border-red-200 rounded-2xl p-6">
+          <h3 class="text-xl font-bold text-red-600 mb-4 flex items-center gap-2">
+            <i class="fas fa-exclamation-triangle"></i> Vùng nguy hiểm
+          </h3>
+          <p class="text-sm text-gray-600 mb-4">Các hành động dưới đây không thể hoàn tác. Vui lòng thận trọng!</p>
+          <div class="flex flex-wrap gap-3">
+            <button onclick="clearCache()"
+              class="px-4 py-2 bg-yellow-100 text-yellow-700 rounded-xl font-semibold hover:bg-yellow-200 transition">
+              <i class="fas fa-trash mr-2"></i>Xóa Cache
+            </button>
+            <button onclick="exportData()"
+              class="px-4 py-2 bg-blue-100 text-blue-700 rounded-xl font-semibold hover:bg-blue-200 transition">
+              <i class="fas fa-download mr-2"></i>Xuất dữ liệu
+            </button>
+            <button onclick="resetSystem()"
+              class="px-4 py-2 bg-red-100 text-red-700 rounded-xl font-semibold hover:bg-red-200 transition">
+              <i class="fas fa-redo mr-2"></i>Đặt lại hệ thống
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/Admin-settings.js"></script>
+
+</body>
+
+</html>

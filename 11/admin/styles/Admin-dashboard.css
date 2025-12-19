@@ -1,0 +1,85 @@
+/* Admin-dashboard.css - Complete Styles */
+
+/* Font Family Setup */
+body {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.font-sans {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+}
+
+.font-serif {
+  font-family: "Playfair Display", serif !important;
+}
+
+/* Tailwind Custom Utilities */
+@layer utilities {
+  /* Colors */
+  .bg-brand { background-color: #D97706 !important; }
+  .bg-brandDark { background-color: #92400E !important; }
+  .bg-accent { background-color: #059669 !important; }
+  .bg-dark { background-color: #3F2212 !important; }
+  .bg-cream { background-color: #FDFBF7 !important; }
+  
+  .text-brand { color: #D97706 !important; }
+  .text-brandDark { color: #92400E !important; }
+  .text-accent { color: #059669 !important; }
+  .text-dark { color: #3F2212 !important; }
+  
+  .border-brand { border-color: #D97706 !important; }
+  .border-brandDark { border-color: #92400E !important; }
+  
+  /* Hover States */
+  .hover\:bg-brand:hover { background-color: #D97706 !important; }
+  .hover\:bg-brandDark:hover { background-color: #92400E !important; }
+  .hover\:text-brand:hover { color: #D97706 !important; }
+  
+  /* Focus States */
+  .focus\:border-brand:focus { border-color: #D97706 !important; }
+  
+  /* Gradients */
+  .bg-gradient-to-tr { background-image: linear-gradient(to top right, var(--tw-gradient-stops)) !important; }
+  .bg-gradient-to-r { background-image: linear-gradient(to right, var(--tw-gradient-stops)) !important; }
+  .bg-gradient-to-br { background-image: linear-gradient(to bottom right, var(--tw-gradient-stops)) !important; }
+  
+  .from-brand { 
+    --tw-gradient-from: #D97706; 
+    --tw-gradient-to: rgba(217, 119, 6, 0);
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important; 
+  }
+  .to-brandDark { --tw-gradient-to: #92400E !important; }
+  
+  /* Brand opacity variants */
+  .from-brand\/10 { 
+    --tw-gradient-from: rgba(217, 119, 6, 0.1); 
+    --tw-gradient-to: rgba(217, 119, 6, 0);
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important; 
+  }
+  .to-brand\/5 { --tw-gradient-to: rgba(217, 119, 6, 0.05) !important; }
+  
+  .hover\:bg-brand\/10:hover { background-color: rgba(217, 119, 6, 0.1) !important; }
+}
+
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D97706;
+  border-radius: 10px;
+}
+
+/* Card Component */
+.card {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05);
+}

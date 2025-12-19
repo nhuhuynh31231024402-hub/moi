@@ -1,0 +1,330 @@
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- FontAwesome -->
+<link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    rel="stylesheet"
+/>
+<!-- Config Tailwind CSS -->
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: {
+                    sans: ['"Plus Jakarta Sans"', "sans-serif"],
+                    serif: ['"Playfair Display"', "serif"],
+                },
+                colors: {
+                    brand: "#D97706",
+                    brandLight: "#FFFBEB",
+                    brandDark: "#92400E",
+                    accent: "#059669",
+                    dark: "#3F2212",
+                    slate: "#1F2937",
+                    cream: "#FDFBF7",
+                    paper: "#F3F4F6",
+                },
+                boxShadow: {
+                    soft: "0 20px 40px -15px rgba(0, 0, 0, 0.05)",
+                    glow: "0 0 30px rgba(217, 119, 6, 0.4)",
+                },
+                animation: {
+                    scroll: "scroll 8s linear infinite",
+                    "fade-up": "fadeUp 0.8s ease-out forwards",
+                },
+                keyframes: {
+                    scroll: {
+                        "0%": { transform: "translateX(0)" },
+                        "100%": { transform: "translateX(-50%)" },
+                    },
+                    fadeUp: {
+                        "0%": { opacity: "0", transform: "translateY(20px)" },
+                        "100%": { opacity: "1", transform: "translateY(0)" },
+                    },
+                },
+            },
+        },
+    };
+</script>
+
+<header
+    id="main-header"
+    class="fixed w-full z-50 transition-all duration-500 bg-cream/80 backdrop-blur-md border-b border-brand/5"
+>
+    <div
+        class="container mx-auto px-4 md:px-6 h-16 md:h-20 flex justify-between items-center relative"
+    >
+        <!-- Logo -->
+        <a href="../../index.html" class="flex items-center gap-3 group">
+            <div class="relative w-10 h-10 flex-shrink-0">
+                <!-- Chân mèo màu vàng (dưới) -->
+                <i
+                    class="fas fa-paw absolute bottom-0 left-0 text-[#EAB308] text-2xl transform -rotate-12 translate-y-1 -translate-x-1 opacity-80"
+                ></i>
+                <!-- Chân mèo màu đen (trên) -->
+                <i
+                    class="fas fa-paw absolute top-0 right-0 text-black text-2xl transform rotate-12 translate-x-1 -translate-y-1"
+                ></i>
+            </div>
+            <span
+                class="font-serif font-bold text-xl md:text-2xl tracking-tight text-dark"
+            >
+                Paw
+                <span class="text-brand italic">Joy</span>
+                .
+            </span>
+        </a>
+
+        <!-- Hiển thị Menu trên thiết bị Destkop-->
+        <nav
+            class="hidden md:flex items-center space-x-6 lg:space-x-8 font-medium text-sm tracking-wide absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+        >
+            <a href="../../index.html" class="text-gray-600 hover:text-brand transition duration-300">Trang chủ</a>
+            <a
+                href="about-us.html"
+                class="text-gray-600 hover:text-brand transition duration-300"
+                >Về chúng tôi</a
+            >
+            <a
+                href="stores.html"
+                class="text-gray-600 hover:text-brand transition duration-300"
+                >Đặt lịch</a
+            >
+            <a
+                href="blog.html"
+                class="text-gray-600 hover:text-brand transition duration-300"
+                >Blog</a
+            >
+        </nav>
+
+        <!-- Tools (Phải) -->
+        <div class="flex gap-3 md:gap-5 items-center">
+            <!-- Icon cuốn lịch với dropdown -->
+            <div class="relative group" id="calendarDropdown">
+                <button
+                    id="calendarButton"
+                    onclick="toggleCalendarDropdown(event)"
+                    class="w-8 h-8 md:w-9 md:h-9 flex items-center justify-center rounded-full text-dark hover:text-brand hover:bg-brand/10 transition relative"
+                >
+                    <i class="far fa-calendar-alt text-lg"></i>
+                    <!-- Badge số lượng đang chờ -->
+                    <span class="absolute -top-1 -right-1 w-5 h-5 bg-brand text-white text-xs font-bold rounded-full flex items-center justify-center">2</span>
+                </button>
+                
+                <!-- Dropdown khi hover (desktop) hoặc click (mobile) -->
+                <div id="calendarDropdownMenu" class="absolute right-0 top-full mt-2 w-80 bg-white rounded-xl shadow-2xl border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 transform translate-y-2 group-hover:translate-y-0 md:group-hover:translate-y-0 calendar-dropdown-mobile">
+                    <div class="p-4">
+                        <!-- Header dropdown -->
+                        <div class="flex items-center justify-between mb-4 pb-3 border-b border-gray-200">
+                            <h3 class="font-bold text-dark text-sm">Đang chờ thanh toán</h3>
+                            <span class="text-xs text-gray-500">2 dịch vụ</span>
+                        </div>
+                        
+                        <!-- Store info -->
+                        <div class="flex items-center gap-3 mb-4 pb-3 border-b border-gray-100">
+                            <img
+                                src="../../assets/images/stores/PetWow/logo_petwow.png"
+                                alt="Pet Wow"
+                                class="w-12 h-12 rounded-lg object-cover"
+                                onerror="this.src='../../assets/images/logo/LOGO PAWJOY.png'"
+                            />
+                            <div class="flex-1">
+                                <h4 class="font-bold text-dark text-sm">Pet Wow</h4>
+                                <p class="text-xs text-gray-500">294 Lê Quang Định, Bình Thạnh</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Danh sách dịch vụ -->
+                        <div class="space-y-3 mb-4">
+                            <!-- Dịch vụ 1 -->
+                            <div class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                                <div class="flex-1">
+                                    <p class="font-semibold text-dark text-sm">Tắm sấy</p>
+                                    <p class="text-xs text-gray-500">30 phút</p>
+                                    <p class="text-xs font-bold text-brand mt-1">170.000 VNĐ</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Dịch vụ 2 -->
+                            <div class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                                <div class="flex-1">
+                                    <p class="font-semibold text-dark text-sm">Cắt mài móng</p>
+                                    <p class="text-xs text-gray-500">20 phút</p>
+                                    <p class="text-xs font-bold text-brand mt-1">40.000 VNĐ</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Tổng tiền -->
+                        <div class="flex items-center justify-between mb-4 pb-3 border-t border-gray-200 pt-3">
+                            <span class="text-sm font-bold text-dark">Tổng tiền</span>
+                            <span class="font-serif font-bold text-brand">210.000 VNĐ</span>
+                        </div>
+                        
+                        <!-- Button tiếp tục thanh toán -->
+                        <a
+                            href="../../templates/pages/booking-pending.html"
+                            class="w-full bg-brand hover:bg-brandDark text-white font-bold py-3 rounded-xl transition text-center block"
+                        >
+                            Tiếp tục thanh toán
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Icon trái tim - Danh sách yêu thích -->
+            <a
+                href="favorites.html"
+                class="w-8 h-8 md:w-9 md:h-9 flex items-center justify-center rounded-full text-dark hover:text-red-500 hover:bg-red-50 transition relative"
+                title="Danh sách yêu thích"
+            >
+                <i class="far fa-heart text-lg"></i>
+                <span id="favoritesBadge" class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center hidden">0</span>
+            </a>
+            
+            <!-- Icon Account với dropdown -->
+            <div class="relative group" id="accountDropdown">
+                <button
+                    id="accountButton"
+                    onclick="toggleAccountDropdown(event)"
+                    class="w-8 h-8 md:w-9 md:h-9 flex items-center justify-center rounded-full text-dark hover:text-brand hover:bg-brand/10 transition"
+                    title="Tài khoản"
+                >
+                    <i class="far fa-user text-lg"></i>
+                </button>
+                
+                <!-- Dropdown menu -->
+                <div id="accountDropdownMenu" class="absolute right-0 top-full mt-2 w-56 bg-white rounded-xl shadow-2xl border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 transform translate-y-2 group-hover:translate-y-0 md:group-hover:translate-y-0 account-dropdown-mobile">
+                    <div class="py-2">
+                        <a
+                            href="my-account.html"
+                            class="flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition text-gray-700 hover:text-brand"
+                        >
+                            <i class="fas fa-user w-5 text-gray-400"></i>
+                            <span class="font-medium">Tài khoản</span>
+                        </a>
+                        <a
+                            href="register.html"
+                            class="flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition text-gray-700 hover:text-brand"
+                        >
+                            <i class="fas fa-user-plus w-5 text-gray-400"></i>
+                            <span class="font-medium">Đăng ký</span>
+                        </a>
+                        <a
+                            href="login.html"
+                            class="flex items-center gap-3 px-4 py-3 hover:bg-gray-50 transition text-gray-700 hover:text-brand"
+                        >
+                            <i class="fas fa-sign-in-alt w-5 text-gray-400"></i>
+                            <span class="font-medium">Đăng nhập</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <button
+                onclick="toggleMobileMenu()"
+                class="md:hidden text-2xl text-dark hover:text-brand transition"
+            >
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Hiển thị Menu trên Mobile-->
+    <div
+        id="mobile-menu"
+        class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full left-0 top-full shadow-lg"
+    >
+        <div class="flex flex-col p-4 space-y-4 font-medium text-center">
+            <a href="../../index.html" class="text-gray-600 hover:text-brand transition">Trang chủ</a>
+            <a href="about-us.html" class="text-gray-600 hover:text-brand transition">Về chúng tôi</a>
+            <a href="stores.html" class="text-gray-600 hover:text-brand transition">Đặt lịch</a>
+            <a href="blog.html" class="text-gray-600 hover:text-brand transition">Blog</a>
+        </div>
+    </div>
+</header>
+
+<script type="module" src="../../assets/js/lib/mobile-menu.js"></script>
+<script>
+    // Toggle calendar dropdown trên mobile
+    function toggleAccountDropdown(event) {
+        event.stopPropagation();
+        const dropdown = document.getElementById('accountDropdown');
+        const menu = document.getElementById('accountDropdownMenu');
+        
+        if (!menu) return;
+        
+        // Toggle on mobile
+        if (window.innerWidth < 768) {
+            const isOpen = dropdown.classList.contains('account-dropdown-open');
+            if (isOpen) {
+                dropdown.classList.remove('account-dropdown-open');
+            } else {
+                dropdown.classList.add('account-dropdown-open');
+            }
+        }
+        // Desktop: handled by CSS hover
+    }
+
+    function toggleCalendarDropdown(event) {
+        if (event) {
+            event.stopPropagation();
+            event.preventDefault();
+        }
+        
+        const dropdown = document.getElementById('calendarDropdownMenu');
+        const isMobile = window.innerWidth < 768; // md breakpoint của Tailwind
+        
+        if (isMobile && dropdown) {
+            // Trên mobile: toggle bằng class
+            const isOpen = dropdown.classList.contains('calendar-dropdown-open');
+            if (isOpen) {
+                dropdown.classList.remove('calendar-dropdown-open');
+            } else {
+                dropdown.classList.add('calendar-dropdown-open');
+            }
+        }
+        // Trên desktop: vẫn dùng hover (không cần làm gì)
+    }
+
+    // Đóng dropdown khi click bên ngoài (chỉ trên mobile)
+    document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('click', function(event) {
+            const isMobile = window.innerWidth < 768;
+            
+            // Calendar dropdown
+            const calendarDropdown = document.getElementById('calendarDropdown');
+            const calendarMenu = document.getElementById('calendarDropdownMenu');
+            if (isMobile && calendarMenu && calendarDropdown) {
+                const clickedInside = calendarDropdown.contains(event.target);
+                if (!clickedInside) {
+                    calendarDropdown.classList.remove('calendar-dropdown-open');
+                }
+            }
+            
+            // Account dropdown
+            const accountDropdown = document.getElementById('accountDropdown');
+            const accountMenu = document.getElementById('accountDropdownMenu');
+            if (isMobile && accountMenu && accountDropdown) {
+                const clickedInside = accountDropdown.contains(event.target);
+                if (!clickedInside) {
+                    accountDropdown.classList.remove('account-dropdown-open');
+                }
+            }
+        });
+    });
+</script>
+<style>
+    /* Mobile: hiển thị dropdown khi có class calendar-dropdown-open */
+    @media (max-width: 767px) {
+        .calendar-dropdown-mobile.calendar-dropdown-open {
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: translateY(0) !important;
+        }
+        .account-dropdown-mobile.account-dropdown-open {
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: translateY(0) !important;
+        }
+    }
+</style>

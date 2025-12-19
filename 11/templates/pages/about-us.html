@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Paw Joy - All 4 Pets</title>
+        <link
+            rel="icon"
+            type="image/svg+xml"
+            href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23FDBA74'/%3E%3Cstop offset='100%25' stop-color='%23D97706'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23grad)'/%3E%3Cpath fill='white' d='M32 40c-6.6 0-12 5.4-12 12 0 6.6 5.4 12 12 12s12-5.4 12-12c0-6.6-5.4-12-12-12zm-18-8c0 4.4 3.6 8 8 8s8-3.6 8-8-3.6-8-8-8-8 3.6-8 8zm36 0c0 4.4 3.6 8 8 8s8-3.6 8-8-3.6-8-8-8-8 3.6-8 8zm-26-16c0 4.4 3.6 8 8 8s8-3.6 8-8-3.6-8-8-8-8 3.6-8 8zm16 0c0 4.4 3.6 8 8 8s8-3.6 8-8-3.6-8-8-8-8 3.6-8 8z'/%3E%3C/svg%3E"
+        />
+
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            sans: ['"Plus Jakarta Sans"', "sans-serif"],
+                            serif: ['"Playfair Display"', "serif"],
+                        },
+                        colors: {
+                            brand: "#D97706",
+                            brandLight: "#FFFBEB",
+                            brandDark: "#92400E",
+                            accent: "#059669",
+                            dark: "#3F2212",
+                            slate: "#1F2937",
+                            cream: "#FDFBF7",
+                            paper: "#F3F4F6",
+                        },
+                        boxShadow: {
+                            soft: "0 20px 40px -15px rgba(0, 0, 0, 0.05)",
+                            glow: "0 0 30px rgba(217, 119, 6, 0.4)",
+                        },
+                        animation: {
+                            "fade-up": "fadeUp 0.8s ease-out forwards",
+                        },
+                        keyframes: {
+                            fadeUp: {
+                                "0%": {
+                                    opacity: "0",
+                                    transform: "translateY(20px)",
+                                },
+                                "100%": {
+                                    opacity: "1",
+                                    transform: "translateY(0)",
+                                },
+                            },
+                        },
+                    },
+                },
+            };
+        </script>
+    </head>
+    <body
+        class="font-sans text-dark bg-cream antialiased selection:bg-brand selection:text-white flex flex-col min-h-screen"
+    >
+        <!-- HEADER: logo, menu, điều hướng chính  -->
+        <div id="header"></div>
+
+        <main class="flex-grow pt-16 md:pt-20">
+            <section class="py-12 md:py-16 bg-white border-b border-gray-100">
+                <div class="container mx-auto px-6 max-w-4xl text-center">
+                    <span
+                        class="text-brand font-bold text-xs uppercase tracking-widest mb-2 md:mb-3 block"
+                        >Hành trình yêu thương</span
+                    >
+                    <h1
+                        class="font-serif text-3xl md:text-5xl text-dark font-medium leading-tight mb-4"
+                    >
+                        Giá trị cốt lõi của Paw Joy.
+                    </h1>
+                    <p
+                        class="text-gray-600 text-base md:text-lg max-w-3xl mx-auto"
+                    >
+                        Chúng tôi không chỉ là một nền tảng đặt lịch. Chúng tôi
+                        là cầu nối tin cậy giữa bạn và các dịch vụ chăm sóc thú
+                        cưng chất lượng cao, đảm bảo mỗi Boss đều nhận được sự
+                        quan tâm xứng đáng.
+                    </p>
+                </div>
+            </section>
+
+            <section id="policy-sections" class="py-16 md:py-24 bg-cream">
+                <div class="container mx-auto px-6 max-w-4xl">
+                    <div class="text-center mb-10 md:mb-12">
+                        <h2 class="font-serif text-2xl md:text-3xl text-dark">
+                            Thông tin Minh bạch & Cam kết
+                        </h2>
+                        <div class="w-16 h-1 bg-brand mx-auto mt-2"></div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <details
+                            class="group bg-white p-4 md:p-6 rounded-2xl cursor-pointer shadow-soft"
+                            open
+                        >
+                            <summary
+                                class="flex justify-between items-center font-bold text-dark text-lg md:text-xl list-none py-2"
+                            >
+                                <span class="text-brand mr-4"
+                                    ><i class="fas fa-circle-info"></i
+                                ></span>
+                                <span>Về Chúng Tôi: Sứ mệnh và Tầm nhìn</span>
+                                <span
+                                    class="transition group-open:rotate-180 text-brand ml-4"
+                                    ><i class="fas fa-chevron-down"></i
+                                ></span>
+                            </summary>
+                            <div
+                                class="text-gray-600 mt-4 leading-relaxed text-sm md:text-base border-t pt-4"
+                            >
+                                <h4 class="font-bold text-dark mb-2">
+                                    Sứ mệnh:
+                                </h4>
+                                <p class="mb-4">
+                                    Mang đến sự tiện lợi tuyệt đối cho người
+                                    nuôi thú cưng, giúp họ dễ dàng kết nối với
+                                    mạng lưới các dịch vụ Spa, Grooming và Thú y
+                                    uy tín, chuyên nghiệp. Đặt lợi ích và sự an
+                                    toàn của thú cưng lên hàng đầu.
+                                </p>
+                                <h4 class="font-bold text-dark mb-2">
+                                    Tầm nhìn:
+                                </h4>
+                                <p>
+                                    Trở thành nền tảng đặt lịch dịch vụ thú cưng
+                                    số 1 tại Việt Nam, xây dựng một hệ sinh thái
+                                    chăm sóc thú cưng thông minh và minh bạch,
+                                    nơi mọi thông tin dịch vụ, giá cả, và đánh
+                                    giá đều được công khai rõ ràng.
+                                </p>
+                            </div>
+                        </details>
+
+                        <details
+                            class="group bg-white p-4 md:p-6 rounded-2xl cursor-pointer shadow-soft"
+                            open
+                        >
+                            <summary
+                                class="flex justify-between items-center font-bold text-dark text-lg md:text-xl list-none py-2"
+                            >
+                                <span class="text-accent mr-4"
+                                    ><i class="fas fa-file-shield"></i
+                                ></span>
+                                <span>Quy Chế Hoạt Động của Paw Joy</span>
+                                <span
+                                    class="transition group-open:rotate-180 text-brand ml-4"
+                                    ><i class="fas fa-chevron-down"></i
+                                ></span>
+                            </summary>
+                            <div
+                                class="text-gray-600 mt-4 leading-relaxed text-sm md:text-base border-t pt-4"
+                            >
+                                <h4 class="font-bold text-dark mb-2">
+                                    Tiêu chuẩn Đối tác:
+                                </h4>
+                                <p class="mb-4">
+                                    Các đối tác
+                                    Spa/Phòng khám phải đáp ứng tiêu chuẩn
+                                    nghiêm ngặt về vệ sinh, trang thiết bị,
+                                    và kinh nghiệm của nhân viên (tối thiểu
+                                    2 năm kinh nghiệm).
+                                </p>
+                                <h4 class="font-bold text-dark mb-2">
+                                    Quy trình Đặt lịch:
+                                </h4>
+                                <p class="mb-4">
+                                    Người dùng đặt
+                                    lịch qua nền tảng Paw Joy. Sau khi đặt,
+                                    hệ thống sẽ gửi xác nhận trong vòng 15
+                                    phút.
+                                </p>
+                                <h4 class="font-bold text-dark mb-2">
+                                    Chính sách Hủy:
+                                </h4>
+                                <p class="mb-4">
+                                    Khách hàng có thể
+                                    hủy lịch miễn phí tối thiểu 2 giờ trước
+                                    giờ hẹn. Nếu hủy muộn hơn, có thể bị
+                                    tính phí hủy 50% giá trị dịch vụ.
+                                </p>
+                                <h4 class="font-bold text-dark mb-2">
+                                    Giải quyết Tranh chấp:
+                                </h4>
+                                <p>
+                                    Paw Joy đóng
+                                    vai trò là bên thứ ba trung gian, đảm
+                                    bảo quyền lợi công bằng cho cả người
+                                    dùng và đối tác dịch vụ.
+                                </p>
+                            </div>
+                        </details>
+
+                        <details
+                            class="group bg-white p-4 md:p-6 rounded-2xl cursor-pointer shadow-soft"
+                            open
+                        >
+                            <summary
+                                class="flex justify-between items-center font-bold text-dark text-lg md:text-xl list-none py-2"
+                            >
+                                <span class="text-blue-500 mr-4"
+                                    ><i class="fas fa-lock"></i
+                                ></span>
+                                <span>Chính Sách Bảo Mật Thông Tin</span>
+                                <span
+                                    class="transition group-open:rotate-180 text-brand ml-4"
+                                    ><i class="fas fa-chevron-down"></i
+                                ></span>
+                            </summary>
+                            <div
+                                class="text-gray-600 mt-4 leading-relaxed text-sm md:text-base border-t pt-4"
+                            >
+                                <h4 class="font-bold text-dark mb-2">
+                                    Thu thập Thông tin:
+                                </h4>
+                                <p class="mb-4">
+                                    Paw Joy chỉ thu
+                                    thập thông tin cần thiết (Tên, SĐT, Khu
+                                    vực) để phục vụ việc đặt lịch và hỗ trợ
+                                    khách hàng.
+                                </p>
+                                <h4 class="font-bold text-dark mb-2">
+                                    Sử dụng Dữ liệu:
+                                </h4>
+                                <p class="mb-4">
+                                    Thông tin cá nhân
+                                    chỉ được chia sẻ với đối tác Spa/Phòng
+                                    khám mà bạn đã chọn đặt lịch.
+                                </p>
+                                <h4 class="font-bold text-dark mb-2">
+                                    Bảo vệ Dữ liệu:
+                                </h4>
+                                <p class="mb-4">
+                                    Chúng tôi áp dụng
+                                    các biện pháp bảo mật tiêu chuẩn (SSL,
+                                    mã hóa) để bảo vệ thông tin cá nhân của
+                                    người dùng khỏi truy cập trái phép.
+                                </p>
+                                <h4 class="font-bold text-dark mb-2">
+                                    Quyền của Người dùng:
+                                </h4>
+                                <p>
+                                    Bạn có quyền
+                                    truy cập, chỉnh sửa hoặc yêu cầu xóa
+                                    thông tin cá nhân của mình bất cứ lúc
+                                    nào qua tài khoản Paw Joy.
+                                </p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+            </section>
+
+            <section class="py-16 md:py-24 bg-brandLight">
+                <div class="container mx-auto px-6 max-w-4xl text-center">
+                    <h2
+                        class="font-serif text-3xl md:text-4xl text-dark font-medium leading-tight mb-4"
+                    >
+                        Sẵn sàng trải nghiệm dịch vụ 5 sao?
+                    </h2>
+                    <p
+                        class="text-gray-600 text-base md:text-lg max-w-2xl mx-auto mb-8"
+                    >
+                        Bắt đầu hành trình chăm sóc thú cưng thông minh và tiện
+                        lợi cùng Paw Joy ngay hôm nay!
+                    </p>
+                    <a
+                        href="stores.html"
+                        class="inline-flex items-center gap-3 bg-brand hover:bg-brandDark text-white px-8 md:px-10 py-3 md:py-4 rounded-full font-bold transition shadow-lg shadow-brand/30"
+                    >
+                        <span>Đặt lịch ngay</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <!-- FOOTER: thông tin liên hệ, chính sách, mạng xã hội -->
+        <div id="footer"></div>
+
+        <script type="module" src="../../assets/js/scroll.js"></script>
+        <script>
+          // Load header và footer từ các file component dùng chung
+          document.addEventListener("DOMContentLoaded", () => {
+            fetch("../../templates/partials/header.html")
+              .then((res) => res.text())
+              .then((html) => {
+                document.getElementById("header").innerHTML = html;
+                // Update badge sau khi header load
+                setTimeout(() => {
+                  if (typeof updateFavoriteBadge === 'function') {
+                    updateFavoriteBadge();
+                  }
+                }, 100);
+              });
+
+            fetch("../../templates/partials/footer.html")
+              .then((res) => res.text())
+              .then((html) => (document.getElementById("footer").innerHTML = html));
+          });
+        </script>
+        <script src="../../assets/js/lib/favorite-badge.js"></script>
+        <script type="module" src="../../assets/js/lib/mobile-menu.js"></script>
+        <script type="module" src="../../assets/js/lib/footer.js"></script>
+    </body>
+</html>

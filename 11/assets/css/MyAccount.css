@@ -1,0 +1,204 @@
+/* MyAccount CSS */
+
+/* CSS Variables */
+:root {
+  --brand: #D97706;
+  --brand-light: #FFFBEB;
+  --brand-dark: #92400E;
+  --accent: #059669;
+  --dark: #3F2212;
+  --slate: #1F2937;
+  --cream: #FDFBF7;
+  --paper: #F3F4F6;
+}
+
+/* Font Family Setup */
+body {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.font-sans {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+}
+
+.font-serif {
+  font-family: "Playfair Display", serif !important;
+}
+
+/* Tailwind Custom Utilities - Complete Setup */
+@layer utilities {
+  /* Background Colors */
+  .bg-brand { background-color: #D97706 !important; }
+  .bg-brandLight { background-color: #FFFBEB !important; }
+  .bg-brandDark { background-color: #92400E !important; }
+  .bg-dark { background-color: #3F2212 !important; }
+  .bg-cream { background-color: #FDFBF7 !important; }
+  
+  /* Text Colors */
+  .text-brand { color: #D97706 !important; }
+  .text-brandLight { color: #FFFBEB !important; }
+  .text-brandDark { color: #92400E !important; }
+  .text-dark { color: #3F2212 !important; }
+  
+  /* Border Colors */
+  .border-brand { border-color: #D97706 !important; }
+  
+  /* Hover States */
+  .hover\:bg-brand:hover { background-color: #D97706 !important; }
+  .hover\:bg-brandDark:hover { background-color: #92400E !important; }
+  .hover\:text-brand:hover { color: #D97706 !important; }
+  .hover\:text-brandDark:hover { color: #92400E !important; }
+  
+  /* Focus States */
+  .focus\:border-brand:focus { border-color: #D97706 !important; }
+  .focus\:ring-brand:focus { --tw-ring-color: #D97706 !important; }
+  
+  /* Background Opacity */
+  .bg-brand\/10 { background-color: rgba(217, 119, 6, 0.1) !important; }
+  .bg-brand\/5 { background-color: rgba(217, 119, 6, 0.05) !important; }
+  .bg-cream\/50 { background-color: rgba(253, 251, 247, 0.5) !important; }
+  .bg-cream\/80 { background-color: rgba(253, 251, 247, 0.8) !important; }
+  
+  /* Gradients */
+  .bg-gradient-to-tr { background-image: linear-gradient(to top right, var(--tw-gradient-stops)) !important; }
+  .bg-gradient-to-r { background-image: linear-gradient(to right, var(--tw-gradient-stops)) !important; }
+  .bg-gradient-to-br { background-image: linear-gradient(to bottom right, var(--tw-gradient-stops)) !important; }
+  
+  /* Gradient Color Stops */
+  .from-brand { 
+    --tw-gradient-from: #D97706; 
+    --tw-gradient-to: rgba(217, 119, 6, 0);
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important; 
+  }
+  .to-brandDark { --tw-gradient-to: #92400E !important; }
+  .from-orange-400 { 
+    --tw-gradient-from: #fb923c; 
+    --tw-gradient-to: rgba(251, 146, 60, 0);
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important; 
+  }
+  .to-orange-600 { --tw-gradient-to: #ea580c !important; }
+  
+  /* Shadow Colors */
+  .shadow-brand\/30 { --tw-shadow-color: rgba(217, 119, 6, 0.3); box-shadow: var(--tw-shadow-colored) !important; }
+  .shadow-soft { box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05) !important; }
+  .shadow-glow { box-shadow: 0 0 30px rgba(217, 119, 6, 0.4) !important; }
+  .shadow-2xl { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important; }
+  .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important; }
+  
+  /* Toggle Switch */
+  .peer-checked\:bg-brand:checked { background-color: #D97706 !important; }
+}
+
+/* Custom styles for MyAccount page */
+.tab-content {
+  display: block;
+}
+
+.tab-content.hidden {
+  display: none;
+}
+
+/* Toggle switch styles */
+.peer:checked ~ div {
+  background-color: #D97706 !important;
+}
+
+.peer:checked ~ div::after {
+  transform: translateX(100%) !important;
+}
+
+/* Animation for smooth tab transitions */
+.tab-content {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Custom scrollbar for better UX */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--brand);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-dark);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  aside {
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+  
+  .grid-cols-1.lg\:grid-cols-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Additional custom styles for better visual hierarchy */
+.shadow-soft {
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05);
+}
+
+.bg-gradient-brand {
+  background: linear-gradient(135deg, var(--brand), var(--brand-dark));
+}
+
+.text-gradient-brand {
+  background: linear-gradient(135deg, var(--brand), var(--brand-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Modal backdrop blur effect */
+.backdrop-blur-sm {
+  backdrop-filter: blur(4px);
+}
+
+/* Enhanced button hover effects */
+.btn-brand {
+  background-color: var(--brand);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.btn-brand:hover {
+  background-color: var(--brand-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(217, 119, 6, 0.3);
+}
+
+/* Card hover effects */
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.1);
+}

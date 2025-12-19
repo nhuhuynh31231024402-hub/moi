@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đơn đặt lịch - Paw Joy Admin</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="styles/Admin-orders.css">
+</head>
+
+<body class="font-sans text-dark bg-cream">
+
+  <!-- SIDEBAR -->
+  <aside class="fixed left-0 top-0 h-screen bg-white shadow-lg w-64 z-40">
+    <div class="flex flex-col h-full">
+      <div class="h-20 flex items-center px-6 border-b border-gray-100">
+        <a href="Admin-dashboard.html" class="flex items-center gap-3 group">
+          <div class="relative w-10 h-10 flex-shrink-0">
+            <!-- Chân mèo màu vàng (dưới) -->
+            <i
+              class="fas fa-paw absolute bottom-0 left-0 text-[#EAB308] text-2xl transform -rotate-12 translate-y-1 -translate-x-1 opacity-80"></i>
+            <!-- Chân mèo màu đen (trên) -->
+            <i
+              class="fas fa-paw absolute top-0 right-0 text-black text-2xl transform rotate-12 translate-x-1 -translate-y-1"></i>
+          </div>
+          <span class="font-serif font-bold text-xl md:text-2xl tracking-tight text-dark">
+            Paw
+            <span class="text-brand italic">Joy</span>
+            .
+          </span>
+        </a>
+      </div>
+
+      <nav class="flex-1 overflow-y-auto py-6 px-4">
+        <div class="space-y-1">
+          <a href="Admin-dashboard.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-chart-line"></i><span>Dashboard</span>
+          </a>
+          <a href="Admin-orders.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-r from-brand/10 to-brand/5 text-brand font-semibold">
+            <i class="fas fa-calendar-check"></i><span>Đơn đặt lịch</span>
+          </a>
+          <a href="Admin-partners.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-store"></i><span>Đối tác</span>
+          </a>
+          <a href="Admin-customers.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-users"></i><span>Khách hàng</span>
+          </a>
+          <a href="Admin-finance.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-wallet"></i><span>Tài chính</span>
+          </a>
+          <a href="Admin-vouchers.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-ticket"></i><span>Khuyến mãi</span>
+          </a>
+          <a href="Admin-settings.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-cog"></i><span>Cài đặt</span>
+          </a>
+        </div>
+      </nav>
+
+      <div class="border-t border-gray-100 p-4">
+        <div class="flex items-center gap-3">
+          <div
+            class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand to-brandDark text-white flex items-center justify-center font-bold">
+            A</div>
+          <div>
+            <p class="font-semibold text-dark text-sm">Trần Thị Minh Anh</p>
+            <p class="text-xs text-gray-500">anhtran.31231023215@...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <div class="ml-64">
+    <header class="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-gray-100 shadow-sm">
+      <div class="h-20 px-6 flex items-center justify-between">
+        <div>
+          <h2 class="text-xl font-bold text-dark">Đơn đặt lịch</h2>
+          <p class="text-sm text-gray-500">Quản lý đơn hàng</p>
+        </div>
+        <div class="flex items-center gap-4">
+          <button class="relative w-10 h-10 flex items-center justify-center rounded-full hover:bg-brand/10 transition">
+            <i class="far fa-bell text-dark text-lg"></i>
+            <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+          </button>
+          <div
+            class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand to-brandDark text-white flex items-center justify-center font-bold">
+            A</div>
+        </div>
+      </div>
+    </header>
+
+    <main class="p-6">
+      <div class="space-y-6">
+
+        <!-- Header -->
+        <div class="flex items-center justify-between">
+          <div>
+            <h1 class="text-3xl font-serif font-bold text-dark mb-2">Quản lý đơn đặt lịch</h1>
+            <p class="text-gray-500">Theo dõi và quản lý tất cả đơn đặt dịch vụ</p>
+          </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <button onclick="filterByStatus('all')"
+            class="card p-4 text-left hover:shadow-xl transition-all transform hover:scale-105 cursor-pointer">
+            <div class="flex items-center justify-between mb-2">
+              <span class="w-3 h-3 rounded-full bg-gray-500"></span>
+              <span class="text-2xl font-bold text-dark" id="stat-all">30</span>
+            </div>
+            <p class="text-sm text-gray-600">Tất cả</p>
+          </button>
+          <button onclick="filterByStatus('pending')"
+            class="card p-4 text-left hover:shadow-xl transition-all transform hover:scale-105 cursor-pointer">
+            <div class="flex items-center justify-between mb-2">
+              <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+              <span class="text-2xl font-bold text-dark" id="stat-pending">6</span>
+            </div>
+            <p class="text-sm text-gray-600">Chờ xác nhận</p>
+          </button>
+          <button onclick="filterByStatus('confirmed')"
+            class="card p-4 text-left hover:shadow-xl transition-all transform hover:scale-105 cursor-pointer">
+            <div class="flex items-center justify-between mb-2">
+              <span class="w-3 h-3 rounded-full bg-blue-500"></span>
+              <span class="text-2xl font-bold text-dark" id="stat-confirmed">5</span>
+            </div>
+            <p class="text-sm text-gray-600">Đã xác nhận</p>
+          </button>
+          <button onclick="filterByStatus('processing')"
+            class="card p-4 text-left hover:shadow-xl transition-all transform hover:scale-105 cursor-pointer">
+            <div class="flex items-center justify-between mb-2">
+              <span class="w-3 h-3 rounded-full bg-purple-500"></span>
+              <span class="text-2xl font-bold text-dark" id="stat-processing">7</span>
+            </div>
+            <p class="text-sm text-gray-600">Đang xử lý</p>
+          </button>
+          <button onclick="filterByStatus('completed')"
+            class="card p-4 text-left hover:shadow-xl transition-all transform hover:scale-105 cursor-pointer">
+            <div class="flex items-center justify-between mb-2">
+              <span class="w-3 h-3 rounded-full bg-green-500"></span>
+              <span class="text-2xl font-bold text-dark" id="stat-completed">9</span>
+            </div>
+            <p class="text-sm text-gray-600">Hoàn thành</p>
+          </button>
+          <button onclick="filterByStatus('cancelled')"
+            class="card p-4 text-left hover:shadow-xl transition-all transform hover:scale-105 cursor-pointer">
+            <div class="flex items-center justify-between mb-2">
+              <span class="w-3 h-3 rounded-full bg-red-500"></span>
+              <span class="text-2xl font-bold text-dark" id="stat-cancelled">3</span>
+            </div>
+            <p class="text-sm text-gray-600">Đã hủy</p>
+          </button>
+        </div>
+
+        <!-- Filters -->
+        <div class="card">
+          <div class="grid grid-cols-1 md:grid-cols-6 gap-4">
+            <input type="text" id="filterSearch" placeholder="Tìm kiếm mã đơn, tên..."
+              class="px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none">
+            <select id="filterPartner" class="px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none">
+              <option value="">Tất cả đối tác</option>
+              <option value="Pet Wow">Pet Wow</option>
+              <option value="2VET">2VET</option>
+              <option value="GẤU SPA THÚ CƯNG">GẤU SPA THÚ CƯNG</option>
+              <option value="PAO PET">PAO PET</option>
+              <option value="Lumi Pet Shop">Lumi Pet Shop</option>
+              <option value="Tiệm nhà Sâu">Tiệm nhà Sâu</option>
+              <option value="PetGrocer">PetGrocer</option>
+              <option value="Bệnh Viện Thú Y C.well Pet">Bệnh Viện Thú Y C.well Pet</option>
+              <option value="Phòng Khám Thú Y Pets & Min">Phòng Khám Thú Y Pets & Min</option>
+              <option value="PHÒNG KHÁM THÚ Y NASA PET">PHÒNG KHÁM THÚ Y NASA PET</option>
+              <option value="Bệnh Viện Thú Y Pet Pro Cộng Hòa">Bệnh Viện Thú Y Pet Pro Cộng Hòa</option>
+            </select>
+            <select id="filterService" class="px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none">
+              <option value="">Tất cả dịch vụ</option>
+              <optgroup label="Spa">
+                <option value="Tắm sấy">Tắm sấy</option>
+                <option value="Tắm vệ sinh">Tắm vệ sinh</option>
+                <option value="Tắm cạo">Tắm cạo</option>
+                <option value="Tắm vệ sinh cắt tỉa">Tắm vệ sinh cắt tỉa</option>
+                <option value="Cắt mài móng">Cắt mài móng</option>
+                <option value="Vệ sinh, nhổ lông tai">Vệ sinh, nhổ lông tai</option>
+                <option value="Nhuộm">Nhuộm</option>
+              </optgroup>
+              <optgroup label="Thăm khám">
+                <option value="Khám bệnh cơ bản">Khám bệnh cơ bản</option>
+                <option value="Gói khám sức khoẻ tổng quát">Gói khám sức khoẻ tổng quát</option>
+                <option value="Dịch vụ chuyên khoa">Dịch vụ chuyên khoa</option>
+                <option value="Triệt sản">Triệt sản</option>
+                <option value="Xét nghiệm máu cơ bản">Xét nghiệm máu cơ bản</option>
+                <option value="Siêu âm bụng">Siêu âm bụng</option>
+                <option value="Cạo vôi răng">Cạo vôi răng</option>
+              </optgroup>
+            </select>
+            <input type="date" id="filterDate" class="px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none">
+            <button onclick="resetFilters()" class="px-4 py-3 rounded-xl border border-gray-200 text-gray-600 hover:bg-gray-50 font-semibold transition flex items-center justify-center gap-2">
+              <i class="fas fa-redo text-sm"></i>
+              <span>Đặt lại</span>
+            </button>
+            <button onclick="applyFilters()" class="px-6 py-3 rounded-xl bg-brand text-white font-semibold hover:bg-brandDark transition shadow-lg">
+              <i class="fas fa-filter mr-2"></i>Áp dụng
+            </button>
+          </div>
+        </div>
+
+        <!-- Orders Table -->
+        <div class="card overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full">
+              <thead class="bg-cream">
+                <tr>
+                  <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase">Mã đơn</th>
+                  <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase">Khách hàng</th>
+                  <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase">Đối tác</th>
+                  <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase">Dịch vụ</th>
+                  <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase">Giá trị</th>
+                  <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase">Hoa hồng</th>
+                  <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase">Trạng thái</th>
+                  <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase">Thanh toán</th>
+                  <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase">Thời gian</th>
+                  <th class="px-6 py-4 text-center text-xs font-semibold text-gray-600 uppercase">Thao tác</th>
+                </tr>
+              </thead>
+              <tbody id="ordersTableBody" class="divide-y divide-gray-100">
+                <!-- Orders will be generated by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Pagination -->
+          <div class="flex items-center justify-between px-6 py-4 border-t border-gray-100">
+            <p class="text-sm text-gray-600" id="paginationInfo">Hiển thị <span class="font-semibold">1-10</span> trong tổng số <span class="font-semibold">30</span> đơn</p>
+            <div class="flex gap-2" id="paginationButtons">
+              <!-- Pagination buttons will be generated by JavaScript -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal: Order Detail -->
+  <div id="orderModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="sticky top-0 bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between">
+        <h3 class="text-2xl font-bold text-dark">Chi tiết đơn đặt lịch</h3>
+        <button onclick="hideOrderModal()"
+          class="w-10 h-10 rounded-full hover:bg-gray-100 transition flex items-center justify-center">
+          <i class="fas fa-times text-gray-600"></i>
+        </button>
+      </div>
+
+      <div class="p-6 space-y-6" id="orderContent">
+        <!-- Content will be inserted by JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Edit Order -->
+  <div id="editOrderModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="sticky top-0 bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between">
+        <h3 class="text-2xl font-bold text-dark">Chỉnh sửa đơn đặt lịch</h3>
+        <button onclick="hideEditOrderModal()"
+          class="w-10 h-10 rounded-full hover:bg-gray-100 transition flex items-center justify-center">
+          <i class="fas fa-times text-gray-600"></i>
+        </button>
+      </div>
+
+      <div class="p-6 space-y-6" id="editOrderContent">
+        <!-- Content will be inserted by JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Delete Confirm -->
+  <div id="deleteConfirmModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="sticky top-0 bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between">
+        <h3 class="text-2xl font-bold text-dark">Xác nhận xóa đơn hàng</h3>
+        <button onclick="hideDeleteConfirmModal()"
+          class="w-10 h-10 rounded-full hover:bg-gray-100 transition flex items-center justify-center">
+          <i class="fas fa-times text-gray-600"></i>
+        </button>
+      </div>
+
+      <div class="p-6 space-y-6" id="deleteConfirmContent">
+        <!-- Content will be inserted by JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <script src="js/Admin-orders.js"></script>
+</body>
+
+</html>

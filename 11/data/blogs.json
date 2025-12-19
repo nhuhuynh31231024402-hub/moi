@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "title": "Lịch tiêm phòng đầy đủ cho chó mèo con năm 2025",
+    "category": "Sức khỏe thú cưng",
+    "image": "https://images.unsplash.com/photo-1628009368231-7603358486cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    "author": "Dr. Hung",
+    "date": "12/12/2025",
+    "desc": "Cập nhật mới nhất về các mũi tiêm quan trọng và thời điểm vàng để bảo vệ sức khỏe toàn diện cho thú cưng.",
+    "content": "<p class='mb-4'>Việc tiêm phòng là 'lá chắn thép' bảo vệ thú cưng khỏi các bệnh truyền nhiễm nguy hiểm. Dưới đây là lịch trình chuẩn y khoa năm 2025.</p><h3 class='text-2xl font-bold text-dark mt-6 mb-3'>1. Lịch tiêm phòng cho Chó (Vaccine 5 bệnh & 7 bệnh)</h3><ul class='list-disc pl-5 space-y-2 mb-6'><li><strong>6-8 tuần tuổi:</strong> Tiêm mũi 1 (5 bệnh: Care, Parvo, Viêm gan, Ho cũi chó, Phó cúm).</li><li><strong>9-11 tuần tuổi:</strong> Tiêm mũi 2 (7 bệnh: Thêm Lepto và Corona).</li><li><strong>12-14 tuần tuổi:</strong> Tiêm mũi 3 (Nhắc lại 7 bệnh).</li><li><strong>Sau 13 tuần tuổi:</strong> Tiêm phòng Dại (Bắt buộc).</li></ul><h3 class='text-2xl font-bold text-dark mt-6 mb-3'>2. Lịch tiêm phòng cho Mèo (Vaccine 4 bệnh)</h3><ul class='list-disc pl-5 space-y-2 mb-6'><li><strong>8 tuần tuổi:</strong> Tiêm mũi 1 (Giảm bạch cầu, Viêm mũi khí quản, Calici).</li><li><strong>12 tuần tuổi:</strong> Tiêm mũi 2 (Nhắc lại mũi 1 + Tiêm Dại).</li></ul><p class='italic bg-orange-50 p-4 rounded-lg border-l-4 border-brand'>Lưu ý: Sau khi hoàn thành phác đồ chó/mèo con, cần tiêm nhắc lại định kỳ 1 năm/lần.</p>",
+    "comments": [
+      { "user": "Minh Anh", "date": "12/12/2025", "content": "Bài viết rất chi tiết, cảm ơn bác sĩ!" },
+      { "user": "Tuấn Trần", "date": "13/12/2025", "content": "Cho mình hỏi mèo 2 tháng tuổi chưa tiêm mũi nào thì có sao không ạ?" }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Pate tươi vs Thức ăn hạt: Đâu là lựa chọn tối ưu?",
+    "category": "Dinh dưỡng",
+    "image": "https://images.unsplash.com/photo-1589924691195-41432c84c161?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    "author": "Paw Team",
+    "date": "10/12/2025",
+    "desc": "So sánh ưu nhược điểm của hai loại thức ăn phổ biến nhất hiện nay để giúp bạn lên thực đơn phù hợp.",
+    "content": "<p class='mb-4'>Câu chuyện muôn thuở của các Sen: Nên cho ăn hạt cho tiện hay nấu Pate cho bổ? Cùng PawJoy phân tích nhé.</p><h3 class='text-2xl font-bold text-dark mt-6 mb-3'>1. Thức ăn hạt (Dry Food)</h3><p class='mb-2'><strong>Ưu điểm:</strong> Tiện lợi, dễ bảo quản, giá thành hợp lý, hỗ trợ làm sạch mảng bám răng.</p><p class='mb-4'><strong>Nhược điểm:</strong> Ít nước, nếu mèo lười uống nước dễ bị sỏi thận.</p><h3 class='text-2xl font-bold text-dark mt-6 mb-3'>2. Pate tươi (Wet Food)</h3><p class='mb-2'><strong>Ưu điểm:</strong> Hàm lượng nước cao (70-80%), hương vị thơm ngon kích thích vị giác, dễ tiêu hóa.</p><p class='mb-4'><strong>Nhược điểm:</strong> Khó bảo quản (cần tủ lạnh), chi phí cao hơn, dễ gây mảng bám răng nếu không vệ sinh.</p><h3 class='text-xl font-bold text-brand mt-6'>Lời khuyên từ chuyên gia</h3><p>Chế độ ăn kết hợp (Mix feeding) là tốt nhất: Sáng ăn hạt, tối ăn Pate để cân bằng dinh dưỡng và kinh phí.</p>",
+    "comments": [
+      { "user": "Lan Ngọc", "date": "11/12/2025", "content": "Mình hay trộn cả 2 loại, trộm vía bé ăn rất ngon miệng." }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Review 5 quán Cafe Thú Cưng 'xịn xò' nhất Sài Gòn",
+    "category": "Lifestyle",
+    "image": "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    "author": "Admin",
+    "date": "08/12/2025",
+    "desc": "Cuối tuần chưa biết đi đâu? Hãy cùng Boss check-in ngay những địa điểm siêu dễ thương này nhé.",
+    "content": "<p class='mb-6'>Nếu bạn không nuôi thú cưng nhưng vẫn muốn nựng ké, hoặc muốn tìm chỗ giao lưu cho Boss, thì đây là list dành cho bạn.</p><h3 class='text-2xl font-bold text-dark mt-6 mb-2'>1. Paw Cafe - Quận 1</h3><p class='mb-4'>Không gian rộng rãi, nhiều bé Corgi siêu quậy. Đồ uống khá ngon, giá vé bao gồm nước khoảng 80k.</p><img src='https://images.unsplash.com/photo-1612536053389-bd60046b0d91?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80' class='w-full h-64 object-cover rounded-2xl mb-8 shadow-lg' /><h3 class='text-2xl font-bold text-dark mt-6 mb-2'>2. Meo Meo Garden - Bình Thạnh</h3><p class='mb-4'>Thiên đường cho các con sen yêu mèo. Ở đây có hơn 20 bé mèo Anh lông ngắn, Sphynx... rất quấn người.</p><img src='https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80' class='w-full h-64 object-cover rounded-2xl mb-8 shadow-lg' /><h3 class='text-2xl font-bold text-dark mt-6 mb-2'>3. Hachiko Coffee - Tân Bình</h3><p class='mb-4'>Nổi tiếng với dàn Alaska và Husky khổng lồ nhưng cực kỳ hiền lành. Lưu ý là quán hơi đông vào cuối tuần nhé!</p><img src='https://images.unsplash.com/photo-1588022631777-679904791b82?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80' class='w-full h-64 object-cover rounded-2xl mb-8 shadow-lg' />",
+    "comments": []
+  },
+  {
+    "id": 4,
+    "title": "Dạy chó đi vệ sinh đúng chỗ chỉ trong 7 ngày",
+    "category": "Lifestyle",
+    "image": "https://images.unsplash.com/photo-1587300003388-59208cc962cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    "author": "Coach Tuan",
+    "date": "05/12/2025",
+    "desc": "Phương pháp tích cực giúp bạn và cún cưng không còn căng thẳng về vấn đề vệ sinh trong nhà.",
+    "content": "<p class='mb-4'>Vấn đề vệ sinh bừa bãi luôn là nỗi ám ảnh. Hãy kiên nhẫn áp dụng lộ trình 7 ngày sau:</p><h3 class='text-xl font-bold text-brand mt-6'>Ngày 1-2: Xác định vị trí & Quan sát</h3><p class='mb-2'>Chọn một nơi cố định (nhà vệ sinh hoặc khay lót). Quan sát khi bé ăn xong hoặc ngủ dậy, bé thường đi vệ sinh sau 15-20 phút.</p><h3 class='text-xl font-bold text-brand mt-6'>Ngày 3-5: Hành động & Thưởng</h3><p class='mb-2'>Khi thấy bé có dấu hiệu ngửi sàn, xoay vòng, hãy bế ngay bé vào đúng vị trí. Hô lệnh 'Đi tè'. Khi bé đi xong, lập tức khen ngợi và thưởng bánh.</p><h3 class='text-xl font-bold text-brand mt-6'>Ngày 6-7: Củng cố thói quen</h3><p class='mb-2'>Lúc này bé đã bắt đầu hiểu. Nếu bé lỡ đi sai chỗ, hãy lau sạch bằng dung dịch khử mùi chuyên dụng (để mất dấu mùi cũ) và không đánh mắng bé.</p>",
+    "comments": [
+        { "user": "Hùng Dũng", "date": "06/12/2025", "content": "Bài viết rất hay, mình đã áp dụng thành công cho bé Poodle nhà mình." }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Top 5 dấu hiệu Boss cần đi Spa gấp",
+    "category": "Spa & Grooming",
+    "image": "https://images.unsplash.com/photo-1605256486111-38e6908aa978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    "author": "Dr. Hung",
+    "date": "01/12/2025",
+    "desc": "Phát hiện sớm các vấn đề về da và lông không chỉ giúp thú cưng thoải mái mà còn ngăn ngừa bệnh.",
+    "content": "<p class='mb-6 text-lg leading-relaxed'>Bạn có bao giờ để ý thấy Boss nhà mình gãi nhiều hơn bình thường? Hay lông của bé không còn mượt mà như trước? Dưới đây là 5 dấu hiệu báo động đỏ.</p><h3 class='font-bold text-2xl text-dark mt-8 mb-4'>1. Lông bị bết dính và có mùi hôi lạ</h3><p class='mb-4 leading-relaxed'>Đây là dấu hiệu rõ ràng nhất cho thấy tuyến bã nhờn hoạt động quá mức hoặc bé đã lâu không tắm. Môi trường này rất dễ sinh nấm.</p><h3 class='font-bold text-2xl text-dark mt-8 mb-4'>2. Móng chân quá dài</h3><p class='mb-4'>Khi nghe tiếng 'lách cách' trên sàn nhà, đó là lúc móng đã quá dài. Nó có thể đâm ngược vào thịt đệm gây đau đớn và làm hỏng dáng đi của bé.</p><h3 class='font-bold text-2xl text-dark mt-8 mb-4'>3. Tai có nhiều ráy bẩn</h3><p class='mb-4'>Vạch tai bé ra xem, nếu thấy nhiều mảng đen hoặc nâu sẫm kèm mùi hôi, coi chừng bé đã bị rận tai hoặc viêm tai.</p><img src='https://images.unsplash.com/photo-1597633425046-08f5110420b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80' class='w-full rounded-2xl my-6 shadow-md' /><h3 class='font-bold text-2xl text-dark mt-8 mb-4'>4. Tuyến hôi bị tắc</h3><p class='mb-4'>Nếu thấy bé hay chà mông xuống sàn (thuật ngữ gọi là scooting), có thể tuyến hậu môn của bé cần được vắt.</p><h3 class='font-bold text-2xl text-dark mt-8 mb-4'>5. Lông bị rối cục</h3><p class='mb-4'>Đặc biệt với Poodle, lông rối sát da sẽ là ổ vi khuẩn. Đừng cố tự cắt bằng kéo tại nhà vì rất dễ cắt vào da, hãy mang ra Spa để gỡ rối chuyên nghiệp.</p>",
+    "comments": []
+  },
+  {
+    "id": 6,
+    "title": "Lợi ích bất ngờ của việc dắt chó đi dạo mỗi ngày",
+    "category": "Lifestyle",
+    "image": "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    "author": "Admin",
+    "date": "20/11/2025",
+    "desc": "Không chỉ giúp cún cưng giải tỏa năng lượng, đi dạo còn gắn kết tình cảm giữa Sen và Boss.",
+    "content": "<p class='mb-4'>Nhiều người nghĩ chỉ cần nuôi chó trong nhà là đủ, nhưng việc đi dạo mang lại lợi ích to lớn:</p><ul class='list-disc pl-5 space-y-3'><li><strong>Giải tỏa năng lượng dư thừa:</strong> Giúp bé bớt cắn phá đồ đạc trong nhà.</li><li><strong>Xã hội hóa:</strong> Giúp bé dạn dĩ hơn khi gặp người lạ và các chú chó khác.</li><li><strong>Giảm stress:</strong> Việc ngửi mùi hương bên ngoài giúp kích thích trí não của chó.</li><li><strong>Gắn kết tình cảm:</strong> Khoảng thời gian đi dạo là lúc bạn và bé tương tác tốt nhất.</li></ul>",
+    "comments": [
+        { "user": "Bảo Bảo", "date": "21/11/2025", "content": "Cún nhà mình lười đi dạo lắm, cứ ra cửa là nằm ỳ ra." }
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Mèo bị nôn: Khi nào là bình thường, khi nào cần gặp bác sĩ?",
+    "category": "Sức khỏe thú cưng",
+    "image": "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    "author": "Dr. Vet",
+    "date": "18/11/2025",
+    "desc": "Phân biệt nôn búi lông sinh lý và nôn do bệnh lý để có hướng xử lý kịp thời cho mèo cưng.",
+    "content": "<p class='mb-4'>Nuôi mèo chắc hẳn bạn đã từng thấy 'hoàng thượng' nôn. Đừng quá hoảng hốt, hãy phân biệt nhé:</p><h3 class='text-xl font-bold text-brand mt-4'>1. Nôn bình thường (Nôn sinh lý)</h3><p class='mb-2'>Thường là nôn ra búi lông (hairball) hoặc do ăn quá nhanh. Mèo vẫn chơi đùa, ăn uống bình thường sau đó.</p><h3 class='text-xl font-bold text-brand mt-4'>2. Nôn bất thường (Cần đi viện ngay)</h3><ul class='list-disc pl-5 space-y-2 mb-4'><li>Nôn liên tục nhiều lần trong ngày.</li><li>Nôn ra dịch vàng, xanh hoặc có máu.</li><li>Kèm theo tiêu chảy, bỏ ăn, nằm li bì.</li><li>Đây có thể là dấu hiệu của giảm bạch cầu, tắc ruột hoặc ngộ độc.</li></ul>",
+    "comments": []
+  },
+  {
+    "id": 8,
+    "title": "Công thức tự làm bánh thưởng (Treats) cho cún yêu tại nhà",
+    "category": "Dinh dưỡng",
+    "image": "https://images.unsplash.com/photo-1555140889-43c396aa712e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    "author": "Chef Paw",
+    "date": "15/11/2025",
+    "desc": "Tổng hợp 3 công thức làm bánh thưởng đơn giản từ ức gà, bí đỏ và yến mạch, đảm bảo an toàn.",
+    "content": "<p class='mb-4'>Tự làm bánh thưởng giúp bạn kiểm soát được nguyên liệu, không lo chất bảo quản.</p><h3 class='text-2xl font-bold text-dark mb-2'>Bánh quy Bí đỏ & Yến mạch</h3><p><strong>Nguyên liệu:</strong> 1 chén bí đỏ hấp chín nghiền nhuyễn, 2 chén bột yến mạch, 1 quả trứng.</p><p><strong>Cách làm:</strong> Trộn đều tất cả nguyên liệu thành khối bột dẻo. Cán mỏng và dùng khuôn cắt hình xương. Nướng ở 180 độ C trong 20 phút cho khô cứng. Bảo quản trong lọ kín được 1 tuần.</p>",
+    "comments": [
+        { "user": "Mai Chi", "date": "16/11/2025", "content": "Công thức dễ làm, bé nhà mình thích mê." }
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Review Top 3 loại cát vệ sinh cho mèo khử mùi tốt nhất 2025",
+    "category": "Review",
+    "image": "https://images.unsplash.com/photo-1534361960057-19889db9621e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
+    "author": "Reviewer",
+    "date": "10/11/2025",
+    "desc": "So sánh ưu nhược điểm của cát đậu nành, cát đất sét và cát gỗ để tìm ra loại phù hợp nhất.",
+    "content": "<p class='mb-4'>Chọn cát vệ sinh là 'cuộc chiến' không hồi kết. Dưới đây là top 3 loại mình đã trải nghiệm:</p><h3 class='text-xl font-bold text-dark mt-4'>1. Cát Đậu Nành (Cature, Acropet)</h3><ul class='list-disc pl-5 mb-4'><li><strong>Ưu điểm:</strong> Xả được bồn cầu, mùi thơm tự nhiên, ít bụi, an toàn nếu mèo lỡ ăn.</li><li><strong>Nhược điểm:</strong> Giá thành cao, độ vón cục trung bình.</li></ul><h3 class='text-xl font-bold text-dark mt-4'>2. Cát Đất Sét (Genki, Neko)</h3><ul class='list-disc pl-5 mb-4'><li><strong>Ưu điểm:</strong> Giá rẻ, vón cục cực tốt và cứng.</li><li><strong>Nhược điểm:</strong> Rất bụi (không tốt cho mèo bị hen), không xả được bồn cầu, không thân thiện môi trường.</li></ul><h3 class='text-xl font-bold text-dark mt-4'>3. Cát Gỗ (Cat's Best)</h3><ul class='list-disc pl-5 mb-4'><li><strong>Ưu điểm:</strong> Khử mùi đỉnh nhất, dùng siêu tiết kiệm, xả bồn cầu được.</li><li><strong>Nhược điểm:</strong> Hạt nhẹ nên dễ bị văng ra nhà, giá đầu vào khá 'chát'.</li></ul>",
+    "comments": []
+  }
+]

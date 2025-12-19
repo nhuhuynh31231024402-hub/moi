@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Account - Paw Joy</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- External CSS -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+  <!-- Config Tailwind CSS -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', "sans-serif"],
+            serif: ['"Playfair Display"', "serif"],
+          },
+          colors: {
+            brand: "#D97706",
+            brandLight: "#FFFBEB",
+            brandDark: "#92400E",
+            accent: "#059669",
+            dark: "#3F2212",
+            slate: "#1F2937",
+            cream: "#FDFBF7",
+            paper: "#F3F4F6",
+          },
+          boxShadow: {
+            soft: "0 20px 40px -15px rgba(0, 0, 0, 0.05)",
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Common CSS -->
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+  <link rel="stylesheet" href="../../assets/css/christmas-theme.css" />
+  <!-- Custom CSS -->
+  <link href="../../assets/css/MyAccount.css" rel="stylesheet">
+</head>
+
+<body class="font-sans text-dark bg-cream antialiased">
+  <!-- Christmas Snow Container -->
+  <div id="snow-container" class="fixed inset-0 pointer-events-none z-10"></div>
+
+  <!-- HEADER: logo, menu, điều hướng chính  -->
+  <div id="header"></div>
+
+  <!-- MAIN CONTENT -->
+  <div class="min-h-screen bg-cream pt-24 pb-16">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col lg:flex-row gap-6">
+
+        <!-- SIDEBAR -->
+        <aside class="lg:w-64 bg-white rounded-2xl p-6 shadow-soft h-fit">
+          <div class="flex items-center gap-3 mb-6 pb-6 border-b border-gray-100">
+            <div
+              class="w-12 h-12 rounded-full bg-gradient-to-tr from-brand to-brandDark text-white flex items-center justify-center font-bold text-xl">
+              A
+            </div>
+            <div>
+              <h3 class="font-bold text-dark">Trần Thị Minh Anh</h3>
+            </div>
+          </div>
+
+          <nav class="space-y-2">
+            <button onclick="switchTab('profile')" id="tab-profile"
+              class="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition bg-gradient-to-r from-brand/10 to-brand/5 text-brand font-semibold">
+              <i class="fas fa-user w-5"></i>
+              <span>Hồ sơ</span>
+            </button>
+
+            <button onclick="switchTab('appointments')" id="tab-appointments"
+              class="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition text-gray-600 hover:bg-gray-50">
+              <i class="fas fa-calendar-alt w-5"></i>
+              <span>Lịch đặt</span>
+            </button>
+
+            <button onclick="switchTab('pets')" id="tab-pets"
+              class="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition text-gray-600 hover:bg-gray-50">
+              <i class="fas fa-paw w-5"></i>
+              <span>Thú cưng</span>
+            </button>
+
+            <button onclick="switchTab('statistics')" id="tab-statistics"
+              class="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition text-gray-600 hover:bg-gray-50">
+              <i class="fas fa-chart-bar w-5"></i>
+              <span>Thống kê</span>
+            </button>
+
+            <button onclick="switchTab('settings')" id="tab-settings"
+              class="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition text-gray-600 hover:bg-gray-50">
+              <i class="fas fa-cog w-5"></i>
+              <span>Cài đặt</span>
+            </button>
+
+            <button onclick="alert('Đăng xuất')"
+              class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-red-600 hover:bg-red-50 transition">
+              <i class="fas fa-sign-out-alt w-5"></i>
+              <span>Đăng xuất</span>
+            </button>
+          </nav>
+        </aside>
+
+        <!-- MAIN PANEL -->
+        <main class="flex-1">
+          <div class="mb-8">
+            <h1 id="page-title" class="text-3xl font-serif font-bold text-dark mb-2">Hồ sơ của tôi</h1>
+            <p id="page-desc" class="text-gray-500">Quản lý thông tin cá nhân của bạn</p>
+          </div>
+
+          <!-- PROFILE TAB -->
+          <div id="content-profile" class="tab-content">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <!-- Avatar + Info Card -->
+              <div class="lg:col-span-1 bg-white rounded-2xl py-3 px-6 shadow-soft text-center relative">
+                <!-- Thông tin cá nhân Header -->
+                <div class="flex justify-between items-center mb-4 w-full">
+                  <h3 class="font-bold text-dark flex items-center gap-2 text-base">
+                    <i class="fas fa-info-circle text-brand"></i>
+                    Thông tin cá nhân
+                  </h3>
+                  <button onclick="openEditModal()" class="text-brand hover:text-brandDark transition flex-shrink-0">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                </div>
+
+                <div
+                  class="w-32 h-32 rounded-full bg-gradient-to-tr from-brand to-brandDark text-white flex items-center justify-center font-bold text-5xl mx-auto mb-4">
+                  A
+                </div>
+                <h3 class="text-xl font-bold text-dark mb-3">Trần Thị Minh Anh</h3>
+
+                <!-- Thông tin cá nhân -->
+                <div class="text-left border-t border-gray-100 pt-3 mt-3">
+                  <div class="space-y-2">
+                    <div class="flex flex-col py-2 border-b border-gray-100 gap-1">
+                      <span class="text-gray-500 text-xs">Tên</span>
+                      <span class="font-semibold text-dark text-sm">Anh</span>
+                    </div>
+                    <div class="flex flex-col py-2 border-b border-gray-100 gap-1">
+                      <span class="text-gray-500 text-xs">Họ</span>
+                      <span class="font-semibold text-dark text-sm">Trần Thị Minh</span>
+                    </div>
+                    <div class="flex flex-col py-2 border-b border-gray-100 gap-1">
+                      <span class="text-gray-500 text-xs">Email</span>
+                      <span class="font-semibold text-dark text-sm break-all">anhtran.31231023215@st.ueh.edu.vn</span>
+                    </div>
+                    <div class="flex flex-col py-2 border-b border-gray-100 gap-1">
+                      <span class="text-gray-500 text-xs">Số điện thoại</span>
+                      <span class="font-semibold text-dark text-sm">+84 889 659 267</span>
+                    </div>
+                    <div class="flex flex-col py-2 gap-2">
+                      <span class="text-gray-500 text-xs">Địa chỉ</span>
+                      <span class="font-semibold text-dark text-sm">135 Trần Hưng Đạo, Phường cầu Ông
+                        Lãnh, TP.HCM</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Address Card -->
+              <div class="lg:col-span-2 bg-white rounded-2xl p-3 shadow-soft">
+                <div class="flex justify-between items-center mb-4">
+                  <h3 class="font-bold text-dark flex items-center gap-2">
+                    <i class="fas fa-map-marker-alt text-brand"></i>
+                    Địa chỉ đã lưu
+                  </h3>
+                  <button onclick="openAddressModal()" class="text-brand hover:text-brandDark font-semibold text-sm">
+                    + Thêm địa chỉ
+                  </button>
+                </div>
+                <div id="addressList" class="space-y-3">
+                  <div class="bg-cream/50 p-5 rounded-xl relative">
+                    <button onclick="deleteAddress(this)"
+                      class="absolute top-3 right-3 text-red-500 hover:text-red-700 transition">
+                      <i class="fas fa-trash-alt text-sm"></i>
+                    </button>
+                    <div class="flex justify-between items-start mb-2 pr-8">
+                      <h4 class="font-semibold text-dark">Nhà riêng</h4>
+                      <span class="text-xs bg-brand text-white px-2 py-1 rounded-full">Mặc định</span>
+                    </div>
+                    <p class="text-sm text-gray-600">135 Trần Hưng Đạo, Phường cầu Ông Lãnh, TP.HCM</p>
+                    <p class="text-sm text-gray-500 mt-1">SĐT: +84 889 659 267</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- APPOINTMENTS TAB -->
+          <div id="content-appointments" class="tab-content hidden">
+            <div class="space-y-6">
+              <!-- Continue Booking Button -->
+              <div class="flex justify-end">
+                <a href="stores.html" class="inline-flex items-center gap-2 bg-brand hover:bg-brandDark text-white px-6 py-3 rounded-full font-bold transition shadow-md hover:shadow-lg">
+                  <i class="fas fa-plus"></i>
+                  Tiếp tục đặt lịch
+                </a>
+              </div>
+              
+              <div id="appointmentsList" class="space-y-4">
+                <!-- Appointments will be loaded by JavaScript -->
+              </div>
+              
+              <!-- Empty State -->
+              <div id="appointmentsEmptyState" class="bg-white rounded-2xl p-8 shadow-soft hidden">
+                <div class="text-center py-12">
+                  <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-calendar-times text-4xl text-gray-400"></i>
+                  </div>
+                  <h3 class="text-xl font-bold text-dark mb-2">Chưa có lịch hẹn nào</h3>
+                  <p class="text-gray-500 mb-6">Bắt đầu đặt lịch chăm sóc cho thú cưng của bạn ngay hôm nay!</p>
+                  <a href="stores.html" class="inline-block bg-brand hover:bg-brandDark text-white px-6 py-3 rounded-full font-bold transition">
+                    Đặt lịch ngay
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PETS TAB -->
+          <div id="content-pets" class="tab-content hidden">
+            <div id="petsList" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- Pets will be rendered here by JavaScript -->
+            </div>
+          </div>
+
+          <!-- STATISTICS TAB -->
+          <div id="content-statistics" class="tab-content hidden">
+            <div class="space-y-6">
+              <!-- Thống kê tổng quan -->
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-2xl p-6 shadow-soft">
+                  <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                      <i class="fas fa-eye text-blue-600 text-xl"></i>
+                    </div>
+                    <span class="text-3xl font-bold text-dark" id="viewedCount">0</span>
+                  </div>
+                  <h3 class="font-semibold text-dark mb-1">Cửa hàng đã xem</h3>
+                  <p class="text-sm text-gray-500">Tổng số cửa hàng bạn đã xem</p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 shadow-soft">
+                  <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
+                      <i class="fas fa-calendar-check text-green-600 text-xl"></i>
+                    </div>
+                    <span class="text-3xl font-bold text-dark" id="purchasedCount">0</span>
+                  </div>
+                  <h3 class="font-semibold text-dark mb-1">Cửa hàng đã đặt</h3>
+                  <p class="text-sm text-gray-500">Tổng số cửa hàng đã đặt lịch</p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 shadow-soft">
+                  <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
+                      <i class="fas fa-clock text-orange-600 text-xl"></i>
+                    </div>
+                    <span class="text-3xl font-bold text-dark" id="processingCount">0</span>
+                  </div>
+                  <h3 class="font-semibold text-dark mb-1">Đang xử lý</h3>
+                  <p class="text-sm text-gray-500">Lịch đặt đang được xử lý</p>
+                </div>
+              </div>
+
+              <!-- Danh sách cửa hàng đã xem -->
+              <div class="bg-white rounded-2xl p-6 shadow-soft">
+                <h3 class="font-bold text-dark mb-4 flex items-center gap-2">
+                  <i class="fas fa-eye text-brand"></i>
+                  Cửa hàng đã xem
+                </h3>
+                <div id="viewedProducts" class="space-y-3">
+                  <p class="text-gray-500 text-center py-8">Chưa có cửa hàng nào được xem</p>
+                </div>
+              </div>
+
+              <!-- Danh sách cửa hàng đã đặt -->
+              <div class="bg-white rounded-2xl p-6 shadow-soft">
+                <h3 class="font-bold text-dark mb-4 flex items-center gap-2">
+                  <i class="fas fa-calendar-check text-brand"></i>
+                  Cửa hàng đã đặt
+                </h3>
+                <div id="purchasedProducts" class="space-y-3">
+                  <p class="text-gray-500 text-center py-8">Chưa có cửa hàng nào được đặt</p>
+                </div>
+              </div>
+
+              <!-- Danh sách đang xử lý -->
+              <div class="bg-white rounded-2xl p-6 shadow-soft">
+                <h3 class="font-bold text-dark mb-4 flex items-center gap-2">
+                  <i class="fas fa-clock text-brand"></i>
+                  Lịch đặt đang xử lý
+                </h3>
+                <div id="processingProducts" class="space-y-3">
+                  <p class="text-gray-500 text-center py-8">Không có lịch đặt nào đang xử lý</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SETTINGS TAB -->
+          <div id="content-settings" class="tab-content hidden">
+            <div class="space-y-6">
+              <!-- Change Password -->
+              <div class="bg-white rounded-2xl p-6 md:p-8 shadow-soft">
+                <div class="flex items-center gap-3 mb-6">
+                  <div class="w-12 h-12 bg-brand/10 rounded-xl flex items-center justify-center">
+                    <i class="fas fa-key text-brand text-xl"></i>
+                  </div>
+                  <div>
+                    <h3 class="font-bold text-dark text-xl">Đổi mật khẩu</h3>
+                    <p class="text-sm text-gray-500">Cập nhật mật khẩu để bảo vệ tài khoản của bạn</p>
+                  </div>
+                </div>
+                
+                <form id="changePasswordForm" class="space-y-5" onsubmit="changePassword(event)">
+                  <!-- Current Password -->
+                  <div>
+                    <label for="currentPassword" class="block text-sm font-semibold text-dark mb-2">
+                      Mật khẩu hiện tại <span class="text-red-500">*</span>
+                    </label>
+                    <div class="relative">
+                      <input 
+                        type="password" 
+                        id="currentPassword" 
+                        name="currentPassword"
+                        placeholder="Nhập mật khẩu hiện tại"
+                        required
+                        class="w-full px-4 py-3 pr-12 rounded-xl border border-gray-200 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20 transition"
+                      />
+                      <button 
+                        type="button"
+                        onclick="togglePassword('currentPassword')"
+                        class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-brand transition"
+                        title="Hiển thị/Ẩn mật khẩu"
+                      >
+                        <i class="fas fa-eye" id="currentPasswordIcon"></i>
+                      </button>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-1">Vui lòng nhập mật khẩu hiện tại để xác thực</p>
+                  </div>
+
+                  <!-- New Password -->
+                  <div>
+                    <label for="newPassword" class="block text-sm font-semibold text-dark mb-2">
+                      Mật khẩu mới <span class="text-red-500">*</span>
+                    </label>
+                    <div class="relative">
+                      <input 
+                        type="password" 
+                        id="newPassword" 
+                        name="newPassword"
+                        placeholder="Nhập mật khẩu mới (tối thiểu 6 ký tự)"
+                        required
+                        minlength="6"
+                        class="w-full px-4 py-3 pr-12 rounded-xl border border-gray-200 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20 transition"
+                      />
+                      <button 
+                        type="button"
+                        onclick="togglePassword('newPassword')"
+                        class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-brand transition"
+                        title="Hiển thị/Ẩn mật khẩu"
+                      >
+                        <i class="fas fa-eye" id="newPasswordIcon"></i>
+                      </button>
+                    </div>
+                    <div class="mt-2 space-y-1">
+                      <p class="text-xs text-gray-400">Mật khẩu phải có:</p>
+                      <ul class="text-xs text-gray-400 space-y-0.5 ml-4">
+                        <li id="lengthCheck" class="flex items-center gap-2">
+                          <i class="fas fa-circle text-xs"></i>
+                          <span>Ít nhất 6 ký tự</span>
+                        </li>
+                        <li id="matchCheck" class="flex items-center gap-2 hidden">
+                          <i class="fas fa-circle text-xs"></i>
+                          <span>Mật khẩu xác nhận khớp</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <!-- Confirm Password -->
+                  <div>
+                    <label for="confirmPassword" class="block text-sm font-semibold text-dark mb-2">
+                      Xác nhận mật khẩu mới <span class="text-red-500">*</span>
+                    </label>
+                    <div class="relative">
+                      <input 
+                        type="password" 
+                        id="confirmPassword" 
+                        name="confirmPassword"
+                        placeholder="Nhập lại mật khẩu mới"
+                        required
+                        class="w-full px-4 py-3 pr-12 rounded-xl border border-gray-200 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20 transition"
+                      />
+                      <button 
+                        type="button"
+                        onclick="togglePassword('confirmPassword')"
+                        class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-brand transition"
+                        title="Hiển thị/Ẩn mật khẩu"
+                      >
+                        <i class="fas fa-eye" id="confirmPasswordIcon"></i>
+                      </button>
+                    </div>
+                    <p id="confirmPasswordError" class="text-xs text-red-500 mt-1 hidden">Mật khẩu xác nhận không khớp</p>
+                  </div>
+
+                  <!-- Submit Button -->
+                  <div class="flex items-center gap-4 pt-4">
+                    <button 
+                      type="submit"
+                      class="px-8 py-3 rounded-xl bg-brand text-white font-semibold hover:bg-brandDark transition flex items-center gap-2 shadow-lg hover:shadow-xl"
+                    >
+                      <i class="fas fa-save"></i>
+                      Cập nhật mật khẩu
+                    </button>
+                    <button 
+                      type="button"
+                      onclick="resetPasswordForm()"
+                      class="px-6 py-3 rounded-xl bg-gray-100 text-dark font-semibold hover:bg-gray-200 transition"
+                    >
+                      Hủy
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+              <!-- Notifications -->
+              <div class="bg-white rounded-2xl p-6 shadow-soft">
+                <h3 class="font-bold text-dark mb-4 flex items-center gap-2">
+                  <i class="fas fa-bell text-brand"></i>
+                  Thông báo
+                </h3>
+                <div class="space-y-4">
+                  <div class="flex justify-between items-center py-3 border-b border-gray-100">
+                    <div>
+                      <p class="font-semibold text-dark">Thông báo qua Email</p>
+                      <p class="text-sm text-gray-500">Nhận thông báo về lịch hẹn qua email</p>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                      <input type="checkbox" checked class="sr-only peer">
+                      <div
+                        class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand">
+                      </div>
+                    </label>
+                  </div>
+
+                  <div class="flex justify-between items-center py-3 border-b border-gray-100">
+                    <div>
+                      <p class="font-semibold text-dark">Thông báo qua SMS</p>
+                      <p class="text-sm text-gray-500">Nhận tin nhắn nhắc nhở về lịch hẹn</p>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                      <input type="checkbox" class="sr-only peer">
+                      <div
+                        class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand">
+                      </div>
+                    </label>
+                  </div>
+
+                  <div class="flex justify-between items-center py-3">
+                    <div>
+                      <p class="font-semibold text-dark">Thông báo qua WhatsApp</p>
+                      <p class="text-sm text-gray-500">Nhận thông báo qua WhatsApp</p>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                      <input type="checkbox" checked class="sr-only peer">
+                      <div
+                        class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand">
+                      </div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Danger Zone -->
+              <div class="bg-red-50 border-l-4 border-red-500 rounded-2xl p-6">
+                <h3 class="font-bold text-red-700 mb-2 flex items-center gap-2">
+                  <i class="fas fa-exclamation-triangle"></i>
+                  Vùng nguy hiểm
+                </h3>
+                <p class="text-sm text-red-600 mb-4">
+                  Hành động này không thể hoàn tác. Vui lòng cân nhắc kỹ trước khi thực hiện.
+                </p>
+                <button 
+                  onclick="openDeleteAccountModal()"
+                  class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-xl font-semibold transition shadow-lg hover:shadow-xl">
+                  <i class="fas fa-trash-alt mr-2"></i>
+                  Xóa tài khoản
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDIT MODAL -->
+  <div id="editModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm hidden">
+    <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="text-2xl font-bold text-dark">Chỉnh sửa hồ sơ</h3>
+        <button onclick="closeEditModal()" class="text-gray-400 hover:text-dark transition">
+          <i class="fas fa-times text-xl"></i>
+        </button>
+      </div>
+
+      <form class="space-y-4" onsubmit="saveProfile(event)">
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Tên</label>
+          <input type="text" id="editFirstName" value="Anh"
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none transition">
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Họ</label>
+          <input type="text" id="editLastName" value="Trần Thị Minh"
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none transition">
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Email</label>
+          <input type="email" id="editEmail" value="anhtran.31231023215@st.ueh.edu.vn"
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none transition">
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Số điện thoại</label>
+          <input type="tel" id="editPhone" value="+84 889 659 267"
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none transition">
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Địa chỉ</label>
+          <textarea id="editAddress" rows="3"
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none transition resize-none">135 Trần Hưng Đạo, Phường cầu Ông Lãnh, TP.HCM</textarea>
+        </div>
+
+        <div class="flex gap-3 pt-4">
+          <button type="button" onclick="closeEditModal()"
+            class="flex-1 py-3 rounded-xl border border-gray-200 font-semibold text-gray-700 hover:bg-gray-50 transition">
+            Hủy
+          </button>
+          <button type="submit"
+            class="flex-1 py-3 rounded-xl bg-brand text-white font-semibold hover:bg-brandDark transition">
+            Lưu thay đổi
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- PET DETAIL MODAL -->
+  <div id="petDetailModal"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm hidden">
+    <div class="bg-white rounded-2xl p-8 max-w-2xl w-full mx-4 shadow-2xl max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="text-2xl font-bold text-dark">Chi tiết thú cưng</h3>
+        <button onclick="closePetDetailModal()" class="text-gray-400 hover:text-dark transition">
+          <i class="fas fa-times text-xl"></i>
+        </button>
+      </div>
+      <div id="petDetailContent">
+        <!-- Content will be loaded by JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD PET MODAL -->
+  <div id="addPetModal"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm hidden">
+    <div class="bg-white rounded-2xl p-8 max-w-2xl w-full mx-4 shadow-2xl max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="text-2xl font-bold text-dark">Thêm thú cưng mới</h3>
+        <button onclick="closeAddPetModal()" class="text-gray-400 hover:text-dark transition">
+          <i class="fas fa-times text-xl"></i>
+        </button>
+      </div>
+      <form onsubmit="savePet(event)" class="space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Tên thú cưng <span class="text-red-500">*</span></label>
+            <input type="text" id="petName" required
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none transition"
+              placeholder="Nhập tên thú cưng">
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Loại <span class="text-red-500">*</span></label>
+            <select id="petType" required
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none transition">
+              <option value="">Chọn loại</option>
+              <option value="dog">Chó</option>
+              <option value="cat">Mèo</option>
+              <option value="other">Khác</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Giống <span class="text-red-500">*</span></label>
+            <input type="text" id="petBreed" required
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none transition"
+              placeholder="Ví dụ: Golden Retriever">
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Tuổi <span class="text-red-500">*</span></label>
+            <input type="number" id="petAge" required min="0" max="30"
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none transition"
+              placeholder="Tuổi (năm)">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Giới tính <span class="text-red-500">*</span></label>
+            <select id="petGender" required
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none transition">
+              <option value="">Chọn giới tính</option>
+              <option value="male">Đực</option>
+              <option value="female">Cái</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Cân nặng (kg) <span class="text-red-500">*</span></label>
+            <input type="number" id="petWeight" required min="0" step="0.1"
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none transition"
+              placeholder="Cân nặng">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Màu lông</label>
+          <input type="text" id="petColor"
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none transition"
+            placeholder="Ví dụ: Vàng, Đen, Trắng...">
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Ngày sinh</label>
+          <input type="date" id="petBirthday"
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none transition">
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Ghi chú</label>
+          <textarea id="petNotes" rows="3"
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none transition resize-none"
+            placeholder="Thông tin bổ sung về thú cưng..."></textarea>
+        </div>
+
+        <div class="flex gap-3 pt-4">
+          <button type="button" onclick="closeAddPetModal()"
+            class="flex-1 py-3 rounded-xl border border-gray-200 font-semibold text-gray-700 hover:bg-gray-50 transition">
+            Hủy
+          </button>
+          <button type="submit"
+            class="flex-1 py-3 rounded-xl bg-brand text-white font-semibold hover:bg-brandDark transition">
+            Lưu thông tin
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ADDRESS MODAL -->
+  <div id="addressModal"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm hidden">
+    <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl">
+      <div class="flex justify-between items-center mb-6">
+        <h3 class="text-2xl font-bold text-dark">Thêm địa chỉ mới</h3>
+        <button onclick="closeAddressModal()" class="text-gray-400 hover:text-dark transition">
+          <i class="fas fa-times text-xl"></i>
+        </button>
+      </div>
+
+      <form class="space-y-4" onsubmit="saveAddress(event)">
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Tên địa chỉ</label>
+          <input type="text" id="addressName" placeholder="Ví dụ: Nhà riêng, Văn phòng..."
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none transition"
+            required>
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Địa chỉ chi tiết</label>
+          <textarea id="addressDetail" rows="3" placeholder="Số nhà, tên đường, phường, quận, thành phố..."
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none transition resize-none"
+            required></textarea>
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Số điện thoại</label>
+          <input type="tel" id="addressPhone" placeholder="Nhập số điện thoại"
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none transition"
+            required>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <input type="checkbox" id="setDefault" class="w-4 h-4 text-brand focus:ring-brand rounded">
+          <label for="setDefault" class="text-sm text-gray-700">Đặt làm địa chỉ mặc định</label>
+        </div>
+
+        <div class="flex gap-3 pt-4">
+          <button type="button" onclick="closeAddressModal()"
+            class="flex-1 py-3 rounded-xl border border-gray-200 font-semibold text-gray-700 hover:bg-gray-50 transition">
+            Hủy
+          </button>
+          <button type="submit"
+            class="flex-1 py-3 rounded-xl bg-brand text-white font-semibold hover:bg-brandDark transition">
+            Thêm địa chỉ
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER: thông tin liên hệ, chính sách, mạng xã hội -->
+  <div id="footer"></div>
+
+  <script src="../../assets/js/MyAccount.js"></script>
+  <script>
+    // Load header và footer từ các file component dùng chung
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch("../../templates/partials/header.html")
+        .then((res) => res.text())
+        .then((html) => (document.getElementById("header").innerHTML = html)).replace(/$/, `{ document.getElementById("header").innerHTML = html; if (!document.querySelector('script[src*="booking-dropdown"]')) { const script = document.createElement('script'); script.src = '../../assets/js/lib/booking-dropdown.js'; document.body.appendChild(script); } }`);
+
+      fetch("../../templates/partials/footer.html")
+        .then((res) => res.text())
+        .then((html) => (document.getElementById("footer").innerHTML = html));
+    });
+  </script>
+  <script type="module" src="../../assets/js/lib/mobile-menu.js"></script>
+  <script type="module" src="../../assets/js/lib/footer.js"></script>
+  <script src="../../assets/js/lib/favorite-badge.js"></script>
+  <script src="../../assets/js/scroll.js"></script>
+  <script src="../../assets/js/christmas-snow.js"></script>
+</body>
+
+</html>

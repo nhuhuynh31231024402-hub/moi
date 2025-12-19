@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Danh sách yêu thích - Paw Joy</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- External CSS -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+  <!-- Config Tailwind CSS -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', "sans-serif"],
+            serif: ['"Playfair Display"', "serif"],
+          },
+          colors: {
+            brand: "#D97706",
+            brandLight: "#FFFBEB",
+            brandDark: "#92400E",
+            accent: "#059669",
+            dark: "#3F2212",
+            slate: "#1F2937",
+            cream: "#FDFBF7",
+            paper: "#F3F4F6",
+          },
+          boxShadow: {
+            soft: "0 20px 40px -15px rgba(0, 0, 0, 0.05)",
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Common CSS -->
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+  <link rel="stylesheet" href="../../assets/css/christmas-theme.css" />
+</head>
+
+<body class="font-sans text-dark bg-cream antialiased">
+  <!-- Christmas Snow Container -->
+  <div id="snow-container" class="fixed inset-0 pointer-events-none z-10"></div>
+
+  <!-- HEADER: logo, menu, điều hướng chính  -->
+  <div id="header"></div>
+
+  <!-- MAIN CONTENT -->
+  <div class="min-h-screen bg-cream pt-24 pb-16">
+    <div class="container mx-auto px-6">
+      <!-- Breadcrumb -->
+      <div class="mb-6">
+        <nav class="flex items-center gap-2 text-sm text-gray-600">
+          <a href="../../index.html" class="hover:text-brand transition">Trang chủ</a>
+          <i class="fas fa-chevron-right text-xs"></i>
+          <a href="my-account.html" class="hover:text-brand transition">Tài khoản</a>
+          <i class="fas fa-chevron-right text-xs"></i>
+          <span class="text-dark font-semibold">Danh sách yêu thích</span>
+        </nav>
+      </div>
+
+      <!-- Page Header -->
+      <div class="mb-8">
+        <div class="flex items-center gap-4 mb-4">
+          <div class="w-16 h-16 bg-red-50 rounded-2xl flex items-center justify-center">
+            <i class="fas fa-heart text-red-500 text-2xl"></i>
+          </div>
+          <div>
+            <h1 class="text-3xl font-serif font-bold text-dark mb-1">Danh sách yêu thích</h1>
+            <p class="text-gray-500">Quản lý các cửa hàng bạn yêu thích</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filters and Sort -->
+      <div class="bg-white rounded-2xl p-4 shadow-soft mb-6">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div class="flex items-center gap-4">
+            <span class="text-sm font-semibold text-dark" id="favoritesCount">0 cửa hàng yêu thích</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <label class="text-sm text-gray-600">Sắp xếp:</label>
+            <select id="sortFavorites" onchange="sortFavorites()" 
+              class="px-4 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:border-brand transition">
+              <option value="newest">Mới nhất</option>
+              <option value="oldest">Cũ nhất</option>
+              <option value="name-asc">Tên A-Z</option>
+              <option value="name-desc">Tên Z-A</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Favorites List -->
+      <div id="favoritesList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Content will be loaded by JavaScript -->
+      </div>
+
+      <!-- Empty State -->
+      <div id="emptyState" class="hidden text-center py-16">
+        <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i class="far fa-heart text-4xl text-gray-400"></i>
+        </div>
+        <h3 class="text-xl font-bold text-dark mb-2">Chưa có cửa hàng yêu thích nào</h3>
+        <p class="text-gray-500 mb-6">Bắt đầu thêm các cửa hàng yêu thích của bạn!</p>
+        <a href="stores.html" class="inline-block bg-brand hover:bg-brandDark text-white px-6 py-3 rounded-full font-bold transition">
+          Khám phá cửa hàng
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER: thông tin liên hệ, chính sách, mạng xã hội -->
+  <div id="footer"></div>
+
+  <!-- Load scripts trực tiếp -->
+  <script src="../../assets/js/lib/favorite-badge.js"></script>
+  <script src="../../assets/js/Favorites.js"></script>
+  
+  <script>
+    // Load header và footer từ các file component dùng chung
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch("../../templates/partials/header.html")
+        .then((res) => res.text())
+        .then((html) => {
+          document.getElementById("header").innerHTML = html;
+          // Update badge sau khi header load
+          setTimeout(() => {
+            if (typeof updateFavoriteBadge === 'function') {
+              updateFavoriteBadge();
+            }
+          }, 100);
+        });
+
+      fetch("../../templates/partials/footer.html")
+        .then((res) => res.text())
+        .then((html) => (document.getElementById("footer").innerHTML = html));
+    });
+  </script>
+  <script type="module" src="../../assets/js/lib/mobile-menu.js"></script>
+  <script type="module" src="../../assets/js/lib/footer.js"></script>
+  <script src="../../assets/js/scroll.js"></script>
+  <script src="../../assets/js/christmas-snow.js"></script>
+</body>
+
+</html>
+

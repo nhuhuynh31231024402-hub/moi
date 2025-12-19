@@ -1,0 +1,113 @@
+<!-- Newsletter Popup Modal -->
+<div
+  id="newsletterPopup"
+  class="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300"
+  onclick="closeNewsletterPopup(event)"
+>
+  <div
+    class="bg-white rounded-2xl shadow-2xl max-w-4xl w-full mx-4 transform scale-95 transition-transform duration-300 relative overflow-hidden"
+    onclick="event.stopPropagation()"
+  >
+    <!-- Nút đóng -->
+    <button
+      onclick="closeNewsletterPopup()"
+      class="absolute top-4 right-4 text-gray-400 hover:text-dark z-20 w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition"
+    >
+      <i class="fas fa-times text-xl"></i>
+    </button>
+
+    <div class="grid md:grid-cols-2">
+      <!-- Phần bên trái: Hình ảnh trang trí -->
+      <div class="hidden md:block relative bg-gradient-to-br from-brand/90 to-brandDark p-8 overflow-hidden">
+        <!-- Background trang trí -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-48 h-48 bg-accent/20 rounded-full blur-2xl"></div>
+        
+        <!-- Icon và hình ảnh trang trí -->
+        <div class="relative z-10 h-full flex flex-col justify-between">
+          <!-- Phần trên: Icon và text -->
+          <div>
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                <i class="fas fa-paw text-white text-2xl"></i>
+              </div>
+              <div>
+                <h3 class="text-white font-serif text-2xl font-bold">Paw Joy</h3>
+                <p class="text-white/80 text-sm">Chăm sóc thú cưng</p>
+              </div>
+            </div>
+            
+            <!-- Text chào mừng -->
+            <h2 class="text-white font-serif text-4xl font-bold mb-4 leading-tight">
+              Chào mừng bạn đến với Paw Joy! 🐾
+            </h2>
+            <p class="text-white/90 text-lg leading-relaxed">
+              Đăng ký ngay để nhận nhiều ưu đãi đặc biệt và cập nhật mới nhất về dịch vụ chăm sóc thú cưng.
+            </p>
+          </div>
+
+          <!-- Phần dưới: Hình ảnh trang trí -->
+          <div class="relative mt-8">
+            <div class="flex items-center gap-4">
+              <!-- Icon thú cưng -->
+              <div class="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                <i class="fas fa-dog text-white text-3xl"></i>
+              </div>
+              <div class="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                <i class="fas fa-cat text-white text-3xl"></i>
+              </div>
+              <div class="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                <i class="fas fa-heart text-white text-2xl"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phần bên phải: Form đăng ký -->
+      <div class="p-8 md:p-10 flex flex-col justify-center">
+        <div class="mb-6">
+          <h3 class="text-2xl font-serif font-bold text-dark mb-2">Thông báo mới</h3>
+          <p class="text-gray-600 text-sm">Đăng ký để nhận nhiều ưu đãi hơn</p>
+        </div>
+
+        <form onsubmit="event.preventDefault(); handleNewsletterSubmit();" class="space-y-4">
+          <!-- Input Email -->
+          <div>
+            <label class="block text-xs font-bold text-gray-500 mb-2">E-mail Address</label>
+            <input
+              type="email"
+              id="newsletterEmail"
+              required
+              placeholder="your.email@example.com"
+              class="w-full border border-gray-200 bg-gray-50 rounded-xl px-4 py-3 focus:outline-none focus:border-brand transition text-dark"
+            />
+          </div>
+
+          <!-- Nút đăng ký -->
+          <button
+            type="submit"
+            class="w-full bg-gradient-to-r from-brand to-brandDark hover:from-orange-600 hover:to-orange-800 text-white font-bold py-3.5 rounded-xl shadow-lg transition flex items-center justify-center gap-2"
+          >
+            <span>Đăng ký!</span>
+            <i class="fas fa-arrow-right"></i>
+          </button>
+
+          <!-- Thông báo bảo mật -->
+          <p class="text-xs text-center text-gray-500 leading-relaxed">
+            Bằng cách đăng ký, bạn đồng ý nhận các ưu đãi từ Paw Joy, các chương trình khuyến mãi và các tin nhắn thương mại khác. Bạn có thể hủy đăng ký bất cứ lúc nào.
+          </p>
+        </form>
+
+        <!-- Nút "Không, cảm ơn" -->
+        <button
+          onclick="closeNewsletterPopup()"
+          class="mt-4 text-center text-sm text-gray-500 hover:text-dark transition underline"
+        >
+          Không, Cảm ơn!
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,348 @@
+/* ===== CHRISTMAS THEME 2025 ===== */
+/* Optimized for performance - minimal DOM manipulation */
+
+:root {
+  --christmas-red: #dc2626;
+  --christmas-green: #059669;
+  --christmas-gold: #f59e0b;
+  --snow-white: #ffffff;
+}
+
+/* ===== SNOW CONTAINER ===== */
+#snow-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ===== SNOW EFFECTS ===== */
+.snowflake {
+  position: absolute;
+  top: -10px;
+  color: #ffffff;
+  user-select: none;
+  pointer-events: none;
+  animation: snowfall linear infinite;
+  z-index: 1;
+  font-weight: bold;
+  text-shadow:
+    0 0 5px rgba(255, 255, 255, 1),
+    0 0 10px rgba(255, 255, 255, 0.8),
+    0 0 15px rgba(200, 230, 255, 0.6),
+    1px 1px 2px rgba(0, 0, 0, 0.3);
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.9));
+}
+
+@keyframes snowfall {
+  0% {
+    transform: translateY(-100vh) translateX(0px) rotate(0deg) scale(0.8);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) translateX(100px) rotate(360deg) scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* Thêm animation cho tuyết lớn */
+.snowflake.large {
+  animation: snowfall-large linear infinite;
+}
+
+@keyframes snowfall-large {
+  0% {
+    transform: translateY(-100vh) translateX(-50px) rotate(0deg) scale(1);
+    opacity: 0;
+  }
+
+  5% {
+    opacity: 1;
+  }
+
+  95% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100vh) translateX(50px) rotate(180deg) scale(1.5);
+    opacity: 0;
+  }
+}
+
+.snow-cover-header,
+.snow-cover-footer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  font-size: 12px;
+  opacity: 0.3;
+  pointer-events: none;
+  text-align: center;
+  letter-spacing: 10px;
+  z-index: 5;
+}
+
+/* ===== PERFORMANCE OPTIMIZED ANIMATIONS ===== */
+/* Sử dụng transform thay vì thay đổi layout properties */
+
+.christmas-sparkle {
+  position: relative;
+  overflow: hidden;
+}
+
+.christmas-sparkle::before {
+  content: '✨';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 16px;
+  opacity: 0;
+  transform: scale(0.5) rotate(0deg);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.christmas-sparkle:hover::before {
+  opacity: 1;
+  transform: scale(1) rotate(180deg);
+}
+
+/* Christmas button enhancement */
+.christmas-btn {
+  position: relative;
+  background: linear-gradient(135deg, var(--christmas-red), var(--christmas-green));
+  border: none;
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.christmas-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.christmas-btn:hover::before {
+  left: 100%;
+}
+
+.christmas-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(220, 38, 38, 0.3);
+}
+
+/* Subtle Christmas border for cards */
+.christmas-border {
+  border: 2px solid transparent;
+  background: linear-gradient(white, white) padding-box,
+    linear-gradient(45deg, var(--christmas-red), var(--christmas-gold), var(--christmas-green)) border-box;
+}
+
+/* Christmas text glow */
+.christmas-text-glow {
+  text-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+  animation: textGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes textGlow {
+  0% {
+    text-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+  }
+
+  100% {
+    text-shadow: 0 0 20px rgba(245, 158, 11, 0.8), 0 0 30px rgba(245, 158, 11, 0.3);
+  }
+}
+
+/* Optimized snow particles for specific areas */
+.snow-area {
+  position: relative;
+  overflow: hidden;
+}
+
+.snow-area::after {
+  content: '❄️ ❄️ ❄️ ❄️ ❄️';
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 12px;
+  opacity: 0.6;
+  letter-spacing: 20px;
+  pointer-events: none;
+  animation: gentleFloat 6s ease-in-out infinite;
+}
+
+@keyframes gentleFloat {
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-5px) rotate(5deg);
+  }
+}
+
+/* Christmas countdown enhancement */
+.christmas-countdown {
+  background: linear-gradient(135deg,
+      rgba(220, 38, 38, 0.1),
+      rgba(5, 150, 105, 0.1));
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.christmas-countdown .countdown-number {
+  background: linear-gradient(135deg, var(--christmas-red), var(--christmas-green));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+}
+
+/* Performance: Disable animations on low-end devices */
+@media (max-width: 768px) {
+
+  .christmas-sparkle::before,
+  .christmas-text-glow,
+  .snow-area::after {
+    animation: none;
+  }
+
+  .christmas-btn:hover {
+    transform: none;
+  }
+}
+
+/* Accessibility: Respect user preferences */
+@media (prefers-reduced-motion: reduce) {
+
+  .christmas-sparkle::before,
+  .christmas-text-glow,
+  .snow-area::after,
+  .christmas-btn::before {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* Dark mode compatibility */
+@media (prefers-color-scheme: dark) {
+  .christmas-border {
+    background: linear-gradient(#1f2937, #1f2937) padding-box,
+      linear-gradient(45deg, var(--christmas-red), var(--christmas-gold), var(--christmas-green)) border-box;
+  }
+}
+
+/* ===== CHRISTMAS SPECIFIC COMPONENTS ===== */
+
+/* Christmas badge for promotions */
+.promo-christmas {
+  background: linear-gradient(45deg, #dc2626, #059669);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+  animation: christmasPromo 2s ease-in-out infinite alternate;
+}
+
+@keyframes christmasPromo {
+  0% {
+    box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+    transform: scale(1);
+  }
+
+  100% {
+    box-shadow: 0 6px 20px rgba(5, 150, 105, 0.4);
+    transform: scale(1.05);
+  }
+}
+
+/* Christmas tree decoration */
+.christmas-tree {
+  font-size: 24px;
+  animation: treeGlow 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 8px rgba(5, 150, 105, 0.6));
+}
+
+@keyframes treeGlow {
+
+  0%,
+  100% {
+    filter: drop-shadow(0 0 8px rgba(5, 150, 105, 0.6));
+  }
+
+  50% {
+    filter: drop-shadow(0 0 15px rgba(245, 158, 11, 0.8));
+  }
+}
+
+/* Gift box animation */
+.gift-box {
+  font-size: 20px;
+  animation: giftBounce 3s ease-in-out infinite;
+}
+
+@keyframes giftBounce {
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  25% {
+    transform: translateY(-3px) rotate(-2deg);
+  }
+
+  75% {
+    transform: translateY(-1px) rotate(2deg);
+  }
+}
+
+/* Star twinkle */
+.star-twinkle {
+  font-size: 18px;
+  animation: starTwinkle 2s ease-in-out infinite alternate;
+}
+
+@keyframes starTwinkle {
+  0% {
+    opacity: 0.5;
+    transform: scale(0.8);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}

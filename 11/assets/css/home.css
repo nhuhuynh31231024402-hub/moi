@@ -1,0 +1,206 @@
+.glass-panel {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
+}
+.luxury-wheel {
+    background: conic-gradient(
+        #d97706 0deg 60deg,
+        #fffbeb 60deg 120deg,
+        #059669 120deg 180deg,
+        #d97706 180deg 240deg,
+        #fffbeb 240deg 300deg,
+        #059669 300deg 360deg
+    );
+    border: 8px solid #fff;
+    box-shadow: 0 0 0 4px #d97706, 0 20px 50px rgba(0, 0, 0, 0.3);
+    transition: transform 6s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+.wheel-label {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 50%;
+    transform-origin: bottom center;
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+}
+.wheel-text {
+    font-weight: 800;
+    font-size: 1.1rem;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    white-space: nowrap;
+}
+.text-on-orange {
+    color: #fff;
+}
+.text-on-white {
+    color: #d97706;
+}
+.hide-scroll::-webkit-scrollbar {
+    display: none;
+}
+.fade-mask {
+    mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 10%,
+        black 90%,
+        transparent
+    );
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 10%,
+        black 90%,
+        transparent
+    );
+}
+.snowflake {
+    position: absolute;
+    color: #fff;
+    animation: fall linear infinite;
+    pointer-events: none;
+}
+@keyframes fall {
+    to {
+        transform: translateY(100vh) rotate(360deg);
+    }
+}
+
+/* Chatbot Styles - Fixed Layout */
+.chat-msg {
+    margin-bottom: 10px;
+    max-width: 85%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    word-wrap: break-word;
+}
+.chat-msg.bot {
+    background-color: #f3f4f6;
+    color: #1f2937;
+    border-bottom-left-radius: 2px;
+    align-self: flex-start;
+}
+.chat-msg.user {
+    background-color: #d97706;
+    color: white;
+    border-bottom-right-radius: 2px;
+    align-self: flex-end;
+    margin-left: auto;
+}
+.chat-option {
+    cursor: pointer;
+    background: white;
+    border: 1px solid #e5e7eb;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin: 4px 4px 4px 0;
+    display: inline-block;
+    transition: all 0.2s;
+}
+.chat-option:hover {
+    background: #d97706;
+    color: white;
+    border-color: #d97706;
+}
+
+/* FAQ Animation */
+details > summary {
+    list-style: none;
+}
+details > summary::-webkit-details-marker {
+    display: none;
+}
+details > summary:focus {
+    outline: none;
+}
+details[open] summary ~ * {
+    animation: sweep 0.5s ease-in-out;
+}
+@keyframes sweep {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Custom Scrollbar for Region Box & Chat */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #d97706;
+    border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #b45309;
+}
+/* Desktop Footer Logic */
+@media (min-width: 1024px) {
+    .footer-content {
+        display: block !important;
+        opacity: 1 !important;
+        height: auto !important;
+        margin-top: 1.5rem;
+        pointer-events: auto;
+    }
+    .footer-arrow {
+        display: none !important;
+    }
+    .footer-heading {
+        pointer-events: none !important;
+        cursor: default !important;
+        justify-content: flex-start !important;
+    }
+    .footer-col {
+        border-bottom: none !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+    }
+    /* Ẩn thanh cuộn nhưng vẫn cho phép vuốt */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+    }
+
+    /* Hiệu ứng tim đập khi like */
+    .heart-bounce {
+        animation: heartBounce 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes heartBounce {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.3);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+    /* Cố định hiển thị CTA trên Mobile/Tablet */
+    @media (max-width: 1023px) {
+        .cta-content {
+            opacity: 1 !important; /* Đảm bảo CTA luôn hiển thị trên màn hình nhỏ */
+        }
+    }
+}

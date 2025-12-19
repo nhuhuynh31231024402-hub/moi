@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Paw Joy Admin</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Chart.js - Version stable -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+
+  <link rel="stylesheet" href="styles/Admin-dashboard.css">
+</head>
+
+<body class="font-sans text-dark bg-cream">
+
+  <!-- SIDEBAR -->
+  <aside class="fixed left-0 top-0 h-screen bg-white shadow-lg w-64 z-40">
+    <div class="flex flex-col h-full">
+      <div class="h-20 flex items-center px-6 border-b border-gray-100">
+        <a href="Admin-dashboard.html" class="flex items-center gap-3 group">
+          <div class="relative w-10 h-10 flex-shrink-0">
+            <!-- Chân mèo màu vàng (dưới) -->
+            <i
+              class="fas fa-paw absolute bottom-0 left-0 text-[#EAB308] text-2xl transform -rotate-12 translate-y-1 -translate-x-1 opacity-80"></i>
+            <!-- Chân mèo màu đen (trên) -->
+            <i
+              class="fas fa-paw absolute top-0 right-0 text-black text-2xl transform rotate-12 translate-x-1 -translate-y-1"></i>
+          </div>
+          <span class="font-serif font-bold text-xl md:text-2xl tracking-tight text-dark">
+            Paw
+            <span class="text-brand italic">Joy</span>
+            .
+          </span>
+        </a>
+      </div>
+
+      <nav class="flex-1 overflow-y-auto py-6 px-4">
+        <div class="space-y-1">
+          <a href="Admin-dashboard.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-r from-brand/10 to-brand/5 text-brand font-semibold">
+            <i class="fas fa-chart-line"></i><span>Dashboard</span>
+          </a>
+          <a href="Admin-orders.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-calendar-check"></i><span>Đơn đặt lịch</span>
+          </a>
+          <a href="Admin-partners.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-store"></i><span>Đối tác</span>
+          </a>
+          <a href="Admin-customers.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-users"></i><span>Khách hàng</span>
+          </a>
+          <a href="Admin-finance.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-wallet"></i><span>Tài chính</span>
+          </a>
+          <a href="Admin-vouchers.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-ticket"></i><span>Khuyến mãi</span>
+          </a>
+          <a href="Admin-settings.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-cog"></i><span>Cài đặt</span>
+          </a>
+        </div>
+      </nav>
+
+      <div class="border-t border-gray-100 p-4">
+        <div class="flex items-center gap-3">
+          <div
+            class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand to-brandDark text-white flex items-center justify-center font-bold">
+            A</div>
+          <div>
+            <p class="font-semibold text-dark text-sm">Trần Thị Minh Anh</p>
+            <p class="text-xs text-gray-500">anhtran.31231023215@...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <div class="ml-64">
+    <header class="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-gray-100 shadow-sm">
+      <div class="h-20 px-6 flex items-center justify-between">
+        <div>
+          <h2 class="text-xl font-bold text-dark">Dashboard</h2>
+          <p class="text-sm text-gray-500">Tổng quan hoạt động</p>
+        </div>
+        <div class="flex items-center gap-4">
+          <button class="relative w-10 h-10 flex items-center justify-center rounded-full hover:bg-brand/10 transition">
+            <i class="far fa-bell text-dark text-lg"></i>
+            <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+          </button>
+          <div
+            class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand to-brandDark text-white flex items-center justify-center font-bold">
+            A</div>
+        </div>
+      </div>
+    </header>
+
+    <main class="p-6">
+      <div class="space-y-6">
+
+        <!-- Header -->
+        <div class="flex items-center justify-between">
+          <div>
+            <h1 class="text-3xl font-serif font-bold text-dark mb-2">Dashboard</h1>
+            <p class="text-gray-500">Tổng quan hoạt động hệ thống PawJoy</p>
+          </div>
+          <div class="flex gap-3">
+            <select class="px-4 py-2 border border-gray-200 rounded-xl outline-none focus:border-brand">
+              <option>Hôm nay</option>
+              <option>Tuần này</option>
+              <option>Tháng này</option>
+              <option>Năm nay</option>
+            </select>
+            <button
+              class="px-6 py-2.5 rounded-full bg-brand text-white text-sm font-bold shadow-lg hover:bg-brandDark transition">
+              <i class="fas fa-download mr-2"></i>Xuất báo cáo
+            </button>
+          </div>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- KPI 1 -->
+          <div class="card hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <div class="flex items-start justify-between">
+              <div class="flex-1">
+                <p class="text-gray-600 text-sm font-medium mb-2">Tổng số booking</p>
+                <h3 class="text-3xl font-bold text-dark mb-2">2,847</h3>
+                <span class="text-sm font-semibold text-green-600">
+                  <i class="fas fa-arrow-up mr-1"></i>+12.5%
+                </span>
+              </div>
+              <div
+                class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand to-brandDark flex items-center justify-center text-white text-xl shadow-lg">
+                <i class="fas fa-calendar-check"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- KPI 2 -->
+          <div class="card hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <div class="flex items-start justify-between">
+              <div class="flex-1">
+                <p class="text-gray-600 text-sm font-medium mb-2">Khung giờ cao điểm</p>
+                <h3 class="text-3xl font-bold text-dark mb-2">14:00-17:00</h3>
+                <span class="text-sm font-semibold text-gray-600">3 giờ</span>
+              </div>
+              <div
+                class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-600 to-amber-700 flex items-center justify-center text-white text-xl shadow-lg">
+                <i class="fas fa-clock"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- KPI 3 -->
+          <div class="card hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <div class="flex items-start justify-between">
+              <div class="flex-1">
+                <p class="text-gray-600 text-sm font-medium mb-2">Cửa hàng đối tác</p>
+                <h3 class="text-3xl font-bold text-dark mb-2">12</h3>
+                <span class="text-sm font-semibold text-green-600">
+                  <i class="fas fa-arrow-up mr-1"></i>+8
+                </span>
+              </div>
+              <div
+                class="w-14 h-14 rounded-2xl bg-gradient-to-br from-stone-500 to-stone-600 flex items-center justify-center text-white text-xl shadow-lg">
+                <i class="fas fa-store"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- KPI 4 -->
+          <div class="card hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <div class="flex items-start justify-between">
+              <div class="flex-1">
+                <p class="text-gray-600 text-sm font-medium mb-2">Khách hàng mới</p>
+                <h3 class="text-3xl font-bold text-dark mb-2">1,234</h3>
+                <span class="text-sm font-semibold text-green-600">
+                  <i class="fas fa-arrow-up mr-1"></i>+18.2%
+                </span>
+              </div>
+              <div
+                class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center text-white text-xl shadow-lg">
+                <i class="fas fa-user-plus"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- KPI 5 -->
+          <div class="card hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <div class="flex items-start justify-between">
+              <div class="flex-1">
+                <p class="text-gray-600 text-sm font-medium mb-2">Doanh thu (Commission)</p>
+                <h3 class="text-3xl font-bold text-dark mb-2">₫48.5M</h3>
+                <span class="text-sm font-semibold text-green-600">
+                  <i class="fas fa-arrow-up mr-1"></i>+24.8%
+                </span>
+              </div>
+              <div
+                class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center text-white text-xl shadow-lg">
+                <i class="fas fa-wallet"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- KPI 6 -->
+          <div class="card hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <div class="flex items-start justify-between">
+              <div class="flex-1">
+                <p class="text-gray-600 text-sm font-medium mb-2">Rating trung bình</p>
+                <h3 class="text-3xl font-bold text-dark mb-2">4.8/5.0</h3>
+                <span class="text-sm font-semibold text-green-600">
+                  <i class="fas fa-arrow-up mr-1"></i>+0.2
+                </span>
+              </div>
+              <div
+                class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-500 flex items-center justify-center text-white text-xl shadow-lg">
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts Row 1 -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- Chart 1 -->
+          <div class="card">
+            <div class="flex items-center justify-between mb-6">
+              <div>
+                <h3 class="text-lg font-bold text-dark">Đơn đặt dịch vụ theo thời gian</h3>
+                <p class="text-sm text-gray-500">7 ngày qua</p>
+              </div>
+              <div class="w-10 h-10 rounded-xl bg-brand/10 flex items-center justify-center text-brand">
+                <i class="fas fa-chart-line"></i>
+              </div>
+            </div>
+            <div style="position: relative; height: 250px;">
+              <canvas id="chart1"></canvas>
+            </div>
+          </div>
+
+          <!-- Chart 2 -->
+          <div class="card">
+            <div class="flex items-center justify-between mb-6">
+              <div>
+                <h3 class="text-lg font-bold text-dark">Doanh thu theo loại dịch vụ</h3>
+                <p class="text-sm text-gray-500">Tháng này</p>
+              </div>
+              <div class="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center text-accent">
+                <i class="fas fa-chart-bar"></i>
+              </div>
+            </div>
+            <div style="position: relative; height: 250px;">
+              <canvas id="chart2"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts Row 2 -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="card">
+            <div class="flex items-center justify-between mb-6">
+              <div>
+                <h3 class="text-lg font-bold text-dark">Tỉ lệ đơn theo trạng thái</h3>
+                <p class="text-sm text-gray-500">Tháng này</p>
+              </div>
+            </div>
+            <div style="position: relative; height: 250px;">
+              <canvas id="chart3"></canvas>
+            </div>
+          </div>
+
+          <div class="card lg:col-span-2">
+            <div class="flex items-center justify-between mb-6">
+              <div>
+                <h3 class="text-lg font-bold text-dark">Top 5 Shop hoạt động tốt nhất</h3>
+                <p class="text-sm text-gray-500">Theo số lượng đơn</p>
+              </div>
+            </div>
+            <div style="position: relative; height: 250px;">
+              <canvas id="chart4"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chart 5: Khách hàng mới theo tháng -->
+        <div class="card">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <h3 class="text-lg font-bold text-dark">Khách hàng mới theo tháng</h3>
+              <p class="text-sm text-gray-500">6 tháng gần nhất</p>
+            </div>
+            <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center">
+              <i class="fas fa-user-plus"></i>
+            </div>
+          </div>
+          <div style="position: relative; height: 250px;">
+            <canvas id="chart5"></canvas>
+          </div>
+        </div>
+
+        <!-- Recent Activities -->
+        <div class="card">
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="text-xl font-bold text-dark">Hoạt động gần đây</h3>
+            <button class="text-brand text-sm font-semibold hover:underline">Xem tất cả</button>
+          </div>
+          <div class="space-y-4">
+            <div class="flex items-start gap-4 p-4 hover:bg-cream rounded-xl transition">
+              <div
+                class="w-12 h-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-calendar-check"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <h4 class="font-semibold text-dark mb-1">Đơn đặt lịch mới</h4>
+                <p class="text-sm text-gray-600">Nguyễn Văn A đặt lịch spa cho chó Golden tại Pet Wow</p>
+              </div>
+              <span class="text-xs text-gray-500 whitespace-nowrap">2 phút trước</span>
+            </div>
+
+            <div class="flex items-start gap-4 p-4 hover:bg-cream rounded-xl transition">
+              <div
+                class="w-12 h-12 rounded-xl bg-stone-100 text-stone-600 flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-store"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <h4 class="font-semibold text-dark mb-1">Đối tác mới đăng ký</h4>
+                <p class="text-sm text-gray-600">Bệnh Viện Thú Y Pet Pro Cộng Hòa vừa hoàn tất đăng ký và chờ duyệt</p>
+              </div>
+              <span class="text-xs text-gray-500 whitespace-nowrap">15 phút trước</span>
+            </div>
+
+            <div class="flex items-start gap-4 p-4 hover:bg-cream rounded-xl transition">
+              <div
+                class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-star"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <h4 class="font-semibold text-dark mb-1">Đánh giá mới</h4>
+                <p class="text-sm text-gray-600">Trần Thị B vừa đánh giá 5 sao cho Tiệm nhà Sâu</p>
+              </div>
+              <span class="text-xs text-gray-500 whitespace-nowrap">1 giờ trước</span>
+            </div>
+
+            <div class="flex items-start gap-4 p-4 hover:bg-cream rounded-xl transition">
+              <div class="w-12 h-12 rounded-xl bg-brand/10 text-brand flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-wallet"></i>
+              </div>
+              <div class="flex-1 min-w-0">
+                <h4 class="font-semibold text-dark mb-1">Thanh toán thành công</h4>
+                <p class="text-sm text-gray-600">Lumi Pet Shop đã nhận được thanh toán ₫2.5M</p>
+              </div>
+              <span class="text-xs text-gray-500 whitespace-nowrap">3 giờ trước</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="js/Admin-dashboard.js"></script>
+</body>
+
+</html>

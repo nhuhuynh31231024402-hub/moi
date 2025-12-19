@@ -1,0 +1,257 @@
+/* Admin-orders.css - Complete Styles */
+
+/* Font Family Setup */
+body {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.font-sans {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+}
+
+.font-serif {
+  font-family: "Playfair Display", serif !important;
+}
+
+/* Tailwind Custom Utilities */
+@layer utilities {
+  /* Colors */
+  .bg-brand { background-color: #D97706 !important; }
+  .bg-brandDark { background-color: #92400E !important; }
+  .bg-accent { background-color: #059669 !important; }
+  .bg-dark { background-color: #3F2212 !important; }
+  .bg-cream { background-color: #FDFBF7 !important; }
+  
+  .text-brand { color: #D97706 !important; }
+  .text-brandDark { color: #92400E !important; }
+  .text-accent { color: #059669 !important; }
+  .text-dark { color: #3F2212 !important; }
+  
+  .border-brand { border-color: #D97706 !important; }
+  .border-brandDark { border-color: #92400E !important; }
+  
+  /* Hover States */
+  .hover\:bg-brand:hover { background-color: #D97706 !important; }
+  .hover\:bg-brandDark:hover { background-color: #92400E !important; }
+  .hover\:text-brand:hover { color: #D97706 !important; }
+  
+  /* Focus States */
+  .focus\:border-brand:focus { border-color: #D97706 !important; }
+  
+  /* Gradients */
+  .bg-gradient-to-tr { background-image: linear-gradient(to top right, var(--tw-gradient-stops)) !important; }
+  .bg-gradient-to-r { background-image: linear-gradient(to right, var(--tw-gradient-stops)) !important; }
+  .bg-gradient-to-br { background-image: linear-gradient(to bottom right, var(--tw-gradient-stops)) !important; }
+  
+  .from-brand { 
+    --tw-gradient-from: #D97706; 
+    --tw-gradient-to: rgba(217, 119, 6, 0);
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important; 
+  }
+  .to-brandDark { --tw-gradient-to: #92400E !important; }
+  
+  /* Brand opacity variants */
+  .from-brand\/10 { 
+    --tw-gradient-from: rgba(217, 119, 6, 0.1); 
+    --tw-gradient-to: rgba(217, 119, 6, 0);
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important; 
+  }
+  .to-brand\/5 { --tw-gradient-to: rgba(217, 119, 6, 0.05) !important; }
+  
+  .hover\:bg-brand\/10:hover { background-color: rgba(217, 119, 6, 0.1) !important; }
+}
+
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D97706;
+  border-radius: 10px;
+}
+
+/* Card Component */
+.card {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05);
+}
+
+/* Badge Component */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Filter Checkbox Styles */
+.location-checkbox {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #D97706;
+}
+
+.location-checkbox:checked {
+  background-color: #D97706;
+}
+
+/* Filter Scrollbar */
+.filter-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #D97706 #f1f1f1;
+}
+
+.filter-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.filter-scroll::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.filter-scroll::-webkit-scrollbar-thumb {
+  background: #D97706;
+  border-radius: 10px;
+}
+
+/* Hover Effects */
+/* Card hover effect */
+.card {
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.1);
+}
+
+/* Table row hover effect */
+tbody tr {
+  transition: all 0.2s ease;
+}
+
+tbody tr:hover {
+  background-color: #FDFBF7 !important;
+  transform: scale(1.01);
+}
+
+/* Button hover effects */
+button:not(.btn-cancel) {
+  transition: all 0.2s ease;
+}
+
+button:hover:not(.btn-cancel) {
+  transform: translateY(-1px);
+}
+
+button:active:not(.btn-cancel) {
+  transform: translateY(0);
+}
+
+/* Input and select hover effects */
+input[type="text"],
+input[type="date"],
+select {
+  transition: all 0.2s ease;
+}
+
+input[type="text"]:hover,
+input[type="date"]:hover,
+select:hover {
+  border-color: #D97706;
+  box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.1);
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+select:focus {
+  border-color: #D97706;
+  box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15);
+  transform: translateY(-1px);
+}
+
+/* Action buttons hover effects */
+.w-8.h-8.rounded-lg {
+  transition: all 0.2s ease;
+}
+
+.w-8.h-8.rounded-lg:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.w-8.h-8.rounded-lg:active {
+  transform: scale(0.95);
+}
+
+/* Stats cards hover effect enhancement */
+.card.p-4:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.15);
+}
+
+/* Badge hover effect */
+.badge {
+  transition: all 0.2s ease;
+}
+
+.badge:hover {
+  transform: scale(1.05);
+}
+
+/* Pagination buttons hover */
+#paginationButtons button {
+  transition: all 0.2s ease;
+}
+
+#paginationButtons button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Filter buttons hover */
+button[onclick="applyFilters()"],
+button[onclick="resetFilters()"] {
+  transition: all 0.2s ease;
+}
+
+button[onclick="applyFilters()"]:hover,
+button[onclick="resetFilters()"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Modal close button hover */
+button[onclick*="hide"]:hover:not(.btn-cancel) {
+  transform: rotate(90deg);
+  background-color: #f3f4f6;
+}
+
+/* Smooth transitions for all interactive elements */
+a, button, input, select, .card, tr {
+  transition: all 0.2s ease;
+}
+
+/* Cancel button - no hover effects */
+.btn-cancel {
+  transition: none !important;
+}
+
+.btn-cancel:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  background-color: #f3f4f6 !important;
+  color: #374151 !important;
+}

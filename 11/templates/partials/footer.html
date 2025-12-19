@@ -1,0 +1,201 @@
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- FontAwesome -->
+<link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    rel="stylesheet"
+/>
+<!-- Config Tailwind CSS -->
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: {
+                    sans: ['"Plus Jakarta Sans"', "sans-serif"],
+                    serif: ['"Playfair Display"', "serif"],
+                },
+                colors: {
+                    brand: "#D97706",
+                    brandLight: "#FFFBEB",
+                    brandDark: "#92400E",
+                    accent: "#059669",
+                    dark: "#3F2212",
+                    slate: "#1F2937",
+                    cream: "#FDFBF7",
+                    paper: "#F3F4F6",
+                },
+                boxShadow: {
+                    soft: "0 20px 40px -15px rgba(0, 0, 0, 0.05)",
+                    glow: "0 0 30px rgba(217, 119, 6, 0.4)",
+                },
+                animation: {
+                    scroll: "scroll 8s linear infinite",
+                    "fade-up": "fadeUp 0.8s ease-out forwards",
+                },
+                keyframes: {
+                    scroll: {
+                        "0%": { transform: "translateX(0)" },
+                        "100%": { transform: "translateX(-50%)" },
+                    },
+                    fadeUp: {
+                        "0%": { opacity: "0", transform: "translateY(20px)" },
+                        "100%": { opacity: "1", transform: "translateY(0)" },
+                    },
+                },
+            },
+        },
+    };
+</script>
+
+<!-- 9.  Chân Trang -->
+<footer class="bg-dark text-white/70 py-8 md:py-16 border-t border-white/5">
+    <div
+        class="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-4 gap-0 lg:gap-12 mb-0 lg:mb-12"
+    >
+        <!-- Cột 1: Thông tin -->
+        <div class="mb-8 lg:mb-0 text-center lg:text-left">
+            <a
+                href="../../index.html"
+                class="font-serif font-bold text-2xl text-white mb-4 lg:mb-6 block"
+            >
+                Paw
+                <span class="text-brand italic">Joy</span>
+                .
+            </a>
+            <p class="text-sm font-light leading-relaxed mb-6">
+                Hệ sinh thái chăm sóc thú cưng toàn diện.
+                <br />
+                Nơi tình yêu thương được kết nối bằng công nghệ.
+            </p>
+            <div class="flex gap-4 justify-center lg:justify-start">
+                <a
+                    href="#"
+                    class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand hover:text-white transition"
+                >
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a
+                    href="#"
+                    class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand hover:text-white transition"
+                >
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a
+                    href="#"
+                    class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand hover:text-white transition"
+                >
+                    <i class="fab fa-tiktok"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Cột 2: Khám phá -->
+        <div class="footer-col border-b border-white/10 lg:border-none">
+            <div
+                class="footer-heading flex justify-center lg:justify-start items-center py-4 lg:py-0 cursor-pointer lg:cursor-default"
+                onclick="toggleFooter(this)"
+            >
+                <h4
+                    class="text-white font-bold text-sm uppercase tracking-widest lg:mb-6"
+                >
+                    Khám phá
+                </h4>
+                <span
+                    class="footer-arrow transition-transform duration-300 lg:hidden ml-2"
+                    ><i class="fas fa-chevron-down text-brand"></i
+                ></span>
+            </div>
+            <!-- w-fit mx-auto lg:mx-0 text-left: Giúp khối text căn giữa nhưng các dòng chữ thẳng hàng lề trái -->
+            <ul
+                class="footer-content space-y-3 text-sm pb-4 lg:pb-0 hidden lg:block w-fit mx-auto lg:mx-0 text-left"
+            >
+                <li>
+                    <a href="about-us.html" class="hover:text-brand transition"
+                        >Về chúng tôi</a
+                    >
+                </li>
+                <li>
+                    <a href="about-us.html" class="hover:text-brand transition"
+                        >Quy chế hoạt động</a
+                    >
+                </li>
+                <li>
+                    <a href="about-us.html" class="hover:text-brand transition"
+                        >Chính sách bảo mật</a
+                    >
+                </li>
+            </ul>
+        </div>
+
+        <!-- Cột 3: Dịch vụ -->
+        <div class="footer-col border-b border-white/10 lg:border-none">
+            <div
+                class="footer-heading flex justify-center lg:justify-start items-center py-4 lg:py-0 cursor-pointer lg:cursor-default"
+                onclick="toggleFooter(this)"
+            >
+                <h4
+                    class="text-white font-bold text-sm uppercase tracking-widest lg:mb-6"
+                >
+                    Dịch vụ
+                </h4>
+                <span
+                    class="footer-arrow transition-transform duration-300 lg:hidden ml-2"
+                    ><i class="fas fa-chevron-down text-brand"></i
+                ></span>
+            </div>
+            <ul
+                class="footer-content space-y-3 text-sm pb-4 lg:pb-0 hidden lg:block w-fit mx-auto lg:mx-0 text-left"
+            >
+                <li>
+                    <a href="stores.html" class="hover:text-brand transition"
+                        >Spa & Grooming</a
+                    >
+                </li>
+                <li>
+                    <a href="stores.html" class="hover:text-brand transition"
+                        >Thăm khám & dinh dưỡng</a
+                    >
+                </li>
+            </ul>
+        </div>
+
+        <!-- Cột 4: Liên hệ -->
+        <div class="footer-col border-b border-white/10 lg:border-none">
+            <div
+                class="footer-heading flex justify-center lg:justify-start items-center py-4 lg:py-0 cursor-pointer lg:cursor-default"
+                onclick="toggleFooter(this)"
+            >
+                <h4
+                    class="text-white font-bold text-sm uppercase tracking-widest lg:mb-6"
+                >
+                    Liên hệ
+                </h4>
+                <span
+                    class="footer-arrow transition-transform duration-300 lg:hidden ml-2"
+                    ><i class="fas fa-chevron-down text-brand"></i
+                ></span>
+            </div>
+            <ul
+                class="footer-content space-y-4 text-sm pb-4 lg:pb-0 hidden lg:block w-fit mx-auto lg:mx-0 text-left"
+            >
+                <li class="flex gap-3 items-center">
+                    <i class="fas fa-map-marker-alt text-brand mt-0.5"></i>
+                    <span>279 Nguyễn Tri Phương, Q.10</span>
+                </li>
+                <li class="flex gap-3 items-center">
+                    <i class="fas fa-phone text-brand mt-0.5"></i>
+                    <span>1900 6868 68</span>
+                </li>
+                <li class="flex gap-3 items-center">
+                    <i class="fas fa-envelope text-brand mt-0.5"></i>
+                    <span>hello@pawjoy.vn</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="border-t border-white/5 pt-8 text-center text-xs px-6">
+        &copy; Paw Joy Corp. 2025
+    </div>
+</footer>
+
+<script type="module" src="../../assets/js/lib/footer.js"></script>

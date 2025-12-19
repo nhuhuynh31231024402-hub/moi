@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <!-- ========================================
+         META TAGS - Thông tin cơ bản của trang
+         ======================================== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết bài viết - PawJoy</title>
+    
+    <!-- Favicon - Icon hiển thị trên tab trình duyệt -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23FDBA74'/%3E%3Cstop offset='100%25' stop-color='%23D97706'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23grad)'/%3E%3Cg transform='translate(8 10) scale(0.75)'%3E%3Cpath fill='white' d='M32 36c-5.5 0-10 4.5-10 10s4.5 10 10 10 10-4.5 10-10-4.5-10-10-10zm-14-6c0 3.3 2.7 6 6 6s6-2.7 6-6-2.7-6-6-6-6 2.7-6 6zm28 0c0 3.3 2.7 6 6 6s6-2.7 6-6-2.7-6-6-6-6 2.7-6 6zm-20-12c0 3.3 2.7 6 6 6s6-2.7 6-6-2.7-6-6-6-6 2.7-6 6zm12 0c0 3.3 2.7 6 6 6s6-2.7 6-6-2.7-6-6-6-6 2.7-6 6z'/%3E%3C/g%3E%3C/svg%3E" />
+
+    <!-- ========================================
+         THƯ VIỆN BÊN NGOÀI
+         ======================================== -->
+    <!-- Tailwind CSS - Framework CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome - Thư viện icon -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    
+    <!-- Google Fonts - Font chữ đẹp -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- ========================================
+         CẤU HÌNH TAILWIND CSS TÙY CHỈNH
+         ======================================== -->
+    <script>
+      // Cấu hình Tailwind giống blog.html để đồng nhất giao diện
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', "sans-serif"],
+              serif: ['"Playfair Display"', "serif"],
+            },
+            colors: {
+              brand: "#D97706",        // Màu chủ đạo
+              brandLight: "#FFFBEB",
+              brandDark: "#92400E",
+              accent: "#059669",
+              dark: "#3F2212",
+              slate: "#1F2937",
+              cream: "#FDFBF7",
+              paper: "#F3F4F6",
+            },
+            boxShadow: {
+              soft: "0 20px 40px -15px rgba(0, 0, 0, 0.05)",
+              card: "0 10px 30px -5px rgba(0, 0, 0, 0.1)",
+            },
+            animation: {
+              "fade-up": "fadeUp 0.8s ease-out forwards",
+            },
+            keyframes: {
+              fadeUp: {
+                "0%": { opacity: "0", transform: "translateY(20px)" },
+                "100%": { opacity: "1", transform: "translateY(0)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+    
+    <!-- ========================================
+         CSS TÙY CHỈNH
+         ======================================== -->
+    <style>
+      /* Style cho Footer trên Desktop */
+      @media (min-width: 1024px) {
+        .footer-content { display: block !important; opacity: 1 !important; height: auto !important; margin-top: 1.5rem; pointer-events: auto; }
+        .footer-arrow { display: none !important; }
+        .footer-heading { pointer-events: none !important; cursor: default !important; justify-content: flex-start !important; }
+        .footer-col { border-bottom: none !important; margin-bottom: 0 !important; padding-bottom: 0 !important; }
+      }
+      
+      /* Sidebar dính khi cuộn */
+      .sidebar-sticky { position: sticky; top: 100px; height: fit-content; }
+      
+      /* ========================================
+         STYLE CHO NỘI DUNG BÀI VIẾT
+         Áp dụng cho các element bên trong #detail-content
+         ======================================== */
+      
+      /* Đoạn văn - Khoảng cách và độ cao dòng */
+      #detail-content p { 
+        margin-bottom: 1.5rem;  /* Khoảng cách dưới mỗi đoạn */
+        line-height: 1.8;       /* Độ cao dòng (thoáng, dễ đọc) */
+      }
+      
+      /* Tiêu đề cấp 3 - Style sang trọng */
+      #detail-content h3 { 
+        font-family: 'Playfair Display', serif;  /* Font serif cho tiêu đề */
+        font-size: 1.5rem;                        /* Cỡ chữ lớn */
+        font-weight: 700;                         /* Đậm */
+        color: #3F2212;                           /* Màu nâu đậm */
+        margin-top: 2rem;                         /* Khoảng cách trên */
+        margin-bottom: 1rem;                      /* Khoảng cách dưới */
+      }
+      
+      /* Danh sách có dấu đầu dòng */
+      #detail-content ul { 
+        list-style-type: disc;      /* Chấm tròn đầu dòng */
+        padding-left: 1.5rem;       /* Thụt vào bên trái */
+        margin-bottom: 1.5rem;      /* Khoảng cách dưới */
+      }
+      
+      /* Mục trong danh sách */
+      #detail-content li { 
+        margin-bottom: 0.5rem;      /* Khoảng cách giữa các mục */
+      }
+      
+      /* Hình ảnh trong bài viết - Bo tròn và bóng đổ */
+      #detail-content img { 
+        border-radius: 1rem;                               /* Bo tròn góc */
+        margin: 2rem 0;                                    /* Khoảng cách trên/dưới */
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);  /* Bóng mờ */
+        width: 100%;                                       /* Chiều rộng full */
+      }
+    </style>
+</head>
+<body class="font-sans text-dark bg-cream antialiased selection:bg-brand selection:text-white flex flex-col min-h-screen">
+    <!-- Body classes giống blog.html để đồng nhất giao diện -->
+
+    <!-- HEADER: logo, menu, điều hướng chính  -->
+    <div id="header"></div>
+
+    <!-- ========================================
+         NỘI DUNG CHÍNH
+         ======================================== -->
+    <main class="flex-grow pt-28 md:pt-36 pb-12">
+      
+      <!-- ========================================
+           BREADCRUMB - Đường dẫn điều hướng
+           Ví dụ: Trang chủ / Blog / Tên bài viết
+           ======================================== -->
+      <section class="container mx-auto px-6 mb-8">
+        <div class="text-sm text-gray-500 flex items-center gap-2 overflow-hidden">
+          <!-- Link về trang chủ -->
+          <a href="../../index.html" class="hover:text-brand transition flex-shrink-0">Trang chủ</a>
+          <span class="text-gray-300">/</span>
+          
+          <!-- Link về trang blog -->
+          <a href="blog.html" class="hover:text-brand transition flex-shrink-0">Blog</a>
+          <span class="text-gray-300">/</span>
+          
+          <!-- Tên bài viết hiện tại (được load bằng JS) -->
+          <span id="breadcrumb-title" class="text-brand font-bold truncate">Đang tải...</span>
+        </div>
+      </section>
+
+      <section class="container mx-auto px-6">
+        <div class="flex flex-col lg:flex-row gap-12">
+          
+            <aside class="lg:w-1/3 space-y-8 order-2 lg:order-1 sidebar-sticky h-fit">
+                
+                <div class="bg-white p-6 rounded-[2rem] shadow-card border border-gray-100">
+                    <h3 class="font-serif text-xl font-bold mb-4 border-l-4 border-brand pl-3 text-dark">Tìm kiếm</h3>
+                    <div class="relative">
+                        <form action="blog.html" method="GET">
+                            <input type="text" name="search" placeholder="Tìm bài viết..." class="w-full bg-paper border border-transparent rounded-xl py-3 pl-4 pr-10 focus:outline-none focus:border-brand focus:bg-white transition font-bold text-sm text-dark placeholder-gray-400">
+                            <button type="submit" class="absolute right-3 top-3 text-gray-400 hover:text-brand"><i class="fas fa-search"></i></button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-[2rem] shadow-card border border-gray-100">
+                    <h3 class="font-serif text-xl font-bold mb-4 border-l-4 border-brand pl-3 text-dark">Chủ đề</h3>
+                    <ul id="category-list" class="space-y-2">
+                        <li class="text-center text-gray-400 text-sm py-4"><i class="fas fa-circle-notch fa-spin"></i> Đang tải...</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-6 rounded-[2rem] shadow-card border border-gray-100">
+                    <h3 class="font-serif text-xl font-bold mb-6 border-l-4 border-brand pl-3 text-dark">Bài viết mới</h3>
+                    <div id="recent-posts-container" class="space-y-5"></div>
+                </div>
+
+                <div class="bg-white p-6 rounded-[2rem] shadow-card border border-gray-100">
+                    <h3 class="font-serif text-xl font-bold mb-6 border-l-4 border-brand pl-3 text-dark">Bình luận mới</h3>
+                    <div id="recent-comments-container" class="space-y-4">
+                        <div class="text-center text-gray-400 text-sm py-4"><i class="fas fa-circle-notch fa-spin"></i> Đang tải...</div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-[2rem] shadow-card border border-gray-100">
+                    <h3 class="font-serif text-xl font-bold mb-4 border-l-4 border-brand pl-3 text-dark">Từ khóa</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="blog.html?search=spa" class="px-3 py-1.5 bg-gray-100 rounded-lg text-xs font-bold text-gray-600 hover:bg-brand hover:text-white transition">#SpaChoMeo</a>
+                        <a href="blog.html?search=dinh dưỡng" class="px-3 py-1.5 bg-gray-100 rounded-lg text-xs font-bold text-gray-600 hover:bg-brand hover:text-white transition">#DinhDuong</a>
+                        <a href="blog.html?search=review" class="px-3 py-1.5 bg-gray-100 rounded-lg text-xs font-bold text-gray-600 hover:bg-brand hover:text-white transition">#Review</a>
+                        <a href="blog.html?search=huấn luyện" class="px-3 py-1.5 bg-gray-100 rounded-lg text-xs font-bold text-gray-600 hover:bg-brand hover:text-white transition">#HuanLuyen</a>
+                        <a href="blog.html?search=sức khỏe" class="px-3 py-1.5 bg-gray-100 rounded-lg text-xs font-bold text-gray-600 hover:bg-brand hover:text-white transition">#SucKhoe</a>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- ========================================
+                 NỘI DUNG BÀI VIẾT CHI TIẾT
+                 ======================================== -->
+            <div class="lg:w-2/3 order-1 lg:order-2">
+                <!-- 
+                    Article chính:
+                    - lg:w-2/3: Chiếm 2/3 width trên desktop
+                    - order-1: Hiển thị trước sidebar trên mobile
+                    - order-2: Hiển thị sau sidebar trên desktop
+                -->
+                
+                <article class="bg-white rounded-[2rem] shadow-card border border-gray-100 overflow-hidden mb-12 animate-fade-up">
+                    
+                    <!-- ========================================
+                         ẢNH ĐẠI DIỆN BÀI VIẾT VỚI OVERLAY
+                         ======================================== -->
+                    <div class="relative h-64 md:h-96 w-full bg-gray-200">
+                        <!-- Ảnh bìa bài viết - src sẽ được set bằng JavaScript -->
+                        <img 
+                            id="detail-image" 
+                            src="" 
+                            onerror="this.src='https://placehold.co/800x400/e2e8f0/64748b?text=PawJoy'" 
+                            class="absolute inset-0 w-full h-full object-cover">
+                        
+                        <!-- Overlay gradient từ trong suốt đến đen, chứa thông tin bài viết -->
+                        <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/90 via-black/50 to-transparent p-6 md:p-10">
+                            
+                            <!-- Badge chủ đề (Spa, Sức khỏe, v.v) -->
+                            <span id="detail-category" class="bg-brand text-white text-xs font-bold px-3 py-1 rounded-md uppercase mb-3 inline-block shadow-sm"></span>
+                            
+                            <!-- Tiêu đề bài viết -->
+                            <h1 id="detail-title" class="font-serif text-2xl md:text-4xl font-bold text-white leading-tight mb-4 drop-shadow-md">
+                                Đang tải nội dung...
+                            </h1>
+                            
+                            <!-- Meta info: Tác giả & Ngày đăng -->
+                            <div class="flex flex-wrap items-center gap-4 text-white/90 text-sm font-medium">
+                                <!-- Tác giả -->
+                                <span class="flex items-center gap-2">
+                                    <i class="far fa-user text-brand"></i> 
+                                    <span id="detail-author"></span>
+                                </span>
+                                
+                                <!-- Dấu phân cách -->
+                                <span class="hidden md:inline text-white/50">•</span>
+                                
+                                <!-- Ngày đăng -->
+                                <span class="flex items-center gap-2">
+                                    <i class="far fa-clock"></i> 
+                                    <span id="detail-date"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ========================================
+                         NỘI DUNG BÀI VIẾT
+                         ======================================== -->
+                    <div class="p-6 md:p-12">
+                        
+                        <!-- Tóm tắt bài viết - Hiển thị trong khung nổi bật -->
+                        <p id="detail-desc" class="text-lg text-gray-600 mb-8 font-medium italic border-l-4 border-brand pl-6 bg-brand/5 py-6 rounded-r-xl leading-relaxed">
+                            <!-- Nội dung tóm tắt được load từ JS -->
+                        </p>
+
+                        <!-- Nội dung chi tiết bài viết -->
+                        <div id="detail-content" class="text-gray-700 text-lg leading-relaxed mb-10">
+                            <!-- 
+                                Nội dung HTML bài viết được render vào đây
+                                Style cho các element bên trong được định nghĩa ở CSS phía trên
+                            -->
+                        </div>
+
+                        <!-- ========================================
+                             PHẦN CHIA SẺ MẠN XÃ HỘI
+                             ======================================== -->
+                        <div class="mt-12 pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-6">
+                            <div class="flex items-center gap-3">
+                                <span class="font-bold text-dark mr-2 text-sm uppercase tracking-wide">
+                                    Chia sẻ bài viết:
+                                </span>
+                                
+                                <!-- Nút share Facebook - Màu xanh Facebook -->
+                                <a href="#" class="w-10 h-10 rounded-full bg-[#1877F2] text-white flex items-center justify-center hover:opacity-90 transition shadow-md hover:-translate-y-1">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                
+                                <!-- Nút share Twitter - Màu xanh Twitter -->
+                                <a href="#" class="w-10 h-10 rounded-full bg-[#1DA1F2] text-white flex items-center justify-center hover:opacity-90 transition shadow-md hover:-translate-y-1">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                
+                                <!-- Nút share Email - Màu xám đen -->
+                                <a href="#" class="w-10 h-10 rounded-full bg-gray-800 text-white flex items-center justify-center hover:opacity-90 transition shadow-md hover:-translate-y-1">
+                                    <i class="fas fa-envelope"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- ========================================
+                             PHẦN BÌNH LUẬN
+                             ======================================== -->
+                        <div id="comments-section" class="mt-16 pt-10 border-t border-gray-100">
+                            
+                            <!-- Tiêu đề section với số lượng bình luận -->
+                            <h3 id="detail-comments-count" class="font-serif text-2xl font-bold text-dark mb-8 border-l-4 border-brand pl-3">
+                                0 Bình luận
+                            </h3>
+                            
+                            <!-- Container chứa danh sách bình luận - Được render bằng JS -->
+                            <div id="detail-comments-list" class="mb-12 space-y-6">
+                                <!-- Các bình luận sẽ được thêm vào đây bằng JavaScript -->
+                            </div>
+                        
+                            <!-- ========================================
+                                 FORM VIẾT BÌNH LUẬN MỚI
+                                 ======================================== -->
+                            <div class="bg-paper p-6 md:p-8 rounded-[2rem] border border-gray-100">
+                                
+                                <!-- Tiêu đề form -->
+                                <h4 class="font-bold text-lg text-dark mb-4 flex items-center gap-2">
+                                    <i class="far fa-edit text-brand"></i> Để lại ý kiến của bạn
+                                </h4>
+                                
+                                <!-- Form bình luận -->
+                                <form class="space-y-4" onsubmit="event.preventDefault(); alert('Cảm ơn bạn đã gửi bình luận! Chức năng đang được hoàn thiện.');">
+                                    <!-- 
+                                        onsubmit:
+                                        - event.preventDefault(): Ngăn form submit (reload trang)
+                                        - alert(): Hiển thị thông báo tạm thời (chức năng chưa hoàn thiện)
+                                    -->
+                                    
+                                    <!-- Hàng 1: Họ tên và Email -->
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <!-- Input Họ tên -->
+                                        <input 
+                                            type="text" 
+                                            placeholder="Họ tên *" 
+                                            required 
+                                            class="w-full bg-white border border-transparent focus:border-brand rounded-xl px-4 py-3 text-sm focus:outline-none transition shadow-sm placeholder-gray-400 text-dark">
+                                        
+                                        <!-- Input Email -->
+                                        <input 
+                                            type="email" 
+                                            placeholder="Email *" 
+                                            required 
+                                            class="w-full bg-white border border-transparent focus:border-brand rounded-xl px-4 py-3 text-sm focus:outline-none transition shadow-sm placeholder-gray-400 text-dark">
+                                    </div>
+                                    
+                                    <!-- Textarea nội dung bình luận -->
+                                    <textarea 
+                                        rows="4" 
+                                        placeholder="Nội dung bình luận *" 
+                                        required 
+                                        class="w-full bg-white border border-transparent focus:border-brand rounded-xl px-4 py-3 text-sm focus:outline-none transition shadow-sm resize-none placeholder-gray-400 text-dark">
+                                    </textarea>
+                                    
+                                    <!-- Nút gửi bình luận -->
+                                    <button 
+                                        type="submit" 
+                                        class="bg-brand text-white font-bold py-3 px-8 rounded-xl hover:bg-brandDark transition shadow-lg transform hover:-translate-y-1 w-full md:w-auto">
+                                        Gửi bình luận
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </article>
+            </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER: thông tin liên hệ, chính sách, mạng xã hội -->
+    <div id="footer"></div>
+    
+    <!-- ========================================
+         JAVASCRIPT - Tải file JS chính
+         ======================================== -->
+    <script src="../../assets/js/script.js"></script>
+    
+    <!-- ========================================
+         SCRIPT TẢI HEADER VÀ FOOTER ĐỘNG
+         ======================================== -->
+    <script>
+      // Load header và footer từ các file component dùng chung
+      document.addEventListener("DOMContentLoaded", () => {
+        fetch("../../templates/partials/header.html")
+          .then((res) => res.text())
+          .then((html) => (document.getElementById("header").innerHTML = html));
+
+        fetch("../../templates/partials/footer.html")
+          .then((res) => res.text())
+          .then((html) => (document.getElementById("footer").innerHTML = html));
+      });
+    </script>
+    <script type="module" src="../../assets/js/lib/mobile-menu.js"></script>
+    <script type="module" src="../../assets/js/lib/footer.js"></script>
+    <script src="../../assets/js/scroll.js"></script>
+</body>
+</html>

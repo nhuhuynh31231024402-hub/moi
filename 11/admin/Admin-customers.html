@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Khách hàng - Paw Joy Admin</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="styles/Admin-customers.css">
+</head>
+
+<body class="font-sans text-dark bg-cream">
+
+  <!-- SIDEBAR -->
+  <aside class="fixed left-0 top-0 h-screen bg-white shadow-lg w-64 z-40">
+    <div class="flex flex-col h-full">
+      <div class="h-20 flex items-center px-6 border-b border-gray-100">
+        <a href="Admin-dashboard.html" class="flex items-center gap-3 group">
+          <div class="relative w-10 h-10 flex-shrink-0">
+            <!-- Chân mèo màu vàng (dưới) -->
+            <i
+              class="fas fa-paw absolute bottom-0 left-0 text-[#EAB308] text-2xl transform -rotate-12 translate-y-1 -translate-x-1 opacity-80"></i>
+            <!-- Chân mèo màu đen (trên) -->
+            <i
+              class="fas fa-paw absolute top-0 right-0 text-black text-2xl transform rotate-12 translate-x-1 -translate-y-1"></i>
+          </div>
+          <span class="font-serif font-bold text-xl md:text-2xl tracking-tight text-dark">
+            Paw
+            <span class="text-brand italic">Joy</span>
+            .
+          </span>
+        </a>
+      </div>
+
+      <nav class="flex-1 overflow-y-auto py-6 px-4">
+        <div class="space-y-1">
+          <a href="Admin-dashboard.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-chart-line"></i><span>Dashboard</span>
+          </a>
+          <a href="Admin-orders.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-calendar-check"></i><span>Đơn đặt lịch</span>
+          </a>
+          <a href="Admin-partners.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-store"></i><span>Đối tác</span>
+          </a>
+          <a href="Admin-customers.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-r from-brand/10 to-brand/5 text-brand font-semibold">
+            <i class="fas fa-users"></i><span>Khách hàng</span>
+          </a>
+          <a href="Admin-finance.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-wallet"></i><span>Tài chính</span>
+          </a>
+          <a href="Admin-vouchers.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-ticket"></i><span>Khuyến mãi</span>
+          </a>
+          <a href="Admin-settings.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-cog"></i><span>Cài đặt</span>
+          </a>
+        </div>
+      </nav>
+
+      <div class="border-t border-gray-100 p-4">
+        <div class="flex items-center gap-3">
+          <div
+            class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand to-brandDark text-white flex items-center justify-center font-bold">
+            A</div>
+          <div>
+            <p class="font-semibold text-dark text-sm">Trần Thị Minh Anh</p>
+            <p class="text-xs text-gray-500">anhtran.31231023215@...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <div class="ml-64">
+    <header class="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-gray-100 shadow-sm">
+      <div class="h-20 px-6 flex items-center justify-between">
+        <div>
+          <h2 class="text-xl font-bold text-dark">Khách hàng</h2>
+          <p class="text-sm text-gray-500">Quản lý khách hàng</p>
+        </div>
+        <div class="flex items-center gap-4">
+          <button class="relative w-10 h-10 flex items-center justify-center rounded-full hover:bg-brand/10 transition">
+            <i class="far fa-bell text-dark text-lg"></i>
+            <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+          </button>
+          <div
+            class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand to-brandDark text-white flex items-center justify-center font-bold">
+            A</div>
+        </div>
+      </div>
+    </header>
+
+    <main class="p-6">
+      <div class="space-y-6">
+
+        <!-- Header -->
+        <div class="flex items-center justify-between">
+          <div>
+            <h1 class="text-3xl font-serif font-bold text-dark mb-2">Quản lý khách hàng</h1>
+            <p class="text-gray-500">Danh sách khách hàng sử dụng dịch vụ</p>
+          </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="card bg-white rounded-t-2xl">
+          <div class="flex gap-4 border-b border-gray-200">
+            <button onclick="switchTab('customers')" id="tabCustomers"
+              class="px-6 py-4 font-semibold text-brand border-b-2 border-brand transition flex items-center gap-2">
+              <i class="fas fa-users"></i>
+              <span>Danh sách khách hàng</span>
+            </button>
+            <button onclick="switchTab('reviews')" id="tabReviews"
+              class="px-6 py-4 font-semibold text-gray-600 hover:text-brand transition flex items-center gap-2">
+              <i class="fas fa-star"></i>
+              <span>Quản lý đánh giá</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Customers Tab Content -->
+        <div id="customersTab" class="space-y-6">
+          <!-- Stats Cards -->
+          <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+          <button onclick="filterByStatus('all')" class="card hover:shadow-xl transition-all transform hover:scale-105 cursor-pointer text-left">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-gray-600 text-sm mb-2">Tổng khách hàng</p>
+                <p class="text-3xl font-bold text-dark" id="totalCustomers">0</p>
+              </div>
+              <div
+                class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand to-brandDark flex items-center justify-center text-white text-xl shadow-lg">
+                <i class="fas fa-users"></i>
+              </div>
+            </div>
+          </button>
+          <button onclick="filterByStatus('vip')" class="card hover:shadow-xl transition-all transform hover:scale-105 cursor-pointer text-left">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-gray-600 text-sm mb-2">VIP</p>
+                <p class="text-3xl font-bold text-dark" id="vipCustomers">0</p>
+              </div>
+              <div
+                class="w-14 h-14 rounded-2xl bg-gradient-to-br from-yellow-500 to-yellow-600 flex items-center justify-center text-white text-xl shadow-lg">
+                <i class="fas fa-crown"></i>
+              </div>
+            </div>
+          </button>
+          <button onclick="filterByStatus('active')" class="card hover:shadow-xl transition-all transform hover:scale-105 cursor-pointer text-left">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-gray-600 text-sm mb-2">Hoạt động</p>
+                <p class="text-3xl font-bold text-dark" id="activeCustomers">0</p>
+              </div>
+              <div
+                class="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center text-white text-xl shadow-lg">
+                <i class="fas fa-check-circle"></i>
+              </div>
+            </div>
+          </button>
+          <button onclick="filterByStatus('frequent_canceller')" class="card hover:shadow-xl transition-all transform hover:scale-105 cursor-pointer text-left">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-gray-600 text-sm mb-2">Hay hủy</p>
+                <p class="text-3xl font-bold text-dark" id="cancellerCustomers">0</p>
+              </div>
+              <div
+                class="w-14 h-14 rounded-2xl bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center text-white text-xl shadow-lg">
+                <i class="fas fa-ban"></i>
+              </div>
+            </div>
+          </button>
+          <button onclick="filterByStatus('complained')" class="card hover:shadow-xl transition-all transform hover:scale-105 cursor-pointer text-left">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-gray-600 text-sm mb-2">Khiếu nại</p>
+                <p class="text-3xl font-bold text-dark" id="complainedCustomers">0</p>
+              </div>
+              <div
+                class="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center text-white text-xl shadow-lg">
+                <i class="fas fa-exclamation-triangle"></i>
+              </div>
+            </div>
+          </button>
+        </div>
+
+        <!-- Filters -->
+        <div class="card">
+          <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+            <input type="text" id="searchInput" placeholder="Tìm kiếm khách hàng..."
+              class="px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none">
+            <select id="statusFilter" class="px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none">
+              <option value="all">Tất cả trạng thái</option>
+              <option value="vip">VIP</option>
+              <option value="active">Hoạt động</option>
+              <option value="frequent_canceller">Hay hủy</option>
+              <option value="complained">Khiếu nại</option>
+            </select>
+            <select id="sortFilter" class="px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none">
+              <option value="newest">Mới nhất</option>
+              <option value="oldest">Cũ nhất</option>
+              <option value="name_asc">Tên A-Z</option>
+              <option value="name_desc">Tên Z-A</option>
+              <option value="orders_desc">Nhiều đơn nhất</option>
+              <option value="spent_desc">Chi tiêu cao nhất</option>
+            </select>
+            <button id="clearFiltersBtn" onclick="resetFilters()"
+              class="px-4 py-3 rounded-xl border border-gray-200 text-gray-600 hover:bg-gray-50 font-semibold transition flex items-center justify-center gap-2">
+              <i class="fas fa-redo text-sm"></i>
+              <span>Đặt lại</span>
+            </button>
+            <button onclick="applyFilters()" class="px-6 py-3 rounded-xl bg-brand text-white font-semibold hover:bg-brandDark transition shadow-lg">
+              <i class="fas fa-filter mr-2"></i>Áp dụng
+            </button>
+          </div>
+        </div>
+
+        <!-- Customers Content -->
+        <div id="customersContent">
+          <!-- Content will be inserted by JavaScript -->
+        </div>
+
+          <!-- Pagination -->
+          <div class="flex items-center justify-between">
+            <div class="text-gray-600 text-sm" id="paginationInfo">
+              <!-- Pagination info will be inserted by JavaScript -->
+            </div>
+            <div class="flex items-center gap-2" id="paginationButtons">
+              <!-- Pagination buttons will be inserted by JavaScript -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Reviews Tab Content -->
+        <div id="reviewsTab" class="space-y-6 hidden">
+          <!-- Reviews Stats -->
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <button onclick="filterByReviewRating('all')" class="card hover:shadow-xl transition-all transform hover:scale-105 cursor-pointer text-left">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-gray-600 text-sm mb-2">Tổng đánh giá</p>
+                  <p class="text-3xl font-bold text-dark" id="totalReviews">0</p>
+                </div>
+                <div
+                  class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand to-brandDark flex items-center justify-center text-white text-xl shadow-lg">
+                  <i class="fas fa-star"></i>
+                </div>
+              </div>
+            </button>
+            <button onclick="filterByReviewRating('5')" class="card hover:shadow-xl transition-all transform hover:scale-105 cursor-pointer text-left">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-gray-600 text-sm mb-2">5 sao</p>
+                  <p class="text-3xl font-bold text-dark" id="reviews5">0</p>
+                </div>
+                <div
+                  class="w-14 h-14 rounded-2xl bg-gradient-to-br from-yellow-500 to-yellow-600 flex items-center justify-center text-white text-xl shadow-lg">
+                  <i class="fas fa-star"></i>
+                </div>
+              </div>
+            </button>
+            <button onclick="filterByReviewRating('4')" class="card hover:shadow-xl transition-all transform hover:scale-105 cursor-pointer text-left">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-gray-600 text-sm mb-2">4 sao</p>
+                  <p class="text-3xl font-bold text-dark" id="reviews4">0</p>
+                </div>
+                <div
+                  class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white text-xl shadow-lg">
+                  <i class="fas fa-star"></i>
+                </div>
+              </div>
+            </button>
+            <button onclick="filterByReviewRating('low')" class="card hover:shadow-xl transition-all transform hover:scale-105 cursor-pointer text-left">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-gray-600 text-sm mb-2">Đánh giá thấp</p>
+                  <p class="text-3xl font-bold text-dark" id="reviewsLow">0</p>
+                </div>
+                <div
+                  class="w-14 h-14 rounded-2xl bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center text-white text-xl shadow-lg">
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+              </div>
+            </button>
+          </div>
+
+          <!-- Reviews Filters -->
+          <div class="card">
+            <div class="grid grid-cols-1 md:grid-cols-6 gap-4">
+              <input type="text" id="reviewSearchInput" placeholder="Tìm kiếm đánh giá..."
+                class="px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none">
+              <select id="reviewRatingFilter" class="px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none">
+                <option value="all">Tất cả sao</option>
+                <option value="5">5 sao</option>
+                <option value="4">4 sao</option>
+                <option value="3">3 sao</option>
+                <option value="2">2 sao</option>
+                <option value="1">1 sao</option>
+              </select>
+              <select id="reviewPartnerFilter" class="px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none">
+                <option value="">Tất cả đối tác</option>
+              </select>
+              <select id="reviewSortFilter" class="px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none">
+                <option value="newest">Mới nhất</option>
+                <option value="oldest">Cũ nhất</option>
+                <option value="rating_desc">Sao cao nhất</option>
+                <option value="rating_asc">Sao thấp nhất</option>
+              </select>
+              <button onclick="resetReviewFilters()"
+                class="px-4 py-3 rounded-xl border border-gray-200 text-gray-600 hover:bg-gray-50 font-semibold transition flex items-center justify-center gap-2">
+                <i class="fas fa-redo text-sm"></i>
+                <span>Đặt lại</span>
+              </button>
+              <button onclick="applyReviewFilters()" class="px-6 py-3 rounded-xl bg-brand text-white font-semibold hover:bg-brandDark transition shadow-lg">
+                <i class="fas fa-filter mr-2"></i>Áp dụng
+              </button>
+            </div>
+          </div>
+
+          <!-- Reviews Content -->
+          <div id="reviewsContent">
+            <!-- Content will be inserted by JavaScript -->
+          </div>
+
+          <!-- Reviews Pagination -->
+          <div class="flex items-center justify-between">
+            <div class="text-gray-600 text-sm" id="reviewsPaginationInfo">
+              <!-- Pagination info will be inserted by JavaScript -->
+            </div>
+            <div class="flex items-center gap-2" id="reviewsPaginationButtons">
+              <!-- Pagination buttons will be inserted by JavaScript -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal: Customer Detail -->
+  <div id="customerModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="sticky top-0 bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between">
+        <h3 class="text-2xl font-bold text-dark">Chi tiết khách hàng</h3>
+        <button onclick="hideCustomerModal()"
+          class="w-10 h-10 rounded-full hover:bg-gray-100 transition flex items-center justify-center">
+          <i class="fas fa-times text-gray-600"></i>
+        </button>
+      </div>
+
+      <div class="p-6 space-y-6" id="customerContent">
+        <!-- Content will be inserted by JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Edit Customer -->
+  <div id="editCustomerModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="sticky top-0 bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between">
+        <h3 class="text-2xl font-bold text-dark">Chỉnh sửa khách hàng</h3>
+        <button onclick="hideEditCustomerModal()"
+          class="w-10 h-10 rounded-full hover:bg-gray-100 transition flex items-center justify-center">
+          <i class="fas fa-times text-gray-600"></i>
+        </button>
+      </div>
+
+      <div class="p-6 space-y-6" id="editCustomerContent">
+        <!-- Content will be inserted by JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Delete Confirm -->
+  <div id="deleteCustomerConfirmModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="sticky top-0 bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between">
+        <h3 class="text-2xl font-bold text-dark">Xác nhận xóa khách hàng</h3>
+        <button onclick="hideDeleteCustomerConfirmModal()"
+          class="w-10 h-10 rounded-full hover:bg-gray-100 transition flex items-center justify-center">
+          <i class="fas fa-times text-gray-600"></i>
+        </button>
+      </div>
+
+      <div class="p-6 space-y-6" id="deleteCustomerConfirmContent">
+        <!-- Content will be inserted by JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <script src="js/Admin-customers.js"></script>
+
+</body>
+
+</html>
+

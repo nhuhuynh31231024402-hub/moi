@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chọn thời gian - Pet Wow | Paw Joy</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23FDBA74'/%3E%3Cstop offset='100%25' stop-color='%23D97706'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23grad)'/%3E%3Cg transform='translate(8 10) scale(0.75)'%3E%3Cpath fill='white' d='M32 36c-5.5 0-10 4.5-10 10s4.5 10 10 10 10-4.5 10-10-4.5-10-10-10zm-14-6c0 3.3 2.7 6 6 6s6-2.7 6-6-2.7-6-6-6-6 2.7-6 6zm28 0c0 3.3 2.7 6 6 6s6-2.7 6-6-2.7-6-6-6-6 2.7-6 6zm-20-12c0 3.3 2.7 6 6 6s6-2.7 6-6-2.7-6-6-6-6 2.7-6 6zm12 0c0 3.3 2.7 6 6 6s6-2.7 6-6-2.7-6-6-6-6 2.7-6 6z'/%3E%3C/g%3E%3C/svg%3E" />
+    
+    <!-- Common CSS -->
+    <link rel="stylesheet" href="../../assets/css/style.css" />
+    <link rel="stylesheet" href="../../assets/css/christmas-theme.css" />
+
+    <!-- Config Tailwind -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', "sans-serif"],
+              serif: ['"Playfair Display"', "serif"],
+            },
+            colors: {
+              brand: "#D97706",
+              brandLight: "#FFFBEB",
+              brandDark: "#92400E",
+              accent: "#059669",
+              dark: "#3F2212",
+              slate: "#1F2937",
+              cream: "#FDFBF7",
+              paper: "#F3F4F6",
+            },
+            boxShadow: {
+              soft: "0 20px 40px -15px rgba(0, 0, 0, 0.05)",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="font-sans text-dark bg-cream antialiased">
+    <!-- Christmas Snow Container -->
+    <div id="snow-container" class="fixed inset-0 pointer-events-none z-10"></div>
+    <!-- HEADER: logo, menu, điều hướng chính  -->
+    <div id="header"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="pt-20 md:pt-24 pb-8">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <!-- LEFT: Time selection -->
+          <div class="lg:col-span-2">
+            <div class="bg-white rounded-2xl p-6 border border-gray-200 shadow-soft">
+              <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between mb-6">
+                <div>
+                  <h1 class="font-serif text-3xl font-bold text-dark">Chọn thời gian</h1>
+                </div>
+                <div class="flex items-center gap-2 bg-brandLight/70 text-sm text-brand font-semibold px-3 py-2 rounded-full">
+                  <i class="fas fa-shield-heart"></i>
+                  <span>Giữ lịch an toàn</span>
+                </div>
+              </div>
+
+              <!-- Date Navigator -->
+              <div class="rounded-xl border border-gray-100 bg-cream/60 p-4">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                  <div class="flex items-center gap-3">
+                    <button
+                      id="prevWeekBtn"
+                      class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 text-gray-600 hover:border-brand hover:text-brand transition disabled:opacity-40 disabled:cursor-not-allowed"
+                      aria-label="Xem tuần trước"
+                    >
+                      <i class="fas fa-chevron-left text-sm"></i>
+                    </button>
+                    <div>
+                      <p class="text-xs text-gray-500">Tháng</p>
+                      <p id="monthLabel" class="font-bold text-dark"></p>
+                    </div>
+                    <button
+                      id="nextWeekBtn"
+                      class="w-10 h-10 flex items-center justify-center rounded-full border border-gray-200 text-gray-600 hover:border-brand hover:text-brand transition"
+                      aria-label="Xem tuần sau"
+                    >
+                      <i class="fas fa-chevron-right text-sm"></i>
+                    </button>
+                  </div>
+                  <div class="flex items-center gap-2 text-xs text-gray-500">
+                    <span class="w-2 h-2 rounded-full bg-brand"></span> Còn chỗ
+                    <span class="w-2 h-2 rounded-full bg-gray-200 ml-3"></span> Ít chỗ
+                  </div>
+                </div>
+
+                <div id="dateList" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3 mt-4"></div>
+              </div>
+
+              <!-- Time Slots -->
+              <div class="mt-6">
+                <div class="flex items-center justify-between mb-3">
+                  <div>
+                    <h4 class="font-bold text-dark">Khung giờ khả dụng</h4>
+                    <p id="timeHint" class="text-xs text-gray-500">
+                      Chọn ngày để xem khung giờ. Nguồn dữ liệu mô phỏng từ django-appointment.
+                    </p>
+                  </div>
+                  <div class="flex items-center gap-2 text-sm text-gray-600">
+                    <i class="fas fa-calendar-day text-brand"></i>
+                    <span id="selectedDateLabel" class="font-semibold"></span>
+                  </div>
+                </div>
+                <div id="timeSlots" class="grid sm:grid-cols-2 gap-3">
+                  <p class="text-sm text-gray-500 bg-white border border-dashed border-gray-200 rounded-lg p-4">
+                    Hãy chọn một ngày để xem các khung giờ còn trống.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT: Summary -->
+          <div class="lg:col-span-1">
+            <div class="sticky top-24 space-y-4">
+              <!-- Store Info Card -->
+              <div class="bg-white rounded-xl p-5 border border-gray-200">
+                <div class="flex items-start gap-4 mb-4">
+                  <div class="booking-store-image-container overflow-hidden rounded-lg">
+                    <img
+                      id="storeImage"
+                      src="../../assets/images/stores/PetWow/logo_petwow.png"
+                      alt="Store"
+                      class="w-20 h-20 rounded-lg object-cover booking-store-image"
+                      onerror="this.src='../../assets/images/logo/LOGO PAWJOY.png'"
+                    />
+                  </div>
+                  <div class="flex-1">
+                    <h3 id="storeName" class="font-bold text-dark mb-1">Pet Wow</h3>
+                    <div class="flex items-center gap-1 mb-2">
+                      <div id="storeRatingStars" class="flex text-yellow-400 text-xs">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                      </div>
+                      <span id="storeRatingValue" class="text-sm font-bold text-dark ml-1">4.8</span>
+                      <span id="storeReviewCount" class="text-xs text-gray-500">(127)</span>
+                    </div>
+                    <p id="storeAddress" class="text-xs text-gray-600 line-clamp-2">
+                      294 Lê Quang Định, Phường 11, Bình Thạnh, Hồ Chí Minh
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Selected Services -->
+              <div class="bg-white rounded-xl p-5 border border-gray-200">
+                <h4 class="font-bold text-dark mb-4">Dịch vụ đã chọn</h4>
+                <div id="selectedServices" class="space-y-3 mb-4">
+                  <p class="text-sm text-gray-500 text-center py-4">
+                    Không có dịch vụ nào được chọn
+                  </p>
+                </div>
+                <div class="border-t border-gray-200 pt-4 space-y-3">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sm font-bold text-dark">Tổng tiền</span>
+                    <span id="servicesTotal" class="font-serif text-lg font-bold text-dark">0 VNĐ</span>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-1">
+                      <span class="text-sm font-bold text-dark">Phí dịch vụ</span>
+                      <div class="relative group">
+                        <i class="fas fa-question-circle text-gray-400 text-xs cursor-help"></i>
+                        <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-64 p-3 bg-gray-800 text-white text-xs rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pointer-events-none z-10">
+                          Đây là phí giúp Paw Joy duy trì, nâng cao chất lượng trải nghiệm ứng dụng và đa dạng cửa hàng hơn
+                          <div class="absolute top-full left-1/2 transform -translate-x-1/2 -mt-1">
+                            <div class="w-2 h-2 bg-gray-800 rotate-45"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <span id="serviceFee" class="font-serif text-xl font-bold text-dark">15.000 VNĐ</span>
+                  </div>
+                  <p class="text-xs text-gray-500 mt-2 italic">
+                    Tổng tiền dịch vụ bạn chọn sẽ được thanh toán trực tiếp tại cửa hàng
+                  </p>
+                </div>
+              </div>
+
+              <!-- Selected Date/Time -->
+              <div class="bg-white rounded-xl p-5 border border-gray-200">
+                <h4 class="font-bold text-dark mb-3">Thời gian đã chọn</h4>
+                <div id="selectedDateTime" class="p-4 bg-gray-50 rounded-lg text-sm text-gray-600">
+                  Bạn chưa chọn ngày và giờ.
+                </div>
+                <p class="text-xs text-gray-500 mt-3 italic">
+                  Lịch có thể thay đổi tùy vào tình trạng thực tế tại cửa hàng. Chúng tôi sẽ liên hệ xác nhận.
+                </p>
+              </div>
+
+              <!-- Continue Button -->
+              <button
+                id="confirmBtn"
+                class="w-full bg-gray-300 text-gray-500 font-bold py-4 rounded-xl transition cursor-not-allowed"
+                disabled
+              >
+                Xác nhận lịch
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- FOOTER: thông tin liên hệ, chính sách, mạng xã hội -->
+    <div id="footer" class="mt-16"></div>
+
+    <script src="../../assets/js/Stores-booking-time.js"></script>
+    <script>
+      // Load header và footer từ các file component dùng chung
+      document.addEventListener("DOMContentLoaded", () => {
+        fetch("../../templates/partials/header.html")
+          .then((res) => res.text())
+          .then((html) => (document.getElementById("header").innerHTML = html));
+
+        fetch("../../templates/partials/footer.html")
+          .then((res) => res.text())
+          .then((html) => (document.getElementById("footer").innerHTML = html));
+      });
+    </script>
+    <script type="module" src="../../assets/js/lib/mobile-menu.js"></script>
+    <script type="module" src="../../assets/js/lib/footer.js"></script>
+    <script src="../../assets/js/scroll.js"></script>
+    <script src="../../assets/js/christmas-snow.js"></script>
+  </body>
+</html>
+

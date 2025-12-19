@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PawJoy - Blog Kiến Thức</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23FDBA74'/%3E%3Cstop offset='100%25' stop-color='%23D97706'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23grad)'/%3E%3Cg transform='translate(8 10) scale(0.75)'%3E%3Cpath fill='white' d='M32 36c-5.5 0-10 4.5-10 10s4.5 10 10 10 10-4.5 10-10-4.5-10-10-10zm-14-6c0 3.3 2.7 6 6 6s6-2.7 6-6-2.7-6-6-6-6 2.7-6 6zm28 0c0 3.3 2.7 6 6 6s6-2.7 6-6-2.7-6-6-6-6 2.7-6 6zm-20-12c0 3.3 2.7 6 6 6s6-2.7 6-6-2.7-6-6-6-6 2.7-6 6zm12 0c0 3.3 2.7 6 6 6s6-2.7 6-6-2.7-6-6-6-6 2.7-6 6z'/%3E%3C/g%3E%3C/svg%3E" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', "sans-serif"],
+              serif: ['"Playfair Display"', "serif"],
+            },
+            colors: {
+              brand: "#D97706",
+              brandLight: "#FFFBEB",
+              brandDark: "#92400E",
+              accent: "#059669",
+              dark: "#3F2212",
+              slate: "#1F2937",
+              cream: "#FDFBF7",
+              paper: "#F3F4F6",
+            },
+            boxShadow: {
+              soft: "0 20px 40px -15px rgba(0, 0, 0, 0.05)",
+              card: "0 10px 30px -5px rgba(0, 0, 0, 0.1)",
+            },
+            animation: {
+              "fade-up": "fadeUp 0.8s ease-out forwards",
+            },
+            keyframes: {
+              fadeUp: {
+                "0%": { opacity: "0", transform: "translateY(20px)" },
+                "100%": { opacity: "1", transform: "translateY(0)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+    
+    <style>
+      @media (min-width: 1024px) {
+        .footer-content { display: block !important; opacity: 1 !important; height: auto !important; margin-top: 1.5rem; pointer-events: auto; }
+        .footer-arrow { display: none !important; }
+        .footer-heading { pointer-events: none !important; cursor: default !important; justify-content: flex-start !important; }
+        .footer-col { border-bottom: none !important; margin-bottom: 0 !important; padding-bottom: 0 !important; }
+      }
+      .sidebar-sticky { position: sticky; top: 100px; height: fit-content; }
+      .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+      .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    </style>
+</head>
+<body class="font-sans text-dark bg-cream antialiased selection:bg-brand selection:text-white flex flex-col min-h-screen">
+
+    <!-- HEADER: logo, menu, điều hướng chính  -->
+    <div id="header"></div>
+
+    <main class="flex-grow pt-28 md:pt-36 pb-12">
+      <section class="container mx-auto px-6 mb-12 md:mb-16 text-center animate-fade-up">
+          <span class="inline-block py-1.5 px-4 rounded-full bg-white border border-brand/20 text-brand text-xs font-bold uppercase tracking-widest mb-4 shadow-sm">
+            ✨ Cẩm nang kiến thức
+          </span>
+          <h1 class="font-serif text-4xl md:text-6xl text-dark font-medium leading-tight drop-shadow-sm">
+            Chăm Sóc Boss <br /><span class="italic text-brand">Đúng Cách.</span>
+          </h1>
+      </section>
+
+      <section class="container mx-auto px-6">
+        <div class="flex flex-col lg:flex-row gap-12">
+            <aside class="lg:w-1/3 space-y-8 order-2 lg:order-1 sidebar-sticky h-fit">
+                <div class="bg-white p-6 rounded-[2rem] shadow-card border border-gray-100">
+                    <h3 class="font-serif text-xl font-bold mb-4 border-l-4 border-brand pl-3 text-dark">Tìm kiếm</h3>
+                    <div class="relative">
+                        <input type="text" id="searchInput" onkeyup="searchBlogs()" placeholder="Tìm bài viết..." class="w-full bg-paper border border-transparent rounded-xl py-3 pl-4 pr-10 focus:outline-none focus:border-brand focus:bg-white transition font-bold text-sm text-dark placeholder-gray-400">
+                        <button type="button" onclick="searchBlogs()" class="absolute right-3 top-3 text-gray-400 hover:text-brand"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-[2rem] shadow-card border border-gray-100">
+                    <h3 class="font-serif text-xl font-bold mb-4 border-l-4 border-brand pl-3 text-dark">Chủ đề</h3>
+                    <ul id="category-list" class="space-y-2">
+                        <li class="text-center text-gray-400 text-sm py-4"><i class="fas fa-circle-notch fa-spin"></i> Đang tải chủ đề...</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-6 rounded-[2rem] shadow-card border border-gray-100">
+                    <h3 class="font-serif text-xl font-bold mb-6 border-l-4 border-brand pl-3 text-dark">Bài viết mới</h3>
+                    <div id="recent-posts-container" class="space-y-5"></div>
+                </div>
+
+                <div class="bg-white p-6 rounded-[2rem] shadow-card border border-gray-100">
+                    <h3 class="font-serif text-xl font-bold mb-6 border-l-4 border-brand pl-3 text-dark">Bình luận mới</h3>
+                    <div id="recent-comments-container" class="space-y-4">
+                        <div class="text-center text-gray-400 text-sm py-4"><i class="fas fa-circle-notch fa-spin"></i> Đang tải...</div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-[2rem] shadow-card border border-gray-100">
+                    <h3 class="font-serif text-xl font-bold mb-4 border-l-4 border-brand pl-3 text-dark">Từ khóa</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <button type="button" onclick="filterByTag('Spa')" class="px-3 py-1.5 bg-gray-100 rounded-lg text-xs font-bold text-gray-600 hover:bg-brand hover:text-white transition">#SpaChoMeo</button>
+                        <button type="button" onclick="filterByTag('Dinh dưỡng')" class="px-3 py-1.5 bg-gray-100 rounded-lg text-xs font-bold text-gray-600 hover:bg-brand hover:text-white transition">#DinhDuong</button>
+                        <button type="button" onclick="filterByTag('Review')" class="px-3 py-1.5 bg-gray-100 rounded-lg text-xs font-bold text-gray-600 hover:bg-brand hover:text-white transition">#Review</button>
+                    </div>
+                </div>
+            </aside>
+
+            <div class="lg:w-2/3 order-1 lg:order-2">
+                <div class="relative rounded-[2.5rem] overflow-hidden shadow-2xl mb-12 group animate-fade-up">
+                    <div class="grid grid-cols-1 md:grid-cols-2 min-h-[400px]">
+                      <div class="relative h-64 md:h-auto overflow-hidden">
+                        <a href="blog-detail.html?id=5" class="block h-full w-full">
+                            <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=2069" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110" />
+                        </a>
+                        <div class="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition pointer-events-none"></div>
+                      </div>
+                      <div class="bg-dark text-white p-8 md:p-10 flex flex-col justify-center">
+                        <div class="flex items-center gap-3 mb-4">
+                          <span class="bg-brand px-3 py-1 rounded-md text-xs font-bold uppercase">Spa & Grooming</span>
+                          <span class="text-white/60 text-xs"><i class="far fa-clock mr-1"></i> 01/12/2025</span>
+                        </div>
+                        <h2 class="font-serif text-2xl md:text-3xl leading-tight mb-4 hover:text-brand transition cursor-pointer">
+                            <a href="blog-detail.html?id=5">Top 5 dấu hiệu cho thấy Boss đang cần đi Spa gấp</a>
+                        </h2>
+                        <p class="text-white/70 mb-6 text-sm leading-relaxed line-clamp-3">
+                          Phát hiện sớm các vấn đề về da và lông không chỉ giúp thú cưng thoải mái mà còn ngăn ngừa các bệnh lý nghiêm trọng...
+                        </p>
+                        <a href="blog-detail.html?id=5" class="inline-flex items-center gap-2 text-brand font-bold text-sm hover:text-white transition">
+                          Đọc tiếp <i class="fas fa-arrow-right"></i>
+                        </a>
+                      </div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                        <div>
+                            <h2 id="current-category-title" class="font-serif text-3xl font-bold text-dark">Tất cả bài viết</h2>
+                            <div class="w-16 h-1 bg-brand rounded-full mt-2"></div>
+                        </div>
+                        <div class="bg-white rounded-2xl border border-gray-100 shadow-soft px-4 py-3 flex flex-wrap gap-3 items-center text-xs md:text-sm">
+                            <span class="font-semibold text-gray-500 mr-1">Lọc / Sắp xếp:</span>
+                            <select id="sortOrder" class="bg-paper border border-transparent rounded-xl px-3 py-1.5 text-xs md:text-sm focus:outline-none focus:border-brand">
+                                <option value="newest">Mới nhất</option>
+                                <option value="oldest">Cũ nhất</option>
+                                <option value="popular">Nhiều bình luận</option>
+                            </select>
+                            <select id="authorFilter" class="bg-paper border border-transparent rounded-xl px-3 py-1.5 text-xs md:text-sm focus:outline-none focus:border-brand">
+                                <option value="">Tất cả tác giả</option>
+                            </select>
+                            <select id="dateFilter" class="bg-paper border border-transparent rounded-xl px-3 py-1.5 text-xs md:text-sm focus:outline-none focus:border-brand">
+                                <option value="">Tất cả thời gian</option>
+                            </select>
+                            <select id="engagementFilter" class="bg-paper border border-transparent rounded-xl px-3 py-1.5 text-xs md:text-sm focus:outline-none focus:border-brand">
+                                <option value="">Mức độ tương tác</option>
+                                <option value="withComments">Có bình luận</option>
+                                <option value="noComments">Chưa có bình luận</option>
+                                <option value="hot">Nhiều bình luận</option>
+                            </select>
+                            <button type="button" onclick="applyFilters()" class="bg-brand text-white font-semibold px-3 py-1.5 rounded-xl hover:bg-brandDark transition shadow-sm">
+                                Áp dụng
+                            </button>
+                            <button type="button" onclick="resetAdvancedFilters()" class="text-gray-400 hover:text-brand font-medium">
+                                Xóa lọc
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <div class="col-span-2 text-center text-gray-400 py-12"><i class="fas fa-circle-notch fa-spin text-2xl"></i> Đang tải dữ liệu...</div>
+                </div>
+
+                <div class="flex justify-center mb-12">
+                    <button id="loadMoreBtn" type="button" class="md:hidden inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-brand text-white text-sm font-bold shadow-soft hover:bg-brandDark transition hidden">
+                        Xem thêm
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </button>
+                </div>
+
+                <div id="pagination" class="flex justify-center mt-12 gap-3 hidden"></div>
+            </div>
+        </div>
+      </section>
+
+      <section class="container mx-auto px-6 mt-24">
+        <div class="text-center mb-10">
+          <i class="fab fa-instagram text-3xl md:text-4xl text-brand mb-3"></i>
+          <h2 class="font-serif text-2xl md:text-3xl text-dark font-bold">Theo dõi @PawJoy trên Instagram</h2>
+          <p class="text-gray-500 text-sm mt-2">Cùng ngắm nhìn những khoảnh khắc "đốn tim" mỗi ngày.</p>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <a href="#" class="group relative aspect-square rounded-2xl overflow-hidden cursor-pointer">
+            <img src="https://images.unsplash.com/photo-1535930749574-1399327ce78f?q=80&w=600" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+            <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+              <i class="fas fa-heart text-white text-2xl"></i>
+            </div>
+          </a>
+          <a href="#" class="group relative aspect-square rounded-2xl overflow-hidden cursor-pointer">
+            <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=600" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+            <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+              <i class="fas fa-heart text-white text-2xl"></i>
+            </div>
+          </a>
+          <a href="#" class="group relative aspect-square rounded-2xl overflow-hidden cursor-pointer">
+            <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?q=80&w=600" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+            <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+              <i class="fas fa-heart text-white text-2xl"></i>
+            </div>
+          </a>
+          <a href="#" class="group relative aspect-square rounded-2xl overflow-hidden cursor-pointer">
+            <img src="https://images.unsplash.com/photo-1598133894008-61f7fdb8cc3a?q=80&w=600" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+            <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+              <i class="fas fa-heart text-white text-2xl"></i>
+            </div>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER: thông tin liên hệ, chính sách, mạng xã hội -->
+    <div id="footer"></div>
+    
+    <script src="../../assets/js/script.js"></script>
+    <script>
+      // Load header và footer từ các file component dùng chung
+      document.addEventListener("DOMContentLoaded", () => {
+        fetch("../../templates/partials/header.html")
+          .then((res) => res.text())
+          .then((html) => {
+            document.getElementById("header").innerHTML = html;
+            // Update badge sau khi header load
+            setTimeout(() => {
+              if (typeof updateFavoriteBadge === 'function') {
+                updateFavoriteBadge();
+              }
+            }, 100);
+          });
+
+        fetch("../../templates/partials/footer.html")
+          .then((res) => res.text())
+          .then((html) => (document.getElementById("footer").innerHTML = html));
+      });
+    </script>
+    <script src="../../assets/js/lib/favorite-badge.js"></script>
+    <script type="module" src="../../assets/js/lib/mobile-menu.js"></script>
+    <script type="module" src="../../assets/js/lib/footer.js"></script>
+    <script src="../../assets/js/scroll.js"></script>
+</body>
+</html>

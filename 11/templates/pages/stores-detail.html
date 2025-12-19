@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="pageTitle">Chi tiết cửa hàng | Paw Joy</title>
+
+    <!-- Thư viện Tailwind CSS để xây dựng giao diện -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Bộ icon sử dụng cho nút, đánh giá, thao tác -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Font chữ chính cho website -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Thiết lập màu sắc, font và hiệu ứng chung cho Paw Joy -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', "sans-serif"],
+              serif: ['"Playfair Display"', "serif"],
+            },
+            colors: {
+              brand: "#D97706", // Màu chủ đạo thương hiệu
+              brandLight: "#FFFBEB",
+              brandDark: "#92400E",
+              accent: "#059669",
+              dark: "#3F2212",
+              slate: "#1F2937",
+              cream: "#FDFBF7", // Màu nền tổng thể
+              paper: "#F3F4F6",
+            },
+            boxShadow: {
+              soft: "0 20px 40px -15px rgba(0, 0, 0, 0.05)", // Đổ bóng nhẹ
+              glow: "0 0 30px rgba(217, 119, 6, 0.4)",  // Hiệu ứng nổi bật
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* Sidebar cố định khi cuộn trang (áp dụng cho desktop) */
+      .sidebar-sticky {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 100px;
+        height: fit-content;
+      }
+      /* Ẩn thanh cuộn ngang cho danh sách dịch vụ */
+      .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .hide-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      /* Hiển thị đầy đủ footer khi ở màn hình desktop */
+      @media (min-width: 1024px) {
+        .footer-content {
+          display: block !important;
+          opacity: 1 !important;
+          height: auto !important;
+          margin-top: 1.5rem;
+          pointer-events: auto;
+        }
+        .footer-arrow {
+          display: none !important;
+        }
+        .footer-heading {
+          pointer-events: none !important;
+          cursor: default !important;
+          justify-content: flex-start !important;
+        }
+        .footer-col {
+          border-bottom: none !important;
+          margin-bottom: 0 !important;
+          padding-bottom: 0 !important;
+        }
+      }
+    </style>
+    <!-- Christmas Theme CSS -->
+    <link rel="stylesheet" href="../../assets/css/christmas-theme.css" />
+  </head>
+  <body
+    class="font-sans text-dark bg-cream antialiased selection:bg-brand selection:text-white"
+  >
+    <!-- Christmas Snow Container -->
+    <div id="snow-container" class="fixed inset-0 pointer-events-none z-10"></div>
+    <!-- HEADER - Load từ component dùng chung -->
+    <div id="header"></div>
+
+    <!-- NỘI DUNG CHÍNH CỦA TRANG -->
+    <main class="pt-20 md:pt-24">
+      <div class="container mx-auto px-6 py-8">
+        <!-- Nút quay lại danh sách cửa hàng -->
+        <div class="mb-6">
+          <a
+            href="stores.html"
+            class="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-brand font-medium transition">
+            <i class="fas fa-arrow-left"></i>
+            <span>Quay về danh sách cửa hàng</span>
+          </a>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <!-- CỘT TRÁI – Thông tin chi tiết cửa hàng -->
+          <div class="lg:col-span-2 space-y-8">
+            <!-- Tiêu đề & thông tin tổng quan cửa hàng -->
+            <div>
+              <div class="flex items-start justify-between mb-4">
+                <h1 id="storeName" class="font-serif text-4xl md:text-5xl font-bold text-dark flex-1">
+                  Đang tải...
+                </h1>
+                <!-- Nút yêu thích cửa hàng -->
+                <button
+                  id="favoriteStoreBtn"
+                  onclick="toggleFavoriteStore()"
+                  class="ml-4 w-12 h-12 flex items-center justify-center rounded-full border-2 border-gray-200 hover:border-red-500 hover:bg-red-50 transition text-gray-400 hover:text-red-500"
+                  title="Thêm vào danh sách yêu thích"
+                >
+                  <i class="far fa-heart text-xl"></i>
+                </button>
+              </div>
+              <!-- Đánh giá sao & giờ mở cửa -->
+              <div class="flex flex-wrap items-center gap-4 mb-4">
+                <div class="flex items-center gap-2">
+                  <div id="ratingStars" class="flex text-yellow-400"></div>
+                  <span id="ratingValue" class="text-dark font-bold ml-1"></span>
+                  <span id="reviewCount" class="text-gray-500 text-sm"></span>
+                </div>
+                <!-- Địa chỉ & link chỉ đường -->
+                <div class="flex items-center gap-2 text-gray-600">
+                  <i class="fas fa-clock text-brand"></i>
+                  <span id="openingHours" class="text-sm"></span>
+                </div>
+              </div>
+              <div class="flex items-start gap-2 mb-4">
+                <i class="fas fa-map-marker-alt text-brand mt-1"></i>
+                <div>
+                  <p id="storeAddress" class="text-gray-700 font-medium"></p>
+                  <a id="mapLink" href="#" target="_blank" class="text-brand hover:text-brandDark text-sm font-semibold">
+                    Xem đường đi <i class="fas fa-external-link-alt text-xs"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Thư viện hình ảnh cửa hàng -->
+            <div class="grid grid-cols-3 gap-2 rounded-2xl overflow-hidden">
+              <div class="col-span-2 store-gallery-container rounded-2xl overflow-hidden">
+                <img
+                  id="mainImage"
+                  src=""
+                  alt=""
+                  class="w-full h-64 object-cover cursor-pointer store-gallery-image"
+                  onclick="openGallery(0)"
+                  onerror="this.src='../../assets/images/logo/LOGO PAWJOY.png'"
+                />
+              </div>
+              <div class="col-span-1 space-y-2">
+                <div class="store-gallery-container rounded-lg overflow-hidden">
+                  <img
+                    id="image1"
+                    src=""
+                    alt=""
+                    class="w-full h-32 object-cover cursor-pointer store-gallery-image"
+                    onclick="openGallery(1)"
+                    onerror="this.src='../../assets/images/logo/LOGO PAWJOY.png'"
+                  />
+                </div>
+                <div class="store-gallery-container rounded-lg overflow-hidden">
+                  <img
+                    id="image2"
+                    src=""
+                    alt=""
+                    class="w-full h-32 object-cover cursor-pointer store-gallery-image"
+                    onclick="openGallery(2)"
+                    onerror="this.src='../../assets/images/logo/LOGO PAWJOY.png'"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- DANH SÁCH DỊCH VỤ -->
+            <div class="bg-white rounded-2xl p-6 shadow-soft">
+              <h2 class="font-serif text-2xl font-bold text-dark mb-6">Dịch vụ</h2>
+              
+              <!-- Tab phân loại dịch vụ (Tắm, Grooming, Khám,...) -->
+              <div id="serviceTabs" class="flex items-center gap-2 mb-6 overflow-x-auto pb-2 hide-scrollbar">
+                <!-- Tab dịch vụ sẽ được render bằng JavaScript -->
+              </div>
+
+              <!-- Danh sách dịch vụ theo từng tab -->
+              <div id="serviceList" class="space-y-4">
+                <!-- Tab dịch vụ sẽ được render bằng JavaScript -->
+              </div>
+
+              <button class="mt-6 w-full py-3 border-2 border-brand text-brand hover:bg-brand hover:text-white rounded-xl font-bold transition">
+                Xem tất cả
+              </button>
+            </div>
+
+            <!-- ĐÁNH GIÁ KHÁCH HÀNG -->
+            <div class="bg-white rounded-2xl p-6 shadow-soft">
+              <div class="flex items-center justify-between mb-6">
+                <div>
+                  <h2 class="font-serif text-2xl font-bold text-dark mb-2">Đánh giá</h2>
+                  <div class="flex items-center gap-2">
+                    <div id="reviewRatingStars" class="flex text-yellow-400"></div>
+                    <span id="reviewRatingValue" class="text-dark font-bold"></span>
+                    <span id="reviewCount2" class="text-gray-500 text-sm"></span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Form thêm đánh giá mới -->
+              <div class="mb-8 p-6 bg-brandLight/30 rounded-xl border-2 border-brand/20">
+                <h3 class="font-bold text-dark mb-4">Viết đánh giá của bạn</h3>
+                <form id="reviewForm" onsubmit="submitReview(event)">
+                  <div class="mb-4">
+                    <label class="block text-sm font-bold text-dark mb-2">Đánh giá của bạn</label>
+                    <div class="flex items-center gap-2 mb-2" id="ratingInput">
+                      <i class="far fa-star text-2xl text-gray-300 cursor-pointer hover:text-yellow-400 transition" data-rating="1" onclick="setRating(1)"></i>
+                      <i class="far fa-star text-2xl text-gray-300 cursor-pointer hover:text-yellow-400 transition" data-rating="2" onclick="setRating(2)"></i>
+                      <i class="far fa-star text-2xl text-gray-300 cursor-pointer hover:text-yellow-400 transition" data-rating="3" onclick="setRating(3)"></i>
+                      <i class="far fa-star text-2xl text-gray-300 cursor-pointer hover:text-yellow-400 transition" data-rating="4" onclick="setRating(4)"></i>
+                      <i class="far fa-star text-2xl text-gray-300 cursor-pointer hover:text-yellow-400 transition" data-rating="5" onclick="setRating(5)"></i>
+                    </div>
+                    <span id="ratingText" class="text-xs text-gray-500">Chọn số sao đánh giá</span>
+                  </div>
+                  <div class="mb-4">
+                    <label class="block text-sm font-bold text-dark mb-2">Tên của bạn</label>
+                    <input type="text" id="reviewerName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-brand" placeholder="Nhập tên của bạn">
+                  </div>
+                  <div class="mb-4">
+                    <label class="block text-sm font-bold text-dark mb-2">Bình luận</label>
+                    <textarea id="reviewComment" required rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-brand" placeholder="Chia sẻ trải nghiệm của bạn..."></textarea>
+                  </div>
+                  <button type="submit" class="w-full bg-brand hover:bg-brandDark text-white font-bold py-3 rounded-lg transition">
+                    Gửi đánh giá
+                  </button>
+                </form>
+              </div>
+
+              <!-- Danh sách review -->
+              <div id="reviewsList" class="space-y-6">
+                <!-- Review sẽ được render bằng JavaScript -->
+              </div>
+
+              <!-- Nút xem tất cả đánh giá -->
+              <button class="mt-6 w-full py-3 border-2 border-brand text-brand hover:bg-brand hover:text-white rounded-xl font-bold transition">
+                Xem tất cả
+              </button>
+            </div>
+
+            <!-- GIỚI THIỆU CỬA HÀNG -->
+            <div class="bg-white rounded-2xl p-6 shadow-soft">
+              <h2 class="font-serif text-2xl font-bold text-dark mb-4">Giới thiệu</h2>
+              <div id="storeDescription" class="prose max-w-none text-gray-700 leading-relaxed">
+                <!-- Nội dung mô tả cửa hàng sẽ được render bằng JavaScript-->
+              </div>
+            </div>
+
+            <!-- SẢN PHẨM LIÊN QUAN -->
+            <div class="bg-white rounded-2xl p-6 shadow-soft">
+              <h2 class="font-serif text-2xl font-bold text-dark mb-6">Dịch vụ liên quan</h2>
+              <div id="relatedServices" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Sản phẩm liên quan sẽ được render bằng JavaScript -->
+              </div>
+            </div>
+
+            <!-- SẢN PHẨM MUA CÙNG -->
+            <div class="bg-white rounded-2xl p-6 shadow-soft">
+              <h2 class="font-serif text-2xl font-bold text-dark mb-6">Thường được đặt kèm</h2>
+              <div id="boughtTogether" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Sản phẩm mua cùng sẽ được render bằng JavaScript -->
+              </div>
+            </div>
+
+          </div>
+
+          <!-- CỘT PHẢI – SIDEBAR THÔNG TIN & ĐẶT LỊCH -->
+          <div class="lg:col-span-1">
+            <div class="sidebar-sticky">
+              <div class="bg-white rounded-2xl p-6 shadow-soft border border-gray-200">
+                <!-- NÚT ĐẶT LỊCH NHANH -->
+                <button
+                  id="bookingButton"
+                  onclick="goToBooking()"
+                  class="w-full bg-dark hover:bg-brand text-white font-bold py-4 rounded-xl transition shadow-lg mb-6"
+                >
+                  Đặt ngay
+                </button>
+
+                <!-- ĐỊA CHỈ CỬA HÀNG -->
+                <div class="space-y-4 mb-6">
+                  <div class="border-t border-gray-200 pt-4">
+                    <div class="flex items-start gap-2 mb-2">
+                      <i class="fas fa-map-marker-alt text-brand mt-1"></i>
+                      <div class="flex-1">
+                        <p id="sidebarAddress" class="text-sm text-gray-700 font-medium"></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- GIÁ DỊCH VỤ THAM KHẢO -->
+                <div class="border-t border-gray-200 pt-4">
+                  <div class="flex items-center justify-between mb-3">
+                    <span class="text-sm font-bold text-dark">Giá từ</span>
+                    <span id="priceFrom" class="font-serif text-xl font-bold text-brand"></span>
+                  </div>
+                  <div class="flex items-center gap-2 text-sm text-gray-600">
+                    <i class="fas fa-info-circle text-brand"></i>
+                    <span>Giá có thể thay đổi tùy theo dịch vụ</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- MODAL XEM ẢNH PHÓNG TO -->
+    <div
+      id="galleryModal"
+      class="fixed inset-0 bg-black/80 z-50 hidden items-center justify-center px-4"
+      onclick="closeGallery()"
+    >
+      <div
+        class="relative max-w-5xl w-full max-h-[90vh] flex items-center justify-center"
+        onclick="event.stopPropagation()"
+      >
+        <!-- NÚT ĐÓNG HÌNH ẢNH -->
+        <button
+          onclick="closeGallery()"
+          class="absolute top-3 right-3 text-white text-2xl hover:text-brand"
+          aria-label="Close gallery"
+        >
+          &times;
+        </button>
+        <!-- ẢNH TRƯỚC -->
+        <button
+          onclick="prevImage()"
+          class="absolute left-2 md:left-6 text-white text-3xl font-bold px-2 py-1 rounded-full hover:bg-white/10"
+          aria-label="Previous image"
+        >
+          ‹
+        <!-- ẢNH ĐANG XEM -->
+        </button>
+        <div class="store-gallery-container">
+          <img
+            id="galleryImage"
+            src=""
+            alt="Gallery image"
+            class="max-h-[80vh] max-w-full rounded-lg shadow-2xl object-contain bg-black store-gallery-image"
+            onerror="this.src='../../assets/images/logo/LOGO PAWJOY.png'"
+          />
+        </div>
+        <!-- ẢNH TIẾP THEO -->
+        <button
+          onclick="nextImage()"
+          class="absolute right-2 md:right-6 text-white text-3xl font-bold px-2 py-1 rounded-full hover:bg-white/10"
+          aria-label="Next image"
+        >
+          ›
+        </button>
+      </div>
+    </div>
+
+    <!-- FOOTER – DÙNG CHUNG TỪ COMPONENT -->
+    <div id="footer"></div>
+
+    <script>
+      // ===== DỮ LIỆU CỬA HÀNG =====
+      // Lưu toàn bộ thông tin cửa hàng: tên, địa chỉ, dịch vụ, giá, đánh giá...
+      const storesData = {
+        // Mỗi key là ID duy nhất của cửa hàng (dùng trong URL)
+        'petwow': {
+          id: 'petwow',
+          name: 'Pet Wow',
+          rating: 4.8,
+          reviewCount: 127,
+          openingHours: 'Mở cửa đến 20:00',
+          address: '294 Lê Quang Định, Phường 11, Bình Thạnh, Hồ Chí Minh',
+          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.9234!2d106.6976!3d10.8019!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528c8e8e8e8e9%3A0x8e8e8e8e8e8e8e8e!2zMjk0IEzDqiBRdWFuZyDEkGluaCwgUGjhuqduZyAxMSwgQsOsbmggVGjhuqFuaCwgSOG7kyBDaMOtIE5pbmggNzAwMDA!5e0!3m2!1svi!2s!4v1234567890123!5m2!1svi!2s',
+          mapLink: 'https://www.google.com/maps/dir/?api=1&destination=294+Lê+Quang+Định,+Phường+11,+Bình+Thạnh,+Hồ+Chí+Minh',
+          // Logo cửa hàng
+          logo: '../../assets/images/stores/PetWow/logo_petwow.png',
+          // Bộ ảnh hiển thị & dùng cho thư viện hình ảnh
+          images: {
+            main: '../../assets/images/stores/PetWow/pic1.jpg',
+            img1: '../../assets/images/stores/PetWow/pic2.jpg',
+            img2: '../../assets/images/stores/PetWow/pic3.jpg'
+          },
+          priceFrom: '40.000 VNĐ',
+          priceMin: 40,
+          bookingUrl: 'stores-booking.html', // Trang đặt lịch
+          // Mô tả chi tiết cửa hàng (HTML)
+          description: `<p>Pet Wow là một trong những spa thú cưng uy tín tại khu vực Bình Thạnh, chuyên cung cấp các dịch vụ chăm sóc và làm đẹp toàn diện cho thú cưng. Với đội ngũ nhân viên giàu kinh nghiệm và tận tâm, chúng tôi cam kết mang đến trải nghiệm tốt nhất cho cả bạn và thú cưng.</p>
+            <p>Chúng tôi cung cấp đầy đủ các dịch vụ từ tắm rửa, cắt tỉa, chăm sóc móng, vệ sinh tai đến nhuộm lông. Tất cả các sản phẩm sử dụng đều được lựa chọn kỹ lưỡng, an toàn cho sức khỏe của thú cưng. Không gian spa rộng rãi, sạch sẽ và được trang bị đầy đủ thiết bị hiện đại.</p>
+            <p>Pet Wow luôn đặt sự hài lòng của khách hàng và sức khỏe của thú cưng lên hàng đầu. Chúng tôi tin rằng mỗi chú thú cưng đều xứng đáng được chăm sóc một cách tốt nhất.</p>`,
+          // Danh sách dịch vụ của cửa hàng
+          services: [
+            { name: 'Tắm sấy', category: 'tam-ve-sinh', duration: '30 phút', price: 170 },
+            { name: 'Tắm vệ sinh', category: 'tam-ve-sinh', duration: '45 phút', price: 220 },
+            { name: 'Tắm cạo', category: 'tam-ve-sinh', duration: '1 giờ', price: 350 },
+            { name: 'Tắm vệ sinh cắt tỉa', category: 'cat-tia', duration: '1 giờ 30 phút', price: 380 },
+            { name: 'Cắt mài móng', category: 'cham-soc-mong', duration: '20 phút', price: 40 },
+            { name: 'Vệ sinh, nhổ lông tai', category: 'cham-soc-mong', duration: '25 phút', price: 40 },
+            { name: 'Nhuộm', category: 'nhuom', duration: '1 giờ 15 phút', price: 400 }
+          ],
+          // Danh sách đánh giá từ khách hàng
+          reviews: [
+            { name: 'Minh Anh', initial: 'M', rating: 5, date: '8 tháng 12, 2025', comment: 'Rất tốt! Nhân viên chăm sóc tận tình, bé nhà mình rất thích đến đây.' },
+            { name: 'Thành', initial: 'T', rating: 5, date: '5 tháng 12, 2025', comment: 'Dịch vụ cắt tỉa rất chuyên nghiệp. Bé cắt xong trông rất đẹp và sạch sẽ.' },
+            { name: 'Hương', initial: 'H', rating: 5, date: '1 tháng 12, 2025', comment: 'Mình đã đưa bé đến đây nhiều lần rồi. Luôn hài lòng với chất lượng dịch vụ. Giá cả hợp lý, không gian sạch sẽ, nhân viên nhiệt tình.' },
+            { name: 'Khánh', initial: 'K', rating: 5, date: '28 tháng 11, 2025', comment: 'Tuyệt vời! Bé nhà mình rất nhát nước nhưng các bạn nhân viên ở đây rất kiên nhẫn và nhẹ nhàng. Tắm xong lông mềm mượt, thơm phức.' }
+          ]
+        },
+        '2vet': {
+          id: '2vet',
+          name: '2VET',
+          rating: 4.7,
+          reviewCount: 95,
+          openingHours: 'Mở cửa đến 19:00',
+          address: '128 Chu Văn An, Bình Thạnh, Hồ Chí Minh',
+          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.9234!2d106.6976!3d10.8019!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528c8e8e8e8e9%3A0x8e8e8e8e8e8e8e8e!2zMTI4IENodSBWxINuIEFuLCBCw6xuaCBUaOG6oW5oLCBI4buTIMSQw6x1IE5pbmggNzAwMDA!5e0!3m2!1svi!2s!4v1234567890123!5m2!1svi!2s',
+          mapLink: 'https://www.google.com/maps/dir/?api=1&destination=128+Chu+Văn+An,+Bình+Thạnh,+Hồ+Chí+Minh',
+          logo: '../../assets/images/stores/2Vet/logo_2vet.png',
+          images: {
+            main: '../../assets/images/stores/2Vet/pic1.jpg',
+            img1: '../../assets/images/stores/2Vet/pic2.jpg',
+            img2: '../../assets/images/stores/2Vet/pic3.jpg'
+          },
+          priceFrom: '49.000 VNĐ',
+          priceMin: 49,
+          bookingUrl: 'stores-booking.html',
+          description: `<p>2VET là phòng khám thú y và spa chăm sóc thú cưng uy tín tại Bình Thạnh, cung cấp dịch vụ thăm khám và spa toàn diện.</p>
+            <p>Với đội ngũ bác sĩ thú y giàu kinh nghiệm và nhân viên chăm sóc chuyên nghiệp, chúng tôi cam kết mang đến dịch vụ chất lượng cao cho thú cưng của bạn.</p>`,
+          services: [
+            // Spa
+            { name: 'Tắm sấy', category: 'tam-ve-sinh', duration: '30 phút', price: 120 },
+            { name: 'Tắm vệ sinh', category: 'tam-ve-sinh', duration: '40 - 60 phút', price: 200 },
+            { name: 'Tắm cạo', category: 'tam-ve-sinh', duration: '1 giờ', price: 329 },
+            { name: 'Tắm vệ sinh cắt tỉa', category: 'cat-tia', duration: '1 giờ 30 phút', price: 299 },
+            { name: 'Cắt mài móng', category: 'cham-soc-mong', duration: '20 phút', price: 39 },
+            { name: 'Vệ sinh, nhổ lông tai', category: 'cham-soc-mong', duration: '20 phút', price: 30 },
+            { name: 'Nhuộm', category: 'nhuom', duration: '1 giờ 30 phút', price: 429 },
+            // Thăm khám
+            { name: 'Khám bệnh cơ bản', category: 'vet', duration: '30 phút', price: 159 },
+            { name: 'Gói khám sức khoẻ tổng quát', category: 'vet', duration: '60 phút', price: 899 },
+            { name: 'Triệt sản mèo đực', category: 'vet', duration: '90 phút', price: 299 },
+            { name: 'Triệt sản mèo cái', category: 'vet', duration: '120 phút', price: 499 },
+            { name: 'Triệt sản chó đực', category: 'vet', duration: '120 phút', price: 799 },
+            { name: 'Triệt sản chó cái', category: 'vet', duration: '150 phút', price: 719 },
+            { name: 'Xét nghiệm máu cơ bản', category: 'vet', duration: '30 phút', price: 299 },
+            { name: 'Siêu âm bụng', category: 'vet', duration: '30 phút', price: 230 },
+            { name: 'Cạo vôi răng', category: 'vet', duration: '45 phút', price: 499 },
+            { name: 'Test nhanh bệnh truyền nhiễm', category: 'vet', duration: '30 phút', price: 300 }
+          ],
+          reviews: [
+            { name: 'Lan', initial: 'L', rating: 5, date: '10 tháng 12, 2025', comment: 'Bác sĩ rất tận tâm, giải thích rõ ràng về tình trạng của bé.' },
+            { name: 'Nam', initial: 'N', rating: 4, date: '7 tháng 12, 2025', comment: 'Dịch vụ tốt, giá cả hợp lý.' }
+          ]
+        },
+        'gauspa': {
+          id: 'gauspa',
+          name: 'GẤU SPA THÚ CƯNG',
+          rating: 4.6,
+          reviewCount: 82,
+          openingHours: 'Mở cửa đến 18:00',
+          address: '290 Lý Thái Tổ, Phường 1, Quận 3, Thành phố Hồ Chí Minh',
+          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.9234!2d106.6976!3d10.8019!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528c8e8e8e8e9%3A0x8e8e8e8e8e8e8e8e!2zMjkwIEzDvSBUaMOhaSBU4buBLCBQaMaw4buNbmcgMSwgUXXhuq1uIDMsIFRow6BuaCBwaOG7kSBI4buTIENow6x1IE5pbmggNzAwMDA!5e0!3m2!1svi!2s!4v1234567890123!5m2!1svi!2s',
+          mapLink: 'https://www.google.com/maps/dir/?api=1&destination=290+Lý+Thái+Tổ,+Phường+1,+Quận+3,+Thành+phố+Hồ+Chí+Minh',
+          logo: '../../assets/images/stores/GauSpa/logo_gauspa.png',
+          images: {
+            main: '../../assets/images/stores/GauSpa/pic1.jpg',
+            img1: '../../assets/images/stores/GauSpa/pic2.jpg',
+            img2: '../../assets/images/stores/GauSpa/pic3.jpg'
+          },
+          priceFrom: 'Liên hệ',
+          priceMin: 39,
+          bookingUrl: 'stores-booking.html',
+          description: `<p>GẤU SPA THÚ CƯNG chuyên cung cấp các dịch vụ spa và chăm sóc thú cưng tại Quận 3.</p>`,
+          services: [
+            { name: 'Tắm sấy', category: 'tam-ve-sinh', duration: '30 phút', price: 100 },
+            { name: 'Tắm vệ sinh', category: 'tam-ve-sinh', duration: '45 phút', price: 219 },
+            { name: 'Tắm cạo', category: 'tam-ve-sinh', duration: '1 giờ', price: 349 },
+            { name: 'Tắm vệ sinh cắt tỉa', category: 'cat-tia', duration: '1 giờ 30 phút', price: 319 },
+            { name: 'Cắt mài móng', category: 'cham-soc-mong', duration: '20 phút', price: 39 },
+            { name: 'Vệ sinh, nhổ lông tai', category: 'cham-soc-mong', duration: '20 phút', price: 39 },
+            { name: 'Nhuộm', category: 'nhuom', duration: '1 giờ 30 phút', price: 399 }
+          ],
+          reviews: [
+            { name: 'Mai', initial: 'M', rating: 5, date: '9 tháng 12, 2025', comment: 'Dịch vụ tốt, nhân viên nhiệt tình.' }
+          ]
+        },
+        'paopet': {
+          id: 'paopet',
+          name: 'PAO PET',
+          rating: 4.5,
+          reviewCount: 76,
+          openingHours: 'Mở cửa đến 19:30',
+          address: '10 Bàu Cát 1, Phường 14, Quận Tân Bình, TPHCM',
+          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.9234!2d106.6976!3d10.8019!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528c8e8e8e8e9%3A0x8e8e8e8e8e8e8e8e!2zMTAgQsOg4bqjIENhdCAxLCBQaMaw4buNbmcgMTQsIFXhuq1uIFTDom4gQsOsbmgsIFRQSEON!5e0!3m2!1svi!2s!4v1234567890123!5m2!1svi!2s',
+          mapLink: 'https://www.google.com/maps/dir/?api=1&destination=10+Bàu+Cát+1,+Phường+14,+Quận+Tân+Bình,+TPHCM',
+          logo: '../../assets/images/stores/PaoPet/logo_paopet.png',
+          images: {
+            main: '../../assets/images/stores/PaoPet/pic1.jpg',
+            img1: '../../assets/images/stores/PaoPet/pic2.jpg',
+            img2: '../../assets/images/stores/PaoPet/pic3.jpg'
+          },
+          priceFrom: '40.000 VNĐ',
+          priceMin: 40,
+          bookingUrl: 'stores-booking.html',
+          description: `<p>PAO PET là spa thú cưng tại Tân Bình với nhiều năm kinh nghiệm.</p>`,
+          services: [
+            { name: 'Tắm sấy', category: 'tam-ve-sinh', duration: '30 phút', price: 99 },
+            { name: 'Tắm vệ sinh', category: 'tam-ve-sinh', duration: '45 phút', price: 239 },
+            { name: 'Tắm cạo', category: 'tam-ve-sinh', duration: '1 giờ', price: 350 },
+            { name: 'Tắm vệ sinh cắt tỉa', category: 'cat-tia', duration: '1 giờ 30 phút', price: 339 },
+            { name: 'Cắt mài móng', category: 'cham-soc-mong', duration: '20 phút', price: 40 },
+            { name: 'Vệ sinh, nhổ lông tai', category: 'cham-soc-mong', duration: '20 phút', price: 45 },
+            { name: 'Nhuộm', category: 'nhuom', duration: '1 giờ 30 phút', price: 420 }
+          ],
+          reviews: [
+            { name: 'Hùng', initial: 'H', rating: 4, date: '6 tháng 12, 2025', comment: 'Dịch vụ ổn định.' }
+          ]
+        },
+        'lumipet': {
+          id: 'lumipet',
+          name: 'Lumi Pet Shop',
+          rating: 4.8,
+          reviewCount: 110,
+          openingHours: 'Mở cửa đến 20:00',
+          address: '27 Võ Trường Toản, Phường 2, Bình Thạnh, Thành phố Hồ Chí Minh',
+          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.9234!2d106.6976!3d10.8019!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528c8e8e8e8e9%3A0x8e8e8e8e8e8e8e8e!2zMjcgVsOgIFRyw7x1bmcgVG9hbiwgUGjhuqduZyAyLCBCw6xuaCBUaOG6oW5oLCBI4buTIMSQw6x1IE5pbmggNzAwMDA!5e0!3m2!1svi!2s!4v1234567890123!5m2!1svi!2s',
+          mapLink: 'https://www.google.com/maps/dir/?api=1&destination=27+Võ+Trường+Toản,+Phường+2,+Bình+Thạnh,+Thành+phố+Hồ+Chí+Minh',
+          logo: '../../assets/images/stores/LumiPet/logo_lumipet.png',
+          images: {
+            main: '../../assets/images/stores/LumiPet/pic1.jpg',
+            img1: '../../assets/images/stores/LumiPet/pic2.jpg',
+            img2: '../../assets/images/stores/LumiPet/pic3.jpg'
+          },
+          priceFrom: '79.000 VNĐ',
+          priceMin: 79,
+          bookingUrl: 'stores-booking.html',
+          description: `<p>Lumi Pet Shop cung cấp dịch vụ spa và chăm sóc thú cưng chất lượng cao tại Bình Thạnh.</p>`,
+          services: [
+            { name: 'Gói tắm sấy cơ bản', category: 'tam-ve-sinh', duration: '30 phút', price: 79 },
+            { name: 'Tắm vệ sinh', category: 'tam-ve-sinh', duration: '45 phút', price: 200 },
+            { name: 'Tắm cạo', category: 'tam-ve-sinh', duration: '1 giờ', price: 350 },
+            { name: 'Tắm vệ sinh cắt tỉa', category: 'cat-tia', duration: '1 giờ 30 phút', price: 379 },
+            { name: 'Nhuộm', category: 'nhuom', duration: '1 giờ 30 phút', price: 450 }
+          ],
+          reviews: [
+            { name: 'Vy', initial: 'V', rating: 5, date: '11 tháng 12, 2025', comment: 'Rất hài lòng với dịch vụ.' }
+          ]
+        },
+        'tiemnhasau': {
+          id: 'tiemnhasau',
+          name: 'Tiệm nhà Sâu',
+          rating: 4.9,
+          reviewCount: 145,
+          openingHours: 'Mở cửa đến 19:00',
+          address: '330/12 Đ. Phan Đình Phùng, Phường 1, Phú Nhuận, Thành phố Hồ Chí Minh',
+          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.9234!2d106.6976!3d10.8019!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528c8e8e8e8e9%3A0x8e8e8e8e8e8e8e8e!2zMzMwLzEyIMSRLiBQaGFuIMSQw6xuaCBQaHVuZywgUGjhuqduZyAxLCBQaMO6IE5odWFuLCBUaMOibmggcGjhu5sgSOG7kyBDaMOtIE5pbmggNzAwMDA!5e0!3m2!1svi!2s!4v1234567890123!5m2!1svi!2s',
+          mapLink: 'https://www.google.com/maps/dir/?api=1&destination=330/12+Đ.+Phan+Đình+Phùng,+Phường+1,+Phú+Nhuận,+Thành+phố+Hồ+Chí+Minh',
+          logo: '../../assets/images/stores/TiemNhaSau/logo_tiemnhasau.png',
+          images: {
+            main: '../../assets/images/stores/TiemNhaSau/pic1.jpg',
+            img1: '../../assets/images/stores/TiemNhaSau/pic2.jpg',
+            img2: '../../assets/images/stores/TiemNhaSau/pic3.jpg'
+          },
+          priceFrom: '50.000 VNĐ',
+          priceMin: 50,
+          bookingUrl: 'stores-booking.html',
+          description: `<p>Tiệm nhà Sâu là một trong những spa thú cưng được đánh giá cao nhất tại Phú Nhuận.</p>`,
+          services: [
+            { name: 'Tắm sấy', category: 'tam-ve-sinh', duration: '30 phút', price: 100 },
+            { name: 'Tắm vệ sinh', category: 'tam-ve-sinh', duration: '45 phút', price: 250 },
+            { name: 'Tắm cạo', category: 'tam-ve-sinh', duration: '1 giờ', price: 300 },
+            { name: 'Tắm vệ sinh cắt tỉa', category: 'cat-tia', duration: '1 giờ 30 phút', price: 359 },
+            { name: 'Cắt mài móng', category: 'cham-soc-mong', duration: '20 phút', price: 50 },
+            { name: 'Vệ sinh, nhổ lông tai', category: 'cham-soc-mong', duration: '20 phút', price: 50 },
+            { name: 'Nhuộm', category: 'nhuom', duration: '1 giờ 30 phút', price: 450 }
+          ],
+          reviews: [
+            { name: 'Quang', initial: 'Q', rating: 5, date: '12 tháng 12, 2025', comment: 'Tuyệt vời nhất!' }
+          ]
+        },
+        'petgrocer': {
+          id: 'petgrocer',
+          name: 'PetGrocer',
+          rating: 4.7,
+          reviewCount: 68,
+          openingHours: 'Mở cửa đến 18:30',
+          address: '9 Số 3, Hiệp Bình Chánh, Thủ Đức, Thành phố Hồ Chí Minh',
+          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.9234!2d106.6976!3d10.8019!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528c8e8e8e8e9%3A0x8e8e8e8e8e8e8e8e!2zOSBT4buRIDMsIEhp4buHcCBCw6xuaCBDaMOhbmgsIFRo4buNIMSR4buDLCBUaMOibmggcGjhu5EgSOG7kyBDaMOtIE5pbmggNzAwMDA!5e0!3m2!1svi!2s!4v1234567890123!5m2!1svi!2s',
+          mapLink: 'https://www.google.com/maps/dir/?api=1&destination=9+Số+3,+Hiệp+Bình+Chánh,+Thủ+Đức,+Thành+phố+Hồ+Chí+Minh',
+          logo: '../../assets/images/stores/PetGrocer/logo_petgrocer.png',
+          images: {
+            main: '../../assets/images/stores/PetGrocer/pic1.jpg',
+            img1: '../../assets/images/stores/PetGrocer/pic2.jpg',
+            img2: '../../assets/images/stores/PetGrocer/pic3.jpg'
+          },
+          priceFrom: '90.000 VNĐ',
+          priceMin: 90,
+          bookingUrl: 'stores-booking.html',
+          description: `<p>PetGrocer cung cấp dịch vụ spa tại Thủ Đức.</p>`,
+          services: [
+            { name: 'Tắm sấy', category: 'tam-ve-sinh', duration: '30 phút', price: 100 },
+            { name: 'Tắm vệ sinh', category: 'tam-ve-sinh', duration: '45 phút', price: 200 },
+            { name: 'Tắm cạo', category: 'tam-ve-sinh', duration: '1 giờ', price: 239 },
+            { name: 'Vệ sinh, nhổ lông tai, cắt mài móng', category: 'cham-soc-mong', duration: '30 phút', price: 90 }
+          ],
+          reviews: [
+            { name: 'Dũng', initial: 'D', rating: 4, date: '4 tháng 12, 2025', comment: 'Dịch vụ tốt.' }
+          ]
+        },
+        'cwellpet': {
+          id: 'cwellpet',
+          name: 'Bệnh Viện Thú Y C.well Pet',
+          rating: 4.6,
+          reviewCount: 92,
+          openingHours: 'Mở cửa đến 20:00',
+          address: '78 Trịnh Đình Trọng, Phú Trung, Tân Phú, Thành phố Hồ Chí Minh',
+          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.9234!2d106.6976!3d10.8019!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528c8e8e8e8e9%3A0x8e8e8e8e8e8e8e8e!2zNzggVHLhu4fhu4kgxJDhu4luaCBUcsaw4 MubmcsIFBow7ogVHJ1bmcsIFTDom4gUGjDugosIFRow6BuaCBwaOG7kSBI4buTIENow6x1IE5pbmggNzAwMDA!5e0!3m2!1svi!2s!4v1234567890123!5m2!1svi!2s',
+          mapLink: 'https://www.google.com/maps/dir/?api=1&destination=78+Trịnh+Đình+Trọng,+Phú+Trung,+Tân+Phú,+Thành+phố+Hồ+Chí+Minh',
+          logo: '../../assets/images/stores/CWellPet/logo_cwellpet.png',
+          images: {
+            main: '../../assets/images/stores/CWellPet/pic1.jpg',
+            img1: '../../assets/images/stores/CWellPet/pic2.jpg',
+            img2: '../../assets/images/stores/CWellPet/pic3.jpg'
+          },
+          priceFrom: '70.000 VNĐ',
+          priceMin: 70,
+          bookingUrl: 'stores-booking.html',
+          description: `<p>Bệnh Viện Thú Y C.well Pet cung cấp dịch vụ thăm khám và spa tại Tân Phú.</p>`,
+          services: [
+            // Spa
+            { name: 'Tắm sấy', category: 'tam-ve-sinh', duration: '30 phút', price: 100 },
+            { name: 'Tắm vệ sinh', category: 'tam-ve-sinh', duration: '45 phút', price: 200 },
+            { name: 'Tắm cạo', category: 'tam-ve-sinh', duration: '1 giờ', price: 239 },
+            { name: 'Vệ sinh, nhổ lông tai, cắt mài móng', category: 'cham-soc-mong', duration: '30 phút', price: 90 },
+            // Thăm khám
+            { name: 'Khám bệnh cơ bản', category: 'vet', duration: '30 phút', price: 179 },
+            { name: 'Gói khám sức khoẻ tổng quát', category: 'vet', duration: '60 phút', price: 899 },
+            { name: 'Triệt sản mèo đực', category: 'vet', duration: '90 phút', price: 299 },
+            { name: 'Triệt sản mèo cái', category: 'vet', duration: '120 phút', price: 499 },
+            { name: 'Triệt sản chó đực', category: 'vet', duration: '120 phút', price: 799 },
+            { name: 'Triệt sản chó cái', category: 'vet', duration: '150 phút', price: 729 },
+            { name: 'Xét nghiệm máu cơ bản', category: 'vet', duration: '30 phút', price: 300 }
+          ],
+          reviews: [
+            { name: 'Phương', initial: 'P', rating: 5, date: '3 tháng 12, 2025', comment: 'Bác sĩ rất chuyên nghiệp.' }
+          ]
+        },
+        'petsmin': {
+          id: 'petsmin',
+          name: 'Phòng Khám Thú Y Pets & Min',
+          rating: 4.8,
+          reviewCount: 118,
+          openingHours: 'Mở cửa đến 19:30',
+          address: '181/102 Âu Dương Lân, Phường Rạch Ông, Quận 8, Thành phố Hồ Chí Minh',
+          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.9234!2d106.6976!3d10.8019!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528c8e8e8e8e9%3A0x8e8e8e8e8e8e8e8e!2zMTgxLzEwMiDDgAUgRMaw4buhbmcgTMOibiwgUGjhuqduZyBSYWNoIMSQw6xuaCwgUXXhuq1uIDgsIFRow6BuaCBwaOG7kSBI4buTIENow6x1IE5pbmggNzAwMDA!5e0!3m2!1svi!2s!4v1234567890123!5m2!1svi!2s',
+          mapLink: 'https://www.google.com/maps/dir/?api=1&destination=181/102+Âu+Dương+Lân,+Phường+Rạch+Ông,+Quận+8,+Thành+phố+Hồ+Chí+Minh',
+          logo: '../../assets/images/stores/Pets&Min/logo_pets&min.png',
+          images: {
+            main: '../../assets/images/stores/Pets&Min/pic1.jpg',
+            img1: '../../assets/images/stores/Pets&Min/pic2.jpg',
+            img2: '../../assets/images/stores/Pets&Min/pic3.jpg'
+          },
+          priceFrom: '50.000 VNĐ',
+          priceMin: 50,
+          bookingUrl: 'stores-booking.html',
+          description: `<p>Phòng Khám Thú Y Pets & Min tại Quận 8 với dịch vụ thăm khám và spa.</p>`,
+          services: [
+            // Spa
+            { name: 'Tắm sấy', category: 'tam-ve-sinh', duration: '30 phút', price: 150 },
+            { name: 'Tắm vệ sinh', category: 'tam-ve-sinh', duration: '45 phút', price: 300 },
+            { name: 'Tắm cạo', category: 'tam-ve-sinh', duration: '1 giờ', price: 219 },
+            { name: 'Vệ sinh, nhổ lông tai', category: 'cham-soc-mong', duration: '20 phút', price: 50 },
+            // Thăm khám
+            { name: 'Khám bệnh cơ bản', category: 'vet', duration: '30 phút', price: 179 },
+            { name: 'Gói khám sức khoẻ tổng quát', category: 'vet', duration: '60 phút', price: 859 },
+            { name: 'Triệt sản mèo đực', category: 'vet', duration: '90 phút', price: 299 },
+            { name: 'Triệt sản mèo cái', category: 'vet', duration: '120 phút', price: 499 },
+            { name: 'Triệt sản chó đực', category: 'vet', duration: '120 phút', price: 780 },
+            { name: 'Triệt sản chó cái', category: 'vet', duration: '150 phút', price: 700 },
+            { name: 'Xét nghiệm máu cơ bản', category: 'vet', duration: '30 phút', price: 270 },
+            { name: 'Siêu âm bụng', category: 'vet', duration: '30 phút', price: 250 },
+            { name: 'Cạo vôi răng', category: 'vet', duration: '45 phút', price: 500 },
+            { name: 'Test nhanh bệnh truyền nhiễm', category: 'vet', duration: '30 phút', price: 300 }
+          ],
+          reviews: [
+            { name: 'Linh', initial: 'L', rating: 5, date: '2 tháng 12, 2025', comment: 'Rất tốt!' }
+          ]
+        },
+        'nasapet': {
+          id: 'nasapet',
+          name: 'PHÒNG KHÁM THÚ Y NASA PET',
+          rating: 4.7,
+          reviewCount: 105,
+          openingHours: 'Mở cửa đến 20:00',
+          address: '3 Ông Ích Khiêm, Phường 10, Quận 11, Thành phố Hồ Chí Minh',
+          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.9234!2d106.6976!3d10.8019!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528c8e8e8e8e9%3A0x8e8e8e8e8e8e8e8e!2zMyDDgU5nIMOtY2ggS2hp4bqDbSwgUGjGsOG7nW5nIDEwLCBRdeG6rW4gMTEsIFRoYW5oIHBo4buRIEjhu5MgQ2jDrSBNaW5oIDcwMDAw!5e0!3m2!1svi!2s!4v1234567890123!5m2!1svi!2s',
+          mapLink: 'https://www.google.com/maps/dir/?api=1&destination=3+Ông+Ích+Khiêm,+Phường+10,+Quận+11,+Thành+phố+Hồ+Chí+Minh',
+          logo: '../../assets/images/stores/NasaPet/logo_nasapet.png',
+          images: {
+            main: '../../assets/images/stores/NasaPet/pic1.jpg',
+            img1: '../../assets/images/stores/NasaPet/pic2.jpg',
+            img2: '../../assets/images/stores/NasaPet/pic3.jpg'
+          },
+          priceFrom: '70.000 VNĐ',
+          priceMin: 70,
+          bookingUrl: 'stores-booking.html',
+          description: `<p>PHÒNG KHÁM THÚ Y NASA PET tại Quận 11 với dịch vụ thăm khám và spa.</p>`,
+          services: [
+            // Spa
+            { name: 'Tắm sấy', category: 'tam-ve-sinh', duration: '30 phút', price: 190 },
+            { name: 'Tắm vệ sinh', category: 'tam-ve-sinh', duration: '45 phút', price: 320 },
+            { name: 'Tắm cạo', category: 'tam-ve-sinh', duration: '1 giờ', price: 230 },
+            { name: 'Vệ sinh, nhổ lông tai, cắt mài móng', category: 'cham-soc-mong', duration: '30 phút', price: 70 },
+            // Thăm khám
+            { name: 'Khám bệnh cơ bản', category: 'vet', duration: '30 phút', price: 199 },
+            { name: 'Gói khám sức khoẻ tổng quát', category: 'vet', duration: '60 phút', price: 880 },
+            { name: 'Triệt sản mèo đực', category: 'vet', duration: '90 phút', price: 289 },
+            { name: 'Triệt sản mèo cái', category: 'vet', duration: '120 phút', price: 489 },
+            { name: 'Triệt sản chó đực', category: 'vet', duration: '120 phút', price: 790 },
+            { name: 'Triệt sản chó cái', category: 'vet', duration: '150 phút', price: 720 },
+            { name: 'Xét nghiệm máu cơ bản', category: 'vet', duration: '30 phút', price: 270 }
+          ],
+          reviews: [
+            { name: 'Tuấn', initial: 'T', rating: 4, date: '1 tháng 12, 2025', comment: 'Dịch vụ ổn.' }
+          ]
+        },
+        'petpro': {
+          id: 'petpro',
+          name: 'Bệnh Viện Thú Y Pet Pro Cộng Hòa',
+          rating: 4.6,
+          reviewCount: 87,
+          openingHours: 'Mở cửa đến 21:00',
+          address: '389 Cộng Hòa, Phường Tân Bình, Tân Bình, Thành phố Hồ Chí Minh',
+          mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.9234!2d106.6976!3d10.8019!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528c8e8e8e8e9%3A0x8e8e8e8e8e8e8e8e!2zMzg5IEPDtG5nIEjhuq9hLCBQaMaw4buNbmcgVMOibiBCw6xuaCwgVMOibiBCw6xuaCwgVGjDoG5oIHBo4buRICThu5MgQ2jDrSBuaGggNzAwMDA!5e0!3m2!1svi!2s!4v1234567890123!5m2!1svi!2s',
+          mapLink: 'https://www.google.com/maps/dir/?api=1&destination=389+Cộng+Hòa,+Phường+Tân+Bình,+Tân+Bình,+Thành+phố+Hồ+Chí+Minh',
+          logo: '../../assets/images/stores/PetPro/logo_petpro.png',
+          images: {
+            main: '../../assets/images/stores/PetPro/pic1.jpg',
+            img1: '../../assets/images/stores/PetPro/pic2.jpg',
+            img2: '../../assets/images/stores/PetPro/pic3.jpg'
+          },
+          priceFrom: '250.000 VNĐ',
+          priceMin: 250,
+          bookingUrl: 'stores-booking.html',
+          description: `<p>Bệnh Viện Thú Y Pet Pro Cộng Hòa tại Tân Bình với dịch vụ thăm khám chuyên nghiệp.</p>`,
+          services: [
+            { name: 'Khám bệnh cơ bản', category: 'vet', duration: '30 phút', price: 169 },
+            { name: 'Gói khám sức khoẻ tổng quát', category: 'vet', duration: '60 phút', price: 900 },
+            { name: 'Triệt sản mèo đực', category: 'vet', duration: '90 phút', price: 300 },
+            { name: 'Triệt sản mèo cái', category: 'vet', duration: '120 phút', price: 480 },
+            { name: 'Triệt sản chó đực', category: 'vet', duration: '120 phút', price: 750 },
+            { name: 'Triệt sản chó cái', category: 'vet', duration: '150 phút', price: 700 },
+            { name: 'Xét nghiệm máu cơ bản', category: 'vet', duration: '30 phút', price: 339 },
+            { name: 'Siêu âm bụng', category: 'vet', duration: '30 phút', price: 250 },
+            { name: 'Cạo vôi răng', category: 'vet', duration: '45 phút', price: 499 },
+            { name: 'Test nhanh bệnh truyền nhiễm', category: 'vet', duration: '30 phút', price: 300 }
+          ],
+          reviews: [
+            { name: 'An', initial: 'A', rating: 5, date: '30 tháng 11, 2025', comment: 'Bệnh viện rất chuyên nghiệp.' }
+          ]
+        }
+      };
+
+      // ===== HÀM TIỆN ÍCH =====
+      function getURLParameter(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+      }
+
+      // Hiển thị sao đánh giá dựa trên điểm rating
+      function generateStars(rating) {
+        const fullStars = Math.floor(rating); 
+        const hasHalfStar = rating % 1 >= 0.5; 
+        let html = '';
+        for (let i = 0; i < fullStars; i++) {
+          html += '<i class="fas fa-star"></i>';
+        }
+        if (hasHalfStar) {
+          html += '<i class="fas fa-star-half-alt"></i>';
+        }
+        const emptyStars = 5 - Math.ceil(rating);
+        for (let i = 0; i < emptyStars; i++) {
+          html += '<i class="far fa-star"></i>';
+        }
+        return html;
+      }
+      // ===== TẢI & HIỂN THỊ DỮ LIỆU CỬA HÀNG =====
+      function loadStoreData() {
+        const storeId = getURLParameter('id');
+        
+        if (!storeId || !storesData[storeId]) {
+          document.getElementById('storeName').textContent = 'Cửa hàng không tồn tại';
+          document.getElementById('pageTitle').textContent = 'Không tìm thấy | Paw Joy';
+          return;
+        }
+
+        const store = storesData[storeId];
+
+        // Cập nhật tiêu đề trang
+        document.getElementById('pageTitle').textContent = `${store.name} - Chi tiết cửa hàng | Paw Joy`;
+
+        // Cập nhật thông tin header
+        document.getElementById('storeName').textContent = store.name;
+        document.getElementById('ratingStars').innerHTML = generateStars(store.rating);
+        document.getElementById('ratingValue').textContent = store.rating;
+        document.getElementById('reviewCount').textContent = `(${store.reviewCount} đánh giá)`;
+        document.getElementById('openingHours').textContent = store.openingHours;
+        document.getElementById('storeAddress').textContent = store.address;
+        document.getElementById('mapLink').href = store.mapLink;
+        document.getElementById('sidebarAddress').textContent = store.address;
+        document.getElementById('priceFrom').textContent = store.priceFrom;
+
+        // Cập nhật hình ảnh
+        document.getElementById('mainImage').src = store.images.main;
+        document.getElementById('mainImage').alt = store.name;
+        document.getElementById('image1').src = store.images.img1;
+        document.getElementById('image1').alt = store.name;
+        document.getElementById('image2').src = store.images.img2;
+        document.getElementById('image2').alt = store.name;
+
+        // Kiểm tra và cập nhật trạng thái yêu thích
+        updateFavoriteButton(store.id);
+        currentGalleryImages = [
+          store.images.main,
+          store.images.img1,
+          store.images.img2
+        ];
+        currentGalleryIndex = 0;
+
+        // Cập nhật mô tả cửa hàng
+        document.getElementById('storeDescription').innerHTML = store.description;
+
+        // Xử lý nút đặt lịch
+        document.getElementById('bookingButton').onclick = () => {
+          sessionStorage.setItem('selectedStore', JSON.stringify({
+            id: store.id,
+            name: store.name
+          }));
+          window.location.href = store.bookingUrl;
+        };
+
+        // Tạo tab lọc dịch vụ
+        const categories = ['all', 'tam-ve-sinh', 'cat-tia', 'cham-soc-mong', 'nhuom', 'vet'];
+        const categoryLabels = {
+          'all': 'Nổi bật',
+          'tam-ve-sinh': 'Tắm & Vệ sinh',
+          'cat-tia': 'Cắt tỉa',
+          'cham-soc-mong': 'Chăm sóc móng',
+          'nhuom': 'Nhuộm',
+          'vet': 'Thăm khám'
+        };
+        
+        const tabsHtml = categories.map(cat => {
+          const isActive = cat === 'all' ? 'bg-brand text-white font-bold' : 'bg-gray-100 text-gray-600';
+          return `<button onclick="filterServices('${cat}')" class="category-tab px-4 py-2 ${isActive} rounded-full text-sm font-medium hover:bg-gray-200 whitespace-nowrap" data-category="${cat}">${categoryLabels[cat]}</button>`;
+        }).join('');
+        document.getElementById('serviceTabs').innerHTML = tabsHtml;
+
+        // Hiển thị danh sách dịch vụ
+        const servicesHtml = store.services.map(service => {
+          return `
+            <div class="service-item flex items-center justify-between p-4 border border-gray-200 rounded-xl hover:border-brand hover:shadow-md transition" data-category="${service.category}">
+              <div class="flex-1">
+                <h3 class="font-bold text-dark mb-1">${service.name}</h3>
+                <p class="text-sm text-gray-500">${service.duration}</p>
+              </div>
+              <div class="flex items-center gap-4">
+                <span class="font-serif text-lg font-bold text-dark">${service.price.toLocaleString('vi-VN')}.000 VNĐ</span>
+                <button onclick="bookService('${service.name}', ${service.price})" class="px-6 py-2 bg-brand hover:bg-brandDark text-white rounded-full text-sm font-bold transition">
+                  Đặt
+                </button>
+              </div>
+            </div>
+          `;
+        }).join('');
+        document.getElementById('serviceList').innerHTML = servicesHtml;
+
+        // Hiển thị đánh giá khách hàng ban đầu (từ dữ liệu gốc)
+        document.getElementById('reviewRatingStars').innerHTML = generateStars(store.rating);
+        document.getElementById('reviewRatingValue').textContent = store.rating;
+        document.getElementById('reviewCount2').textContent = `(${store.reviewCount} đánh giá)`;
+
+        // Lưu reviews vào localStorage để có thể thêm mới (chỉ lưu lần đầu)
+        if (!localStorage.getItem(`reviews_${storeId}`)) {
+          localStorage.setItem(`reviews_${storeId}`, JSON.stringify(store.reviews));
+        }
+        
+        renderReviews(store);
+        renderRelatedServices(store);
+        renderBoughtTogether(store);
+      }
+
+      // Hiển thị đánh giá
+      function renderReviews(store) {
+        const storeId = getURLParameter('id');
+        const savedReviews = localStorage.getItem(`reviews_${storeId}`);
+        const reviews = savedReviews ? JSON.parse(savedReviews) : store.reviews;
+        
+        if (reviews.length === 0) {
+          document.getElementById('reviewsList').innerHTML = '<p class="text-gray-500 text-center py-4">Chưa có đánh giá nào. Hãy là người đầu tiên đánh giá!</p>';
+          // Giữ rating ban đầu từ store
+          document.getElementById('reviewRatingStars').innerHTML = generateStars(store.rating);
+          document.getElementById('reviewRatingValue').textContent = store.rating;
+          document.getElementById('reviewCount2').textContent = `(${store.reviewCount} đánh giá)`;
+          return;
+        }
+
+        const reviewsHtml = reviews.map(review => {
+          const starsHtml = generateStars(review.rating);
+          return `
+            <div class="border-b border-gray-200 pb-6 last:border-0">
+              <div class="flex items-start justify-between mb-3">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-brand text-white flex items-center justify-center font-bold">
+                    ${review.initial}
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-dark">${review.name}</h4>
+                    <div class="flex items-center gap-1 text-yellow-400 text-xs mt-1">
+                      ${starsHtml}
+                    </div>
+                  </div>
+                </div>
+                <span class="text-xs text-gray-500">${review.date}</span>
+              </div>
+              <p class="text-gray-700">${review.comment}</p>
+            </div>
+          `;
+        }).join('');
+        document.getElementById('reviewsList').innerHTML = reviewsHtml;
+        
+        // Cập nhật số lượng đánh giá và rating trung bình
+        const avgRating = reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length;
+        document.getElementById('reviewRatingStars').innerHTML = generateStars(avgRating);
+        document.getElementById('reviewRatingValue').textContent = avgRating.toFixed(1);
+        document.getElementById('reviewCount2').textContent = `(${reviews.length} đánh giá)`;
+      }
+
+      // Hiển thị dịch vụ liên quan
+      function renderRelatedServices(store) {
+        // Lấy 4 dịch vụ khác cùng danh mục hoặc ngẫu nhiên
+        const relatedServices = store.services.slice(0, 4);
+        
+        if (relatedServices.length === 0) {
+          document.getElementById('relatedServices').innerHTML = '<p class="text-gray-500 text-center py-4">Không có dịch vụ liên quan</p>';
+          return;
+        }
+
+        const html = relatedServices.map(service => {
+          return `
+            <div class="border border-gray-200 rounded-xl p-4 hover:border-brand hover:shadow-md transition cursor-pointer" onclick="bookService('${service.name}', ${service.price})">
+              <h3 class="font-bold text-dark mb-2">${service.name}</h3>
+              <p class="text-sm text-gray-500 mb-2">${service.duration}</p>
+              <div class="flex items-center justify-between">
+                <span class="font-serif text-lg font-bold text-brand">${service.price.toLocaleString('vi-VN')}.000 VNĐ</span>
+                <button class="px-4 py-1.5 bg-brand hover:bg-brandDark text-white rounded-lg text-sm font-bold transition">
+                  Đặt ngay
+                </button>
+              </div>
+            </div>
+          `;
+        }).join('');
+        document.getElementById('relatedServices').innerHTML = html;
+      }
+
+      // Hiển thị dịch vụ mua cùng
+      function renderBoughtTogether(store) {
+        // Dịch vụ thường được đặt kèm (ví dụ: tắm + cắt móng, tắm + cắt tỉa)
+        const boughtTogetherServices = [];
+        
+        // Logic: Tìm các dịch vụ bổ sung (chăm sóc móng, vệ sinh tai thường đi kèm với tắm)
+        store.services.forEach(service => {
+          if (service.category === 'cham-soc-mong' || 
+              (service.name.toLowerCase().includes('móng') || 
+               service.name.toLowerCase().includes('tai'))) {
+            boughtTogetherServices.push(service);
+          }
+        });
+        
+        // Nếu không có, lấy 2 dịch vụ đầu tiên
+        if (boughtTogetherServices.length === 0) {
+          boughtTogetherServices.push(...store.services.slice(0, 2));
+        }
+        
+        // Giới hạn 2 dịch vụ
+        const services = boughtTogetherServices.slice(0, 2);
+
+        if (services.length === 0) {
+          document.getElementById('boughtTogether').innerHTML = '<p class="text-gray-500 text-center py-4">Không có dịch vụ mua cùng</p>';
+          return;
+        }
+
+        const html = services.map(service => {
+          return `
+            <div class="border border-gray-200 rounded-xl p-4 hover:border-brand hover:shadow-md transition cursor-pointer" onclick="bookService('${service.name}', ${service.price})">
+              <div class="flex items-center gap-2 mb-2">
+                <i class="fas fa-check-circle text-accent"></i>
+                <h3 class="font-bold text-dark">${service.name}</h3>
+              </div>
+              <p class="text-sm text-gray-500 mb-2">${service.duration}</p>
+              <div class="flex items-center justify-between">
+                <span class="font-serif text-lg font-bold text-brand">${service.price.toLocaleString('vi-VN')}.000 VNĐ</span>
+                <button class="px-4 py-1.5 bg-accent hover:bg-emerald-700 text-white rounded-lg text-sm font-bold transition">
+                  Thêm vào đặt
+                </button>
+              </div>
+            </div>
+          `;
+        }).join('');
+        document.getElementById('boughtTogether').innerHTML = html;
+      }
+
+      // Biến lưu rating được chọn
+      let selectedRating = 0;
+
+      // Chọn số sao đánh giá
+      function setRating(rating) {
+        selectedRating = rating;
+        const stars = document.querySelectorAll('#ratingInput i');
+        const ratingText = document.getElementById('ratingText');
+        
+        stars.forEach((star, index) => {
+          if (index < rating) {
+            star.classList.remove('far');
+            star.classList.add('fas');
+            star.classList.remove('text-gray-300');
+            star.classList.add('text-yellow-400');
+          } else {
+            star.classList.remove('fas');
+            star.classList.add('far');
+            star.classList.remove('text-yellow-400');
+            star.classList.add('text-gray-300');
+          }
+        });
+        
+        const ratingLabels = {
+          1: 'Rất không hài lòng',
+          2: 'Không hài lòng',
+          3: 'Bình thường',
+          4: 'Hài lòng',
+          5: 'Rất hài lòng'
+        };
+        ratingText.textContent = ratingLabels[rating] || 'Chọn số sao đánh giá';
+      }
+
+      // Gửi đánh giá
+      function submitReview(event) {
+        event.preventDefault();
+        
+        if (selectedRating === 0) {
+          alert('Vui lòng chọn số sao đánh giá!');
+          return;
+        }
+        
+        const name = document.getElementById('reviewerName').value.trim();
+        const comment = document.getElementById('reviewComment').value.trim();
+        
+        if (!name || !comment) {
+          alert('Vui lòng điền đầy đủ thông tin!');
+          return;
+        }
+        
+        const storeId = getURLParameter('id');
+        const savedReviews = localStorage.getItem(`reviews_${storeId}`);
+        const reviews = savedReviews ? JSON.parse(savedReviews) : [];
+        
+        // Tạo review mới
+        const newReview = {
+          name: name,
+          initial: name.charAt(0).toUpperCase(),
+          rating: selectedRating,
+          date: new Date().toLocaleDateString('vi-VN', { day: 'numeric', month: 'long', year: 'numeric' }),
+          comment: comment
+        };
+        
+        reviews.unshift(newReview); // Thêm vào đầu danh sách
+        localStorage.setItem(`reviews_${storeId}`, JSON.stringify(reviews));
+        
+        // Reset form
+        document.getElementById('reviewForm').reset();
+        selectedRating = 0;
+        setRating(0);
+        
+        // Hiển thị lại danh sách đánh giá
+        const store = storesData[storeId];
+        if (store) {
+          renderReviews(store);
+        }
+        
+        alert('Cảm ơn bạn đã đánh giá! Đánh giá của bạn đã được gửi.');
+      }
+
+      // ĐIỀU HƯỚNG ĐẶT LỊCH
+      function goToBooking() {
+        const storeId = getURLParameter('id');
+        if (storeId && storesData[storeId]) {
+          const store = storesData[storeId];
+          sessionStorage.setItem('selectedStore', JSON.stringify({
+            id: store.id,
+            name: store.name
+          }));
+          window.location.href = store.bookingUrl;
+        }
+      }
+
+      /**
+       * Chuyển tên dịch vụ thành ID (giống với stores-booking.html)
+       */
+      function slugify(name) {
+        return name
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-+|-+$/g, "");
+      }
+
+      /**
+   * Đặt lịch cho một dịch vụ cụ thể
+   */
+      function bookService(serviceName, price) {
+        const storeId = getURLParameter('id');
+        if (storeId && storesData[storeId]) {
+          const store = storesData[storeId];
+          // Dùng cùng hàm slugify như stores-booking.html để đảm bảo ID khớp
+          sessionStorage.setItem('selectedService', JSON.stringify({
+            id: slugify(serviceName),
+            name: serviceName,
+            price: price
+          }));
+          sessionStorage.setItem('selectedStore', JSON.stringify({
+            id: store.id,
+            name: store.name
+          }));
+          window.location.href = store.bookingUrl;
+        }
+      }
+
+      // LỌC DỊCH VỤ THEO DANH MỤC
+      function filterServices(category) {
+        const services = document.querySelectorAll('.service-item');
+        const tabs = document.querySelectorAll('.category-tab');
+        
+        // Đổi trạng thái tab
+        tabs.forEach(tab => {
+          if (tab.getAttribute('data-category') === category) {
+            tab.classList.remove('bg-gray-100', 'text-gray-600');
+            tab.classList.add('bg-brand', 'text-white', 'font-bold');
+          } else {
+            tab.classList.remove('bg-brand', 'text-white', 'font-bold');
+            tab.classList.add('bg-gray-100', 'text-gray-600');
+          }
+        });
+
+        // Hiển thị / ẩn dịch vụ
+        services.forEach(service => {
+          const serviceCategory = service.getAttribute('data-category');
+          if (category === 'all' || serviceCategory === category) {
+            service.style.display = 'flex';
+          } else {
+            service.style.display = 'none';
+          }
+        });
+      }
+
+      
+
+      // TẢI HEADER & FOOTER TỪ COMPONENT
+      document.addEventListener("DOMContentLoaded", () => {
+        fetch("../../templates/partials/header.html")
+          .then((res) => res.text())
+          .then((html) => (document.getElementById("header").innerHTML = html));
+
+        fetch("../../templates/partials/footer.html")
+          .then((res) => res.text())
+          .then((html) => (document.getElementById("footer").innerHTML = html));
+      });
+
+      // ===== XEM ẢNH (PHÓNG TO) =====
+      let currentGalleryImages = [];
+      let currentGalleryIndex = 0;
+
+      function openGallery(index) {
+        if (!currentGalleryImages.length) return;
+        currentGalleryIndex = index;
+        const modal = document.getElementById('galleryModal');
+        const imgEl = document.getElementById('galleryImage');
+        imgEl.src = currentGalleryImages[currentGalleryIndex];
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+
+      function closeGallery() {
+        const modal = document.getElementById('galleryModal');
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+
+      function nextImage() {
+        if (!currentGalleryImages.length) return;
+        currentGalleryIndex = (currentGalleryIndex + 1) % currentGalleryImages.length;
+        document.getElementById('galleryImage').src = currentGalleryImages[currentGalleryIndex];
+      }
+
+      function prevImage() {
+        if (!currentGalleryImages.length) return;
+        currentGalleryIndex =
+          (currentGalleryIndex - 1 + currentGalleryImages.length) % currentGalleryImages.length;
+        document.getElementById('galleryImage').src = currentGalleryImages[currentGalleryIndex];
+      }
+
+      // ============================================
+      // FAVORITE STORE FUNCTIONS
+      // ============================================
+      function toggleFavoriteStore() {
+        const storeId = getURLParameter('id');
+        if (!storeId) return;
+
+        const store = storesData[storeId];
+        if (!store) return;
+
+        const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+        const existingIndex = favorites.findIndex(f => f.id === storeId);
+
+        const favoriteBtn = document.getElementById('favoriteStoreBtn');
+        if (!favoriteBtn) return;
+        const favoriteIcon = favoriteBtn.querySelector('i');
+
+        if (existingIndex !== -1) {
+          // Xóa khỏi yêu thích
+          favorites.splice(existingIndex, 1);
+          favoriteIcon.classList.remove('fas', 'text-red-500');
+          favoriteIcon.classList.add('far');
+          favoriteBtn.classList.remove('border-red-500', 'bg-red-50', 'text-red-500');
+          favoriteBtn.classList.add('border-gray-200', 'text-gray-400');
+          favoriteBtn.title = 'Thêm vào danh sách yêu thích';
+          alert('Đã xóa khỏi danh sách yêu thích');
+        } else {
+          // Thêm vào yêu thích
+          const favoriteItem = {
+            id: store.id,
+            name: store.name,
+            category: 'Cửa hàng',
+            price: store.priceFrom || 'Liên hệ',
+            image: store.logo || store.images.main,
+            address: store.address,
+            rating: store.rating,
+            type: 'store',
+            addedAt: new Date().toISOString()
+          };
+          favorites.push(favoriteItem);
+          favoriteIcon.classList.remove('far');
+          favoriteIcon.classList.add('fas', 'text-red-500');
+          favoriteBtn.classList.remove('border-gray-200', 'text-gray-400');
+          favoriteBtn.classList.add('border-red-500', 'bg-red-50', 'text-red-500');
+          favoriteBtn.title = 'Đã thêm vào yêu thích';
+          alert('Đã thêm vào danh sách yêu thích!');
+        }
+
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        updateFavoriteBadge();
+      }
+
+      function updateFavoriteButton(storeId) {
+        const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+        const isFavorite = favorites.some(f => f.id === storeId);
+
+        const favoriteBtn = document.getElementById('favoriteStoreBtn');
+        if (!favoriteBtn) return;
+
+        const favoriteIcon = favoriteBtn.querySelector('i');
+
+        if (isFavorite) {
+          favoriteIcon.classList.remove('far');
+          favoriteIcon.classList.add('fas', 'text-red-500');
+          favoriteBtn.classList.remove('border-gray-200', 'text-gray-400');
+          favoriteBtn.classList.add('border-red-500', 'bg-red-50', 'text-red-500');
+          favoriteBtn.title = 'Đã thêm vào yêu thích';
+        } else {
+          favoriteIcon.classList.remove('fas', 'text-red-500');
+          favoriteIcon.classList.add('far');
+          favoriteBtn.classList.remove('border-red-500', 'bg-red-50', 'text-red-500');
+          favoriteBtn.classList.add('border-gray-200', 'text-gray-400');
+          favoriteBtn.title = 'Thêm vào danh sách yêu thích';
+        }
+      }
+
+      // Update badge after favorite is added/removed
+      const originalToggleFavoriteStore = toggleFavoriteStore;
+      toggleFavoriteStore = function() {
+        originalToggleFavoriteStore();
+        // Badge will be updated by favorite-badge.js
+        setTimeout(() => {
+          if (typeof updateFavoriteBadge === 'function') {
+            updateFavoriteBadge();
+          }
+        }, 100);
+      };
+
+      // Tự động tải dữ liệu cửa hàng khi trang vừa mở
+      document.addEventListener('DOMContentLoaded', loadStoreData);
+    </script>
+    <script type="module" src="../../assets/js/lib/mobile-menu.js"></script>
+    <script type="module" src="../../assets/js/lib/footer.js"></script>
+    <script src="../../assets/js/lib/favorite-badge.js"></script>
+    <script src="../../assets/js/scroll.js"></script>
+    <script src="../../assets/js/christmas-snow.js"></script>
+  </body>
+</html>

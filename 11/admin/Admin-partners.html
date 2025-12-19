@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đối tác - Paw Joy Admin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles/Admin-partners.css">
+</head>
+
+<body class="font-sans text-dark bg-cream">
+
+  <!-- SIDEBAR -->
+  <aside class="fixed left-0 top-0 h-screen bg-white shadow-lg w-64 z-40">
+    <div class="flex flex-col h-full">
+      <div class="h-20 flex items-center px-6 border-b border-gray-100">
+        <a href="Admin-dashboard.html" class="flex items-center gap-3 group">
+          <div class="relative w-10 h-10 flex-shrink-0">
+            <!-- Chân mèo màu vàng (dưới) -->
+            <i
+              class="fas fa-paw absolute bottom-0 left-0 text-[#EAB308] text-2xl transform -rotate-12 translate-y-1 -translate-x-1 opacity-80"></i>
+            <!-- Chân mèo màu đen (trên) -->
+            <i
+              class="fas fa-paw absolute top-0 right-0 text-black text-2xl transform rotate-12 translate-x-1 -translate-y-1"></i>
+          </div>
+          <span class="font-serif font-bold text-xl md:text-2xl tracking-tight text-dark">
+            Paw
+            <span class="text-brand italic">Joy</span>
+            .
+          </span>
+        </a>
+      </div>
+
+      <nav class="flex-1 overflow-y-auto py-6 px-4">
+        <div class="space-y-1">
+          <a href="Admin-dashboard.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-chart-line"></i><span>Dashboard</span>
+          </a>
+          <a href="Admin-orders.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-calendar-check"></i><span>Đơn đặt lịch</span>
+          </a>
+          <a href="Admin-partners.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-r from-brand/10 to-brand/5 text-brand font-semibold">
+            <i class="fas fa-store"></i><span>Đối tác</span>
+          </a>
+          <a href="Admin-customers.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-users"></i><span>Khách hàng</span>
+          </a>
+          <a href="Admin-finance.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-wallet"></i><span>Tài chính</span>
+          </a>
+          <a href="Admin-vouchers.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-ticket"></i><span>Khuyến mãi</span>
+          </a>
+          <a href="Admin-settings.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-cog"></i><span>Cài đặt</span>
+          </a>
+        </div>
+      </nav>
+
+      <div class="border-t border-gray-100 p-4">
+        <div class="flex items-center gap-3">
+          <div
+            class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand to-brandDark text-white flex items-center justify-center font-bold">
+            A</div>
+          <div>
+            <p class="font-semibold text-dark text-sm">Trần Thị Minh Anh</p>
+            <p class="text-xs text-gray-500">anhtran.31231023215@...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="ml-64">
+    <header class="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-gray-100 shadow-sm">
+      <div class="h-20 px-6 flex items-center justify-between">
+        <div>
+          <h2 class="text-xl font-bold text-dark">Đối tác</h2>
+          <p class="text-sm text-gray-500">Quản lý Shop/Spa</p>
+        </div>
+        <div class="flex items-center gap-4">
+          <button class="relative w-10 h-10 flex items-center justify-center rounded-full hover:bg-brand/10 transition">
+            <i class="far fa-bell text-dark text-lg"></i>
+            <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+          </button>
+          <div
+            class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand to-brandDark text-white flex items-center justify-center font-bold">
+            A</div>
+        </div>
+      </div>
+    </header>
+
+    <main class="p-6">
+      <div class="space-y-6">
+
+        <div class="flex items-center justify-between">
+          <div>
+            <h1 class="text-3xl font-serif font-bold text-dark mb-2">Quản lý đối tác</h1>
+            <p class="text-gray-500">Danh sách shop, spa, phòng khám đối tác</p>
+          </div>
+          <div class="flex gap-3">
+            <div class="flex items-center gap-2 bg-white rounded-xl p-1 shadow-sm">
+              <button id="gridViewBtn" onclick="switchView('grid')"
+                class="px-4 py-2 rounded-lg bg-brand text-white transition"><i class="fas fa-th"></i></button>
+              <button id="listViewBtn" onclick="switchView('list')"
+                class="px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-100 transition"><i
+                  class="fas fa-list"></i></button>
+            </div>
+            <button onclick="showAddPartnerModal()" class="px-6 py-2.5 rounded-full bg-brand text-white text-sm font-bold shadow-lg hover:bg-brandDark">
+              <i class="fas fa-plus mr-2"></i>Thêm đối tác
+            </button>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <button onclick="filterByStatus('all')" class="card hover:shadow-xl transition-all transform hover:scale-105 cursor-pointer text-left">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-gray-600 text-sm mb-2">Tổng đối tác</p>
+                <p class="text-3xl font-bold text-dark" id="stat-all">11</p>
+              </div>
+              <div
+                class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand to-brandDark flex items-center justify-center text-white text-xl shadow-lg">
+                <i class="fas fa-store"></i>
+              </div>
+            </div>
+          </button>
+          <button onclick="filterByStatus('active')" class="card hover:shadow-xl transition-all transform hover:scale-105 cursor-pointer text-left">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-gray-600 text-sm mb-2">Đang hoạt động</p>
+                <p class="text-3xl font-bold text-dark" id="stat-active">11</p>
+              </div>
+              <div
+                class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-600 to-amber-700 flex items-center justify-center text-white text-xl shadow-lg">
+                <i class="fas fa-check-circle"></i>
+              </div>
+            </div>
+          </button>
+          <button onclick="filterByStatus('pending')" class="card hover:shadow-xl transition-all transform hover:scale-105 cursor-pointer text-left">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-gray-600 text-sm mb-2">Chờ duyệt</p>
+                <p class="text-3xl font-bold text-dark" id="stat-pending">0</p>
+              </div>
+              <div
+                class="w-14 h-14 rounded-2xl bg-gradient-to-br from-stone-500 to-stone-600 flex items-center justify-center text-white text-xl shadow-lg">
+                <i class="fas fa-clock"></i>
+              </div>
+            </div>
+          </button>
+          <button onclick="filterByStatus('suspended')" class="card hover:shadow-xl transition-all transform hover:scale-105 cursor-pointer text-left">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-gray-600 text-sm mb-2">Tạm khóa</p>
+                <p class="text-3xl font-bold text-dark" id="stat-suspended">0</p>
+              </div>
+              <div
+                class="w-14 h-14 rounded-2xl bg-gradient-to-br from-stone-600 to-stone-700 flex items-center justify-center text-white text-xl shadow-lg">
+                <i class="fas fa-ban"></i>
+              </div>
+            </div>
+          </button>
+        </div>
+
+        <!-- Filters -->
+        <div class="card">
+          <div class="grid grid-cols-1 md:grid-cols-6 gap-4">
+            <input type="text" id="filterSearch" placeholder="Tìm kiếm đối tác..."
+              class="px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none">
+            <select id="filterType" class="px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none">
+              <option value="">Tất cả loại hình</option>
+              <option value="Spa">Spa</option>
+              <option value="Thăm khám">Thăm khám</option>
+              <option value="Spa & Thăm khám">Spa & Thăm khám</option>
+            </select>
+            <select id="filterStatus" class="px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none">
+              <option value="">Tất cả trạng thái</option>
+              <option value="active">Đang hoạt động</option>
+              <option value="pending">Chờ duyệt</option>
+              <option value="suspended">Tạm khóa</option>
+            </select>
+            <select id="filterSort" class="px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none">
+              <option value="rating">Sắp xếp: Rating</option>
+              <option value="orders">Sắp xếp: Đơn hàng</option>
+              <option value="revenue">Sắp xếp: Doanh thu</option>
+            </select>
+            <button onclick="resetFilters()" class="px-4 py-3 rounded-xl border border-gray-200 text-gray-600 hover:bg-gray-50 font-semibold transition flex items-center justify-center gap-2">
+              <i class="fas fa-redo text-sm"></i>
+              <span>Đặt lại</span>
+            </button>
+            <button onclick="applyFilters()" class="px-6 py-3 rounded-xl bg-brand text-white font-semibold hover:bg-brandDark transition shadow-lg">
+              <i class="fas fa-filter mr-2"></i>Áp dụng
+            </button>
+          </div>
+        </div>
+
+        <!-- Partners Grid -->
+        <div id="partnersGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Cards will be rendered by JavaScript -->
+        </div>
+      </div>
+
+      <!-- Partners List (Hidden by default) -->
+      <div id="partnersList" class="hidden">
+        <div class="card overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full">
+              <thead class="bg-cream">
+                <tr>
+                  <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase">Đối tác</th>
+                  <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase">Loại hình</th>
+                  <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase">Liên hệ</th>
+                  <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase">Rating</th>
+                  <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase">Đơn hàng</th>
+                  <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase">Doanh thu</th>
+                  <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase">Trạng thái</th>
+                  <th class="px-6 py-4 text-center text-xs font-semibold text-gray-600 uppercase">Thao tác</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-100" id="partnersTableBody">
+                <!-- Table rows will be populated by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+  </div>
+  </main>
+  </div>
+
+  <!-- Modal: Partner Detail -->
+  <div id="partnerModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="sticky top-0 bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between">
+        <h3 class="text-2xl font-bold text-dark">Thông tin đối tác</h3>
+        <button onclick="hidePartnerModal()"
+          class="w-10 h-10 rounded-full hover:bg-gray-100 transition flex items-center justify-center">
+          <i class="fas fa-times text-gray-600"></i>
+        </button>
+      </div>
+
+      <div class="p-6 space-y-6" id="partnerContent">
+        <!-- Content will be inserted by JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Add Partner -->
+  <div id="addPartnerModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="sticky top-0 bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between">
+        <h3 class="text-2xl font-bold text-dark">Thêm đối tác mới</h3>
+        <button onclick="hideAddPartnerModal()"
+          class="w-10 h-10 rounded-full hover:bg-gray-100 transition flex items-center justify-center">
+          <i class="fas fa-times text-gray-600"></i>
+        </button>
+      </div>
+
+      <form id="addPartnerForm" onsubmit="addNewPartner(event)" class="p-6 space-y-6">
+        <!-- Tên đối tác -->
+        <div class="card bg-cream">
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Tên đối tác <span class="text-red-500">*</span></label>
+          <input type="text" name="name" required
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none"
+            placeholder="Nhập tên đối tác">
+        </div>
+
+        <!-- Loại hình -->
+        <div class="card bg-cream">
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Loại hình <span class="text-red-500">*</span></label>
+          <select name="type" required
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none">
+            <option value="">Chọn loại hình</option>
+            <option value="Spa">Spa</option>
+            <option value="Thăm khám">Thăm khám</option>
+            <option value="Spa & Thăm khám">Spa & Thăm khám</option>
+          </select>
+        </div>
+
+        <!-- Địa chỉ -->
+        <div class="card bg-cream">
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Địa chỉ <span class="text-red-500">*</span></label>
+          <input type="text" name="address" required
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none"
+            placeholder="Nhập địa chỉ">
+        </div>
+
+        <!-- Số điện thoại -->
+        <div class="card bg-cream">
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Số điện thoại <span class="text-red-500">*</span></label>
+          <input type="tel" name="phone" required
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none"
+            placeholder="Nhập số điện thoại">
+        </div>
+
+        <!-- Email -->
+        <div class="card bg-cream">
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Email <span class="text-red-500">*</span></label>
+          <input type="email" name="email" required
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none"
+            placeholder="Nhập email">
+        </div>
+
+        <!-- Trạng thái -->
+        <div class="card bg-cream">
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Trạng thái <span class="text-red-500">*</span></label>
+          <select name="status" required
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none">
+            <option value="active">Đang hoạt động</option>
+            <option value="pending">Chờ duyệt</option>
+            <option value="suspended">Tạm khóa</option>
+          </select>
+        </div>
+
+        <!-- Giờ mở cửa -->
+        <div class="card bg-cream">
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Giờ mở cửa</label>
+          <input type="text" name="openTime"
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none"
+            placeholder="VD: 8:00 - 20:00">
+        </div>
+
+        <!-- Website -->
+        <div class="card bg-cream">
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Website</label>
+          <input type="url" name="website"
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none"
+            placeholder="https://example.com">
+        </div>
+
+        <!-- Mô tả -->
+        <div class="card bg-cream">
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Mô tả</label>
+          <textarea name="description" rows="3"
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none"
+            placeholder="Nhập mô tả về đối tác"></textarea>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex gap-3 pt-4 border-t border-gray-100">
+          <button type="button" onclick="hideAddPartnerModal()"
+            class="btn-cancel flex-1 px-6 py-3 bg-gray-100 text-gray-700 rounded-xl font-semibold">
+            <i class="fas fa-times mr-2"></i>Hủy
+          </button>
+          <button type="submit"
+            class="flex-1 px-6 py-3 bg-brand text-white rounded-xl font-bold hover:bg-brandDark transition">
+            <i class="fas fa-save mr-2"></i>Thêm đối tác
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Add Partner -->
+  <div id="addPartnerModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="sticky top-0 bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between">
+        <h3 class="text-2xl font-bold text-dark">Thêm đối tác mới</h3>
+        <button onclick="hideAddPartnerModal()"
+          class="w-10 h-10 rounded-full hover:bg-gray-100 transition flex items-center justify-center">
+          <i class="fas fa-times text-gray-600"></i>
+        </button>
+      </div>
+
+      <form id="addPartnerForm" onsubmit="handleAddPartner(event)" class="p-6 space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Tên đối tác -->
+          <div class="card bg-cream">
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Tên đối tác <span class="text-red-500">*</span></label>
+            <input type="text" id="addPartnerName" name="name" required
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none"
+              placeholder="Nhập tên đối tác">
+          </div>
+
+          <!-- Loại hình -->
+          <div class="card bg-cream">
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Loại hình <span class="text-red-500">*</span></label>
+            <select id="addPartnerType" name="type" required
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none">
+              <option value="">Chọn loại hình</option>
+              <option value="Spa">Spa</option>
+              <option value="Thăm khám">Thăm khám</option>
+              <option value="Spa & Thăm khám">Spa & Thăm khám</option>
+            </select>
+          </div>
+
+          <!-- Địa chỉ -->
+          <div class="card bg-cream md:col-span-2">
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Địa chỉ <span class="text-red-500">*</span></label>
+            <input type="text" id="addPartnerAddress" name="address" required
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none"
+              placeholder="Nhập địa chỉ đối tác">
+          </div>
+
+          <!-- Số điện thoại -->
+          <div class="card bg-cream">
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Số điện thoại <span class="text-red-500">*</span></label>
+            <input type="tel" id="addPartnerPhone" name="phone" required
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none"
+              placeholder="0901234567">
+          </div>
+
+          <!-- Email -->
+          <div class="card bg-cream">
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Email <span class="text-red-500">*</span></label>
+            <input type="email" id="addPartnerEmail" name="email" required
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none"
+              placeholder="email@example.com">
+          </div>
+
+          <!-- Website -->
+          <div class="card bg-cream">
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Website</label>
+            <input type="url" id="addPartnerWebsite" name="website"
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none"
+              placeholder="https://example.com">
+          </div>
+
+          <!-- Giờ mở cửa -->
+          <div class="card bg-cream">
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Giờ mở cửa</label>
+            <input type="text" id="addPartnerOpenTime" name="openTime"
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none"
+              placeholder="8:00 - 20:00">
+          </div>
+
+          <!-- Rating -->
+          <div class="card bg-cream">
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Đánh giá</label>
+            <input type="number" id="addPartnerRating" name="rating" min="0" max="5" step="0.1" value="0"
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none"
+              placeholder="4.5">
+          </div>
+
+          <!-- Trạng thái -->
+          <div class="card bg-cream">
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Trạng thái <span class="text-red-500">*</span></label>
+            <select id="addPartnerStatus" name="status" required
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none">
+              <option value="active">Đang hoạt động</option>
+              <option value="pending">Chờ duyệt</option>
+              <option value="suspended">Tạm khóa</option>
+            </select>
+          </div>
+
+          <!-- Mô tả -->
+          <div class="card bg-cream md:col-span-2">
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Mô tả</label>
+            <textarea id="addPartnerDescription" name="description" rows="3"
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none"
+              placeholder="Nhập mô tả về đối tác"></textarea>
+          </div>
+
+          <!-- Logo URL -->
+          <div class="card bg-cream md:col-span-2">
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Logo (URL hoặc đường dẫn)</label>
+            <input type="text" id="addPartnerLogo" name="logo"
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none"
+              placeholder="../assets/images/stores/.../logo.png">
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex gap-3 pt-4 border-t border-gray-100">
+          <button type="button" onclick="hideAddPartnerModal()"
+            class="btn-cancel flex-1 px-6 py-3 bg-gray-100 text-gray-700 rounded-xl font-semibold">
+            <i class="fas fa-times mr-2"></i>Hủy
+          </button>
+          <button type="submit"
+            class="flex-1 px-6 py-3 bg-brand text-white rounded-xl font-bold hover:bg-brandDark transition">
+            <i class="fas fa-save mr-2"></i>Thêm đối tác
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Edit Partner -->
+  <div id="editPartnerModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="sticky top-0 bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between">
+        <h3 class="text-2xl font-bold text-dark">Chỉnh sửa đối tác</h3>
+        <button onclick="hideEditPartnerModal()"
+          class="w-10 h-10 rounded-full hover:bg-gray-100 transition flex items-center justify-center">
+          <i class="fas fa-times text-gray-600"></i>
+        </button>
+      </div>
+
+      <form id="editPartnerForm" onsubmit="updatePartner(event)" class="p-6 space-y-6">
+        <!-- Tên đối tác -->
+        <div class="card bg-cream">
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Tên đối tác <span class="text-red-500">*</span></label>
+          <input type="text" name="name" required
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none"
+            placeholder="Nhập tên đối tác">
+        </div>
+
+        <!-- Loại hình -->
+        <div class="card bg-cream">
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Loại hình <span class="text-red-500">*</span></label>
+          <select name="type" required
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none">
+            <option value="">Chọn loại hình</option>
+            <option value="Spa">Spa</option>
+            <option value="Thăm khám">Thăm khám</option>
+            <option value="Spa & Thăm khám">Spa & Thăm khám</option>
+          </select>
+        </div>
+
+        <!-- Địa chỉ -->
+        <div class="card bg-cream">
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Địa chỉ <span class="text-red-500">*</span></label>
+          <input type="text" name="address" required
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none"
+            placeholder="Nhập địa chỉ">
+        </div>
+
+        <!-- Số điện thoại -->
+        <div class="card bg-cream">
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Số điện thoại <span class="text-red-500">*</span></label>
+          <input type="tel" name="phone" required
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none"
+            placeholder="Nhập số điện thoại">
+        </div>
+
+        <!-- Email -->
+        <div class="card bg-cream">
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Email <span class="text-red-500">*</span></label>
+          <input type="email" name="email" required
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none"
+            placeholder="Nhập email">
+        </div>
+
+        <!-- Trạng thái -->
+        <div class="card bg-cream">
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Trạng thái <span class="text-red-500">*</span></label>
+          <select name="status" required
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none">
+            <option value="active">Đang hoạt động</option>
+            <option value="pending">Chờ duyệt</option>
+            <option value="suspended">Tạm khóa</option>
+          </select>
+        </div>
+
+        <!-- Giờ mở cửa -->
+        <div class="card bg-cream">
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Giờ mở cửa</label>
+          <input type="text" name="openTime"
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none"
+            placeholder="VD: 8:00 - 20:00">
+        </div>
+
+        <!-- Website -->
+        <div class="card bg-cream">
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Website</label>
+          <input type="url" name="website"
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none"
+            placeholder="https://example.com">
+        </div>
+
+        <!-- Mô tả -->
+        <div class="card bg-cream">
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Mô tả</label>
+          <textarea name="description" rows="3"
+            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand outline-none"
+            placeholder="Nhập mô tả về đối tác"></textarea>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex gap-3 pt-4 border-t border-gray-100">
+          <button type="button" onclick="hideEditPartnerModal()"
+            class="btn-cancel flex-1 px-6 py-3 bg-gray-100 text-gray-700 rounded-xl font-semibold">
+            <i class="fas fa-times mr-2"></i>Hủy
+          </button>
+          <button type="submit"
+            class="flex-1 px-6 py-3 bg-brand text-white rounded-xl font-bold hover:bg-brandDark transition">
+            <i class="fas fa-save mr-2"></i>Lưu thay đổi
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Delete Partner Confirm -->
+  <div id="deletePartnerModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="sticky top-0 bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between">
+        <h3 class="text-2xl font-bold text-dark">Xác nhận xóa đối tác</h3>
+        <button onclick="hideDeletePartnerConfirm()"
+          class="w-10 h-10 rounded-full hover:bg-gray-100 transition flex items-center justify-center">
+          <i class="fas fa-times text-gray-600"></i>
+        </button>
+      </div>
+
+      <div class="p-6 space-y-6" id="deletePartnerContent">
+        <!-- Content will be inserted by JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <script src="js/Admin-partners.js"></script>
+
+</html>

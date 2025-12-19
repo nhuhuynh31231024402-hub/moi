@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Khuyến mãi - Paw Joy Admin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles/Admin-vouchers.css">
+</head>
+
+<body class="font-sans text-dark bg-cream">
+
+  <!-- SIDEBAR -->
+  <aside class="fixed left-0 top-0 h-screen bg-white shadow-lg w-64 z-40">
+    <div class="flex flex-col h-full">
+      <div class="h-20 flex items-center px-6 border-b border-gray-100">
+        <a href="Admin-dashboard.html" class="flex items-center gap-3 group">
+          <div class="relative w-10 h-10 flex-shrink-0">
+            <!-- Chân mèo màu vàng (dưới) -->
+            <i
+              class="fas fa-paw absolute bottom-0 left-0 text-[#EAB308] text-2xl transform -rotate-12 translate-y-1 -translate-x-1 opacity-80"></i>
+            <!-- Chân mèo màu đen (trên) -->
+            <i
+              class="fas fa-paw absolute top-0 right-0 text-black text-2xl transform rotate-12 translate-x-1 -translate-y-1"></i>
+          </div>
+          <span class="font-serif font-bold text-xl md:text-2xl tracking-tight text-dark">
+            Paw
+            <span class="text-brand italic">Joy</span>
+            .
+          </span>
+        </a>
+      </div>
+
+      <nav class="flex-1 overflow-y-auto py-6 px-4">
+        <div class="space-y-1">
+          <a href="Admin-dashboard.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-chart-line"></i><span>Dashboard</span>
+          </a>
+          <a href="Admin-orders.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-calendar-check"></i><span>Đơn đặt lịch</span>
+          </a>
+          <a href="Admin-partners.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-store"></i><span>Đối tác</span>
+          </a>
+          <a href="Admin-customers.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-users"></i><span>Khách hàng</span>
+          </a>
+          <a href="Admin-finance.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-wallet"></i><span>Tài chính</span>
+          </a>
+          <a href="Admin-vouchers.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-r from-brand/10 to-brand/5 text-brand font-semibold">
+            <i class="fas fa-ticket"></i><span>Khuyến mãi</span>
+          </a>
+          <a href="Admin-settings.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-brand transition">
+            <i class="fas fa-cog"></i><span>Cài đặt</span>
+          </a>
+        </div>
+      </nav>
+
+      <div class="border-t border-gray-100 p-4">
+        <div class="flex items-center gap-3">
+          <div
+            class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand to-brandDark text-white flex items-center justify-center font-bold">
+            A</div>
+          <div>
+            <p class="font-semibold text-dark text-sm">Trần Thị Minh Anh</p>
+            <p class="text-xs text-gray-500">anhtran.31231023215@...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="ml-64">
+    <header class="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-gray-100 shadow-sm">
+      <div class="h-20 px-6 flex items-center justify-between">
+        <div>
+          <h2 class="text-xl font-bold text-dark">Khuyến mãi</h2>
+          <p class="text-sm text-gray-500">Quản lý mã giảm giá</p>
+        </div>
+        <div class="flex items-center gap-4">
+          <button class="relative w-10 h-10 flex items-center justify-center rounded-full hover:bg-brand/10 transition">
+            <i class="far fa-bell text-dark text-lg"></i>
+            <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+          </button>
+          <div
+            class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand to-brandDark text-white flex items-center justify-center font-bold">
+            A</div>
+        </div>
+      </div>
+    </header>
+
+    <main class="p-6">
+      <div class="space-y-6">
+
+        <div class="flex items-center justify-between">
+          <div>
+            <h1 class="text-3xl font-serif font-bold text-dark mb-2">Quản lý khuyến mãi</h1>
+            <p class="text-gray-500">Tạo và quản lý mã giảm giá, voucher</p>
+          </div>
+          <button onclick="showCreateModal()"
+            class="px-6 py-2.5 rounded-full bg-brand text-white text-sm font-bold shadow-lg hover:bg-brandDark">
+            <i class="fas fa-plus mr-2"></i>Tạo mã giảm giá
+          </button>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div class="card">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-gray-600 text-sm mb-2">Tổng mã khuyến mãi</p>
+                <p class="text-3xl font-bold text-dark">5</p>
+              </div>
+              <div
+                class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand to-brandDark flex items-center justify-center text-white text-xl shadow-lg">
+                <i class="fas fa-ticket"></i>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-gray-600 text-sm mb-2">Đang hoạt động</p>
+                <p class="text-3xl font-bold text-dark">3</p>
+              </div>
+              <div
+                class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-600 to-amber-700 flex items-center justify-center text-white text-xl shadow-lg">
+                <i class="fas fa-check-circle"></i>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-gray-600 text-sm mb-2">Sắp diễn ra</p>
+                <p class="text-3xl font-bold text-dark">1</p>
+              </div>
+              <div
+                class="w-14 h-14 rounded-2xl bg-gradient-to-br from-stone-500 to-stone-600 flex items-center justify-center text-white text-xl shadow-lg">
+                <i class="fas fa-clock"></i>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-gray-600 text-sm mb-2">Tổng lượt sử dụng</p>
+                <p class="text-3xl font-bold text-dark">1,234</p>
+              </div>
+              <div
+                class="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center text-white text-xl shadow-lg">
+                <i class="fas fa-chart-line"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vouchers Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <!-- Voucher 1 -->
+          <div class="card hover:shadow-xl transition relative overflow-hidden cursor-pointer"
+            onclick="showDetailModal(0)">
+            <div
+              class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-brand/10 to-accent/10 rounded-full -mr-16 -mt-16">
+            </div>
+
+            <div class="flex items-start justify-between mb-4 relative">
+              <div
+                class="inline-flex items-center gap-2 px-3 py-1 bg-brand text-white rounded-lg font-mono font-bold text-sm mb-2">
+                <i class="fas fa-ticket"></i>
+                WELCOME2024
+              </div>
+              <span class="badge bg-green-100 text-green-700">
+                <i class="fas fa-check-circle mr-1"></i>Đang hoạt động
+              </span>
+            </div>
+
+            <h3 class="font-bold text-lg text-dark mb-3">Chào mừng khách hàng mới</h3>
+
+            <div class="flex items-center gap-3 mb-4">
+              <div class="flex-1">
+                <p class="text-sm text-gray-500">Giá trị giảm</p>
+                <p class="text-3xl font-bold text-brand">20%</p>
+              </div>
+              <div class="flex-1">
+                <p class="text-sm text-gray-500">Đơn tối thiểu</p>
+                <p class="text-lg font-semibold text-dark">200K</p>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <div class="flex items-center justify-between text-sm mb-2">
+                <span class="text-gray-600">Đã sử dụng</span>
+                <span class="font-semibold text-dark">245/1000</span>
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                <div class="h-full rounded-full bg-green-500 transition-all" style="width: 24.5%"></div>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2 text-sm text-gray-600 mb-4">
+              <i class="fas fa-calendar-alt"></i>
+              <span>01/01/2024</span>
+              <i class="fas fa-arrow-right text-xs"></i>
+              <span>31/12/2024</span>
+            </div>
+
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="badge bg-purple-100 text-purple-700 text-xs">Tất cả dịch vụ</span>
+            </div>
+
+            <div class="flex gap-2 pt-3 border-t border-gray-100">
+              <button onclick="event.stopPropagation(); showDetailModal(0)"
+                class="flex-1 px-4 py-2 bg-brand/10 text-brand rounded-lg hover:bg-brand/20 transition text-sm font-semibold">
+                <i class="fas fa-eye mr-1"></i>Chi tiết
+              </button>
+              <button onclick="event.stopPropagation()"
+                class="px-4 py-2 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition">
+                <i class="fas fa-ellipsis-h"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Voucher 2 -->
+          <div class="card hover:shadow-xl transition relative overflow-hidden cursor-pointer"
+            onclick="showDetailModal(1)">
+            <div
+              class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full -mr-16 -mt-16">
+            </div>
+
+            <div class="flex items-start justify-between mb-4 relative">
+              <div
+                class="inline-flex items-center gap-2 px-3 py-1 bg-brand text-white rounded-lg font-mono font-bold text-sm mb-2">
+                <i class="fas fa-ticket"></i>
+                SPA50K
+              </div>
+              <span class="badge bg-green-100 text-green-700">
+                <i class="fas fa-check-circle mr-1"></i>Đang hoạt động
+              </span>
+            </div>
+
+            <h3 class="font-bold text-lg text-dark mb-3">Giảm 50K dịch vụ Spa</h3>
+
+            <div class="flex items-center gap-3 mb-4">
+              <div class="flex-1">
+                <p class="text-sm text-gray-500">Giá trị giảm</p>
+                <p class="text-3xl font-bold text-brand">50K</p>
+              </div>
+              <div class="flex-1">
+                <p class="text-sm text-gray-500">Đơn tối thiểu</p>
+                <p class="text-lg font-semibold text-dark">300K</p>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <div class="flex items-center justify-between text-sm mb-2">
+                <span class="text-gray-600">Đã sử dụng</span>
+                <span class="font-semibold text-dark">189/500</span>
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                <div class="h-full rounded-full bg-green-500 transition-all" style="width: 37.8%"></div>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2 text-sm text-gray-600 mb-4">
+              <i class="fas fa-calendar-alt"></i>
+              <span>15/01/2024</span>
+              <i class="fas fa-arrow-right text-xs"></i>
+              <span>15/02/2024</span>
+            </div>
+
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="badge bg-purple-100 text-purple-700 text-xs">Spa</span>
+            </div>
+
+            <div class="flex gap-2 pt-3 border-t border-gray-100">
+              <button onclick="event.stopPropagation(); showDetailModal(1)"
+                class="flex-1 px-4 py-2 bg-brand/10 text-brand rounded-lg hover:bg-brand/20 transition text-sm font-semibold">
+                <i class="fas fa-eye mr-1"></i>Chi tiết
+              </button>
+              <button onclick="event.stopPropagation()"
+                class="px-4 py-2 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition">
+                <i class="fas fa-ellipsis-h"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Voucher 3 -->
+          <div class="card hover:shadow-xl transition relative overflow-hidden cursor-pointer"
+            onclick="showDetailModal(2)">
+            <div
+              class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-pink-100 to-red-100 rounded-full -mr-16 -mt-16">
+            </div>
+
+            <div class="flex items-start justify-between mb-4 relative">
+              <div
+                class="inline-flex items-center gap-2 px-3 py-1 bg-brand text-white rounded-lg font-mono font-bold text-sm mb-2">
+                <i class="fas fa-ticket"></i>
+                VET30
+              </div>
+              <span class="badge bg-green-100 text-green-700">
+                <i class="fas fa-check-circle mr-1"></i>Đang hoạt động
+              </span>
+            </div>
+
+            <h3 class="font-bold text-lg text-dark mb-3">Giảm 30% dịch vụ thăm khám</h3>
+
+            <div class="flex items-center gap-3 mb-4">
+              <div class="flex-1">
+                <p class="text-sm text-gray-500">Giá trị giảm</p>
+                <p class="text-3xl font-bold text-brand">30%</p>
+              </div>
+              <div class="flex-1">
+                <p class="text-sm text-gray-500">Đơn tối thiểu</p>
+                <p class="text-lg font-semibold text-dark">250K</p>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <div class="flex items-center justify-between text-sm mb-2">
+                <span class="text-gray-600">Đã sử dụng</span>
+                <span class="font-semibold text-dark">156/300</span>
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                <div class="h-full rounded-full bg-yellow-500 transition-all" style="width: 52%"></div>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2 text-sm text-gray-600 mb-4">
+              <i class="fas fa-calendar-alt"></i>
+              <span>10/01/2024</span>
+              <i class="fas fa-arrow-right text-xs"></i>
+              <span>31/01/2024</span>
+            </div>
+
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="badge bg-purple-100 text-purple-700 text-xs">Thăm khám</span>
+            </div>
+
+            <div class="flex gap-2 pt-3 border-t border-gray-100">
+              <button onclick="event.stopPropagation(); showDetailModal(2)"
+                class="flex-1 px-4 py-2 bg-brand/10 text-brand rounded-lg hover:bg-brand/20 transition text-sm font-semibold">
+                <i class="fas fa-eye mr-1"></i>Chi tiết
+              </button>
+              <button onclick="event.stopPropagation()"
+                class="px-4 py-2 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition">
+                <i class="fas fa-ellipsis-h"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Voucher 4 - Expired -->
+          <div class="card hover:shadow-xl transition relative overflow-hidden cursor-pointer"
+            onclick="showDetailModal(3)">
+            <div
+              class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full -mr-16 -mt-16">
+            </div>
+
+            <div class="flex items-start justify-between mb-4 relative">
+              <div
+                class="inline-flex items-center gap-2 px-3 py-1 bg-brand text-white rounded-lg font-mono font-bold text-sm mb-2">
+                <i class="fas fa-ticket"></i>
+                NEWYEAR100K
+              </div>
+              <span class="badge bg-red-100 text-red-700">
+                <i class="fas fa-times-circle mr-1"></i>Đã hết hạn
+              </span>
+            </div>
+
+            <h3 class="font-bold text-lg text-dark mb-3">Tết 2024 - Giảm 100K</h3>
+
+            <div class="flex items-center gap-3 mb-4">
+              <div class="flex-1">
+                <p class="text-sm text-gray-500">Giá trị giảm</p>
+                <p class="text-3xl font-bold text-brand">100K</p>
+              </div>
+              <div class="flex-1">
+                <p class="text-sm text-gray-500">Đơn tối thiểu</p>
+                <p class="text-lg font-semibold text-dark">500K</p>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <div class="flex items-center justify-between text-sm mb-2">
+                <span class="text-gray-600">Đã sử dụng</span>
+                <span class="font-semibold text-dark">450/500</span>
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                <div class="h-full rounded-full bg-red-500 transition-all" style="width: 90%"></div>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2 text-sm text-gray-600 mb-4">
+              <i class="fas fa-calendar-alt"></i>
+              <span>01/01/2024</span>
+              <i class="fas fa-arrow-right text-xs"></i>
+              <span>15/01/2024</span>
+            </div>
+
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="badge bg-purple-100 text-purple-700 text-xs">Tất cả dịch vụ</span>
+            </div>
+
+            <div class="flex gap-2 pt-3 border-t border-gray-100">
+              <button onclick="event.stopPropagation(); showDetailModal(3)"
+                class="flex-1 px-4 py-2 bg-brand/10 text-brand rounded-lg hover:bg-brand/20 transition text-sm font-semibold">
+                <i class="fas fa-eye mr-1"></i>Chi tiết
+              </button>
+              <button onclick="event.stopPropagation()"
+                class="px-4 py-2 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition">
+                <i class="fas fa-ellipsis-h"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Voucher 5 - Scheduled -->
+          <div class="card hover:shadow-xl transition relative overflow-hidden cursor-pointer"
+            onclick="showDetailModal(4)">
+            <div
+              class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-100 to-cyan-100 rounded-full -mr-16 -mt-16">
+            </div>
+
+            <div class="flex items-start justify-between mb-4 relative">
+              <div
+                class="inline-flex items-center gap-2 px-3 py-1 bg-brand text-white rounded-lg font-mono font-bold text-sm mb-2">
+                <i class="fas fa-ticket"></i>
+                FLASH50
+              </div>
+              <span class="badge bg-blue-100 text-blue-700">
+                <i class="fas fa-clock mr-1"></i>Sắp diễn ra
+              </span>
+            </div>
+
+            <h3 class="font-bold text-lg text-dark mb-3">Flash Sale 50%</h3>
+
+            <div class="flex items-center gap-3 mb-4">
+              <div class="flex-1">
+                <p class="text-sm text-gray-500">Giá trị giảm</p>
+                <p class="text-3xl font-bold text-brand">50%</p>
+              </div>
+              <div class="flex-1">
+                <p class="text-sm text-gray-500">Đơn tối thiểu</p>
+                <p class="text-lg font-semibold text-dark">400K</p>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <div class="flex items-center justify-between text-sm mb-2">
+                <span class="text-gray-600">Đã sử dụng</span>
+                <span class="font-semibold text-dark">0/100</span>
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                <div class="h-full rounded-full bg-blue-500 transition-all" style="width: 0%"></div>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2 text-sm text-gray-600 mb-4">
+              <i class="fas fa-calendar-alt"></i>
+              <span>01/02/2024</span>
+              <i class="fas fa-arrow-right text-xs"></i>
+              <span>05/02/2024</span>
+            </div>
+
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="badge bg-purple-100 text-purple-700 text-xs">Spa</span>
+              <span class="badge bg-purple-100 text-purple-700 text-xs">Thăm khám</span>
+            </div>
+
+            <div class="flex gap-2 pt-3 border-t border-gray-100">
+              <button onclick="event.stopPropagation(); showDetailModal(4)"
+                class="flex-1 px-4 py-2 bg-brand/10 text-brand rounded-lg hover:bg-brand/20 transition text-sm font-semibold">
+                <i class="fas fa-eye mr-1"></i>Chi tiết
+              </button>
+              <button onclick="event.stopPropagation()"
+                class="px-4 py-2 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition">
+                <i class="fas fa-ellipsis-h"></i>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal: Create Voucher -->
+  <div id="createModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="sticky top-0 bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between">
+        <h3 class="text-2xl font-bold text-dark">Tạo mã giảm giá mới</h3>
+        <button onclick="hideCreateModal()"
+          class="w-10 h-10 rounded-full hover:bg-gray-100 transition flex items-center justify-center">
+          <i class="fas fa-times text-gray-600"></i>
+        </button>
+      </div>
+
+      <div class="p-6 space-y-6">
+        <!-- Basic Info -->
+        <div class="card bg-cream space-y-4">
+          <h4 class="font-bold text-dark flex items-center gap-2">
+            <i class="fas fa-info-circle text-brand"></i>
+            Thông tin cơ bản
+          </h4>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="col-span-2">
+              <label class="block text-sm font-semibold text-gray-700 mb-2">Tên chương trình</label>
+              <input type="text" placeholder="VD: Khuyến mãi mùa hè"
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none">
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">Mã giảm giá</label>
+              <input type="text" placeholder="VD: SUMMER2024"
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none uppercase">
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">Loại giảm giá</label>
+              <select class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none">
+                <option>Giảm theo phần trăm (%)</option>
+                <option>Giảm số tiền cố định</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Discount Value -->
+        <div class="card bg-cream space-y-4">
+          <h4 class="font-bold text-dark flex items-center gap-2">
+            <i class="fas fa-percentage text-brand"></i>
+            Giá trị giảm
+          </h4>
+          <div class="grid grid-cols-3 gap-4">
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">Giá trị giảm</label>
+              <input type="number" placeholder="20"
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none">
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">Giảm tối đa</label>
+              <input type="number" placeholder="100000"
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none">
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">Đơn tối thiểu</label>
+              <input type="number" placeholder="200000"
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none">
+            </div>
+          </div>
+        </div>
+
+        <!-- Usage Limit -->
+        <div class="card bg-cream space-y-4">
+          <h4 class="font-bold text-dark flex items-center gap-2">
+            <i class="fas fa-users text-brand"></i>
+            Giới hạn sử dụng
+          </h4>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">Số lượng mã</label>
+              <input type="number" placeholder="1000"
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none">
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">Số lần dùng/khách</label>
+              <input type="number" placeholder="1"
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none">
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">Ngày bắt đầu</label>
+              <input type="date"
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none">
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">Ngày kết thúc</label>
+              <input type="date"
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none">
+            </div>
+          </div>
+        </div>
+
+        <!-- Conditions -->
+        <div class="card bg-cream space-y-4">
+          <h4 class="font-bold text-dark flex items-center gap-2">
+            <i class="fas fa-list-check text-brand"></i>
+            Điều kiện áp dụng
+          </h4>
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Dịch vụ áp dụng</label>
+            <select multiple
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none" size="4">
+              <option>Tất cả dịch vụ</option>
+              <option>Spa</option>
+              <option>Thăm khám</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Ghi chú điều kiện</label>
+            <textarea rows="3" placeholder="VD: Áp dụng cho khách hàng mới đăng ký"
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:outline-none"></textarea>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex gap-3">
+          <button onclick="hideCreateModal()"
+            class="flex-1 px-6 py-3 bg-gray-100 text-dark rounded-xl font-semibold hover:bg-gray-200 transition">
+            Hủy
+          </button>
+          <button
+            class="flex-1 px-6 py-3 bg-gray-200 text-gray-700 rounded-xl font-semibold hover:bg-gray-300 transition">
+            <i class="fas fa-save mr-2"></i>Lưu nháp
+          </button>
+          <button class="flex-1 px-6 py-3 bg-brand text-white rounded-xl font-bold hover:bg-brandDark transition">
+            <i class="fas fa-plus mr-2"></i>Tạo mã
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Detail Voucher -->
+  <div id="detailModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+      <div class="sticky top-0 bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between">
+        <h3 class="text-2xl font-bold text-dark">Chi tiết mã giảm giá</h3>
+        <button onclick="hideDetailModal()"
+          class="w-10 h-10 rounded-full hover:bg-gray-100 transition flex items-center justify-center">
+          <i class="fas fa-times text-gray-600"></i>
+        </button>
+      </div>
+
+      <div class="p-6 space-y-6" id="detailContent">
+        <!-- Content will be inserted by JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <script src="js/Admin-vouchers.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,491 @@
+/* --- CSS Cho Giao diện Card (Trang Blog List) --- */
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #FDFBF7;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #e5e7eb;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #D97706;
+}
+
+/* Sidebar trượt theo */
+.sidebar-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 100px; /* Cách mép trên 100px khi cuộn */
+    height: fit-content;
+}
+
+/* Hiệu ứng hover danh mục */
+.category-item {
+    transition: all 0.3s ease;
+}
+
+.category-item:hover {
+    transform: translateX(8px);
+}
+
+/* Tinh chỉnh input tìm kiếm */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+    display: none;
+}
+
+/* --- CSS Cho Nội Dung Chi Tiết (Trang Blog Detail) --- */
+.prose p {
+    margin-bottom: 1.5rem; /* Khoảng cách giữa các đoạn văn */
+    line-height: 1.8;      /* Chiều cao dòng cho dễ đọc */
+    color: #4b5563;        /* Màu xám dễ chịu */
+}
+
+.prose h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #3F2212; /* Màu Dark Coffee */
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.prose h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #3F2212;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+.prose ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.prose img {
+    border-radius: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.prose blockquote {
+    border-left: 4px solid #D97706; /* Màu cam chủ đạo */
+    padding-left: 1rem;
+    font-style: italic;
+    color: #666;
+    margin: 2rem 0;
+    background-color: #fffbeb; /* Nền vàng nhạt */
+    padding: 1rem;
+    border-radius: 0 0.5rem 0.5rem 0;
+}
+
+/* ============================================
+   CSS CHO TRANG BOOKING TIME & CONFIRM
+   ============================================ */
+
+/* Ẩn thanh cuộn (scrollbar) - Dùng cho các phần tử cần scroll nhưng không hiển thị scrollbar */
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.hide-scrollbar {
+    -ms-overflow-style: none; /* IE và Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+/* Hiệu ứng hover với icon chân mèo - Khi hover vào card/button sẽ hiện icon chân mèo ở góc dưới bên phải */
+.paw-hover {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+/* Icon chân mèo xuất hiện khi hover - Sử dụng Font Awesome icon */
+.paw-hover::after {
+    content: "\f1b0"; /* Unicode của icon chân mèo trong Font Awesome */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    right: 12px; /* Vị trí góc dưới bên phải */
+    bottom: 12px;
+    color: rgba(217, 119, 6, 0.32); /* Màu cam nhạt */
+    font-size: 26px;
+    transform: scale(0.6); /* Ban đầu nhỏ hơn */
+    opacity: 0; /* Ẩn ban đầu */
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    pointer-events: none; /* Không chặn sự kiện click */
+    filter: none;
+}
+
+/* Hiệu ứng khi hover - Card/button nhẹ nhàng nâng lên */
+.paw-hover:hover {
+    transform: translateY(-1px); /* Nâng lên 1px */
+    box-shadow: 0 6px 16px -12px rgba(178, 161, 6, 0.12); /* Đổ bóng nhẹ */
+}
+
+/* Icon chân mèo hiện ra khi hover */
+.paw-hover:hover::after {
+    opacity: 1; /* Hiện ra */
+    transform: scale(1); /* Phóng to về kích thước bình thường */
+}
+
+/* Hiệu ứng sparkle (tia sáng) khi hover - Icon chân mèo xuất hiện và biến mất như tia sáng */
+.paw-trail::before {
+    content: "\f1b0";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    left: 14px;
+    top: 10px;
+    color: rgba(217, 119, 6, 0.28);
+    font-size: 18px;
+    opacity: 0;
+    transform: translateY(6px) scale(0.8);
+    transition: opacity 0.15s ease;
+    pointer-events: none;
+}
+
+.paw-trail:hover::before {
+    opacity: 1;
+    animation: paw-pop 0.45s ease forwards;
+}
+
+/* Animation cho hiệu ứng sparkle - Icon chân mèo bay lên và biến mất */
+@keyframes paw-pop {
+    0% {
+        opacity: 0; /* Bắt đầu ẩn */
+        transform: translateY(6px) scale(0.75); /* Ở dưới, nhỏ */
+    }
+    50% {
+        opacity: 0.8; /* Giữa chừng hiện rõ nhất */
+        transform: translateY(-2px) scale(1); /* Bay lên, kích thước bình thường */
+    }
+    100% {
+        opacity: 0; /* Kết thúc ẩn */
+        transform: translateY(-8px) scale(0.9); /* Bay lên cao, nhỏ lại */
+    }
+}
+
+/* Icon chân mèo khi đã chọn (stamp) - Hiển thị khi người dùng đã chọn ngày/giờ */
+.stamp-paw {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #d97706;
+    font-weight: 600;
+}
+
+.stamp-paw i {
+    opacity: 0.9;
+}
+
+/* Class để kích hoạt animation khi chọn - Thêm class này khi người dùng chọn */
+.stamp-animate {
+    animation: stamp-pop 0.45s ease;
+}
+
+/* Animation cho hiệu ứng stamp - Icon chân mèo xuất hiện với hiệu ứng đóng dấu */
+@keyframes stamp-pop {
+    0% {
+        transform: scale(0.7) rotate(-6deg); /* Nhỏ, xoay trái */
+        opacity: 0; /* Ẩn */
+    }
+    50% {
+        transform: scale(1.06) rotate(2deg); /* Phóng to hơn bình thường, xoay phải */
+        opacity: 1; /* Hiện rõ */
+    }
+    100% {
+        transform: scale(1) rotate(0deg); /* Về kích thước và góc bình thường */
+        opacity: 1; /* Vẫn hiện */
+    }
+}
+
+/* ============================================
+   HIỆU ỨNG PHÓNG TO HÌNH ẢNH KHI HOVER
+   ============================================ */
+
+/* Container cho hình ảnh cần hiệu ứng zoom */
+.image-zoom-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: inherit;
+}
+
+/* Hình ảnh có hiệu ứng zoom khi hover */
+.image-zoom {
+    transition: transform 0.5s ease, opacity 0.3s ease;
+    will-change: transform;
+}
+
+.image-zoom-container:hover .image-zoom {
+    transform: scale(1.1);
+}
+
+/* ============================================
+   HIỆU ỨNG PHÓNG TO HÌNH ẢNH TRONG STORES-DETAIL.HTML
+   ============================================ */
+
+/* Container cho hình ảnh trong thư viện cửa hàng */
+.store-gallery-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: inherit;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Overlay mờ khi hover */
+.store-gallery-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0);
+    transition: background 0.4s ease;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Hiệu ứng khi hover vào container */
+.store-gallery-container:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    transform: translateY(-2px);
+}
+
+/* Overlay tối nhẹ khi hover */
+.store-gallery-container:hover::before {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/* Hình ảnh trong thư viện cửa hàng (mainImage, image1, image2) */
+.store-gallery-image {
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
+                filter 0.4s ease;
+    will-change: transform;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    position: relative;
+    z-index: 0;
+}
+
+/* Hiệu ứng phóng to và sáng hơn khi hover */
+.store-gallery-container:hover .store-gallery-image {
+    transform: scale(1.2);
+    filter: brightness(1.1);
+}
+
+/* Hình ảnh trong modal gallery */
+#galleryModal .store-gallery-container {
+    border-radius: 0.5rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#galleryModal .store-gallery-image {
+    transition: transform 0.6s ease;
+    will-change: transform;
+    max-height: 80vh;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+#galleryModal .store-gallery-container:hover .store-gallery-image {
+    transform: scale(1.1);
+}
+
+/* ============================================
+   HIỆU ỨNG PHÓNG TO HÌNH ẢNH TRONG STORES.HTML
+   ============================================ */
+
+/* Hình ảnh cửa hàng trong danh sách */
+.store-card-image-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.store-card-image {
+    transition: transform 0.6s ease;
+    will-change: transform;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.store-card-image-container:hover .store-card-image {
+    transform: scale(1.12);
+}
+
+/* ============================================
+   HIỆU ỨNG PHÓNG TO HÌNH ẢNH TRONG TRANG ĐẶT LỊCH
+   ============================================ */
+
+/* Hình ảnh cửa hàng trong trang đặt lịch */
+.booking-store-image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: inherit;
+}
+
+.booking-store-image {
+    transition: transform 0.4s ease;
+    will-change: transform;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.booking-store-image-container:hover .booking-store-image {
+    transform: scale(1.2);
+}
+
+/* ============================================
+   HIỆU ỨNG HOVER CHO 2 HÌNH ẢNH TRONG PHẦN GIỚI THIỆU SPA
+   ============================================ */
+
+/* Container cho hình ảnh trong phần giới thiệu spa */
+.spa-intro-image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: inherit;
+    z-index: 0;
+}
+
+/* Hình ảnh trong phần giới thiệu spa */
+.spa-intro-image {
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1);
+}
+
+/* Hiệu ứng phóng to khi hover vào card (group) - nhiều selector để đảm bảo hoạt động */
+.group:hover .spa-intro-image-container .spa-intro-image,
+.group:hover .spa-intro-image,
+div.group:hover img.spa-intro-image {
+    transform: scale(1.15);
+}
+
+/* Hoặc hover trực tiếp vào container */
+.spa-intro-image-container:hover .spa-intro-image {
+    transform: scale(1.15);
+}
+
+/* ============================================
+   HIỆU ỨNG HOVER CHO CARD CỬA HÀNG TRONG TRANG DANH SÁCH YÊU THÍCH
+   ============================================ */
+
+/* Card cửa hàng trong trang favorites */
+.favorite-store-card {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+/* Hiệu ứng khi hover vào card */
+.favorite-store-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+    border-color: rgba(217, 119, 6, 0.3);
+}
+
+/* Container cho hình ảnh cửa hàng */
+.favorite-store-image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.75rem 0.75rem 0 0;
+}
+
+/* Hình ảnh cửa hàng */
+.favorite-store-image {
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                filter 0.4s ease;
+    will-change: transform;
+    display: block;
+}
+
+/* Hiệu ứng phóng to và sáng hơn khi hover vào card */
+.favorite-store-card:hover .favorite-store-image {
+    transform: scale(1.1);
+    filter: brightness(1.05);
+}
+
+/* Overlay nhẹ khi hover */
+.favorite-store-image-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.05) 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.favorite-store-card:hover .favorite-store-image-container::after {
+    opacity: 1;
+}
+
+/* ============================================
+   LOGIC CHO FOOTER TRÊN DESKTOP
+   Trên màn hình lớn (>= 1024px), footer luôn mở và không có mũi tên
+   ============================================ */
+@media (min-width: 1024px) {
+    .footer-content {
+        display: block !important;
+        opacity: 1 !important;
+        height: auto !important;
+        margin-top: 1.5rem;
+        pointer-events: auto;
+    }
+    .footer-arrow {
+        display: none !important;
+    }
+    .footer-heading {
+        pointer-events: none !important;
+        cursor: default !important;
+        justify-content: flex-start !important;
+    }
+    .footer-col {
+        border-bottom: none !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+    }
+}

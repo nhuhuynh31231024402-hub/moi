@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="pageTitle">Đặt lịch | Paw Joy</title>
+
+    <!-- Christmas Theme CSS -->
+    <link rel="stylesheet" href="../../assets/css/christmas-theme.css" />
+
+    <!-- Thư viện Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Bộ icon sử dụng cho nút, đánh giá, thao tác -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Google Fonts: Font chữ chính dùng cho toàn bộ website -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Thiết lập màu sắc, font và hiệu ứng chung cho Paw Joy -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', "sans-serif"],
+              serif: ['"Playfair Display"', "serif"],
+            },
+            colors: {
+              brand: "#D97706", // Màu thương hiệu Paw Joy
+              brandLight: "#FFFBEB",
+              brandDark: "#92400E",
+              accent: "#059669",
+              dark: "#3F2212",
+              slate: "#1F2937",
+              cream: "#FDFBF7",
+              paper: "#F3F4F6",
+            },
+            boxShadow: {
+              soft: "0 20px 40px -15px rgba(0, 0, 0, 0.05)",
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* Ẩn thanh cuộn ngang cho danh sách dịch vụ */
+      .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .hide-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      /* Cách hiển thị footer trên màn hình desktop */
+      @media (min-width: 1024px) {
+        .footer-content {
+          display: block !important;
+          opacity: 1 !important;
+          height: auto !important;
+          margin-top: 1.5rem;
+          pointer-events: auto;
+        }
+        .footer-arrow {
+          display: none !important;
+        }
+        .footer-heading {
+          pointer-events: none !important;
+          cursor: default !important;
+          justify-content: flex-start !important;
+        }
+        .footer-col {
+          border-bottom: none !important;
+          margin-bottom: 0 !important;
+          padding-bottom: 0 !important;
+        }
+      }
+    </style>
+  </head>
+  <body class="font-sans text-dark bg-cream antialiased">
+    <!-- Christmas Snow Container -->
+    <div id="snow-container" class="fixed inset-0 pointer-events-none z-10"></div>
+    <!-- HEADER: logo, menu, điều hướng chính  -->
+    <div id="header"></div>
+
+    <!-- KHU VỰC ĐẶT LỊCH DỊCH VỤ -->
+    <main class="pt-20 md:pt-24 pb-8">
+      <div class="container mx-auto px-6">
+        <!-- Nút quay lại trang chi tiết cửa hàng -->
+        <div class="mb-6">
+          <a
+            id="backToStore"
+            href="#"
+            class="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-brand font-medium transition">
+            <i class="fas fa-arrow-left"></i>
+            <span>Quay về cửa hàng</span>
+          </a>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <!-- CỘT TRÁI: DANH SÁCH DỊCH VỤ KHÁCH CÓ THỂ CHỌN -->
+          <div class="lg:col-span-2">
+            <h1 id="bookingHeading" class="font-serif text-4xl font-bold text-dark mb-8">
+              Dịch vụ
+            </h1>
+
+            <!-- Thanh chọn loại dịch vụ (Tắm, Cắt tỉa, Thăm khám...) -->
+            <div id="serviceTabs" class="flex items-center gap-2 mb-6 overflow-x-auto pb-2 hide-scrollbar"></div>
+
+            <!-- Danh sách dịch vụ hiển thị theo loại đã chọn -->
+            <div id="serviceList" class="space-y-4">
+              <p class="text-sm text-gray-500">Đang tải dịch vụ...</p>
+            </div>
+          </div>
+
+          <!-- CỘT PHẢI: THÔNG TIN CỬA HÀNG & DỊCH VỤ ĐÃ CHỌN -->
+          <div class="lg:col-span-1">
+            <div class="sticky top-24">
+              <!-- Thông tin cửa hàng đang đặt lịch -->
+              <div class="bg-white rounded-xl p-5 border border-gray-200 mb-4">
+                <div class="flex items-start gap-4 mb-4">
+                  <div class="booking-store-image-container overflow-hidden rounded-lg">
+                    <img
+                      id="storeImage"
+                      src=""
+                      alt=""
+                      class="w-20 h-20 rounded-lg object-cover booking-store-image"
+                    />
+                  </div>
+                  <div class="flex-1">
+                    <h3 id="storeName" class="font-bold text-dark mb-1"></h3>
+                    <!-- Đánh giá cửa hàng -->
+                    <div class="flex items-center gap-1 mb-2">
+                      <div id="storeRatingStars" class="flex text-yellow-400 text-xs"></div>
+                      <span id="storeRatingValue" class="text-sm font-bold text-dark ml-1"></span>
+                      <span id="storeReviewCount" class="text-xs text-gray-500"></span>
+                    </div>
+                    <!-- Địa chỉ cửa hàng -->
+                    <p id="storeAddress" class="text-xs text-gray-600 line-clamp-2"></p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- DANH SÁCH DỊCH VỤ KHÁCH ĐÃ CHỌN -->
+              <div class="bg-white rounded-xl p-5 border border-gray-200 mb-4">
+                <h4 class="font-bold text-dark mb-4">Dịch vụ đã chọn</h4>
+                <!-- Danh sách dịch vụ trong giỏ -->
+                <div id="selectedServices" class="space-y-3 mb-4">
+                  <p class="text-sm text-gray-500 text-center py-4">
+                    Không có dịch vụ nào được chọn
+                  </p>
+                </div>
+                <!-- Tổng tiền và phí nền tảng -->
+                <div class="border-t border-gray-200 pt-4 space-y-3">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sm font-bold text-dark">Tổng tiền</span>
+                    <span id="servicesTotal" class="font-serif text-lg font-bold text-dark">0 VNĐ</span>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-1">
+                      <span class="text-sm font-bold text-dark">Phí dịch vụ</span>
+                      <!-- Giải thích phí dịch vụ của nền tảng -->
+                      <div class="relative group">
+                        <i class="fas fa-question-circle text-gray-400 text-xs cursor-help"></i>
+                        <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-64 p-3 bg-gray-800 text-white text-xs rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pointer-events-none z-10">
+                          Đây là phí giúp Paw Joy duy trì, nâng cao chất lượng trải nghiệm ứng dụng và đa dạng cửa hàng hơn
+                          <div class="absolute top-full left-1/2 transform -translate-x-1/2 -mt-1">
+                            <div class="w-2 h-2 bg-gray-800 rotate-45"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <span id="totalPrice" class="font-serif text-xl font-bold text-dark">0 VNĐ</span>
+                  </div>
+                  <p class="text-xs text-gray-500 mt-2 italic">
+                    Tổng tiền dịch vụ bạn chọn sẽ được thanh toán trực tiếp tại cửa hàng
+                  </p>
+                </div>
+              </div>
+
+              <!-- Nút chuyển sang bước chọn thời gian -->
+              <button
+                id="continueBtn"
+                onclick="continueBooking()"
+                disabled
+                class="w-full bg-gray-300 text-gray-500 font-bold py-4 rounded-xl transition cursor-not-allowed"
+              >
+                Tiếp tục
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- FOOTER: thông tin liên hệ, chính sách, mạng xã hội -->
+    <div id="footer"></div>
+
+    <script>
+      // ===== DỮ LIỆU CỬA HÀNG (hiển thị ở sidebar) – Load từ file JSON =====
+      let storesData = {};
+      
+      /**
+       * Hàm load danh sách cửa hàng từ file JSON
+       * Dùng để hiển thị thông tin cửa hàng khi đặt lịch
+       */
+      async function loadStoresData() {
+        try {
+          const response = await fetch('../../data/stores.json');
+          storesData = await response.json();
+          console.log('Stores data loaded from JSON:', storesData);
+        } catch (error) {
+          console.error('Error loading stores data:', error);
+          // Dữ liệu dự phòng nếu không load được file JSON
+          storesData = {
+            petwow: {
+              id: "petwow",
+              name: "Pet Wow",
+              rating: 4.8,
+              reviewCount: 127,
+              address: "294 Lê Quang Định, Phường 11, Bình Thạnh, Hồ Chí Minh",
+              logo: "../../assets/images/stores/PetWow/logo_petwow.png",
+            }
+          };
+        }
+      }
+
+      // Danh sách dịch vụ khách đã chọn
+      let selectedServices = [];
+      let currentStoreId = null; // Lưu ID cửa hàng hiện tại (dùng khi chuyển sang bước chọn thời gian)
+
+      /**
+      * Lấy tham số từ URL (vd: ?id=petwow)
+      */
+      function getURLParameter(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+      }
+
+      /**
+   * Tạo icon sao đánh giá cửa hàng
+   */
+      function generateStars(rating) {
+        const fullStars = Math.floor(rating);
+        const hasHalfStar = rating % 1 >= 0.5;
+        let html = "";
+        for (let i = 0; i < fullStars; i++) {
+          html += '<i class="fas fa-star"></i>';
+        }
+        if (hasHalfStar) {
+          html += '<i class="fas fa-star-half-alt"></i>';
+        }
+        const emptyStars = 5 - Math.ceil(rating);
+        for (let i = 0; i < emptyStars; i++) {
+          html += '<i class="far fa-star"></i>';
+        }
+        return html;
+      }
+
+      /**
+   * Xác định nhóm dịch vụ dựa trên tên dịch vụ
+   * (phục vụ cho việc lọc theo tab)
+   */
+      function getCategoryForServiceName(name) {
+        const lower = name.toLowerCase();
+        if (
+          lower.includes("tắm sấy") ||
+          lower.includes("tắm vệ sinh") ||
+          lower.includes("tắm cạo")
+        ) {
+          return "tam-ve-sinh";
+        }
+        if (lower.includes("cắt tỉa")) {
+          return "cat-tia";
+        }
+        if (lower.includes("móng") || lower.includes("tai")) {
+          return "cham-soc-mong";
+        }
+        if (lower.includes("nhuộm")) {
+          return "nhuom";
+        }
+        return "tam-ve-sinh";
+      }
+
+      // ===== DỮ LIỆU DỊCH VỤ CỦA TỪNG CỬA HÀNG (theo Sheet2) =====
+      // price: giá đầy đủ (đơn vị VNĐ)
+      const bookingServicesData = {
+        petwow: {
+          services: [
+            { name: "Tắm sấy", price: 170000, type: "spa" },
+            { name: "Tắm vệ sinh", price: 220000, type: "spa" },
+            { name: "Tắm cạo", price: 350000, type: "spa" },
+            { name: "Tắm vệ sinh cắt tỉa", price: 380000, type: "spa" },
+            { name: "Cắt mài móng", price: 40000, type: "spa" },
+            { name: "Vệ sinh, nhổ lông tai", price: 40000, type: "spa" },
+            { name: "Nhuộm", price: 400000, type: "spa" },
+          ],
+        },
+        "2vet": {
+          services: [
+            // Spa
+            { name: "Tắm sấy", price: 120000, type: "spa" },
+            { name: "Tắm vệ sinh", price: 200000, type: "spa" },
+            { name: "Tắm cạo", price: 329000, type: "spa" },
+            { name: "Tắm vệ sinh cắt tỉa", price: 299000, type: "spa" },
+            { name: "Cắt mài móng", price: 39000, type: "spa" },
+            { name: "Vệ sinh, nhổ lông tai", price: 30000, type: "spa" },
+            { name: "Nhuộm", price: 429000, type: "spa" },
+            // Thăm khám
+            { name: "Khám bệnh cơ bản", price: 159000, type: "vet" },
+            {
+              name: "Gói khám sức khoẻ tổng quát",
+              price: 899000,
+              type: "vet",
+            },
+            { name: "Triệt sản mèo đực", price: 299000, type: "vet" },
+            { name: "Triệt sản mèo cái", price: 499000, type: "vet" },
+            { name: "Triệt sản chó đực", price: 799000, type: "vet" },
+            { name: "Triệt sản chó cái", price: 719000, type: "vet" },
+            { name: "Xét nghiệm máu cơ bản", price: 299000, type: "vet" },
+            { name: "Siêu âm bụng", price: 230000, type: "vet" },
+            { name: "Cạo vôi răng", price: 499000, type: "vet" },
+            {
+              name: "Test nhanh bệnh truyền nhiễm",
+              price: 300000,
+              type: "vet",
+            },
+          ],
+        },
+        gauspa: {
+          services: [
+            { name: "Tắm sấy", price: 100000, type: "spa" },
+            { name: "Tắm vệ sinh", price: 219000, type: "spa" },
+            { name: "Tắm cạo", price: 349000, type: "spa" },
+            { name: "Tắm vệ sinh cắt tỉa", price: 319000, type: "spa" },
+            { name: "Cắt mài móng", price: 39000, type: "spa" },
+            { name: "Vệ sinh, nhổ lông tai", price: 39000, type: "spa" },
+            { name: "Nhuộm", price: 399000, type: "spa" },
+          ],
+        },
+        paopet: {
+          services: [
+            { name: "Tắm sấy", price: 99000, type: "spa" },
+            { name: "Tắm vệ sinh", price: 239000, type: "spa" },
+            { name: "Tắm cạo", price: 350000, type: "spa" },
+            { name: "Tắm vệ sinh cắt tỉa", price: 339000, type: "spa" },
+            { name: "Cắt mài móng", price: 40000, type: "spa" },
+            { name: "Vệ sinh, nhổ lông tai", price: 45000, type: "spa" },
+            { name: "Nhuộm", price: 420000, type: "spa" },
+          ],
+        },
+        lumipet: {
+          services: [
+            { name: "Gói tắm sấy cơ bản", price: 79000, type: "spa" },
+            { name: "Tắm vệ sinh", price: 200000, type: "spa" },
+            { name: "Tắm cạo", price: 350000, type: "spa" },
+            { name: "Tắm vệ sinh cắt tỉa", price: 379000, type: "spa" },
+            { name: "Nhuộm", price: 450000, type: "spa" },
+          ],
+        },
+        tiemnhasau: {
+          services: [
+            { name: "Tắm sấy", price: 100000, type: "spa" },
+            { name: "Tắm vệ sinh", price: 250000, type: "spa" },
+            { name: "Tắm cạo", price: 300000, type: "spa" },
+            { name: "Tắm vệ sinh cắt tỉa", price: 359000, type: "spa" },
+            { name: "Cắt mài móng", price: 50000, type: "spa" },
+            { name: "Vệ sinh, nhổ lông tai", price: 50000, type: "spa" },
+            { name: "Nhuộm", price: 450000, type: "spa" },
+          ],
+        },
+        petgrocer: {
+          services: [
+            { name: "Tắm sấy", price: 100000, type: "spa" },
+            { name: "Tắm vệ sinh", price: 200000, type: "spa" },
+            { name: "Tắm cạo", price: 239000, type: "spa" },
+            {
+              name: "Vệ sinh, nhổ lông tai, cắt mài móng",
+              price: 90000,
+              type: "spa",
+            },
+          ],
+        },
+        cwellpet: {
+          services: [
+            // Spa
+            { name: "Tắm sấy", price: 100000, type: "spa" },
+            { name: "Tắm vệ sinh", price: 200000, type: "spa" },
+            { name: "Tắm cạo", price: 239000, type: "spa" },
+            {
+              name: "Vệ sinh, nhổ lông tai, cắt mài móng",
+              price: 90000,
+              type: "spa",
+            },
+            // Thăm khám
+            { name: "Khám bệnh cơ bản", price: 179000, type: "vet" },
+            {
+              name: "Gói khám sức khoẻ tổng quát",
+              price: 899000,
+              type: "vet",
+            },
+            { name: "Triệt sản mèo đực", price: 299000, type: "vet" },
+            { name: "Triệt sản mèo cái", price: 499000, type: "vet" },
+            { name: "Triệt sản chó đực", price: 799000, type: "vet" },
+            { name: "Triệt sản chó cái", price: 729000, type: "vet" },
+            { name: "Xét nghiệm máu cơ bản", price: 300000, type: "vet" },
+          ],
+        },
+        petsmin: {
+          services: [
+            // Spa
+            { name: "Tắm sấy", price: 150000, type: "spa" },
+            { name: "Tắm vệ sinh", price: 300000, type: "spa" },
+            { name: "Tắm cạo", price: 219000, type: "spa" },
+            { name: "Vệ sinh, nhổ lông tai", price: 50000, type: "spa" },
+            // Thăm khám
+            { name: "Khám bệnh cơ bản", price: 179000, type: "vet" },
+            {
+              name: "Gói khám sức khoẻ tổng quát",
+              price: 859000,
+              type: "vet",
+            },
+            { name: "Triệt sản mèo đực", price: 299000, type: "vet" },
+            { name: "Triệt sản mèo cái", price: 499000, type: "vet" },
+            { name: "Triệt sản chó đực", price: 780000, type: "vet" },
+            { name: "Triệt sản chó cái", price: 700000, type: "vet" },
+            { name: "Xét nghiệm máu cơ bản", price: 270000, type: "vet" },
+            { name: "Siêu âm bụng", price: 250000, type: "vet" },
+            { name: "Cạo vôi răng", price: 500000, type: "vet" },
+            {
+              name: "Test nhanh bệnh truyền nhiễm",
+              price: 300000,
+              type: "vet",
+            },
+          ],
+        },
+        nasapet: {
+          services: [
+            // Spa
+            { name: "Tắm sấy", price: 190000, type: "spa" },
+            { name: "Tắm vệ sinh", price: 320000, type: "spa" },
+            { name: "Tắm cạo", price: 230000, type: "spa" },
+            {
+              name: "Vệ sinh, nhổ lông tai, cắt mài móng",
+              price: 70000,
+              type: "spa",
+            },
+            // Thăm khám
+            { name: "Khám bệnh cơ bản", price: 199000, type: "vet" },
+            {
+              name: "Gói khám sức khoẻ tổng quát",
+              price: 880000,
+              type: "vet",
+            },
+            { name: "Triệt sản mèo đực", price: 289000, type: "vet" },
+            { name: "Triệt sản mèo cái", price: 489000, type: "vet" },
+            { name: "Triệt sản chó đực", price: 790000, type: "vet" },
+            { name: "Triệt sản chó cái", price: 720000, type: "vet" },
+            { name: "Xét nghiệm máu cơ bản", price: 270000, type: "vet" },
+          ],
+        },
+        petpro: {
+          services: [
+            // Thăm khám
+            { name: "Khám bệnh cơ bản", price: 169000, type: "vet" },
+            {
+              name: "Gói khám sức khoẻ tổng quát",
+              price: 900000,
+              type: "vet",
+            },
+            { name: "Triệt sản mèo đực", price: 300000, type: "vet" },
+            { name: "Triệt sản mèo cái", price: 480000, type: "vet" },
+            { name: "Triệt sản chó đực", price: 750000, type: "vet" },
+            { name: "Triệt sản chó cái", price: 700000, type: "vet" },
+            { name: "Xét nghiệm máu cơ bản", price: 339000, type: "vet" },
+            { name: "Siêu âm bụng", price: 250000, type: "vet" },
+            { name: "Cạo vôi răng", price: 499000, type: "vet" },
+            {
+              name: "Test nhanh bệnh truyền nhiễm",
+              price: 300000,
+              type: "vet",
+            },
+          ],
+        },
+      };
+
+      // Chuyển tên dịch vụ thành ID
+      function slugify(name) {
+        return name
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/^-+|-+$/g, "");
+      }
+
+      // Hiển thị danh sách dịch vụ theo cửa hàng đang chọn
+      function buildServicesForStore(storeId) {
+        const serviceListEl = document.getElementById("serviceList");
+        const serviceTabsEl = document.getElementById("serviceTabs");
+
+        const storeServices = bookingServicesData[storeId];
+        if (!storeServices || !storeServices.services.length) {
+          serviceTabsEl.innerHTML = "";
+          serviceListEl.innerHTML =
+            '<p class="text-sm text-gray-500">Hiện chưa có dữ liệu dịch vụ cho cửa hàng này.</p>';
+          return;
+        }
+
+        const services = storeServices.services.map((s) => {
+          const category =
+            s.type === "vet" ? "tham-kham" : getCategoryForServiceName(s.name);
+          return {
+            ...s,
+            id: slugify(s.name),
+            duration:
+              s.type === "vet" ? "Thời lượng linh hoạt (thăm khám)" : "Thời lượng linh hoạt",
+            category,
+          };
+        });
+
+        // Danh mục dịch vụ
+        const categorySet = new Set(["all"]);
+        services.forEach((s) => categorySet.add(s.category));
+        const categories = Array.from(categorySet);
+
+        const categoryLabels = {
+          all: "Nổi bật",
+          "tam-ve-sinh": "Tắm & Vệ sinh",
+          "cat-tia": "Cắt tỉa",
+          "cham-soc-mong": "Chăm sóc móng",
+          nhuom: "Nhuộm",
+          "tham-kham": "Thăm khám",
+        };
+
+        const tabsHtml = categories
+          .map((cat) => {
+            const isActive =
+              cat === "all"
+                ? "bg-brand text-white font-bold"
+                : "bg-gray-100 text-gray-600";
+            return `<button onclick="filterServices('${cat}')" class="category-tab px-4 py-2 ${isActive} rounded-full text-sm font-medium hover:bg-gray-200 whitespace-nowrap" data-category="${cat}">${
+              categoryLabels[cat] || cat
+            }</button>`;
+          })
+          .join("");
+        serviceTabsEl.innerHTML = tabsHtml;
+
+        const servicesHtml = services
+          .map((service) => {
+            const priceFormatted = formatPrice(service.price);
+            return `
+                <div
+                  class="service-item service-card bg-white rounded-xl p-5 border border-gray-200 hover:border-brand hover:shadow-md transition"
+                  data-category="${service.category}"
+                  data-service-id="${service.id}"
+                  data-service-name="${service.name}"
+                  data-service-duration="${service.duration}"
+                  data-service-price="${service.price}"
+                >
+                  <div class="flex items-start justify-between">
+                    <div class="flex-1">
+                      <h3 class="font-bold text-dark mb-1">${service.name}</h3>
+                      <p class="text-sm text-gray-500 mb-2">${service.duration}</p>
+                    </div>
+                    <div class="flex flex-col items-end gap-3 ml-4">
+                      <span class="font-serif text-xl font-bold text-dark">${priceFormatted}</span>
+                      <button
+                        onclick="addService('${service.id}', '${service.name.replace(
+                          /'/g,
+                          "\\'"
+                        )}', ${service.price}, '${service.duration}')"
+                        class="w-10 h-10 rounded-full bg-brand hover:bg-brandDark text-white flex items-center justify-center transition shadow-lg"
+                      >
+                        <i class="fas fa-plus"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              `;
+          })
+          .join("");
+
+        serviceListEl.innerHTML = servicesHtml;
+
+        filterServices("all");
+      }
+
+      async function initPage() {
+        // Đảm bảo dữ liệu cửa hàng đã được tải xong trước khi hiển thị trang
+        if (!storesData || Object.keys(storesData).length === 0) {
+          console.warn('storesData not loaded yet, waiting...');
+          await loadStoresData();
+        }
+        
+        let storeId = null;
+        // Ưu tiên lấy ID cửa hàng từ URL (vì URL phản ánh cửa hàng người dùng đang xem)
+        const idFromUrl = getURLParameter("id");
+        if (idFromUrl && storesData[idFromUrl]) {
+          storeId = idFromUrl;
+        }
+
+        // Nếu không có trong URL, mới lấy cửa hàng đã lưu trước đó trong sessionStorage
+        if (!storeId) {
+          const savedStore = sessionStorage.getItem("selectedStore");
+          if (savedStore) {
+            try {
+              const store = JSON.parse(savedStore);
+              if (storesData[store.id]) {
+                storeId = store.id;
+              }
+            } catch (e) {
+              storeId = null;
+            }
+          }
+        }
+
+        // Nếu vẫn không xác định được cửa hàng, thì dùng cửa hàng mặc định
+        if (!storeId || !storesData[storeId]) {
+          storeId = "petwow";
+        }
+
+        // Lưu ID cửa hàng hiện tại để dùng cho các bước tiếp theo
+        currentStoreId = storeId;
+
+        const store = storesData[storeId];
+        if (!store) {
+          console.error('Store not found for ID:', storeId);
+          return;
+        }
+        
+        // Lưu thông tin cửa hàng đang đặt lịch vào sessionStorage
+        sessionStorage.setItem('selectedStore', JSON.stringify({
+          id: store.id,
+          name: store.name
+        }));
+
+        // Cập nhật tiêu đề trang
+        document.getElementById(
+          "pageTitle"
+        ).textContent = `Đặt lịch - ${store.name} | Paw Joy`;
+        // Cập nhật tiêu đề danh sách dịch vụ
+        const headingEl = document.getElementById("bookingHeading");
+        if (headingEl) {
+          headingEl.textContent = `Dịch vụ tại ${store.name}`;
+        }
+
+        // Cập nhật link quay lại trang chi tiết cửa hàng
+        const backLink = document.getElementById("backToStore");
+        if (backLink) {
+          backLink.href = `stores-detail.html?id=${store.id}`;
+        }
+
+        // Lấy các phần tử hiển thị thông tin cửa hàng
+        const imgEl = document.getElementById("storeImage");
+        const nameEl = document.getElementById("storeName");
+        const ratingStarsEl = document.getElementById("storeRatingStars");
+        const ratingValueEl = document.getElementById("storeRatingValue");
+        const reviewCountEl = document.getElementById("storeReviewCount");
+        const addressEl = document.getElementById("storeAddress");
+
+        // Hiển thị thông tin cửa hàng lên giao diện
+        if (imgEl) {
+          // Điều chỉnh đường dẫn logo từ stores.json (từ root) thành relative từ templates/pages/
+          let logoPath = store.logo;
+          if (logoPath.startsWith('assets/images/')) {
+            logoPath = '../../' + logoPath;
+          }
+          imgEl.src = logoPath;
+          imgEl.alt = store.name;
+        }
+        if (nameEl) nameEl.textContent = store.name;
+        if (ratingStarsEl) ratingStarsEl.innerHTML = generateStars(store.rating);
+        if (ratingValueEl) ratingValueEl.textContent = store.rating;
+        if (reviewCountEl)
+          reviewCountEl.textContent = `(${store.reviewCount})`;
+        if (addressEl) addressEl.textContent = store.address;
+
+        // Hiển thị danh sách dịch vụ của cửa hàng
+        buildServicesForStore(storeId);
+
+        // Nếu người dùng đã chọn dịch vụ từ trang trước thì tự động thêm vào giỏ
+        // Đợi một chút để đảm bảo DOM đã render xong
+        setTimeout(() => {
+          const savedService = sessionStorage.getItem("selectedService");
+          if (savedService) {
+            try {
+              const service = JSON.parse(savedService);
+              // Tìm service card bằng ID
+              const serviceCard = document.querySelector(
+                `[data-service-id="${service.id}"]`
+              );
+              
+              if (serviceCard) {
+                const duration = serviceCard.getAttribute("data-service-duration") || "";
+                // Nếu giá lưu là đơn vị "nghìn" thì chuyển sang VND
+                const priceVND =
+                  service.price >= 1000 ? service.price : service.price * 1000;
+                
+                // Thêm dịch vụ vào giỏ
+                addService(service.id, service.name, priceVND, duration);
+                
+                // Xóa khỏi sessionStorage sau khi đã thêm
+                sessionStorage.removeItem("selectedService");
+
+                // Cuộn tới dịch vụ vừa được thêm và highlight
+                serviceCard.scrollIntoView({ behavior: "smooth", block: "center" });
+                serviceCard.classList.add("ring-2", "ring-brand");
+                setTimeout(() => {
+                  serviceCard.classList.remove("ring-2", "ring-brand");
+                }, 2000);
+              } else {
+                console.warn('Service card not found for ID:', service.id);
+                // Nếu không tìm thấy card, vẫn thêm vào giỏ với thông tin có sẵn
+                const priceVND = service.price >= 1000 ? service.price : service.price * 1000;
+                addService(service.id, service.name, priceVND, "Thời lượng linh hoạt");
+                sessionStorage.removeItem("selectedService");
+              }
+            } catch (e) {
+              console.error('Error loading saved service:', e);
+            }
+          }
+        }, 100); // Đợi 100ms để DOM render xong
+      }
+
+      // Khởi tạo trang sau khi dữ liệu cửa hàng đã được load
+      async function initialize() {
+        await loadStoresData();
+        if (document.readyState === 'loading') {
+          window.addEventListener("DOMContentLoaded", initPage);
+        } else {
+          initPage();
+        }
+      }
+      
+      initialize();
+
+      // ===== XỬ LÝ GIỎ DỊCH VỤ=====
+      function filterServices(category) {
+        const services = document.querySelectorAll('.service-item');
+        const tabs = document.querySelectorAll('.category-tab');
+
+        // Cập nhật tab đang được chọn
+        tabs.forEach((tab) => {
+          if (tab.getAttribute('data-category') === category) {
+            tab.classList.remove('bg-gray-100', 'text-gray-600');
+            tab.classList.add('bg-brand', 'text-white', 'font-bold');
+          } else {
+            tab.classList.remove('bg-brand', 'text-white', 'font-bold');
+            tab.classList.add('bg-gray-100', 'text-gray-600');
+          }
+        });
+
+        // Hiển thị hoặc ẩn dịch vụ theo danh mục
+        services.forEach((service) => {
+          const serviceCategory = service.getAttribute('data-category');
+          if (category === 'all' || serviceCategory === category) {
+            service.style.display = 'block';
+          } else {
+            service.style.display = 'none';
+          }
+        });
+      }
+
+      // Thêm dịch vụ vào giỏ (mỗi dịch vụ chỉ chọn 1 lần)
+      function addService(id, name, price, duration) {
+        // Check if service already exists - only allow one instance
+        const exists = selectedServices.find((s) => s.id === id);
+        if (exists) {
+          // Service already added, show message or do nothing
+          alert('Dịch vụ này đã được thêm vào. Mỗi dịch vụ chỉ có thể được chọn một lần.');
+          return;
+        }
+        selectedServices.push({
+          id: id,
+          name: name,
+          price: price,
+          duration: duration,
+          quantity: 1,
+        });
+        updateSelectedServices();
+      }
+
+      // Xoá dịch vụ khỏi giỏ
+      function removeService(id) {
+        selectedServices = selectedServices.filter((s) => s.id !== id);
+        updateSelectedServices();
+      }
+
+      // Định dạng giá tiền theo VNĐ
+      function formatPrice(price) {
+        return price.toLocaleString('vi-VN') + ' VNĐ';
+      }
+
+      // Cập nhật giao diện giỏ dịch vụ
+      function updateSelectedServices() {
+        const container = document.getElementById('selectedServices');
+        const totalPriceEl = document.getElementById('totalPrice');
+        const servicesTotalEl = document.getElementById('servicesTotal');
+        const continueBtn = document.getElementById('continueBtn');
+
+        // Cập nhật trạng thái nút bấm cho tất cả thẻ dịch vụ
+        document.querySelectorAll('.service-card').forEach(card => {
+          const serviceId = card.getAttribute('data-service-id');
+          const button = card.querySelector('button');
+          const isSelected = selectedServices.find(s => s.id === serviceId);
+          
+          if (isSelected) {
+            // Nếu dịch vụ đã được chọn, thì vô hiệu hóa nút và hiển thị dấu check
+            button.disabled = true;
+            button.classList.add('bg-gray-300', 'cursor-not-allowed', 'opacity-50');
+            button.classList.remove('bg-brand', 'hover:bg-brandDark');
+            button.innerHTML = '<i class="fas fa-check"></i>';
+          } else {
+            // Nếu dịch vụ chưa được chọn, thì cho phép bấm và hiển thị nút thêm
+            button.disabled = false;
+            button.classList.remove('bg-gray-300', 'cursor-not-allowed', 'opacity-50');
+            button.classList.add('bg-brand', 'hover:bg-brandDark');
+            button.innerHTML = '<i class="fas fa-plus"></i>';
+          }
+        });
+
+        if (selectedServices.length === 0) {
+          // Trường hợp chưa chọn dịch vụ nào
+          container.innerHTML =
+            '<p class="text-sm text-gray-500 text-center py-4">Không có dịch vụ nào được chọn</p>';
+          totalPriceEl.textContent = '0 VNĐ';
+          servicesTotalEl.textContent = '0 VNĐ';
+          // Vô hiệu hóa nút tiếp tục
+          continueBtn.disabled = true;
+          continueBtn.classList.add('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
+          continueBtn.classList.remove('bg-dark', 'text-white', 'hover:bg-brand');
+        } else {
+          // Trường hợp đã chọn ít nhất một dịch vụ
+          let servicesTotal = 0;
+          // Hiển thị danh sách dịch vụ đã chọn
+          container.innerHTML = selectedServices
+            .map((service) => {
+              servicesTotal += service.price;
+              const servicePriceFormatted = formatPrice(service.price);
+              return `
+                <div class="flex items-start justify-between p-3 bg-gray-50 rounded-lg">
+                  <div class="flex-1">
+                    <h5 class="font-bold text-sm text-dark mb-1">${service.name}</h5>
+                    <p class="text-xs text-gray-500">${service.duration}</p>
+                  </div>
+                  <div class="flex flex-col items-end gap-2 ml-3">
+                    <span class="font-serif font-bold text-dark">${servicePriceFormatted}</span>
+                    <button
+                      onclick="removeService('${service.id}')"
+                      class="text-red-500 hover:text-red-700 text-sm"
+                    >
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+                </div>
+              `;
+            })
+            .join('');
+
+          // Tổng tiền các dịch vụ đã chọn
+          servicesTotalEl.textContent = servicesTotal.toLocaleString('vi-VN') + ' VNĐ';
+          
+          // Phí dịch vụ cố định 15.000 VNĐ (phí trung gian)
+          totalPriceEl.textContent = '15.000 VNĐ';
+          // Kích hoạt nút tiếp tục đặt lịch
+          continueBtn.disabled = false;
+          continueBtn.classList.remove('bg-gray-300', 'text-gray-500', 'cursor-not-allowed');
+          continueBtn.classList.add('bg-dark', 'text-white', 'hover:bg-brand');
+        }
+      }
+
+      // Lưu lựa chọn hiện tại và chuyển sang trang chọn thời gian
+      function continueBooking() {
+        // Nếu chưa chọn dịch vụ thì không cho tiếp tục
+        if (!selectedServices.length) return;
+        
+        // Luôn cập nhật cửa hàng hiện tại vào sessionStorage (ưu tiên biến global hoặc URL)
+        let storeId = currentStoreId || getURLParameter("id");
+        if (!storeId || !storesData[storeId]) {
+          storeId = "petwow"; 
+        }
+        
+        const store = storesData[storeId];
+        if (!store) {
+          console.error('Store not found for ID:', storeId);
+          return;
+        }
+        
+        // Chuẩn bị dữ liệu cửa hàng để lưu
+        const storeData = {
+          id: store.id,
+          name: store.name
+        };
+        // Lưu thông tin cửa hàng và dịch vụ đã chọn vào sessionStorage
+        console.log('Saving store to sessionStorage:', storeData);
+        sessionStorage.setItem('selectedStore', JSON.stringify(storeData));
+        sessionStorage.setItem('bookingServices', JSON.stringify(selectedServices));
+        
+        // Log để kiểm tra dữ liệu khi debug
+        console.log('SessionStorage after save:', {
+          selectedStore: sessionStorage.getItem('selectedStore'),
+          bookingServices: sessionStorage.getItem('bookingServices')
+        });
+        
+        // Chuyển sang trang chọn ngày & khung giờ
+        window.location.href = 'stores-booking-time.html';
+      }
+
+
+      // Load header và footer từ các file component dùng chung
+      document.addEventListener("DOMContentLoaded", () => {
+        fetch("../../templates/partials/header.html")
+          .then((res) => res.text())
+          .then((html) => (document.getElementById("header").innerHTML = html));
+
+        fetch("../../templates/partials/footer.html")
+          .then((res) => res.text())
+          .then((html) => (document.getElementById("footer").innerHTML = html));
+      });
+    </script>
+    <script type="module" src="../../assets/js/lib/mobile-menu.js"></script>
+    <script type="module" src="../../assets/js/lib/footer.js"></script>
+    <script src="../../assets/js/scroll.js"></script>
+    
+    <!-- Christmas Snow Effects -->
+    <script src="../../assets/js/christmas-snow.js"></script>
+  </body>
+</html>

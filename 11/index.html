@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Paw Joy - All 4 Pets</title>
+    
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23FDBA74'/%3E%3Cstop offset='100%25' stop-color='%23D97706'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23grad)'/%3E%3Cg transform='translate(8 10) scale(0.75)'%3E%3Cpath fill='white' d='M32 36c-5.5 0-10 4.5-10 10s4.5 10 10 10 10-4.5 10-10-4.5-10-10-10zm-14-6c0 3.3 2.7 6 6 6s6-2.7 6-6-2.7-6-6-6-6 2.7-6 6zm28 0c0 3.3 2.7 6 6 6s6-2.7 6-6-2.7-6-6-6-6 2.7-6 6zm-20-12c0 3.3 2.7 6 6 6s6-2.7 6-6-2.7-6-6-6-6 2.7-6 6zm12 0c0 3.3 2.7 6 6 6s6-2.7 6-6-2.7-6-6-6-6 2.7-6 6z'/%3E%3C/g%3E%3C/svg%3E" />
+
+    <!-- 1. THƯ VIỆN & FONTS -->
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet" />
+
+    <!-- 2. CẤU HÌNH TAILWIND -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', "sans-serif"],
+              serif: ['"Playfair Display"', "serif"],
+            },
+            colors: {
+              brand: "#D97706",
+              brandLight: "#FFFBEB",
+              brandDark: "#92400E",
+              accent: "#059669",
+              dark: "#3F2212",
+              slate: "#1F2937",
+              cream: "#FDFBF7",
+              paper: "#F3F4F6",
+            },
+            boxShadow: {
+              soft: "0 20px 40px -15px rgba(0, 0, 0, 0.05)",
+              glow: "0 0 30px rgba(217, 119, 6, 0.4)",
+            },
+            animation: {
+              scroll: "scroll 8s linear infinite",
+              "fade-up": "fadeUp 0.8s ease-out forwards",
+            },
+            keyframes: {
+              scroll: {
+                "0%": { transform: "translateX(0)" },
+                "100%": { transform: "translateX(-50%)" },
+              },
+              fadeUp: {
+                "0%": { opacity: "0", transform: "translateY(20px)" },
+                "100%": { opacity: "1", transform: "translateY(0)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- 3. LINK CSS -->
+    <link rel="stylesheet" href="./assets/css/home.css">
+    <link rel="stylesheet" href="./assets/css/christmas-theme.css">
+
+  </head>
+  <body class="font-sans text-dark bg-cream antialiased selection:bg-brand selection:text-white flex flex-col min-h-screen">
+    <!-- CHRISTMAS SNOW CONTAINER - pointer-events: none để không block interactions -->
+    <div id="snow-container" class="fixed inset-0 pointer-events-none z-[5]"></div>
+
+    <!-- HEADER: logo, menu, điều hướng chính  -->
+    <div id="header"></div>
+
+    <main class="flex-grow">
+      <!-- 2. Phần hero-->
+      <section
+        id="compass"
+        class="relative min-h-[90vh] flex flex-col items-center justify-start md:justify-between overflow-hidden pt-24 md:pt-32 pb-0">
+        <div class="absolute inset-0 z-0">
+          <img
+            src="./assets/images/pic10.jpg"
+            class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-dark via-black/30 to-transparent"></div>
+        </div>
+
+        <!-- Khối chứa Tiêu đề và Form -->
+        <div class="container mx-auto px-4 md:px-6 relative z-10 flex flex-col items-center flex-grow">
+          <!-- Nội dung HERO -->
+          <div class="text-center mb-10 w-full max-w-none animate-fade-up md:mt-0" style="animation-delay: 0.2s">
+            <span
+              class="inline-block py-1.5 px-4 md:px-5 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white text-[10px] md:text-xs font-bold uppercase tracking-widest mb-4 md:mb-6 shadow-sm">
+              ✨ Nền tảng Đặt lịch Spa & Thú y Tiện lợi
+            </span>
+            <h1 class="font-serif text-4xl md:text-6xl lg:text-8xl font-medium text-white leading-tight mb-4 md:mb-6 drop-shadow-2xl">
+              Nâng tầm trải nghiệm
+              <br />
+              <span class="italic text-brand">Thú Cưng.</span>
+            </h1>
+            <p class="text-white/90 text-base md:text-xl font-light max-w-2xl mx-auto leading-relaxed px-4">
+              Hệ thống gợi ý dịch vụ chuẩn xác. Kết nối mạng lưới 30+ Spa uy tín.
+            </p>
+          </div>
+
+          <!-- Button Xem tất cả của hàng -->
+          <div class="w-full max-w-5xl animate-fade-up px-4 md:px-0 mb-8 md:mb-12" style="animation-delay: 0.5s">
+            <div class="flex justify-center">
+              <a
+                href="templates/pages/stores.html"
+                class="bg-dark hover:bg-brand text-white px-8 md:px-12 py-4 md:py-5 rounded-xl md:rounded-2xl font-bold transition shadow-lg flex items-center justify-center gap-3 md:gap-4 text-base md:text-lg">
+                <span>Xem tất cả cửa hàng</span>
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3.Thống kê uy tín cuộn-->
+        <div class="w-full relative z-10 py-8 md:py-10 bg-dark md:mt-24">
+          <div class="absolute inset-0 opacity-35 bg-[url('assets/images/cubes.png')]"></div>
+          <!-- Căn giữa nội dung bên trong khối cha-->
+          <div class="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center text-white relative z-10">
+            <div>
+              <div class="text-3xl md:text-4xl font-serif font-bold mb-1 count-up" data-target="2357">121</div>
+              <div class="text-[10px] uppercase tracking-widest opacity-60">Lịch hẹn thành công</div>
+            </div>
+            <div>
+              <div class="text-3xl md:text-4xl font-serif font-bold mb-1 count-up" data-target="30">12</div>
+              <div class="text-[10px] uppercase tracking-widest opacity-60">Spa Đối tác</div>
+            </div>
+            <div>
+              <div class="text-3xl md:text-4xl font-serif font-bold mb-1">
+                4.8
+                <span class="text-brand">★</span>
+              </div>
+              <div class="text-[10px] uppercase tracking-widest opacity-60">Đánh giá trung bình</div>
+            </div>
+            <div>
+              <div class="text-3xl md:text-4xl font-serif font-bold mb-1 text-accent">
+                15
+                <span class="text-sm">p</span>
+              </div>
+              <div class="text-[10px] uppercase tracking-widest opacity-60">Xác nhận lịch</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3.1 DANH SÁCH ĐỐI TÁC -->
+      <section class="py-12 md:py-16 bg-white border-b border-gray-100 overflow-hidden">
+        <div class="container mx-auto px-6 mb-8 md:mb-12 text-center">
+          <h3 class="text-lg md:text-2xl font-serif font-bold text-dark uppercase tracking-widest mb-2">Hệ thống đối tác uy tín</h3>
+          <div class="w-12 md:w-16 h-1 bg-brand mx-auto rounded-full"></div>
+        </div>
+        <div class="relative w-full flex overflow-x-hidden group fade-mask">
+          <div class="animate-scroll flex space-x-12 md:space-x-24 items-center whitespace-nowrap group-hover:[animation-play-state:paused]">
+            <!-- Link đến trang chi tiết đối tác -->
+            <a
+              href="templates/pages/stores-detail.html?id=petwow"
+              class="inline-flex flex-col items-center gap-2 no-underline cursor-pointer group"
+            >
+              <img
+                src="./assets/images/stores/PetWow/logo_petwow.png"
+                alt="PETWOW"
+                class="w-16 h-16 md:w-20 md:h-20 object-contain"
+              />
+              <span class="text-3xl md:text-4xl font-serif font-black text-gray-300 group-hover:text-dark transition">
+                PET <span class="text-brand">WOW</span>
+              </span>
+            </a>
+            <a
+              href="templates/pages/stores-detail.html?id=2vet"
+              class="inline-flex flex-col items-center gap-2 no-underline cursor-pointer group">
+              <img
+                src="./assets/images/stores/2Vet/logo_2vet.png"
+                alt="2VET"
+                class="w-16 h-16 md:w-20 md:h-20 object-contain"
+              />
+              <span class="text-3xl md:text-4xl font-serif font-black text-gray-300 group-hover:text-dark transition">
+                <span class="text-accent">2VET</span>
+              </span>
+            </a>
+            <a
+              href="templates/pages/stores-detail.html?id=gauspa"
+              class="inline-flex flex-col items-center gap-2 no-underline cursor-pointer group">
+              <img
+                src="./assets/images/stores/GauSpa/logo_gauspa.png"
+                alt="GẤU SPA"
+                class="w-16 h-16 md:w-20 md:h-20 object-contain"
+              />
+              <span class="text-3xl md:text-4xl font-serif font-black text-gray-300 group-hover:text-dark transition">
+                GẤU
+                <span class="text-brand">SPA</span>
+              </span>
+            </a>
+            <a
+              href="templates/pages/stores-detail.html?id=paopet"
+              class="inline-flex flex-col items-center gap-2 no-underline cursor-pointer group">
+              <img
+                src="./assets/images/stores/PaoPet/logo_paopet.png"
+                alt="PAO PET"
+                class="w-16 h-16 md:w-20 md:h-20 object-contain"
+              />
+              <span class="text-3xl md:text-4xl font-serif font-black text-gray-300 group-hover:text-dark transition">
+                PAO
+                <span class="text-accent">PET</span>
+              </span>
+            </a>
+            <a
+              href="templates/pages/stores-detail.html?id=lumipet"
+              class="inline-flex flex-col items-center gap-2 no-underline cursor-pointer group">
+              <img
+                src="./assets/images/stores/LumiPet/logo_lumipet.png"
+                alt="LUMI PET"
+                class="w-16 h-16 md:w-20 md:h-20 object-contain"
+              />
+              <span class="text-3xl md:text-4xl font-serif font-black text-gray-300 group-hover:text-dark transition">
+                LUMI
+                <span class="text-blue-500">PET</span>
+              </span>
+            </a>
+            <a
+              href="templates/pages/stores-detail.html?id=tiemnhasau"
+              class="inline-flex flex-col items-center gap-2 no-underline cursor-pointer group">
+              <img
+                src="./assets/images/stores/TiemNhaSau/logo_tiemnhasau.png"
+                alt="TIỆM NHÀ SÂU"
+                class="w-16 h-16 md:w-20 md:h-20 object-contain"
+              />
+              <span class="text-3xl md:text-4xl font-serif font-black text-gray-300 group-hover:text-dark transition">
+                TIỆM
+                <span class="text-brand">NHÀ SÂU</span>
+              </span>
+            </a>
+            <a
+              href="templates/pages/stores-detail.html?id=petgrocer"
+              class="inline-flex flex-col items-center gap-2 no-underline cursor-pointer group">
+              <img
+                src="./assets/images/stores/PetGrocer/logo_petgrocer.png"
+                alt="PET GROCER"
+                class="w-16 h-16 md:w-20 md:h-20 object-contain"
+              />
+              <span class="text-3xl md:text-4xl font-serif font-black text-gray-300 group-hover:text-dark transition">
+                PET
+                <span class="text-accent">GROCER</span>
+              </span>
+            </a>
+            <a
+              href="templates/pages/stores-detail.html?id=cwellpet"
+              class="inline-flex flex-col items-center gap-2 no-underline cursor-pointer group">
+              <img
+                src="./assets/images/stores/CWellPet/logo_cwellpet.png"
+                alt="C.WELL PET"
+                class="w-16 h-16 md:w-20 md:h-20 object-contain"
+              />
+              <span class="text-3xl md:text-4xl font-serif font-black text-gray-300 group-hover:text-dark transition">
+                C.WELL
+                <span class="text-blue-500">PET</span>
+              </span>
+            </a>
+            <a
+              href="templates/pages/stores-detail.html?id=petsmin"
+              class="inline-flex flex-col items-center gap-2 no-underline cursor-pointer group">
+              <img
+                src="./assets/images/stores/Pets&Min/logo_pets&min.png"
+                alt="PETS & MIN"
+                class="w-16 h-16 md:w-20 md:h-20 object-contain"
+              />
+              <span class="text-3xl md:text-4xl font-serif font-black text-gray-300 group-hover:text-dark transition">
+                PETS
+                <span class="text-pink-500">& MIN</span>
+              </span>
+            </a>
+            <a
+              href="templates/pages/stores-detail.html?id=nasapet"
+              class="inline-flex flex-col items-center gap-2 no-underline cursor-pointer group">
+              <img
+                src="./assets/images/stores/NasaPet/logo_nasapet.png"
+                alt="NASA PET"
+                class="w-16 h-16 md:w-20 md:h-20 object-contain"
+              />
+              <span class="text-3xl md:text-4xl font-serif font-black text-gray-300 group-hover:text-dark transition">
+                NASA
+                <span class="text-accent">PET</span>
+              </span>
+            </a>
+            <a
+              href="templates/pages/stores-detail.html?id=petpro"
+              class="inline-flex flex-col items-center gap-2 no-underline cursor-pointer group">
+              <img
+                src="./assets/images/stores/PetPro/logo_petpro.png"
+                alt="PET PRO"
+                class="w-16 h-16 md:w-20 md:h-20 object-contain"
+              />
+              <span class="text-3xl md:text-4xl font-serif font-black text-gray-300 group-hover:text-dark transition">
+                PET
+                <span class="text-brand">PRO</span>
+              </span>
+            </a>
+            <!-- Cuộn vòng lặp -->
+            <a
+              href="templates/pages/stores-detail.html?id=petwow"
+              class="inline-flex flex-col items-center gap-2 no-underline cursor-pointer group">
+              <img
+                src="./assets/images/stores/PetWow/logo_petwow.png"
+                alt="PETWOW"
+                class="w-16 h-16 md:w-20 md:h-20 object-contain"
+              />
+              <span class="text-3xl md:text-4xl font-serif font-black text-gray-300 group-hover:text-dark transition">
+                PET <span class="text-brand">WOW</span>
+              </span>
+            </a>
+            <a
+              href="templates/pages/stores-detail.html?id=2vet"
+              class="inline-flex flex-col items-center gap-2 no-underline cursor-pointer group">
+              <img
+                src="./assets/images/stores/2Vet/logo_2vet.png"
+                alt="2VET"
+                class="w-16 h-16 md:w-20 md:h-20 object-contain"
+              />
+              <span class="text-3xl md:text-4xl font-serif font-black text-gray-300 group-hover:text-dark transition">
+                <span class="text-accent">2VET</span>
+              </span>
+            </a>
+            <a
+              href="templates/pages/stores-detail.html?id=gauspa"
+              class="inline-flex flex-col items-center gap-2 no-underline cursor-pointer group">
+              <img
+                src="./assets/images/stores/GauSpa/logo_gauspa.png"
+                alt="GẤU SPA"
+                class="w-16 h-16 md:w-20 md:h-20 object-contain"
+              />
+              <span class="text-3xl md:text-4xl font-serif font-black text-gray-300 group-hover:text-dark transition">
+                GẤU
+                <span class="text-brand">SPA</span>
+              </span>
+            </a>
+            <a
+              href="templates/pages/stores-detail.html?id=paopet"
+              class="inline-flex flex-col items-center gap-2 no-underline cursor-pointer group">
+              <img
+                src="./assets/images/stores/PaoPet/logo_paopet.png"
+                alt="PAO PET"
+                class="w-16 h-16 md:w-20 md:h-20 object-contain"
+              />
+              <span class="text-3xl md:text-4xl font-serif font-black text-gray-300 group-hover:text-dark transition">
+                PAO
+                <span class="text-accent">PET</span>
+              </span>
+            </a>
+            <a
+              href="templates/pages/stores-detail.html?id=lumipet"
+              class="inline-flex flex-col items-center gap-2 no-underline cursor-pointer group">
+              <img
+                src="./assets/images/stores/LumiPet/logo_lumipet.png"
+                alt="LUMI PET"
+                class="w-16 h-16 md:w-20 md:h-20 object-contain"
+              />
+              <span class="text-3xl md:text-4xl font-serif font-black text-gray-300 group-hover:text-dark transition">
+                LUMI
+                <span class="text-blue-500">PET</span>
+              </span>
+            </a>
+            <a
+              href="templates/pages/stores-detail.html?id=tiemnhasau"
+              class="inline-flex flex-col items-center gap-2 no-underline cursor-pointer group">
+              <img
+                src="./assets/images/stores/TiemNhaSau/logo_tiemnhasau.png"
+                alt="TIỆM NHÀ SÂU"
+                class="w-16 h-16 md:w-20 md:h-20 object-contain"
+              />
+              <span class="text-3xl md:text-4xl font-serif font-black text-gray-300 group-hover:text-dark transition">
+                TIỆM
+                <span class="text-brand">NHÀ SÂU</span>
+              </span>
+            </a>
+            <a
+              href="templates/pages/stores-detail.html?id=petgrocer"
+              class="inline-flex flex-col items-center gap-2 no-underline cursor-pointer group">
+              <img
+                src="./assets/images/stores/PetGrocer/logo_petgrocer.png"
+                alt="PET GROCER"
+                class="w-16 h-16 md:w-20 md:h-20 object-contain"
+              />
+              <span class="text-3xl md:text-4xl font-serif font-black text-gray-300 group-hover:text-dark transition">
+                PET
+                <span class="text-accent">GROCER</span>
+              </span>
+            </a>
+            <a
+              href="templates/pages/stores-detail.html?id=cwellpet"
+              class="inline-flex flex-col items-center gap-2 no-underline cursor-pointer group">
+              <img
+                src="./assets/images/stores/CWellPet/logo_cwellpet.png"
+                alt="C.WELL PET"
+                class="w-16 h-16 md:w-20 md:h-20 object-contain"
+              />
+              <span class="text-3xl md:text-4xl font-serif font-black text-gray-300 group-hover:text-dark transition">
+                C.WELL
+                <span class="text-blue-500">PET</span>
+              </span>
+            </a>
+            <a
+              href="templates/pages/stores-detail.html?id=petsmin"
+              class="inline-flex flex-col items-center gap-2 no-underline cursor-pointer group">
+              <img
+                src="./assets/images/stores/Pets&Min/logo_pets&min.png"
+                alt="PETS & MIN"
+                class="w-16 h-16 md:w-20 md:h-20 object-contain"
+              />
+              <span class="text-3xl md:text-4xl font-serif font-black text-gray-300 group-hover:text-dark transition">
+                PETS
+                <span class="text-pink-500">& MIN</span>
+              </span>
+            </a>
+            <a
+              href="templates/pages/stores-detail.html?id=nasapet"
+              class="inline-flex flex-col items-center gap-2 no-underline cursor-pointer group">
+              <img
+                src="./assets/images/stores/NasaPet/logo_nasapet.png"
+                alt="NASA PET"
+                class="w-16 h-16 md:w-20 md:h-20 object-contain"
+              />
+              <span class="text-3xl md:text-4xl font-serif font-black text-gray-300 group-hover:text-dark transition">
+                NASA
+                <span class="text-accent">PET</span>
+              </span>
+            </a>
+            <a
+              href="templates/pages/stores-detail.html?id=petpro"
+              class="inline-flex flex-col items-center gap-2 no-underline cursor-pointer group">
+              <img
+                src="./assets/images/stores/PetPro/logo_petpro.png"
+                alt="PET PRO"
+                class="w-16 h-16 md:w-20 md:h-20 object-contain"
+              />
+              <span class="text-3xl md:text-4xl font-serif font-black text-gray-300 group-hover:text-dark transition">
+                PET
+                <span class="text-brand">PRO</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Dịch vụ chính -->
+      <section id="services" class="py-16 md:py-24 bg-cream relative">
+        <div class="container mx-auto px-6 relative z-10">
+          <div class="flex flex-col md:flex-row justify-between items-end mb-10 md:mb-16 gap-6">
+            <div>
+              <span class="text-brand font-bold text-xs uppercase tracking-widest mb-2 md:mb-3 block">Dịch vụ tinh hoa</span>
+              <h2 class="font-serif text-3xl md:text-5xl text-dark font-medium leading-tight">Lựa chọn hoàn hảo cho Boss.</h2>
+            </div>
+            <div class="block pb-2">
+              <a
+                href="templates/pages/stores.html"
+                class="inline-flex items-center gap-2 text-dark font-bold border-b border-dark hover:border-brand hover:text-brand transition pb-1">
+                Xem ngay
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+            <!-- Dịch vụ 1 -->
+            <div
+              class="group relative h-[400px] md:h-[550px] rounded-2xl md:rounded-[2.5rem] overflow-hidden cursor-pointer shadow-soft hover:shadow-2xl transition duration-500">
+              <img
+                src="assets/images/pic1.jpg"
+                class="absolute inset-0 w-full h-full object-cover transition duration-1000 group-hover:scale-110" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90"></div>
+              <div class="absolute bottom-0 left-0 p-6 md:p-10 w-full">
+                <h3 class="font-serif text-2xl md:text-4xl text-white mb-2 md:mb-3">Spa & Grooming</h3>
+                <p class="text-white/80 font-light text-sm md:text-lg mb-4 md:mb-6 line-clamp-2">Gói Combo 7 bước: Tắm thảo mộc, Cắt tỉa tạo kiểu.</p>
+                <div class="flex items-center gap-4 md:gap-6 opacity-0 group-hover:opacity-100 transition delay-100">
+                  <a
+                    href="templates/pages/stores.html?service=spa"
+                    class="bg-white text-dark px-6 md:px-8 py-2 md:py-3 rounded-full font-bold hover:bg-brand hover:text-white transition text-sm md:text-base">
+                    Đặt lịch ngay
+                  </a>
+                  <span class="text-white font-serif italic text-lg md:text-xl">Từ 200k</span>
+                </div>
+              </div>
+            </div>
+            <!-- Dịch vụ 2 -->
+            <div
+              class="group relative h-[400px] md:h-[550px] rounded-2xl md:rounded-[2.5rem] overflow-hidden cursor-pointer shadow-soft hover:shadow-2xl transition duration-500">
+              <img
+                src="assets/images/pic2.jpg"
+                class="absolute inset-0 w-full h-full object-cover transition duration-1000 group-hover:scale-110" />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90"></div>
+              <div class="absolute bottom-0 left-0 p-6 md:p-10 w-full">
+                <h3 class="font-serif text-2xl md:text-4xl text-white mb-2 md:mb-3">Thăm Khám & Dinh Dưỡng</h3>
+                <p class="text-white/80 font-light text-sm md:text-lg mb-4 md:mb-6 line-clamp-2">Tư vấn chế độ ăn chuẩn khoa học bởi chuyên gia.</p>
+                <div class="flex items-center gap-4 md:gap-6 opacity-0 group-hover:opacity-100 transition delay-100">
+                  <a
+                    href="templates/pages/stores.html?service=vet"
+                    class="bg-white text-dark px-6 md:px-8 py-2 md:py-3 rounded-full font-bold hover:bg-accent hover:text-white transition text-sm md:text-base">
+                    Đặt lịch ngay
+                  </a>
+                  <span class="text-white font-serif italic text-lg md:text-xl">150k/lần</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Quy trình  -->
+      <section id="booking-journey" class="py-16 md:py-20 bg-white">
+        <div class="container mx-auto px-6">
+          <div class="text-center mb-12 md:mb-16">
+            <h2 class="font-serif text-2xl md:text-4xl text-dark">Quy trình minh bạch</h2>
+            <div class="w-12 md:w-16 h-1 bg-brand mx-auto mt-4"></div>
+          </div>
+          <div class="relative max-w-4xl mx-auto space-y-8 md:space-y-12">
+            <!-- Dòng kẻ chỉ hiện trên Desktop -->
+            <div class="absolute left-6 md:left-1/2 top-0 bottom-0 w-0.5 bg-gray-100 md:-translate-x-1/2"></div>
+
+            <!-- Bước 1 -->
+            <div class="relative flex flex-col md:flex-row items-start md:items-center justify-between group pl-16 md:pl-0">
+              <div class="md:w-5/12 text-left md:text-right md:pr-10 mb-2 md:mb-0">
+                <h3 class="font-bold text-lg md:text-xl text-dark group-hover:text-brand transition">1. Đặt lịch Online</h3>
+                <p class="text-gray-500 text-sm mt-1">Chọn dịch vụ & thời gian trên web chỉ trong 30s.</p>
+              </div>
+              <div
+                class="absolute left-0 md:left-1/2 md:-translate-x-1/2 z-10 bg-white border-4 border-brand w-14 h-14 rounded-full flex items-center justify-center text-brand text-xl shadow-lg group-hover:scale-110 transition duration-300">
+                <i class="fas fa-mobile-alt"></i>
+              </div>
+              <div class="md:w-5/12 md:pl-10 text-left">
+                <span class="text-xs font-bold bg-orange-50 text-brand px-3 py-1 rounded-full">30 giây</span>
+              </div>
+            </div>
+
+            <!-- Bước 2 -->
+            <div class="relative flex flex-col md:flex-row items-start md:items-center justify-between group pl-16 md:pl-0">
+              <div class="md:w-5/12 text-left md:text-right md:pr-10 order-last md:order-first">
+                <span class="text-xs font-bold bg-green-50 text-accent px-3 py-1 rounded-full">5 phút</span>
+              </div>
+              <div
+                class="absolute left-0 md:left-1/2 md:-translate-x-1/2 z-10 bg-white border-4 border-accent w-14 h-14 rounded-full flex items-center justify-center text-accent text-xl shadow-lg group-hover:scale-110 transition duration-300">
+                <i class="fas fa-headset"></i>
+              </div>
+              <div class="md:w-5/12 md:pl-10 text-left mb-2 md:mb-0 order-first md:order-last">
+                <h3 class="font-bold text-lg md:text-xl text-dark group-hover:text-accent transition">2. Xác nhận & Tư vấn</h3>
+                <p class="text-gray-500 text-sm mt-1">Nhân viên cửa hàng gọi điện xác nhận.</p>
+              </div>
+            </div>
+
+            <!-- Bước 3 -->
+            <div class="relative flex flex-col md:flex-row items-start md:items-center justify-between group pl-16 md:pl-0">
+              <div class="md:w-5/12 text-left md:text-right md:pr-10 mb-2 md:mb-0">
+                <h3 class="font-bold text-lg md:text-xl text-dark group-hover:text-brand transition">3. Trải nghiệm</h3>
+                <p class="text-gray-500 text-sm mt-1">Đến Spa và tận hưởng dịch vụ chuẩn 5 sao.</p>
+              </div>
+              <div
+                class="absolute left-0 md:left-1/2 md:-translate-x-1/2 z-10 bg-white border-4 border-dark w-14 h-14 rounded-full flex items-center justify-center text-dark text-xl shadow-lg group-hover:scale-110 transition duration-300">
+                <i class="fas fa-heart"></i>
+              </div>
+              <div class="md:w-5/12 md:pl-10 text-left">
+                <span class="text-xs font-bold bg-gray-100 text-dark px-3 py-1 rounded-full">Hài lòng</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+     <!-- 6. Chương trình Giáng sinh - Vòng quay may mắn -->
+<section id="promo" class="py-16 md:py-20 bg-brandDark relative overflow-hidden text-white"> <!-- Section khuyến mãi chính: ID "promo" để định danh, lớp CSS cho padding, background tối, vị trí tương đối, ẩn tràn, và màu chữ trắng -->
+  <div id="snow-container" class="absolute inset-0 pointer-events-none opacity-30"></div> <!-- Container cho hiệu ứng tuyết rơi: Vị trí tuyệt đối, che toàn bộ section, không tương tác chuột, độ trong suốt 30% -->
+  <div class="container mx-auto px-6 relative z-10 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16"> <!-- Container chính: Căn giữa, padding ngang, vị trí tương đối với z-index cao, flexbox để sắp xếp dọc trên mobile và ngang trên desktop, căn giữa và khoảng cách -->
+    <div class="lg:w-1/2 text-center lg:text-left"> <!-- Phần bên trái (hoặc trên mobile): Chiếm 50% chiều rộng trên desktop, căn giữa trên mobile, căn trái trên desktop -->
+      <span class="bg-white text-brandDark font-bold px-4 py-1.5 rounded-full text-xs uppercase tracking-widest mb-4 md:mb-6 inline-block shadow-lg animate-pulse"> <!-- Badge "Flash Sale": Background trắng, chữ tối, in đậm, bo tròn, chữ nhỏ, chữ hoa, khoảng cách chữ, margin dưới, inline-block, bóng đổ, hiệu ứng nhấp nháy -->
+        <i class="fas fa-snowflake mr-2"></i> <!-- Icon tuyết từ FontAwesome -->
+        Flash Sale Giáng Sinh
+      </span>
+      <h2 class="font-serif text-4xl md:text-6xl mb-4 md:mb-6 leading-none"> <!-- Tiêu đề chính: Font serif, kích thước lớn, margin dưới, không line-height -->
+        Paw's Holiday
+        <br />
+        <span class="italic text-brand">Pamper</span> <!-- Phần "Pamper" nghiêng và màu brand -->
+      </h2>
+      <p class="text-white/80 text-base md:text-lg mb-6 md:mb-8 font-light max-w-md mx-auto lg:mx-0"> <!-- Mô tả: Chữ trắng mờ, kích thước trung bình, font nhẹ, max-width, căn giữa trên mobile, căn trái trên desktop -->
+        Giảm ngay 15% cho Combo Spa & Thăm khám. Quay thưởng để nhận thêm quà tặng.
+      </p>
+      <div class="flex justify-center lg:justify-start gap-4 mb-8"> <!-- Container cho countdown timer: Flexbox, căn giữa trên mobile, căn trái trên desktop, khoảng cách, margin dưới -->
+        <div class="bg-black/20 backdrop-blur rounded-xl p-3 w-16 text-center border border-white/10"> <!-- Ô "Ngày": Background mờ, bo tròn, padding, chiều rộng cố định, căn giữa, viền mờ -->
+          <span id="days" class="block text-2xl font-bold font-serif">02</span> <!-- Số ngày: ID để cập nhật động, block, kích thước lớn, in đậm, font serif -->
+          <span class="text-[10px] uppercase opacity-60">Ngày</span> <!-- Nhãn "Ngày": Chữ nhỏ, hoa, mờ -->
+        </div>
+        <div class="bg-black/20 backdrop-blur rounded-xl p-2 md:p-3 w-14 md:w-16 text-center border border-white/10"> <!-- Ô "Giờ": Tương tự, padding responsive -->
+          <span id="hours" class="block text-xl md:text-2xl font-bold font-serif">14</span> <!-- Số giờ: ID để cập nhật -->
+          <span class="text-[8px] md:text-[10px] uppercase opacity-60">Giờ</span> <!-- Nhãn "Giờ" -->
+        </div>
+        <div class="bg-black/20 backdrop-blur rounded-xl p-2 md:p-3 w-14 md:w-16 text-center border border-white/10"> <!-- Ô "Phút": Tương tự -->
+          <span id="minutes" class="block text-xl md:text-2xl font-bold font-serif">45</span> <!-- Số phút: ID để cập nhật -->
+          <span class="text-[8px] md:text-[10px] uppercase opacity-60">Phút</span> <!-- Nhãn "Phút" -->
+        </div>
+        <div class="bg-brand text-white rounded-xl p-2 md:p-3 w-14 md:w-16 text-center shadow-glow"> <!-- Ô "Giây": Background brand, chữ trắng, bo tròn, padding, chiều rộng, căn giữa, bóng đổ phát sáng -->
+          <span id="seconds" class="block text-xl md:text-2xl font-bold font-serif">30</span> <!-- Số giây: ID để cập nhật -->
+          <span class="text-[8px] md:text-[10px] uppercase">Giây</span> <!-- Nhãn "Giây" -->
+        </div>
+      </div>
+    </div>
+    <div class="lg:w-1/2 flex justify-center relative"> <!-- Phần bên phải (hoặc dưới mobile): Chiếm 50% chiều rộng, căn giữa, vị trí tương đối -->
+      <div class="relative w-[300px] h-[300px] md:w-[380px] md:h-[380px] bg-white rounded-full luxury-wheel flex items-center justify-center cursor-pointer shadow-2xl" id="wheel" onclick="spinWheel()"> <!-- Vòng quay: Vị trí tương đối, kích thước responsive, background trắng, bo tròn, lớp "luxury-wheel" (có lẽ cho hiệu ứng), căn giữa nội dung, con trỏ chuột, bóng đổ lớn, ID để tương tác, onclick gọi hàm spinWheel() -->
+        <div class="absolute inset-0 w-full h-full rounded-full overflow-hidden pointer-events-none"> <!-- Container cho các nhãn trên vòng quay: Che toàn bộ, bo tròn, ẩn tràn, không tương tác -->
+          <div class="wheel-label" style="transform: rotate(30deg)"> <!-- Nhãn đầu tiên: Lớp "wheel-label", xoay 30 độ -->
+            <span class="text-on-orange wheel-text">10%</span> <!-- Văn bản "10%": Lớp cho màu trên nền cam, lớp "wheel-text" -->
+          </div>
+          <div class="wheel-label" style="transform: rotate(90deg)"> <!-- Nhãn thứ hai: Xoay 90 độ -->
+            <span class="text-on-white wheel-text">30K</span> <!-- Văn bản "30K": Màu trên nền trắng -->
+          </div>
+          <div class="wheel-label" style="transform: rotate(150deg)"> <!-- Nhãn thứ ba: Xoay 150 độ -->
+            <span class="text-on-orange wheel-text">12%</span> <!-- Văn bản "12%": Màu trên nền cam -->
+          </div>
+          <div class="wheel-label" style="transform: rotate(210deg)"> <!-- Nhãn thứ tư: Xoay 210 độ -->
+            <span class="text-on-orange wheel-text">snack</span> <!-- Văn bản "snack": Màu trên nền cam -->
+          </div>
+          <div class="wheel-label" style="transform: rotate(270deg)"> <!-- Nhãn thứ năm: Xoay 270 độ -->
+            <span class="text-red-600 font-black wheel-text text-xl md:text-2xl">20%</span> <!-- Văn bản "20%": Màu đỏ, in đậm, kích thước lớn -->
+          </div>
+          <div class="wheel-label" style="transform: rotate(330deg)"> <!-- Nhãn thứ sáu: Xoay 330 độ -->
+            <span class="text-on-white wheel-text">15%</span> <!-- Văn bản "15%": Màu trên nền trắng -->
+          </div>
+        </div>
+        <div class="absolute w-16 h-16 md:w-20 md:h-20 bg-white rounded-full shadow-lg flex items-center justify-center z-10 border-4 border-brand text-brandDark font-bold text-lg md:text-xl"> <!-- Nút "QUAY": Vị trí tuyệt đối, kích thước responsive, background trắng, bo tròn, bóng đổ, căn giữa, z-index cao, viền brand, chữ tối, in đậm, kích thước lớn -->
+          QUAY
+        </div>
+      </div>
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 -mt-4 text-white text-3xl md:text-4xl drop-shadow-lg z-20"> <!-- Mũi tên chỉ xuống: Vị trí tuyệt đối trên cùng, căn giữa ngang, dịch lên, chữ trắng, kích thước lớn, bóng đổ, z-index cao -->
+        <i class="fas fa-caret-down"></i> <!-- Icon mũi tên từ FontAwesome -->
+      </div>
+    </div>
+  </div>
+</section>
+
+      <!-- 7. Khoảnh khắc chia sẻ (Slider trên Desktop) -->
+<section class="py-16 md:py-24 bg-cream relative group/slider"> <!-- Section chính: Padding dọc responsive, background màu cream, vị trí tương đối, nhóm "slider" cho hiệu ứng -->
+  <div class="container mx-auto px-6"> <!-- Container chính: Căn giữa, padding ngang -->
+    <div class="flex justify-between items-end mb-10 md:mb-12"> <!-- Header: Flexbox để căn giữa và cuối, margin dưới -->
+      <div> <!-- Phần tiêu đề -->
+        <h2 class="font-serif text-2xl md:text-4xl text-dark">Khoảnh khắc Paw Joy</h2> <!-- Tiêu đề: Font serif, kích thước responsive, màu tối -->
+        <p class="text-gray-500 mt-2 text-sm md:text-base">Câu chuyện hạnh phúc từ cộng đồng.</p> <!-- Mô tả: Màu xám, margin trên, kích thước responsive -->
+      </div>
+    </div>
+
+    <!-- Slider Container -->
+    <div class="relative overflow-hidden"> <!-- Container slider: Vị trí tương đối, ẩn tràn ngang -->
+      <!-- Track chứa các Card -->
+      <div id="momentsTrack" class="flex snap-x snap-mandatory overflow-x-auto scroll-smooth no-scrollbar gap-6 md:gap-8 pb-4"> <!-- Track: Flexbox, snap để căn giữa card, cuộn ngang mượt, ẩn scrollbar, khoảng cách responsive, padding dưới -->
+                      <!-- Thẻ 1 -->
+                      <div class="min-w-full md:min-w-[23%] snap-center relative group rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-2 h-[480px]"> <!-- Card đầu tiên: Chiều rộng full trên mobile, 23% trên desktop, snap căn giữa, vị trí tương đối, nhóm "group", bo tròn, ẩn tràn, bóng đổ, hiệu ứng hover (bóng lớn hơn, dịch lên), chiều cao cố định -->
+                        <img src="assets/images/pic3.png" class="w-full h-full object-cover transition duration-700 group-hover:scale-110" /> <!-- Hình ảnh: Che toàn bộ card, hiệu ứng zoom khi hover -->
+                        <button onclick="toggleLike(this)" class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1.5 rounded-full flex items-center gap-1.5 text-gray-500 font-bold shadow-sm hover:scale-110 transition z-10 group-like"> <!-- Nút like: Vị trí tuyệt đối trên phải, background mờ, bo tròn, flexbox cho icon và số, hiệu ứng hover, z-index cao, nhóm "group-like", onclick gọi hàm toggleLike() -->
+                          <i class="far fa-heart transition-all"></i> <!-- Icon trái tim rỗng từ FontAwesome, hiệu ứng chuyển đổi -->
+                          <span class="text-xs text-dark">1200</span> <!-- Số lượt like: Chữ nhỏ, màu tối -->
+                        </button>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent pointer-events-none"></div> <!-- Overlay gradient: Che toàn bộ, gradient từ đen mờ lên trong suốt, không tương tác -->
+                        <div class="absolute bottom-6 left-6 right-6 text-white pointer-events-none"> <!-- Phần thông tin dưới: Vị trí tuyệt đối dưới, padding ngang, chữ trắng, không tương tác -->
+                          <p class="font-bold text-sm leading-relaxed mb-3"> <!-- Đoạn văn bản: In đậm, chữ nhỏ, line-height thoải mái, margin dưới -->
+                            "Bác sĩ ở đây khám răng nhẹ nhàng cực. Bé chịu nằm im re để bác sĩ kiểm tra."
+                          <div class="flex items-center gap-2 text-xs opacity-90"> <!-- Phần avatar và tên: Flexbox, khoảng cách, chữ nhỏ, độ trong suốt -->
+                          <div class="w-6 h-6 rounded-full bg-white flex items-center justify-center text-brand font-bold">L</div>
+                            <span>@lananh_corgi</span> <!-- Tên người dùng -->
+                          </div>
+                        </div>
+                      </div>
+              <!-- Thẻ 2 -->
+              <div
+                class="min-w-full md:min-w-[23%] snap-center relative group rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-2 h-[480px]">
+                <img
+                  src="assets/images/pic4.jpg"
+                  class="w-full h-full object-cover transition duration-700 group-hover:scale-110" />
+                <button
+                  onclick="toggleLike(this)"
+                  class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1.5 rounded-full flex items-center gap-1.5 text-gray-500 font-bold shadow-sm hover:scale-110 transition z-10 group-like">
+                  <i class="far fa-heart transition-all"></i>
+                  <span class="text-xs text-dark">856</span>
+                </button>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent pointer-events-none"></div>
+                <div class="absolute bottom-6 left-6 right-6 text-white pointer-events-none">
+                  <p class="font-bold text-sm leading-relaxed mb-3">"Bé Corgi nhà mình trộm vía rất nhát nước mà đến đây các bạn nhân viên dỗ khéo lắm."</p>
+                  <div class="flex items-center gap-2 text-xs opacity-90">
+                    <div class="w-6 h-6 rounded-full bg-white flex items-center justify-center text-brand font-bold">H</div>
+                    <span>@hung_vet</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Thẻ 3 -->
+              <div
+                class="min-w-full md:min-w-[23%] snap-center relative group rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-2 h-[480px]">
+                <video
+                  src="videos/vid1.mp4"
+                  class="w-full h-full object-cover"
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  controls></video>
+                <button
+                  onclick="toggleLike(this)"
+                  class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1.5 rounded-full flex items-center gap-1.5 text-gray-500 font-bold shadow-sm hover:scale-110 transition z-10 group-like">
+                  <i class="far fa-heart transition-all"></i>
+                  <span class="text-xs text-dark">2400</span>
+                </button>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent pointer-events-none"></div>
+                <div class="absolute bottom-6 left-6 right-6 text-white pointer-events-none">
+                  <p class="font-bold text-sm leading-relaxed mb-3">"Gửi bé ở spa mà yên tâm hẳn. Bé chơi đùa vui vẻ."</p>
+                  <div class="flex items-center gap-2 text-xs opacity-90">
+                    <div class="w-6 h-6 rounded-full bg-white flex items-center justify-center text-brand font-bold">M</div>
+                    <span>@minhthu_cat</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Thẻ 4 -->
+              <div
+                class="min-w-full md:min-w-[23%] snap-center relative group rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-2 h-[480px]">
+                <img
+                  src="assets/images/pic5.jpg"
+                  class="w-full h-full object-cover"
+                  frameborder="0"
+                  scrolling="no"
+                  style="pointer-events: none"></img>
+                <button
+                  onclick="toggleLike(this)"
+                  class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1.5 rounded-full flex items-center gap-1.5 text-gray-500 font-bold shadow-sm hover:scale-110 transition z-10 group-like">
+                  <i class="far fa-heart transition-all"></i>
+                  <span class="text-xs text-dark">982</span>
+                </button>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent pointer-events-none"></div>
+                <div class="absolute bottom-6 left-6 right-6 text-white pointer-events-none">
+                  <p class="font-bold text-sm leading-relaxed mb-3">"Styling tóc xoăn Poodle ở 2vet đúng đỉnh! Bé cắt xong trông như cục bông."</p>
+                  <div class="flex items-center gap-2 text-xs opacity-90">
+                    <div class="w-6 h-6 rounded-full bg-white flex items-center justify-center text-brand font-bold">P</div>
+                    <span>@mr_poodle</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Thẻ 5 -->
+              <div
+                class="min-w-full md:min-w-[23%] snap-center relative group rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-2 h-[480px]">
+                <img
+                  src="./assets/images/pic6.jpg"
+                  class="w-full h-full object-cover transition duration-700 group-hover:scale-110" />
+                <button
+                  onclick="toggleLike(this)"
+                  class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1.5 rounded-full flex items-center gap-1.5 text-gray-500 font-bold shadow-sm hover:scale-110 transition z-10 group-like">
+                  <i class="far fa-heart transition-all"></i>
+                  <span class="text-xs text-dark">3500</span>
+                </button>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent pointer-events-none"></div>
+                <div class="absolute bottom-6 left-6 right-6 text-white pointer-events-none">
+                  <p class="font-bold text-sm leading-relaxed mb-3">
+                    "Bình thường ở nhà chả cho ai động vào người, thế mà đến spa một cái là nằm im re hưởng thụ =))))))."
+                  </p>
+                  <div class="flex items-center gap-2 text-xs opacity-90">
+                    <div class="w-6 h-6 rounded-full bg-white flex items-center justify-center text-brand font-bold">C</div>
+                    <span>@hoangthuong_cat</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Thẻ 6 -->
+              <div
+                class="min-w-full md:min-w-[23%] snap-center relative group rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-2 h-[480px]">
+                <img
+                  src="./assets/images/pic7.jpg"
+                  class="w-full h-full object-cover transition duration-700 group-hover:scale-110" />
+                <button
+                  onclick="toggleLike(this)"
+                  class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1.5 rounded-full flex items-center gap-1.5 text-gray-500 font-bold shadow-sm hover:scale-110 transition z-10 group-like">
+                  <i class="far fa-heart transition-all"></i>
+                  <span class="text-xs text-dark">2100</span>
+                </button>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent pointer-events-none"></div>
+                <div class="absolute bottom-6 left-6 right-6 text-white pointer-events-none">
+                  <p class="font-bold text-sm leading-relaxed mb-3">"Đi spa về mà cứ tưởng đi show thời trang, về là lông mượt tưng thơm phức à."</p>
+                  <div class="flex items-center gap-2 text-xs opacity-90">
+                    <div class="w-6 h-6 rounded-full bg-white flex items-center justify-center text-brand font-bold">G</div>
+                    <span>@maah_babyyyy</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Thẻ 7 -->
+              <div
+                class="min-w-full md:min-w-[23%] snap-center relative group rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-2 h-[480px]">
+                <img
+                  src="./assets/images/pic8.jpg"
+                  class="w-full h-full object-cover transition duration-700 group-hover:scale-110" />
+                <button
+                  onclick="toggleLike(this)"
+                  class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1.5 rounded-full flex items-center gap-1.5 text-gray-500 font-bold shadow-sm hover:scale-110 transition z-10 group-like">
+                  <i class="far fa-heart transition-all"></i>
+                  <span class="text-xs text-dark">4200</span>
+                </button>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent pointer-events-none"></div>
+                <div class="absolute bottom-6 left-6 right-6 text-white pointer-events-none">
+                  <p class="font-bold text-sm leading-relaxed mb-3">
+                    "Tưởng đâu đi đánh trận về, may mà các bạn nhân viên kiên nhẫn gỡ rối lông cho ổng."
+                  </p>
+                  <div class="flex items-center gap-2 text-xs opacity-90">
+                    <div class="w-6 h-6 rounded-full bg-white flex items-center justify-center text-brand font-bold">N</div>
+                    <span>@poodle_ngao</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Thẻ 8 -->
+              <div
+                class="min-w-full md:min-w-[23%] snap-center relative group rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-2 h-[480px]">
+                <img
+                  src="./assets/images/pic9.jpg"
+                  class="w-full h-full object-cover transition duration-700 group-hover:scale-110" />
+                <button
+                  onclick="toggleLike(this)"
+                  class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1.5 rounded-full flex items-center gap-1.5 text-gray-500 font-bold shadow-sm hover:scale-110 transition z-10 group-like">
+                  <i class="far fa-heart transition-all"></i>
+                  <span class="text-xs text-dark">1800</span>
+                </button>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent pointer-events-none"></div>
+                <div class="absolute bottom-6 left-6 right-6 text-white pointer-events-none">
+                  <p class="font-bold text-sm leading-relaxed mb-3">
+                    "Sáng đưa đi là cục đất, chiều đón về thành cục bông. Mấy chị nhân viên ở đây có phép thuật à? :))"
+                  </p>
+                  <div class="flex items-center gap-2 text-xs opacity-90">
+                    <div class="w-6 h-6 rounded-full bg-white flex items-center justify-center text-brand font-bold">K</div>
+                    <span>@kiki_bui_doi</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Nút điều hướng (Chỉ hiện trên Desktop) -->
+            <button
+              onclick="slideMoments(-1)"
+              class="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg items-center justify-center text-dark hover:bg-brand hover:text-white transition z-20"> <!-- Nút mũi tên trái: Ẩn trên mobile, hiện trên desktop, vị trí tuyệt đối bên trái, căn giữa dọc, kích thước cố định, background trắng, bo tròn, bóng đổ, căn giữa nội dung, màu tối, hover đổi màu brand và trắng, hiệu ứng chuyển đổi, z-index cao, onclick gọi hàm slideMoments(-1) để lùi slider -->
+              <i class="fas fa-chevron-left"></i> <!-- Icon mũi tên trái từ FontAwesome -->
+            </button>
+            <button
+              onclick="slideMoments(1)"
+              class="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg items-center justify-center text-dark hover:bg-brand hover:text-white transition z-20"> <!-- Nút mũi tên phải: Tương tự nút trái, vị trí bên phải, onclick gọi slideMoments(1) để tiến slider -->
+              <i class="fas fa-chevron-right"></i> <!-- Icon mũi tên phải từ FontAwesome -->
+            </button>
+            </div> <!-- Đóng div slider container -->
+
+            <div id="dots-container" class="flex justify-between mt-6 md:hidden relative w-24 h-2 mx-auto"> <!-- Container cho dots indicator: Chỉ hiện trên mobile (ẩn trên desktop), flexbox để căn giữa, margin trên, vị trí tương đối, chiều rộng cố định, chiều cao nhỏ, căn giữa ngang -->
+              <div class="absolute inset-0 flex items-center justify-center"> <!-- Overlay cho thanh nền: Che toàn bộ container, căn giữa -->
+                <div class="w-full h-0.5 bg-gray-300 rounded-full"></div> <!-- Thanh nền: Chiều rộng full, chiều cao mỏng, màu xám, bo tròn -->
+              </div>
+
+              <div id="sliding-dot" class="absolute top-0 w-2 h-2 rounded-full bg-brand transition-transform duration-100 ease-out" style="left: 0"></div> <!-- Dot trượt: Vị trí tuyệt đối trên cùng, kích thước nhỏ, bo tròn, màu brand, hiệu ứng chuyển đổi mượt mà, vị trí ban đầu bên trái (left: 0) -->
+
+              <div class="dot-marker w-2 h-2 rounded-full bg-gray-300 z-10"></div> <!-- Dot marker đầu tiên: Kích thước nhỏ, bo tròn, màu xám, z-index cao -->
+              <div class="dot-marker w-2 h-2 rounded-full bg-gray-300 z-10"></div> <!-- Dot marker thứ hai: Tương tự -->
+            </div>
+            </div> <!-- Đóng container chính -->
+            </section> <!-- Đóng section -->
+
+      <!-- 8. Câu hỏi thường gặp FAQ -->
+            <section class="py-16 md:py-20 relative overflow-hidden"> <!-- Section câu hỏi: Padding dọc responsive, vị trí tương đối, ẩn tràn -->
+              <!-- Background Image -->
+              <div class="absolute inset-0 z-0">
+                <img
+                  src="./assets/images/pic11.jpg"
+                  alt="Background"
+                  class="w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-black/30"></div> <!-- Overlay trắng mờ để text dễ đọc -->
+              </div>
+              <!-- Content Container -->
+              <div class="container mx-auto px-6 max-w-4xl relative z-10"> <!-- Container chính: Căn giữa, padding ngang, max-width giới hạn để căn giữa nội dung, z-index cao -->
+                <div class="text-center mb-10 md:mb-12"> <!-- Phần tiêu đề: Căn giữa, margin dưới responsive -->
+                  <h2 class="font-serif text-2xl md:text-3xl text-white">Câu Hỏi Thường Gặp</h2> <!-- Tiêu đề: Font serif, kích thước responsive, màu tối -->
+                  <div class="w-16 h-1 bg-brand mx-auto mt-2"></div> <!-- Thanh gạch dưới: Chiều rộng nhỏ, chiều cao mỏng, màu brand, căn giữa, margin trên -->
+                </div>
+                <div class="space-y-4"> <!-- Container cho các câu hỏi: Khoảng cách dọc giữa các item -->
+<!-- Câu 1 -->
+            <details class="group bg-paper p-4 md:p-6 rounded-2xl cursor-pointer border border-white/50"> <!-- Element accordion: Background giấy, padding responsive, bo tròn, con trỏ chuột, viền mờ, nhóm "group" cho hiệu ứng -->
+                    <summary class="flex justify-between items-center font-bold text-dark text-base md:text-lg list-none"> <!-- Summary (tiêu đề có thể click): Flexbox để căn giữa và cuối, in đậm, màu tối, kích thước responsive, loại bỏ bullet list -->
+                      <span>Paw Joy có trực tiếp cung cấp dịch vụ spa/thăm khám cho thú cưng không?</span> <!-- Văn bản câu hỏi -->
+                      <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down text-brand"></i></span> <!-- Icon mũi tên: Hiệu ứng xoay khi mở, màu brand -->
+                    </summary>
+                    <p class="text-gray-600 mt-4 leading-relaxed text-sm md:text-base"> <!-- Nội dung trả lời: Màu xám, margin trên, line-height thoải mái, kích thước responsive -->
+                      Paw Joy là nền tảng đặt lịch trung gian, giúp bạn tìm cửa hàng phù hợp, 
+                      chọn dịch vụ và đặt khung giờ nhanh chóng. 
+                      Dịch vụ spa hoặc thăm khám sẽ được thực hiện tại cửa hàng đối tác mà bạn chọn. 
+                      Sau khi bạn đặt lịch, hệ thống sẽ gửi thông tin booking và cửa hàng sẽ xác nhận lại lịch hẹn với bạn.
+                    </p>
+                  </details>
+<!-- Câu 2 -->
+            <details class="group bg-paper p-4 md:p-6 rounded-2xl cursor-pointer border border-white/50">
+              <summary class="flex justify-between items-center font-bold text-dark text-base md:text-lg list-none">
+                <span>Nếu tôi đặt lịch rồi nhưng muốn đổi giờ hoặc hủy lịch thì làm như thế nào?</span>
+                <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down text-brand"></i></span>
+              </summary>
+              <p class="text-gray-600 mt-4 leading-relaxed text-sm md:text-base">
+                Bạn có thể vào trang lịch đặt trong "Hồ sơ của tôi" để xem chi tiết booking và chọn đổi giờ/hủy lịch. 
+                Trong trường hợp cửa hàng đã gần đến giờ phục vụ, hệ thống sẽ khuyến nghị bạn liên hệ trực tiếp cửa hàng trao đổi để được hỗ trợ nhanh nhất, 
+                vì mỗi cửa hàng có quy định xác nhận và giữ chỗ khác nhau.
+              </p>
+            </details>
+<!-- Câu 3 -->
+            <details class="group bg-paper p-4 md:p-6 rounded-2xl cursor-pointer border border-white/50">
+              <summary class="flex justify-between items-center font-bold text-dark text-base md:text-lg list-none">
+                <span>Bao lâu thì nên đưa bé đi Spa một lần?</span>
+                <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down text-brand"></i></span>
+              </summary>
+              <p class="text-gray-600 mt-4 leading-relaxed text-sm md:text-base">
+                Đối với các giống chó lông dài (Poodle, Pomeranian), chúng tôi khuyến khích Spa 1 tuần/lần để tránh rối lông. 
+                Đối với thú cưng lông ngắn, có thể Spa 2 tuần/lần. 
+                Việc duy trì lịch trình Spa đều đặn giúp bé luôn thơm tho và khỏe mạnh.
+              </p>
+<!-- Câu 4 -->
+            </details>
+            <details class="group bg-paper p-4 md:p-6 rounded-2xl cursor-pointer border border-white/50">
+              <summary class="flex justify-between items-center font-bold text-dark text-base md:text-lg list-none">
+                <span>Bao lâu thì nên tắm cho thú cưng một lần để vừa sạch vừa không hại da?</span>
+                <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down text-brand"></i></span>
+              </summary>
+              <p class="text-gray-600 mt-4 leading-relaxed text-sm md:text-base">
+                Thông thường, chó mèo khỏe mạnh có thể tắm khoảng 1–2 tuần/lần. 
+                Nếu bé hay ra ngoài, lăn bẩn hoặc có mùi nhanh thì có thể tắm thường hơn, nhưng nên dùng sữa tắm dành riêng cho thú cưng và tránh tắm quá dày khiến da bị khô, ngứa. 
+                Với bé có da nhạy cảm hoặc đang điều trị bệnh da, bạn nên hỏi bác sĩ thú y để chọn lịch tắm và sản phẩm phù hợp.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 10. MODAL: Popup nhập SĐT để lưu voucher (View - UI component) -->
+            <div
+            id="leadModal"
+            class="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
+            <!-- Overlay + hiệu ứng mờ nền -->
+
+            <div
+                class="bg-white rounded-2xl shadow-2xl p-8 max-w-sm w-full mx-4 transform scale-95 transition-transform duration-300 relative overflow-hidden">
+                <!-- Khung modal chính -->
+
+                <!-- Background trang trí -->
+                <div class="absolute -top-10 -right-10 w-32 h-32 bg-yellow-100 rounded-full blur-2xl opacity-50"></div>
+                <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-brand/10 rounded-full blur-2xl opacity-50"></div>
+
+                <!-- Nội dung thông báo trúng voucher -->
+                <div class="text-center mb-6 relative z-10">
+                <div
+                    class="w-20 h-20 bg-gradient-to-tr from-yellow-400 to-orange-500 text-white rounded-full flex items-center justify-center text-4xl mx-auto mb-4 shadow-lg animate-bounce">
+                    <i class="fas fa-gift"></i>
+                </div>
+
+                <h3 class="text-2xl font-bold text-dark mb-2">
+                    Wow! Voucher <span class="text-brand" id="winResult">20%</span> đã thuộc về bạn
+                </h3>
+
+                <p class="text-gray-600 text-sm leading-relaxed">
+                    Yêu cầu nhập SĐT để lưu voucher vào hệ thống
+                </p>
+                </div>
+
+            <!-- Form nhập SĐT (chỉ giao diện, xử lý ở JS/Controller) -->
+            <form onsubmit="event.preventDefault(); handleLeadSubmit();" class="relative z-10">
+            <div class="space-y-4">
+
+                <!-- Input số điện thoại -->
+                <div>
+                <label class="block text-xs font-bold text-gray-500 mb-1 ml-1">
+                    Số điện thoại
+                </label>
+                <input
+                    type="tel"
+                    required
+                    id="phoneInput"
+                    placeholder="09xx xxx xxx"
+                    class="w-full border border-gray-200 bg-gray-50 rounded-xl px-4 py-3 focus:outline-none focus:border-brand transition text-dark" />
+                </div>
+
+                <!-- Submit lưu voucher -->
+                <button
+                type="submit"
+                class="w-full bg-gradient-to-r from-brand to-brandDark hover:from-orange-600 hover:to-orange-800 text-white font-bold py-3.5 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+                <span>Lưu ưu đãi</span>
+                <i class="fas fa-arrow-right"></i>
+                </button>
+
+                <!-- Thông báo bảo mật -->
+                <p class="text-[10px] text-center text-gray-400">
+                <i class="fas fa-lock mr-1"></i>
+                Thông tin được bảo mật
+                </p>
+            </div>
+            </form>
+
+            <!-- Nút đóng modal -->
+            <button
+            onclick="closeLeadModal()"
+            class="absolute top-4 right-4 text-gray-400 hover:text-dark z-20 w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition">
+            <i class="fas fa-times"></i>
+            </button>
+        </div>
+        </div>
+
+    <!-- 11. Widgets -->
+    <div
+      id="smart-reminder"
+      class="fixed bottom-0 left-0 w-full bg-dark text-white p-4 z-40 transform translate-y-full transition-transform duration-500 shadow-2xl border-t border-white/10"
+      style="background-color: #1f2937">
+      <div class="container mx-auto flex justify-between items-center">
+        <div class="flex items-center gap-4">
+          <div class="w-10 h-10 rounded-full bg-brand flex items-center justify-center animate-bounce">
+            <i class="fas fa-bell"></i>
+          </div>
+          <div>
+            <p class="font-bold text-sm">Nhắc nhở nhỏ 🐾</p>
+            <p class="text-xs text-gray-300">Đã lâu bé chưa đi Spa. Đặt lịch ngay giảm 10%!</p>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <button
+            class="text-xs font-bold text-gray-400 hover:text-white"
+            onclick="document.getElementById('smart-reminder').classList.add('translate-y-full')">
+            Bỏ qua
+          </button>
+          <a href="templates/pages/stores.html" class="bg-white text-dark px-4 py-2 rounded-lg text-xs font-bold hover:bg-brand hover:text-white transition">Đặt Ngay</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12. Chat Button -->
+    <div class="fixed bottom-8 right-8 z-50">
+          <!-- Nút mở / đóng chat -->
+      <button
+        onclick="toggleChat()"
+        class="w-14 h-14 rounded-full bg-brand text-white shadow-2xl flex items-center justify-center hover:scale-110 transition duration-300">
+        <i class="fas fa-comment-dots text-2xl"></i>
+      </button>
+    </div>
+<!-- Chat Box: giao diện chat, chiều cao cố định, nội dung cuộn -->
+    <div
+      id="chatBox"
+      class="fixed bottom-24 right-8 w-80 h-[400px] bg-white rounded-2xl shadow-2xl border border-gray-100 hidden opacity-0 scale-95 transition-all duration-300 transform origin-bottom-right z-50 flex flex-col overflow-hidden">
+     <!-- Chat Header (cố định) -->
+      <div class="bg-brand p-4 text-white flex justify-between items-center flex-shrink-0">
+        <span class="font-bold font-serif">Hỗ trợ Paw Joy</span>
+        <button onclick="toggleChat()"><i class="fas fa-times"></i></button>
+      </div>
+
+      <!-- Chat Body (scrollable – hiển thị kịch bản chat) -->
+      <div class="p-4 flex-1 bg-gray-50 overflow-y-auto space-y-3 custom-scrollbar" id="chatContent">
+        <div class="chat-msg bot">Chào bạn! Paw Joy có thể giúp gì cho bé cưng hôm nay?</div>
+      <!-- Gợi ý câu hỏi (chat tự động) -->
+        <div class="chat-msg bot">
+          <span class="block mb-2 font-bold text-xs text-gray-500">Gợi ý câu hỏi:</span>
+          <div class="chat-option" onclick="sendAutoMsg('Giá spa bao nhiêu?')">💰 Giá dịch vụ</div>
+          <div class="chat-option" onclick="sendAutoMsg('Đặt lịch thế nào?')">📅 Cách đặt lịch</div>
+          <div class="chat-option" onclick="sendAutoMsg('Có đưa đón không?')">🚗 Đưa đón thú cưng</div>
+          <div class="chat-option" onclick="connectSupport()" style="border-color: #d97706; color: #d97706">👤 Nhắn với nhân viên</div>
+        </div>
+      </div>
+
+       <!-- Chat Input (cố định, gửi tin nhắn) -->
+      <div class="p-3 border-t bg-white flex gap-2 flex-shrink-0">
+        <input
+          type="text"
+          placeholder="Nhập tin nhắn..."
+          class="w-full bg-gray-100 rounded-full px-3 py-2 text-sm outline-none"
+          id="chatInput"
+          onkeypress="if(event.key==='Enter') sendUserMsg()" />
+        <button class="text-brand" onclick="sendUserMsg()">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- FOOTER: thông tin liên hệ, chính sách, mạng xã hội -->
+    <div id="footer"></div>
+
+    <!-- main js -->
+    <script type="module" src="./assets/js/main.js"></script>
+    <script type="module" src="./assets/js/scroll.js"></script>
+    <script>
+      // Load header và footer từ các file component dùng chung
+      document.addEventListener("DOMContentLoaded", () => {
+        fetch("./templates/partials/header.html")
+          .then((res) => res.text())
+          .then((html) => {
+            // Điều chỉnh đường dẫn cho index.html (ở root)
+            // Thay thế ../../index.html thành ./index.html
+            html = html.replace(/href="\.\.\/\.\.\/index\.html"/g, 'href="./index.html"');
+            // Thay thế các link đến pages (relative) thành đường dẫn từ root
+            html = html.replace(/href="(about-us|stores|blog|my-account|favorites|login|register|stores-booking|stores-detail|stores-booking-time|stores-booking-confirm|blog-detail)\.html"/g, 'href="templates/pages/$1.html"');
+            document.getElementById("header").innerHTML = html;
+            
+            // Load favorite badge script after header is loaded
+            const badgeScript = document.createElement('script');
+            badgeScript.src = './assets/js/lib/favorite-badge.js';
+            document.body.appendChild(badgeScript);
+          });
+
+        fetch("./templates/partials/footer.html")
+          .then((res) => res.text())
+          .then((html) => {
+            // Điều chỉnh đường dẫn cho index.html (ở root)
+            // Thay thế ../../index.html thành ./index.html
+            html = html.replace(/href="\.\.\/\.\.\/index\.html"/g, 'href="./index.html"');
+            // Thay thế các link đến pages (relative) thành đường dẫn từ root
+            html = html.replace(/href="(about-us|stores|blog|my-account|favorites|login|register|stores-booking|stores-detail|stores-booking-time|stores-booking-confirm|blog-detail)\.html"/g, 'href="templates/pages/$1.html"');
+            document.getElementById("footer").innerHTML = html;
+          });
+      });
+    </script>
+    <script type="module" src="./assets/js/lib/mobile-menu.js"></script>
+    <script type="module" src="./assets/js/lib/footer.js"></script>
+    
+    <!-- Newsletter Popup -->
+    <script>
+      // Load newsletter popup HTML
+      fetch("./templates/partials/newsletter-popup.html")
+        .then((res) => res.text())
+        .then((html) => {
+          document.body.insertAdjacentHTML('beforeend', html);
+          // Load script sau khi HTML đã được inject
+          const script = document.createElement('script');
+          script.type = 'module';
+          script.src = './assets/js/lib/newsletter-popup.js';
+          document.body.appendChild(script);
+        });
+    </script>
+    
+    <!-- Christmas Snow Effects -->
+    <script src="./assets/js/christmas-snow.js"></script>
+  </body>
+</html>
