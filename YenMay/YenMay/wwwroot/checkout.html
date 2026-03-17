@@ -1,0 +1,608 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh Toán - Yến Sào Yến Mây</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/style-checkout.css">
+    <style>
+        /* Các style này có thể đã có trong style.css của bạn hoặc cần được thêm/điều chỉnh */
+        /* --- General Checkout Styles --- */
+        .form-check .form-check-input {
+            float: left;
+            margin-left: -0.5em;
+        }
+
+        .checkout-section {
+            background-color: #f8f9fa; /* Nền xám rất nhạt cho toàn trang checkout */
+        }
+
+        .page-title {
+            color: #613613;
+            font-weight: 700;
+            margin-bottom: 2.5rem;
+        }
+
+        .billing-details h2, .order-summary h2.card-title {
+            color: #613613;
+            font-weight: 600;
+            font-size: 1.5rem;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: #495057;
+        }
+
+        .form-control-lg {
+            font-size: 1rem;
+            padding: 0.6rem 1rem;
+        }
+
+        .form-control:focus {
+            border-color: #a1744f;
+            box-shadow: 0 0 0 0.25rem rgba(143, 88, 42, 0.25);
+        }
+
+        .required {
+            color: #dc3545;
+            margin-left: 2px;
+        }
+
+        /* --- Order Summary Card --- */
+        .order-summary .card {
+            border: 1px solid #e9bc98;
+            border-radius: 0.5rem;
+            box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
+        }
+
+        .order-summary .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.85rem;
+            font-size: 0.95rem;
+            color: #4f4f4f;
+        }
+
+            .order-summary .summary-item strong {
+                color: #343a40;
+                font-weight: 500;
+            }
+
+        .order-summary .grand-total strong {
+            font-size: 1.25rem;
+            color: #333;
+        }
+
+        .order-summary #checkout-grand-total {
+            color: #d26e4b;
+            font-size: 1.9rem;
+            font-weight: 700;
+        }
+
+        /* --- Payment Methods --- */
+        .payment-methods .form-check {
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 0.375rem;
+            padding: 1rem 1.25rem;
+            margin-bottom: 0.75rem;
+            transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+            .payment-methods .form-check:hover {
+                background-color: #f8f9fa;
+                border-color: #ced4da;
+            }
+
+        .payment-methods .form-check-input:checked + .form-check-label {
+            color: #8F582A;
+        }
+
+        .payment-methods .form-check-input:focus {
+            border-color: #a1744f;
+            box-shadow: 0 0 0 0.25rem rgba(143, 88, 42, 0.25);
+        }
+
+        .payment-methods .form-check-label {
+            font-weight: 500;
+            color: #495057;
+            display: flex;
+            align-items: center;
+        }
+
+            .payment-methods .form-check-label i {
+                margin-right: 0.5rem;
+                color: #8F582A;
+                width: 20px;
+                text-align: center;
+            }
+
+        .payment-methods .payment-description {
+            font-size: 0.85em;
+            color: #6c757d;
+            margin-left: calc(1.25em + 0.75rem + 0.25rem); /* Căn với text của label (checkbox + icon + margin-right icon + padding nhỏ) */
+            margin-top: 0.25rem;
+        }
+
+        /* --- Invoice Styles --- */
+        .invoice-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            margin-top: 30px;
+            border: 1px solid #dee2e6;
+        }
+
+        .invoice-header {
+            border-bottom: 2px solid #eee;
+            padding-bottom: 20px;
+        }
+
+            .invoice-header img {
+                max-height: 70px;
+                margin-bottom: 15px;
+            }
+
+            .invoice-header h2 {
+                color: #613613;
+                margin-bottom: 5px;
+                font-size: 1.8rem;
+                font-weight: 700;
+            }
+
+        .invoice-details p, .customer-details p {
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .invoice-details strong, .customer-details strong {
+            color: #495057;
+        }
+
+        .order-items-table {
+            margin-top: 20px;
+            margin-bottom: 25px;
+        }
+
+            .order-items-table th {
+                background-color: #f8f9fa;
+                color: #613613;
+                font-weight: 600;
+                border-bottom-width: 2px;
+            }
+
+            .order-items-table td {
+                vertical-align: middle;
+                font-size: 0.9rem;
+            }
+
+        .invoice-summary .summary-item {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+            .invoice-summary .summary-item span:first-child {
+                color: #4f4f4f;
+            }
+
+        .invoice-summary .grand-total strong {
+            font-size: 1.3rem;
+            color: #333;
+        }
+
+        .invoice-summary #invoice-grand-total-value {
+            font-size: 1.5rem;
+            color: #d26e4b;
+            font-weight: bold;
+        }
+
+        .invoice-footer p {
+            font-size: 0.9rem;
+            color: #777;
+            margin-top: 20px;
+        }
+
+        .btn-print-invoice {
+            font-weight: 500;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            .invoice-container, .invoice-container * {
+                visibility: visible;
+            }
+
+            .invoice-container {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                margin: 0;
+                padding: 15px; /* Giảm padding khi in */
+                box-shadow: none;
+                border: none;
+                font-size: 10pt; /* Cỡ chữ cơ bản cho bản in */
+            }
+
+                .invoice-container h2 {
+                    font-size: 14pt;
+                }
+
+                .invoice-container h5 {
+                    font-size: 10pt;
+                }
+
+                .invoice-container p, .invoice-container td, .invoice-container th {
+                    font-size: 9pt;
+                }
+
+            .invoice-summary .grand-total strong {
+                font-size: 11pt;
+            }
+
+            .invoice-summary #invoice-grand-total-value {
+                font-size: 12pt;
+            }
+
+            .no-print, .site-header, .site-footer, .page-title.text-center.mb-5, #checkout-success-message.alert, .btn-print-invoice + a {
+                display: none !important;
+            }
+
+            .table {
+                --bs-table-color: #000;
+                --bs-table-bg: #fff;
+            }
+            /* Đảm bảo màu chữ và nền khi in */
+        }
+    </style>
+</head>
+<body class="bg-light checkout-section">
+
+    <header class="site-header">
+        <div class="container header-container d-flex justify-content-between align-items-center">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="img-sp/logotrongsuot.png" alt="Logo Yến Sào Yến Mây" style="height: 60px;">
+                </a>
+            </div>
+            <nav class="main-nav flex-grow-1 d-none d-lg-flex justify-content-center">
+                <ul class="nav-menu mb-0">
+                    <li><a href="index.html">Trang Chủ</a></li>
+                    <li><a href="blog.html">Bài Viết</a></li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="sanpham.html" id="navbarDropdownProducts" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Sản Phẩm
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownProducts">
+                            <li><a class="dropdown-item" href="sanpham.html">Tất Cả Sản Phẩm</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="sanpham.html?category=yen-chung">Yến Chưng</a></li>
+                            <li><a class="dropdown-item" href="sanpham.html?category=set-qua-tet">Set Quà Tết</a></li>
+                            <li><a class="dropdown-item" href="sanpham.html?category=set-qua-tinh-tuy">Set Quà Tinh Túy</a></li>
+                            <li><a class="dropdown-item" href="sanpham.html?category=yen-tinh-che">Yến Tinh Chế</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="aboutus.html">Về Chúng Tôi</a></li>
+                    <li><a href="contact.html">Liên Hệ</a></li>
+                </ul>
+            </nav>
+            <div class="header-icons d-none d-lg-flex align-items-center">
+                <a href="javascript:void(0);" id="search-icon-desktop" aria-label="Tìm kiếm" class="ms-3"><i class="fas fa-search"></i></a>
+                <li id="account-menu-item" class="account-item has-icon">
+                    <a href="login.html" aria-label="Tài khoản" class="ms-3 nav-top-link nav-top-not-logged-in is-small"><i class="fas fa-user"></i></a>
+                </li>
+                <a href="cart.html" aria-label="Giỏ hàng" class="ms-3 cart-icon-link">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count-icon">0</span>
+                </a>
+            </div>
+
+            <div id="desktop-search-container" class="desktop-search-form ms-auto" style="display: none;">
+                <input type="search" id="desktop-search-input" class="form-control form-control-sm" placeholder="Tìm kiếm sản phẩm...">
+                <button id="close-search-desktop" type="button" class="btn-close btn-sm" aria-label="Close"></button>
+            </div>
+
+
+            <div class="d-lg-none d-flex align-items-center">
+                <a href="javascript:void(0);" id="search-icon-mobile" aria-label="Tìm kiếm" class="ms-3"><i class="fas fa-search"></i></a>
+                <a href="cart.html" aria-label="Giỏ hàng" class="ms-3 cart-icon-link">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count-icon">0</span>
+                </a>
+                <button class="menu-toggle ms-3" aria-label="Toggle menu">☰</button>
+            </div>
+            <nav class="main-nav-mobile w-100 d-lg-none">
+                <ul class="nav-menu">
+                    <li><a href="index.html">Trang Chủ</a></li>
+                    <li><a href="blog.html">Bài Viết</a></li>
+                    <li><a href="sanpham.html">Sản Phẩm</a></li>
+                    <li class="submenu-item"><a href="sanpham.html?category=yen-chung" style="padding-left: 35px;">- Yến Chưng</a></li>
+                    <li class="submenu-item"><a href="sanpham.html?category=set-qua-tet" style="padding-left: 35px;">- Set Quà Tết</a></li>
+                    <li class="submenu-item"><a href="sanpham.html?category=set-qua-tinh-tuy" style="padding-left: 35px;">- Set Quà Tinh Túy</a></li>
+                    <li class="submenu-item"><a href="sanpham.html?category=yen-tinh-che" style="padding-left: 35px;">- Yến Tinh Chế</a></li>
+                    <li><a href="aboutus.html">Về Chúng Tôi</a></li>
+                    <li><a href="contact.html">Liên Hệ</a></li>
+                    <li id="mobile-account-menu-item"><a href="login.html" class="px-3 py-2 d-block">Tài khoản</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="site-main section-padding">
+        <div class="container">
+            <div id="checkout-form-area">
+                <h1 class="page-title text-center mb-5">Thông Tin Thanh Toán</h1>
+                <div id="checkout-content-wrapper" class="row g-4 g-lg-5">
+                    <div class="col-lg-7 billing-details">
+                        <form id="checkout-form" novalidate>
+                            <h2 class="h4 mb-4">Thông tin giao hàng</h2>
+
+                            <div class="mb-3">
+                                <label for="billing_name" class="form-label">Họ và tên <span class="required">*</span></label>
+                                <input type="text" class="form-control form-control-lg" id="billing_name" name="billing_name" required placeholder="Nhập họ và tên của bạn">
+                                <div class="invalid-feedback">
+                                    Vui lòng nhập họ và tên.
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="billing_phone" class="form-label">Số điện thoại <span class="required">*</span></label>
+                                <input type="tel" class="form-control form-control-lg" id="billing_phone" name="billing_phone" required placeholder="Nhập số điện thoại liên hệ">
+                                <div class="invalid-feedback">
+                                    Vui lòng nhập số điện thoại hợp lệ (VD: 0912345678).
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="billing_email" class="form-label">Địa chỉ email</label>
+                                <input type="email" class="form-control form-control-lg" id="billing_email" name="billing_email" placeholder="Nhập địa chỉ email (không bắt buộc)">
+                                <div class="invalid-feedback">
+                                    Vui lòng nhập địa chỉ email hợp lệ.
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="billing_address" class="form-label">Địa chỉ nhận hàng <span class="required">*</span></label>
+                                <textarea class="form-control form-control-lg" id="billing_address" name="billing_address" rows="3" required placeholder="Số nhà, tên đường, phường/xã, quận/huyện, tỉnh/thành phố"></textarea>
+                                <div class="invalid-feedback">
+                                    Vui lòng nhập địa chỉ nhận hàng.
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="order_notes" class="form-label">Ghi chú đơn hàng (tuỳ chọn)</label>
+                                <textarea class="form-control form-control-lg" id="order_notes" name="order_notes" rows="3" placeholder="Ví dụ: Giao hàng giờ hành chính..."></textarea>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="col-lg-5 order-summary">
+                        <div class="card shadow-sm border-0 sticky-top" style="top: 100px;">
+                            <div class="card-body p-4">
+                                <h2 class="h4 mb-4 text-center card-title">Đơn Hàng Của Bạn</h2>
+                                <hr class="my-3">
+                                <div class="summary-item">
+                                    <span>Tạm tính:</span>
+                                    <strong id="checkout-subtotal-amount">0 ₫</strong>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Phí vận chuyển:</span>
+                                    <strong id="checkout-shipping-fee">0 ₫</strong>
+                                </div>
+                                <div class="summary-item text-success fw-medium" id="checkout-discount-row" style="display: none;">
+                                    <span>Giảm giá (10%):</span>
+                                    <strong id="checkout-discount-amount">- 0 ₫</strong>
+                                </div>
+                                <hr class="my-3">
+                                <div class="summary-item grand-total mb-4">
+                                    <strong>Tổng cộng:</strong>
+                                    <strong id="checkout-grand-total">0 ₫</strong>
+                                </div>
+
+                                <h3 class="h5 mb-3">Phương thức thanh toán <span class="required">*</span></h3>
+                                <div class="payment-methods" id="payment-methods-container">
+                                    <div class="payment-method form-check">
+                                        <input class="form-check-input" type="radio" name="payment_method" id="cod" value="cod" checked>
+                                        <label class="form-check-label" for="cod">
+                                            <i class="fas fa-truck"></i>Thanh toán khi nhận hàng (COD)
+                                        </label>
+                                        <p class="payment-description">Trả tiền mặt trực tiếp cho nhân viên giao hàng.</p>
+                                    </div>
+                                    <div class="payment-method form-check">
+                                        <input class="form-check-input" type="radio" name="payment_method" id="bank_transfer" value="bank_transfer">
+                                        <label class="form-check-label" for="bank_transfer">
+                                            <i class="fas fa-university"></i>Chuyển khoản ngân hàng
+                                        </label>
+                                        <div class="payment-description" id="bank-transfer-info" style="display: none;">
+                                            <p class="mb-1">Vui lòng chuyển khoản vào tài khoản sau:</p>
+                                            <p class="mb-1"><strong>Ngân hàng:</strong> Agribank</p>
+                                            <p class="mb-1"><strong>Số tài khoản:</strong> 4814205400149</p>
+                                            <p class="mb-1"><strong>Chủ tài khoản:</strong> YEN SAO YEN MAY</p>
+                                            <p class="mb-0"><strong>Nội dung:</strong> Thanh toán đơn hàng #<span id="checkout-order-id-placeholder">[Mã đơn hàng]</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="payment-method form-check">
+                                        <input class="form-check-input" type="radio" name="payment_method" id="e_wallet" value="e_wallet">
+                                        <label class="form-check-label" for="e_wallet">
+                                            <i class="fas fa-wallet"></i>Ví điện tử (MoMo)
+                                        </label>
+                                        <div class="payment-description" id="ewallet-info" style="display: none;">
+                                            <p class="mb-2">Quét mã QR để thanh toán qua MoMo:</p>
+                                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=MoMo_ZaloPay_YenSaoYAn&bgcolor=fdf6ef&color=613613&qzone=1&margin=0" alt="Mã QR Thanh toán" class="img-fluid qr-code-image" style="max-width: 150px; margin: 0 auto; display: block;">
+                                            <p class="mt-2 text-center small">Hoặc thanh toán trực tiếp qua ứng dụng.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit" form="checkout-form" class="btn btn-theme-primary btn-lg w-100 mt-4">
+                                    <i class="fas fa-check-circle me-2"></i>Xác nhận đặt hàng
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="order-invoice-section" style="display: none;">
+                <div class="alert alert-success text-center mt-4 py-4 no-print">
+                    <i class="fas fa-check-circle fa-3x mb-3 text-success"></i>
+                    <h4 class="alert-heading">Đặt Hàng Thành Công!</h4>
+                    <p class="lead mb-4">Cảm ơn bạn đã mua hàng tại Yến Sào Yến Mây. Chúng tôi sẽ liên hệ với bạn sớm nhất để xác nhận đơn hàng.</p>
+                </div>
+
+                <div class="invoice-container">
+                    <div class="invoice-header row mb-4 align-items-center">
+                        <div class="col-sm-6">
+                            <img src="img-sp/logotrongsuot.png" alt="Logo Yến Sào Yến Mây" style="max-height: 70px; margin-bottom: 15px;">
+                            <p class="mb-0"><strong>Yến Sào Yến Mây</strong></p>
+                            <p class="small text-muted mb-0">44 Đặng Văn Ngữ, Đống Đa, Hà Nội</p>
+                            <p class="small text-muted mb-0">Hotline: +84 393 556 866 | Email: yanyen.vn@gmail.com</p>
+                        </div>
+                        <div class="col-sm-6 text-sm-end mt-3 mt-sm-0">
+                            <h2>HÓA ĐƠN BÁN HÀNG</h2>
+                            <p class="mb-1">Mã đơn hàng: <strong id="invoice-order-id"></strong></p>
+                            <p>Ngày đặt: <span id="invoice-order-date"></span></p>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="row customer-details">
+                        <div class="col-md-7">
+                            <h5>Thông tin khách hàng:</h5>
+                            <p><strong>Tên:</strong> <span id="invoice-customer-name"></span></p>
+                            <p><strong>Điện thoại:</strong> <span id="invoice-customer-phone"></span></p>
+                            <p><strong>Email:</strong> <span id="invoice-customer-email"></span></p>
+                            <p><strong>Địa chỉ:</strong> <span id="invoice-customer-address"></span></p>
+                        </div>
+                        <div class="col-md-5 mt-3 mt-md-0">
+                            <h5>Ghi chú đơn hàng:</h5>
+                            <p id="invoice-order-notes" class="fst-italic text-muted">[Không có ghi chú]</p>
+                        </div>
+                    </div>
+
+                    <div class="order-items-table table-responsive mt-4">
+                        <h5 class="mb-3">Chi tiết đơn hàng:</h5>
+                        <table class="table table-bordered table-striped">
+                            <thead class="table-light">
+                                <tr>
+                                    <th scope="col" class="text-center">STT</th>
+                                    <th scope="col">Tên sản phẩm</th>
+                                    <th scope="col" class="text-center">SL</th>
+                                    <th scope="col" class="text-end">Đơn giá</th>
+                                    <th scope="col" class="text-end">Thành tiền</th>
+                                </tr>
+                            </thead>
+                            <tbody id="invoice-items-body">
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="row justify-content-end invoice-summary mt-4">
+                        <div class="col-md-6 col-lg-5">
+                            <div class="summary-item">
+                                <span>Tạm tính:</span>
+                                <strong id="invoice-subtotal">0 ₫</strong>
+                            </div>
+                            <div class="summary-item">
+                                <span>Phí vận chuyển:</span>
+                                <strong id="invoice-shipping-fee">0 ₫</strong>
+                            </div>
+                            <div class="summary-item text-success fw-medium" id="invoice-discount-row" style="display: none;">
+                                <span>Giảm giá (10%):</span>
+                                <strong id="invoice-discount-amount">- 0 ₫</strong>
+                            </div>
+                            <hr class="my-2">
+                            <div class="summary-item grand-total">
+                                <strong>TỔNG CỘNG:</strong>
+                                <strong id="invoice-grand-total-value">0 ₫</strong>
+                            </div>
+                            <div class="summary-item mt-3">
+                                <span>Phương thức thanh toán:</span>
+                                <strong id="invoice-payment-method"></strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="invoice-footer text-center mt-5 pt-4 border-top">
+                        <p>Cảm ơn quý khách đã tin tưởng và mua sắm tại Yến Sào Yến Mây!</p>
+                        <p class="small text-muted">Vui lòng giữ lại hóa đơn này để đối chiếu khi cần thiết. Đây là hóa đơn điện tử, có giá trị tương đương hóa đơn giấy.</p>
+                    </div>
+                </div>
+                <div class="text-center my-4 no-print">
+                    <button class="btn btn-lg btn-theme-secondary btn-print-invoice me-2"><i class="fas fa-print me-2"></i> In Hóa Đơn</button>
+                    <a href="index.html" class="btn btn-lg btn-outline-secondary"> <i class="fas fa-home me-2"></i> Quay về Trang Chủ</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer pt-5 pb-4">
+        <div class="container">
+            <div class="row gy-4 align-items-start">
+                <div class="col-lg-4 col-md-6 footer-column">
+                    <img src="img-sp/logotrongsuot.png" alt="Logo Footer Yến Mây" style="max-height: 120px; margin-bottom: 20px;" class="d-block d-md-inline-block mb-3 mb-md-0">
+                    <h4 class="mt-3">CÔNG TY CỔ PHẦN THƯƠNG MẠI DỊCH VỤ Yến Mây</h4>
+                    <p class="small">
+                        279 Nguyễn Tri Phương, phường Diên Hồng, Quận 10, TP. Hồ Chí Minh
+                    </p>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6 col-6 footer-column">
+                    <h4>Chính Sách</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                        <li><a href="#">Chính sách đổi trả</a></li>
+                        <li><a href="#">Chính sách vận chuyển</a></li>
+                        <li><a href="#">Điều khoản sử dụng</a></li>
+                        <li><a href="#">Chính sách bảo hành</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6 footer-column">
+                    <h4>Hỗ Trợ</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Chính sách đặt hàng - thanh toán</a></li>
+                        <li><a href="#">Chính sách vận chuyển</a></li>
+                        <li><a href="#">Câu hỏi thường gặp</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 footer-column">
+                    <h4>Liên Hệ</h4>
+                    <p class="small">
+                        Hotline: <a href="tel:+84393556866" class="text-white fw-bold">+84 343647074</a><br>
+                        Email: <a href="mailto:yenmay.vn@gmail.com" class="text-white">yenmay.vn@gmail.com</a>
+                    </p>
+                    <div class="d-flex align-items-center mt-3 gap-3 footer-social-bct">
+                        <div class="social-icons">
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" aria-label="Zalo"><i class="fas fa-comment-dots"></i></a>
+                        </div>
+                        <a href="http://online.gov.vn/Home/WebDetails/91809" title="Đã thông báo với bộ công thương" target="_blank" class="ms-auto ms-md-0">
+                            <img src="https://yanyen.vn/wp-content/uploads/2021/11/logo-da-thong-bao-bo-cong-thuong.webp" alt="Đã thông báo Bộ Công Thương" style="max-height: 45px;">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright mt-4">
+            <p>CÔNG TY CỔ PHẦN THƯƠNG MẠI VÀ DỊCH VỤ YẾN MÂY &copy; 2025. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/shared.js"></script>
+    <script src="js/checkout-page.js"></script>
+</body>
+</html>

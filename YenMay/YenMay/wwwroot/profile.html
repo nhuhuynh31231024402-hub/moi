@@ -1,0 +1,317 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang cá nhân</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/style-profile.css">
+
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-container d-flex justify-content-between align-items-center">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="img-sp/logotrongsuot.png" alt="Logo Yến Sào Yến Mây" style="height: 60px;">
+                </a>
+            </div>
+            <nav class="main-nav flex-grow-1 d-none d-lg-flex justify-content-center">
+                <ul class="nav-menu mb-0">
+                    <li><a href="index.html">Trang Chủ</a></li>
+                    <li><a href="blog.html">Bài Viết</a></li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="sanpham.html" id="navbarDropdownProducts" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Sản Phẩm
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownProducts">
+                            <li><a class="dropdown-item" href="sanpham.html">Tất Cả Sản Phẩm</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="sanpham.html?category=yen-chung">Yến Chưng</a></li>
+                            <li><a class="dropdown-item" href="sanpham.html?category=set-qua-tet">Set Quà Tết</a></li>
+                            <li><a class="dropdown-item" href="sanpham.html?category=set-qua-tinh-tuy">Set Quà Tinh Túy</a></li>
+                            <li><a class="dropdown-item" href="sanpham.html?category=yen-tinh-che">Yến Tinh Chế</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="aboutus.html">Về Chúng Tôi</a></li>
+                    <li><a href="contact.html">Liên Hệ</a></li>
+                </ul>
+            </nav>
+            <div class="header-icons d-none d-lg-flex align-items-center">
+                <a href="javascript:void(0);" id="search-icon-desktop" aria-label="Tìm kiếm" class="ms-3"><i class="fas fa-search"></i></a>
+                <li id="account-menu-item" class="account-item has-icon">
+                    <a href="login.html" aria-label="Tài khoản" class="ms-3 nav-top-link nav-top-not-logged-in is-small"><i class="fas fa-user"></i></a>
+                </li>
+                <a href="cart.html" aria-label="Giỏ hàng" class="ms-3 cart-icon-link">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count-icon">0</span>
+                </a>
+            </div>
+
+            <div id="desktop-search-container" class="desktop-search-form ms-auto" style="display: none;">
+                <input type="search" id="desktop-search-input" class="form-control form-control-sm" placeholder="Tìm kiếm sản phẩm...">
+                <button id="close-search-desktop" type="button" class="btn-close btn-sm" aria-label="Close"></button>
+            </div>
+
+
+            <div class="d-lg-none d-flex align-items-center">
+                <a href="javascript:void(0);" id="search-icon-mobile" aria-label="Tìm kiếm" class="ms-3"><i class="fas fa-search"></i></a>
+                <a href="cart.html" aria-label="Giỏ hàng" class="ms-3 cart-icon-link">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count-icon">0</span>
+                </a>
+                <button class="menu-toggle ms-3" aria-label="Toggle menu">☰</button>
+            </div>
+            <nav class="main-nav-mobile w-100 d-lg-none">
+                <ul class="nav-menu">
+                    <li><a href="index.html">Trang Chủ</a></li>
+                    <li><a href="blog.html">Bài Viết</a></li>
+                    <li><a href="sanpham.html">Sản Phẩm</a></li>
+                    <li class="submenu-item"><a href="sanpham.html?category=yen-chung" style="padding-left: 35px;">- Yến Chưng</a></li>
+                    <li class="submenu-item"><a href="sanpham.html?category=set-qua-tet" style="padding-left: 35px;">- Set Quà Tết</a></li>
+                    <li class="submenu-item"><a href="sanpham.html?category=set-qua-tinh-tuy" style="padding-left: 35px;">- Set Quà Tinh Túy</a></li>
+                    <li class="submenu-item"><a href="sanpham.html?category=yen-tinh-che" style="padding-left: 35px;">- Yến Tinh Chế</a></li>
+                    <li><a href="aboutus.html">Về Chúng Tôi</a></li>
+                    <li><a href="contact.html">Liên Hệ</a></li>
+                    <li id="mobile-account-menu-item"><a href="login.html" class="px-3 py-2 d-block">Tài khoản</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="profile-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="profile-summary">
+                <img id="avatar" src="./images/avatar.jpg" alt="Ảnh đại diện" class="profile-picture"
+                     style="width:60px;height:60px;cursor:pointer;">
+                <input type="file" id="avatar-input" accept="image/*" style="display:none;">
+                <a href="#" id="change-avatar-btn"
+                   style="display:block; font-size:0.9rem; color:#5D4037; text-align:center; margin:5px 0; text-decoration:underline; cursor:pointer;">
+                    Thay
+                    đổi ảnh đại diện
+                </a>
+                <div id="avatar-modal" class="hidden">
+                    <img id="modal-img" alt="Avatar lớn">
+                </div>
+                <h3 id="greeting">Xin chào</h3>
+                <h2 id="username">User</h2>
+            </div>
+            <div class="sidebar-menu">
+                <nav class="sidebar-nav">
+                    <ul>
+                        <li><a href="#account"><i class="fas fa-user"></i> Tài khoản</a></li>
+                        <li><a href="#favorites" data-target="favorites"><i class="fas fa-heart"></i> Yêu thích</a></li>
+                        <li><a href="#address"><i class="fas fa-envelope"></i> Địa chỉ</a></li>
+                    </ul>
+                </nav>
+                <div class="sidebar-footer">
+                    <ul>
+                        <li><a href="#change-password"><i class="fas fa-lock"></i> Đổi mật khẩu</a></li>
+                        <li><a href="#logout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
+                        <li><a href="#delete-account"><i class="fas fa-trash-alt"></i> Xóa tài khoản</a></li>
+                    </ul>
+
+                </div>
+            </div>
+            <div class="sidebar-toggle">☰</div>
+
+        </aside>
+
+        <!-- Main content -->
+        <main class="main-content">
+            <!-- Thông tin cá nhân -->
+            <section id="account" class="form-section">
+                <form id="profile-form">
+                    <h3>Thông tin cá nhân</h3>
+                    <div class="form-grid two-cols">
+                        <div class="form-group">
+                            <label for="fullname">Họ và tên:</label>
+                            <input type="text" id="fullname" name="fullname" placeholder="Nhập họ và tên">
+                        </div>
+                    </div>
+                    <div class="form-grid two-cols">
+                        <div class="form-group">
+                            <label for="email">Địa chỉ email:</label>
+                            <input type="email" id="email" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Số điện thoại:</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                    </div>
+                    <div class="form-grid two-cols">
+                        <div class="form-group">
+                            <label for="gender">Giới tính:</label>
+                            <select id="gender" name="gender">
+                                <option value="">Chọn</option>
+                                <option value="male">Nam</option>
+                                <option value="female">Nữ</option>
+                                <option value="other">Khác</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="dob">Ngày sinh:</label>
+                            <input type="date" id="dob" name="dob">
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button type="submit" class="btn-primary">Lưu thay đổi</button>
+                        <button type="reset" class="btn-secondary">Trở về mặc định</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Yêu thích (placeholder) -->
+            <section id="favorites" class="form-section" style="display: none;">
+                <h3>Sản Phẩm Yêu Thích</h3>
+                <div id="wishlist-items-container" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mt-3">
+                </div>
+                <p id="no-wishlist-items" class="col-12 text-muted" style="display: none;">...</p>
+            </section>
+
+            <!-- Địa chỉ riêng biệt -->
+            <section id="address" class="form-section">
+                <form id="address-form">
+                    <h3>Địa chỉ</h3>
+                    <div class="form-group full-width">
+                        <label for="address">Địa chỉ:</label>
+                        <input type="text" class="address" id="address-input" name="address" placeholder="Nhập địa chỉ cụ thể (số nhà, đường, v.v.)">
+                    </div>
+                    <div class="form-grid two-cols">
+                        <div class="form-group">
+                            <label for="country">Quốc gia: <span class="required">*</span></label>
+                            <select id="country" name="country">
+                                <option value="">Chọn quốc gia</option>
+                                <option value="vn">Việt Nam</option>
+                                <option value="usa">Mỹ</option>
+                                <option value="jp">Nhật Bản</option>
+                                <option value="kr">Hàn Quốc</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="province">Tỉnh/Thành phố: <span class="required">*</span></label>
+                            <select id="province" name="province">
+                                <option value="">Chọn tỉnh/thành</option>
+                                <!-- Tùy chọn sẽ được thêm động bằng JavaScript -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-grid two-cols">
+                        <div class="form-group">
+                            <label for="district">Quận/Huyện: <span class="required">*</span></label>
+                            <select id="district" name="district">
+                                <option value="">Chọn quận/huyện</option>
+                                <!-- Tùy chọn sẽ được thêm động bằng JavaScript -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="ward">Phường/Xã: <span class="required">*</span></label>
+                            <select id="ward" name="ward">
+                                <option value="">Chọn phường/xã</option>
+                                <!-- Tùy chọn sẽ được thêm động bằng JavaScript -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="region-code">Mã vùng:</label>
+                        <input type="text" id="region-code" name="region-code" placeholder="Nhập mã vùng (nếu có)">
+                    </div>
+                    <div class="button-group">
+                        <button type="submit" class="btn-primary">Lưu địa chỉ</button>
+                        <button type="reset" class="btn-secondary">Hủy</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Đổi mật khẩu (không cần mật khẩu hiện tại) -->
+            <section id="change-password" class="form-section">
+                <form id="change-password-form">
+                    <h3>Đổi mật khẩu</h3>
+                    <div class="form-group">
+                        <label for="new-password">Mật khẩu mới:</label>
+                        <input type="password" id="new-password" name="new-password">
+                        <div id="password-strength-bar" class="strength-bar"></div>
+                        <span id="password-strength-text"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Xác nhận mật khẩu mới:</label>
+                        <input type="password" id="confirm-password" name="confirm-password">
+
+                    </div>
+                    <div class="button-group">
+                        <button type="submit" class="btn-primary">Cập nhật mật khẩu</button>
+                        <button type="reset" class="btn-secondary">Hủy</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <footer class="site-footer pt-5 pb-4">
+        <div class="container">
+            <div class="row gy-4 align-items-start">
+                <div class="col-lg-4 col-md-6 footer-column">
+                    <img src="img-sp/logotrongsuot.png" alt="Logo Footer Yến Mây" style="max-height: 120px; margin-bottom: 20px;" class="d-block d-md-inline-block mb-3 mb-md-0">
+                    <h4 class="mt-3">CÔNG TY CỔ PHẦN THƯƠNG MẠI DỊCH VỤ Yến Mây</h4>
+                    <p class="small">
+                        279 Nguyễn Tri Phương, phường Diên Hồng, Quận 10, TP. Hồ Chí Minh
+                    </p>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6 col-6 footer-column">
+                    <h4>Chính Sách</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                        <li><a href="#">Chính sách đổi trả</a></li>
+                        <li><a href="#">Chính sách vận chuyển</a></li>
+                        <li><a href="#">Điều khoản sử dụng</a></li>
+                        <li><a href="#">Chính sách bảo hành</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6 footer-column">
+                    <h4>Hỗ Trợ</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Chính sách đặt hàng - thanh toán</a></li>
+                        <li><a href="#">Chính sách vận chuyển</a></li>
+                        <li><a href="#">Câu hỏi thường gặp</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 footer-column">
+                    <h4>Liên Hệ</h4>
+                    <p class="small">
+                        Hotline: <a href="tel:+84393556866" class="text-white fw-bold">+84 343647074</a><br>
+                        Email: <a href="mailto:yenmay.vn@gmail.com" class="text-white">yenmay.vn@gmail.com</a>
+                    </p>
+                    <div class="d-flex align-items-center mt-3 gap-3 footer-social-bct">
+                        <div class="social-icons">
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" aria-label="Zalo"><i class="fas fa-comment-dots"></i></a>
+                        </div>
+                        <a href="http://online.gov.vn/Home/WebDetails/91809" title="Đã thông báo với bộ công thương" target="_blank" class="ms-auto ms-md-0">
+                            <img src="https://yanyen.vn/wp-content/uploads/2021/11/logo-da-thong-bao-bo-cong-thuong.webp" alt="Đã thông báo Bộ Công Thương" style="max-height: 45px;">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright mt-4">
+            <p>CÔNG TY CỔ PHẦN THƯƠNG MẠI VÀ DỊCH VỤ YẾN MÂY &copy; 2025. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="js/shared.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+
+</html>

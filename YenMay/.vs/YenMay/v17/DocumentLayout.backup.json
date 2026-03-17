@@ -1,0 +1,92 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\b\u00E0i t\u1EADp\\csdl\\YenMay\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{82C63F41-5636-4415-B55A-2294D0CCE5B7}|YenMay\\YenMay.csproj|d:\\b\u00E0i t\u1EADp\\csdl\\yenmay\\yenmay\\wwwroot\\aboutus.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{82C63F41-5636-4415-B55A-2294D0CCE5B7}|YenMay\\YenMay.csproj|solutionrelative:yenmay\\wwwroot\\aboutus.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{82C63F41-5636-4415-B55A-2294D0CCE5B7}|YenMay\\YenMay.csproj|d:\\b\u00E0i t\u1EADp\\csdl\\yenmay\\yenmay\\wwwroot\\checkout.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{82C63F41-5636-4415-B55A-2294D0CCE5B7}|YenMay\\YenMay.csproj|solutionrelative:yenmay\\wwwroot\\checkout.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{82C63F41-5636-4415-B55A-2294D0CCE5B7}|YenMay\\YenMay.csproj|d:\\b\u00E0i t\u1EADp\\csdl\\yenmay\\yenmay\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{82C63F41-5636-4415-B55A-2294D0CCE5B7}|YenMay\\YenMay.csproj|solutionrelative:yenmay\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{82C63F41-5636-4415-B55A-2294D0CCE5B7}|YenMay\\YenMay.csproj|d:\\b\u00E0i t\u1EADp\\csdl\\yenmay\\yenmay\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{82C63F41-5636-4415-B55A-2294D0CCE5B7}|YenMay\\YenMay.csproj|solutionrelative:yenmay\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "aboutus.html",
+              "DocumentMoniker": "D:\\b\u00E0i t\u1EADp\\csdl\\YenMay\\YenMay\\wwwroot\\aboutus.html",
+              "RelativeDocumentMoniker": "YenMay\\wwwroot\\aboutus.html",
+              "ToolTip": "D:\\b\u00E0i t\u1EADp\\csdl\\YenMay\\YenMay\\wwwroot\\aboutus.html",
+              "RelativeToolTip": "YenMay\\wwwroot\\aboutus.html",
+              "ViewState": "AgIAAPEAAAAAAAAAAAAAAAkBAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-02-11T10:37:06.76Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "checkout.html",
+              "DocumentMoniker": "D:\\b\u00E0i t\u1EADp\\csdl\\YenMay\\YenMay\\wwwroot\\checkout.html",
+              "RelativeDocumentMoniker": "YenMay\\wwwroot\\checkout.html",
+              "ToolTip": "D:\\b\u00E0i t\u1EADp\\csdl\\YenMay\\YenMay\\wwwroot\\checkout.html",
+              "RelativeToolTip": "YenMay\\wwwroot\\checkout.html",
+              "ViewState": "AgIAAF4CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2026-02-11T10:34:07.71Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\b\u00E0i t\u1EADp\\csdl\\YenMay\\YenMay\\Program.cs",
+              "RelativeDocumentMoniker": "YenMay\\Program.cs",
+              "ToolTip": "D:\\b\u00E0i t\u1EADp\\csdl\\YenMay\\YenMay\\Program.cs",
+              "RelativeToolTip": "YenMay\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-29T06:04:47.911Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\b\u00E0i t\u1EADp\\csdl\\YenMay\\YenMay\\appsettings.json",
+              "RelativeDocumentMoniker": "YenMay\\appsettings.json",
+              "ToolTip": "D:\\b\u00E0i t\u1EADp\\csdl\\YenMay\\YenMay\\appsettings.json",
+              "RelativeToolTip": "YenMay\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAACPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-01-29T06:04:11.352Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

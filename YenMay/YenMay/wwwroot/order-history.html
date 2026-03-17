@@ -1,0 +1,486 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch Sử Đơn Hàng - Yến Sào Yến Mây</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/style-order-history.css">
+
+    <style>
+        .order-detail-modal-custom .modal-content {
+            border-radius: 0.75rem; /* Bo góc nhiều hơn */
+            border: none;
+            box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,0.15);
+        }
+
+        .order-detail-modal-custom .modal-header {
+            background-color: #f8f5f2; /* Nền header modal nhẹ nhàng */
+            border-bottom: 1px solid #e9d8c7;
+            padding: 1rem 1.5rem;
+        }
+
+        .order-detail-modal-custom .modal-title {
+            color: var(--primary-color, #613613);
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+            .order-detail-modal-custom .modal-title #modal-order-id {
+                font-weight: 700; /* Làm nổi bật mã đơn hàng */
+                color: var(--secondary-color, #A67B5B);
+            }
+
+        .order-detail-modal-custom .modal-body {
+            padding: 1.5rem; /* Tăng padding body */
+            font-size: 0.95rem; /* Font size cơ bản trong modal */
+        }
+
+        .order-detail-modal-custom .modal-section {
+            margin-bottom: 1.5rem; /* Khoảng cách giữa các phần */
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #f0f0f0; /* Đường kẻ mờ phân cách */
+        }
+
+            .order-detail-modal-custom .modal-section:last-child {
+                margin-bottom: 0;
+                padding-bottom: 0;
+                border-bottom: none;
+            }
+
+
+        .order-detail-modal-custom h6 { /* Tiêu đề nhỏ các phần */
+            font-weight: 600;
+            color: var(--primary-color, #613613);
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .order-detail-modal-custom p {
+            margin-bottom: 0.5rem; /* Khoảng cách dòng p */
+            color: #454545; /* Màu chữ đậm hơn chút */
+        }
+
+            .order-detail-modal-custom p strong {
+                color: #333; /* Màu chữ đậm hơn cho label */
+                min-width: 90px; /* Đảm bảo label có độ rộng tối thiểu để căn chỉnh */
+                display: inline-block;
+            }
+
+            .order-detail-modal-custom p span {
+                color: #555; /* Màu chữ cho giá trị */
+            }
+
+            .order-detail-modal-custom p#modal-notes {
+                background-color: #f9f9f9;
+                padding: 8px 12px;
+                border-radius: 4px;
+                border: 1px solid #eee;
+                font-size: 0.9em;
+            }
+
+
+        /* Bảng chi tiết sản phẩm trong Modal */
+        .modal-items-table {
+            font-size: 0.9em; /* Chữ nhỏ hơn chút */
+        }
+
+            .modal-items-table thead th {
+                background-color: #f8f9fa; /* Nền thead nhạt */
+                font-weight: 600;
+                font-size: 0.85em;
+                color: #555;
+                white-space: nowrap;
+            }
+
+            .modal-items-table tbody td {
+                vertical-align: middle;
+            }
+
+
+        /* Bảng tóm tắt tổng tiền trong Modal */
+        .modal-summary-table {
+            margin-bottom: 0; /* Bỏ margin dưới của bảng */
+            font-size: 0.95rem;
+        }
+
+            .modal-summary-table td {
+                padding-top: 0.3rem;
+                padding-bottom: 0.3rem;
+                border: none; /* Bỏ border mặc định */
+            }
+
+            .modal-summary-table tr.border-top {
+                border-top: 1px solid #dee2e6 !important; /* Đường kẻ đậm hơn trước tổng cộng */
+            }
+
+            .modal-summary-table .modal-grand-total-value {
+                color: var(--bs-danger, #dc3545); /* Màu đỏ cho tổng tiền */
+                font-weight: 700;
+                font-size: 1.1rem; /* To hơn một chút */
+            }
+
+            .modal-summary-table .text-success { /* Màu cho dòng giảm giá */
+                color: #198754 !important;
+            }
+
+
+        .order-detail-modal-custom .modal-footer {
+            background-color: #f8f9fa; /* Nền footer modal */
+            border-top: 1px solid #e9d8c7;
+            padding: 0.75rem 1.5rem;
+        }
+
+            .order-detail-modal-custom .modal-footer .btn {
+                font-size: 0.9rem; /* Font size nút nhỏ hơn */
+            }
+        /* === ORDER HISTORY PAGE SPECIFIC STYLES === */
+        body.order-history-page {
+            background-color: #f8f9fa;
+        }
+
+        .order-history-table th {
+            background-color: #f1eadd; /* Màu nền header bảng nhẹ nhàng hơn */
+            color: #613613;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            vertical-align: middle;
+            border-bottom-width: 1px;
+            border-color: #e0d5c8;
+        }
+
+        .order-history-table td {
+            vertical-align: middle;
+            font-size: 0.9rem;
+            border-color: #f0e9e1; /* Đường kẻ nhạt hơn */
+        }
+
+        .order-history-table tbody tr:hover {
+            background-color: #fdfbf7; /* Hiệu ứng hover nhẹ */
+        }
+
+        .order-history-table .btn-view-detail { /* Style cho nút xem chi tiết */
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
+            line-height: 1.2;
+            border-color: #b0a193;
+            color: #613613;
+        }
+
+            .order-history-table .btn-view-detail:hover {
+                background-color: #613613;
+                color: #fff;
+                border-color: #613613;
+            }
+
+        #no-orders-message { /* Style cho thông báo không có đơn hàng */
+            border-left: 5px solid #8F582A;
+            background-color: #fffaf0;
+            color: #5c4d42;
+            padding: 1.5rem; /* Padding nhỏ hơn chút */
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+        }
+
+            #no-orders-message .alert-heading {
+                color: #8F582A;
+                font-weight: 600;
+            }
+
+            #no-orders-message a {
+                font-weight: 500;
+                color: #8F582A;
+            }
+
+                #no-orders-message a:hover {
+                    text-decoration: underline;
+                }
+
+        /* Responsive table */
+        @media (max-width: 767.98px) {
+            .order-history-table thead {
+                display: none;
+            }
+
+            .order-history-table tbody tr {
+                display: block;
+                margin-bottom: 1rem;
+                border: 1px solid #e0d5c8;
+                border-radius: 0.5rem;
+                padding: 1rem;
+                background-color: #fff;
+            }
+
+            .order-history-table tbody td {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                text-align: right;
+                padding: 0.6rem 0.5rem;
+                border-bottom: 1px dashed #f0e9e1;
+            }
+
+                .order-history-table tbody td:last-child {
+                    border-bottom: none;
+                }
+
+                .order-history-table tbody td::before {
+                    content: attr(data-label);
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    font-size: 0.75em;
+                    color: #613613;
+                    margin-right: auto;
+                    text-align: left;
+                    padding-right: 10px;
+                }
+        }
+    </style>
+</head>
+<body class="order-history-page">
+    <header class="site-header">
+        <div class="container header-container d-flex justify-content-between align-items-center">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="img-sp/logotrongsuot.png" alt="Logo Yến Sào Yến Mây" style="height: 60px;">
+                </a>
+            </div>
+            <nav class="main-nav flex-grow-1 d-none d-lg-flex justify-content-center">
+                <ul class="nav-menu mb-0">
+                    <li><a href="index.html">Trang Chủ</a></li>
+                    <li><a href="blog.html">Bài Viết</a></li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="sanpham.html" id="navbarDropdownProducts" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Sản Phẩm
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownProducts">
+                            <li><a class="dropdown-item" href="sanpham.html">Tất Cả Sản Phẩm</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="sanpham.html?category=yen-chung">Yến Chưng</a></li>
+                            <li><a class="dropdown-item" href="sanpham.html?category=set-qua-tet">Set Quà Tết</a></li>
+                            <li><a class="dropdown-item" href="sanpham.html?category=set-qua-tinh-tuy">Set Quà Tinh Túy</a></li>
+                            <li><a class="dropdown-item" href="sanpham.html?category=yen-tinh-che">Yến Tinh Chế</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="aboutus.html">Về Chúng Tôi</a></li>
+                    <li><a href="contact.html">Liên Hệ</a></li>
+                </ul>
+            </nav>
+            <div class="header-icons d-none d-lg-flex align-items-center">
+                <a href="javascript:void(0);" id="search-icon-desktop" aria-label="Tìm kiếm" class="ms-3"><i class="fas fa-search"></i></a>
+                <li id="account-menu-item" class="account-item has-icon">
+                    <a href="login.html" aria-label="Tài khoản" class="ms-3 nav-top-link nav-top-not-logged-in is-small"><i class="fas fa-user"></i></a>
+                </li>
+                <a href="cart.html" aria-label="Giỏ hàng" class="ms-3 cart-icon-link">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count-icon">0</span>
+                </a>
+            </div>
+
+            <div id="desktop-search-container" class="desktop-search-form ms-auto" style="display: none;">
+                <input type="search" id="desktop-search-input" class="form-control form-control-sm" placeholder="Tìm kiếm sản phẩm...">
+                <button id="close-search-desktop" type="button" class="btn-close btn-sm" aria-label="Close"></button>
+            </div>
+
+
+            <div class="d-lg-none d-flex align-items-center">
+                <a href="javascript:void(0);" id="search-icon-mobile" aria-label="Tìm kiếm" class="ms-3"><i class="fas fa-search"></i></a>
+                <a href="cart.html" aria-label="Giỏ hàng" class="ms-3 cart-icon-link">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count-icon">0</span>
+                </a>
+                <button class="menu-toggle ms-3" aria-label="Toggle menu">☰</button>
+            </div>
+            <nav class="main-nav-mobile w-100 d-lg-none">
+                <ul class="nav-menu">
+                    <li><a href="index.html">Trang Chủ</a></li>
+                    <li><a href="blog.html">Bài Viết</a></li>
+                    <li><a href="sanpham.html">Sản Phẩm</a></li>
+                    <li class="submenu-item"><a href="sanpham.html?category=yen-chung" style="padding-left: 35px;">- Yến Chưng</a></li>
+                    <li class="submenu-item"><a href="sanpham.html?category=set-qua-tet" style="padding-left: 35px;">- Set Quà Tết</a></li>
+                    <li class="submenu-item"><a href="sanpham.html?category=set-qua-tinh-tuy" style="padding-left: 35px;">- Set Quà Tinh Túy</a></li>
+                    <li class="submenu-item"><a href="sanpham.html?category=yen-tinh-che" style="padding-left: 35px;">- Yến Tinh Chế</a></li>
+                    <li><a href="aboutus.html">Về Chúng Tôi</a></li>
+                    <li><a href="contact.html">Liên Hệ</a></li>
+                    <li id="mobile-account-menu-item"><a href="login.html" class="px-3 py-2 d-block">Tài khoản</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="site-main container section-padding">
+        <h1 class="page-title">Lịch Sử Đơn Hàng</h1>
+
+        <div class="table-responsive shadow-sm bg-white rounded p-3">
+            <table class="table table-hover order-history-table mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Mã Đơn Hàng</th>
+                        <th>Ngày Đặt</th>
+                        <th>Số Lượng SP</th>
+                        <th class="text-end">Tổng Tiền</th>
+                        <th>Trạng Thái</th>
+                        <th class="text-center">Thao Tác</th>
+                    </tr>
+                </thead>
+                <tbody id="order-history-body">
+                </tbody>
+            </table>
+        </div>
+
+        <div id="no-orders-message" class="alert mt-4" style="display: none;">
+            <h4 class="alert-heading">Chưa có đơn hàng nào!</h4>
+            <p>Bạn hiện chưa đặt đơn hàng nào tại Yến Sào Yến Mây.</p>
+            <hr>
+            <p class="mb-0">
+                <a href="sanpham.html" class="btn btn-theme-primary btn-sm">
+                    <i class="fas fa-shopping-bag me-2"></i>Bắt đầu mua sắm
+                </a>
+            </p>
+        </div>
+    </main>
+    <div class="modal fade order-detail-modal-custom" id="orderDetailModal" tabindex="-1" aria-labelledby="orderDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="orderDetailModalLabel">Chi tiết đơn hàng #<span id="modal-order-id"></span></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3 modal-section">
+                        <div class="col-md-6">
+                            <h6>Thông tin đơn hàng</h6>
+                            <p class="mb-1"><small><strong>Ngày đặt:</strong> <span id="modal-order-date"></span></small></p>
+                            <p class="mb-0"><small><strong>Phương thức thanh toán:</strong> <span id="modal-payment-method"></span></small></p>
+                        </div>
+                        <div class="col-md-6 mt-3 mt-md-0">
+                            <h6>Thông tin khách hàng</h6>
+                            <p class="mb-1"><strong>Tên:</strong> <span id="modal-customer-name"></span></p>
+                            <p class="mb-1"><strong>Điện thoại:</strong> <span id="modal-customer-phone"></span></p>
+                            <p class="mb-0"><strong>Địa chỉ:</strong> <span id="modal-customer-address"></span></p>
+                        </div>
+                    </div>
+                    <div class="modal-section">
+                        <h6>Ghi chú đơn hàng:</h6>
+                        <p id="modal-notes" class="text-muted fst-italic small">[Không có ghi chú]</p>
+                    </div>
+
+                    <div class="mt-4 modal-section">
+                        <h6>Chi tiết sản phẩm:</h6>
+                        <div class="table-responsive">
+                            <table class="table table-sm table-bordered modal-items-table">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Sản phẩm</th>
+                                        <th class="text-center">SL</th>
+                                        <th class="text-end">Đơn giá</th>
+                                        <th class="text-end">Thành tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="modal-items-body">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-end mt-3">
+                        <div class="col-md-6 col-lg-5">
+                            <table class="table table-sm table-borderless modal-summary-table">
+                                <tbody>
+                                    <tr><td class="text-end">Tạm tính:</td><td class="text-end fw-medium" id="modal-subtotal">0 ₫</td></tr>
+                                    <tr id="modal-discount-row" style="display: none;"><td class="text-end text-success">Giảm giá:</td><td class="text-end fw-medium text-success" id="modal-discount">- 0 ₫</td></tr>
+                                    <tr><td class="text-end">Phí vận chuyển:</td><td class="text-end fw-medium" id="modal-shipping">0 ₫</td></tr>
+                                    <tr class="border-top fw-bold"><td class="text-end pt-2">Tổng cộng:</td><td class="text-end pt-2 fs-5 modal-grand-total-value" id="modal-grand-total">0 ₫</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer pt-5 pb-4">
+        <div class="container">
+            <div class="row gy-4 align-items-start">
+                <div class="col-lg-4 col-md-6 footer-column">
+                    <img src="img-sp/logotrongsuot.png" alt="Logo Footer Yến Mây" style="max-height: 120px; margin-bottom: 20px;" class="d-block d-md-inline-block mb-3 mb-md-0">
+                    <h4 class="mt-3">CÔNG TY CỔ PHẦN THƯƠNG MẠI DỊCH VỤ Yến Mây</h4>
+                    <p class="small">
+                        279 Nguyễn Tri Phương, phường Diên Hồng, Quận 10, TP. Hồ Chí Minh
+                    </p>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6 col-6 footer-column">
+                    <h4>Chính Sách</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                        <li><a href="#">Chính sách đổi trả</a></li>
+                        <li><a href="#">Chính sách vận chuyển</a></li>
+                        <li><a href="#">Điều khoản sử dụng</a></li>
+                        <li><a href="#">Chính sách bảo hành</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6 footer-column">
+                    <h4>Hỗ Trợ</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Chính sách đặt hàng - thanh toán</a></li>
+                        <li><a href="#">Chính sách vận chuyển</a></li>
+                        <li><a href="#">Câu hỏi thường gặp</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 footer-column">
+                    <h4>Liên Hệ</h4>
+                    <p class="small">
+                        Hotline: <a href="tel:+84393556866" class="text-white fw-bold">+84 343647074</a><br>
+                        Email: <a href="mailto:yenmay.vn@gmail.com" class="text-white">yenmay.vn@gmail.com</a>
+                    </p>
+                    <div class="d-flex align-items-center mt-3 gap-3 footer-social-bct">
+                        <div class="social-icons">
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" aria-label="Zalo"><i class="fas fa-comment-dots"></i></a>
+                        </div>
+                        <a href="http://online.gov.vn/Home/WebDetails/91809" title="Đã thông báo với bộ công thương" target="_blank" class="ms-auto ms-md-0">
+                            <img src="https://yanyen.vn/wp-content/uploads/2021/11/logo-da-thong-bao-bo-cong-thuong.webp" alt="Đã thông báo Bộ Công Thương" style="max-height: 45px;">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright mt-4">
+            <p>CÔNG TY CỔ PHẦN THƯƠNG MẠI VÀ DỊCH VỤ YẾN MÂY &copy; 2025. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div class="modal fade order-detail-modal-custom" id="orderDetailModal" tabindex="-1" aria-labelledby="orderDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="orderDetailModalLabel">Chi tiết đơn hàng #<span id="modal-order-id"></span></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="js/shared.js"></script>
+    <script src="js/order-history-page.js"></script>
+</body>
+</html>

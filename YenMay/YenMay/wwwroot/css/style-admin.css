@@ -1,0 +1,937 @@
+/* style-admin.css */
+
+/* Reset cơ bản */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Noto Sans', sans-serif;
+  background: #f4f4f4;
+  color: #5D4037;
+  line-height: 1.6;
+}
+
+/* Tiêu đề */
+h2 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-bottom: 20px;
+  color: #3E2723;
+  font-weight: 700;
+}
+
+
+.form-section {
+  background: white;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.form-container {
+  width: 200%;
+  display: flex;
+  transition: transform 0.5s ease;
+  transform: translateX(0);
+}
+
+.form {
+  width: 50%;
+  padding: 50px;
+}
+
+.form-content {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Label & Input */
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #5D4037;
+}
+
+input[type="text"],
+
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: none;
+  border-bottom: 2px solid #5D4037;
+  background: transparent;
+  font-size: 16px;
+}
+input[type="text"]:focus,
+
+input[type="password"]:focus {
+  outline: none;
+  border-bottom-color: #3E2723;
+}
+input::placeholder {
+  color: #aaa;
+}
+/* Button chung */
+button {
+  width: 100%;
+  padding: 15px;
+  background: #5D4037;
+  color: white;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 2px;
+  border-radius: 4px;
+}
+
+button:hover {
+  background: #3E2723;
+}
+
+/* Header Admin */
+#admin-header {
+  background: #5D4037;
+  color: #fff;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+#admin-header h1 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 2rem;
+  font-weight: 550;
+}
+
+/* Container chính */
+.container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding: 0 1rem;
+}
+
+section {
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-bottom: 1rem;
+  color: #3E2723;
+}
+
+/* Bảng quản lý tài khoản */
+#accounts-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+#accounts-table th,
+#accounts-table td {
+  border: 1px solid #ddd;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+#accounts-table th {
+  background: #f5f5f5;
+  color: #5D4037;
+  font-weight: bold;
+}
+
+.delete-btn {
+  background: #d32f2f;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.delete-btn:hover {
+  background: #b71c1c;
+}
+
+/* Form Thêm Newsfeed & Sản phẩm */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+form label {
+  font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="number"],
+form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #5D4037;
+  border-radius: 4px;
+  background: transparent;
+  font-size: 1rem;
+}
+
+form input:focus,
+form textarea:focus {
+  outline: none;
+  border-color: #3E2723;
+}
+
+form button {
+  width: auto;
+  align-self: flex-start;
+  padding: 0.75rem 1.5rem;
+  background: #5D4037;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+form button:hover {
+  background: #3E2723;
+}
+
+/* Danh sách Newsfeed */
+#news-list {
+  list-style: none;
+  margin-top: 1rem;
+}
+
+#news-list li {
+  padding: 0.75rem;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.news-delete-btn {
+  background: #d32f2f;
+  color: #fff;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.news-delete-btn:hover {
+  background: #b71c1c;
+}
+
+/* Danh sách Sản phẩm */
+#product-list {
+  margin-top: 1rem;
+}
+
+.product-item {
+  padding: 0.75rem;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Reset & Base */
+body {
+  margin: 0;
+  font-family: 'Noto Sans', sans-serif;
+  background: #f4f4f4;
+}
+
+/* Login Screen */
+#login-screen {
+  max-width: 400px;
+  margin: 80px auto;
+  text-align: center;
+}
+
+#login-screen input,
+#login-screen button {
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+/* Admin Dashboard Layout */
+#admin-dashboard {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar .logo {
+  display: block;
+  justify-content: center;
+  width: 300px;
+  height: 300px;
+}
+
+.sidebar h2 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: black;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.sidebar nav {
+  width: 100%;
+}
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.sidebar nav li {
+  margin: 0.5rem 0;
+}
+
+.sidebar nav a {
+  display: block;
+  padding: 12px 20px;
+  color: rgb(36, 29, 29);
+  text-decoration: none;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background 0.3s;
+  box-sizing: border-box;
+}
+
+.sidebar nav a:hover,
+.sidebar nav a.active {
+  background: #ecdedb;
+}
+
+/* Main Content */
+.content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background: #f4f4f4; /* Nền thống nhất với body */
+}
+
+.content h2 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #5D4037;
+  text-align: center;
+}
+
+/* Sections */
+.section {
+  display: none;
+  margin-top: 20px;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.section.active {
+  display: block;
+}
+
+/* Dashboard Section */
+#dashboard .card {
+  border: 1px solid #e9d8c7;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.07);
+}
+
+#dashboard .card-title {
+  color: #613613;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+#dashboard .card-text {
+  color: #5D4037;
+  font-weight: 400;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#dashboard canvas {
+  max-height: 300px;
+}
+
+.card-text.display-6 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Item List */
+.item-list {
+  background: white; /* Đảm bảo nền trắng thống nhất */
+  border-radius: 8px;
+  overflow: hidden; /* Đảm bảo bảng không tràn ra ngoài */
+}
+
+.item-list.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.item-list .table {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+  width: 100%;
+}
+
+.item-list .table th {
+  background-color: #f8f9fa;
+  color: #613613;
+  font-weight: 600;
+  border: 1px solid #dee2e6;
+  padding: 10px;
+  white-space: nowrap;
+}
+
+.item-list .table td {
+  vertical-align: middle;
+  border: 1px solid #e9ecef;
+  padding: 10px;
+  word-break: break-word;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item-list .table .btn-sm {
+  padding: 0.3rem 0.6rem; /* Tăng kích thước nút để dễ nhấn */
+  font-size: 0.85rem;
+}
+
+.item-list .table img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* Forms and Inputs */
+.section input[type="text"],
+.section input[type="file"],
+.section input[type="number"],
+.section textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.section button {
+  padding: 10px 20px;
+  background: #5D4037;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.section button:hover {
+  background: #3E2723;
+}
+
+/* Product Info Preview */
+.prod-info {
+  display: none;
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fafafa;
+}
+
+.prod-info img {
+  max-width: 150px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.prod-info h4 {
+  margin: 5px 0;
+}
+
+.prod-info p {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+.logout-btn {
+  width: 100%;
+  padding: 12px 20px;
+  background: #5D4037;
+  color: white;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  box-sizing: border-box;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.section .delete-btn {
+  padding: 0.25rem 0.5rem;
+  width: 60px;
+  height: 40px;
+}
+
+/* CSS cơ bản cho nút toggle */
+#sidebar-toggle {
+  display: none;
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1100;
+  color: #5D4037;
+  background: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* Sales Section */
+#sales.section {
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#sales h3 {
+  font-size: 1.5rem;
+  color: #5D4037;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Modal chi tiết đơn hàng */
+.order-detail-modal-custom .modal-content.invoice-container {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid #dee2e6;
+}
+
+.order-detail-modal-custom .invoice-header {
+  border-bottom: 2px solid #eee;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.order-detail-modal-custom .invoice-header img {
+  max-height: 70px;
+  margin-bottom: 15px;
+}
+
+.order-detail-modal-custom .invoice-header h2 {
+  color: #613613;
+  margin-bottom: 5px;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.order-detail-modal-custom .customer-details h5,
+.order-detail-modal-custom .invoice-details h5 {
+  font-size: 1.1rem;
+  color: #495057;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.order-detail-modal-custom .customer-details p,
+.order-detail-modal-custom .invoice-details p {
+  margin-bottom: 5px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  word-break: break-word;
+}
+
+.order-detail-modal-custom .customer-details strong,
+.order-detail-modal-custom .invoice-details strong {
+  color: #495057;
+}
+
+.order-detail-modal-custom .order-items-table.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.order-detail-modal-custom .modal-items-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  min-width: 500px; /* Đảm bảo bảng đủ rộng */
+}
+
+.order-detail-modal-custom .modal-items-table th {
+  background-color: #f8f9fa;
+  color: #613613;
+  font-weight: 600;
+  border: 1px solid #dee2e6;
+  padding: 10px;
+  text-align: left;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.order-detail-modal-custom .modal-items-table td {
+  vertical-align: middle;
+  border: 1px solid #e9ecef;
+  padding: 10px;
+  word-break: break-word;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.order-detail-modal-custom .modal-items-table .text-end {
+  text-align: right !important;
+}
+
+.order-detail-modal-custom .modal-items-table .text-center {
+  text-align: center !important;
+}
+
+.order-detail-modal-custom .invoice-summary {
+  margin-top: 20px;
+}
+
+.order-detail-modal-custom .invoice-summary .summary-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  padding: 5px 0;
+}
+
+.order-detail-modal-custom .invoice-summary .summary-item span:first-child {
+  color: #4f4f4f;
+}
+
+.order-detail-modal-custom .invoice-summary .summary-item span:last-child,
+.order-detail-modal-custom .invoice-summary .summary-item strong {
+  font-weight: 500;
+  color: #343a40;
+}
+
+.order-detail-modal-custom .invoice-summary .grand-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+}
+
+.order-detail-modal-custom .invoice-summary .grand-total strong {
+  font-size: 1.15rem;
+  color: #333;
+}
+
+.order-detail-modal-custom .invoice-summary #modal-grand-total-admin {
+  font-size: 1.3rem;
+  color: #d26e4b;
+  font-weight: 700;
+}
+
+.order-detail-modal-custom .invoice-footer {
+  margin-top: 30px;
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+  text-align: center;
+}
+
+.order-detail-modal-custom .invoice-footer p {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+/* Print Styles cho Modal */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .order-detail-modal-custom,
+  .order-detail-modal-custom * {
+    visibility: visible;
+  }
+  .order-detail-modal-custom .modal-dialog {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 10mm;
+    box-shadow: none;
+    border: none;
+    font-size: 9pt;
+    background-color: #fff !important;
+    color: #000 !important;
+  }
+  .order-detail-modal-custom .modal-content {
+    padding: 15px;
+    box-shadow: none;
+    border: none;
+  }
+  .order-detail-modal-custom h2 {
+    font-size: 13pt;
+  }
+  .order-detail-modal-custom h5 {
+    font-size: 9.5pt;
+  }
+  .order-detail-modal-custom p,
+  .order-detail-modal-custom td,
+  .order-detail-modal-custom th,
+  .order-detail-modal-custom .invoice-summary .summary-item {
+    font-size: 8.5pt;
+  }
+  .order-detail-modal-custom .modal-items-table th,
+  .order-detail-modal-custom .modal-items-table td {
+    border: 1px solid #ccc !important;
+    padding: 5px;
+  }
+  .order-detail-modal-custom .modal-items-table th {
+    background-color: #f0f0f0 !important;
+  }
+  .order-detail-modal-custom .invoice-summary .grand-total strong {
+    font-size: 10pt;
+  }
+  .order-detail-modal-custom #modal-grand-total-admin {
+    font-size: 11pt;
+  }
+  .order-detail-modal-custom .no-print,
+  .order-detail-modal-custom .btn-close,
+  .order-detail-modal-custom .modal-footer {
+    display: none !important;
+  }
+  .order-detail-modal-custom .table {
+    --bs-table-color: #000;
+    --bs-table-bg: #fff;
+  }
+  .order-detail-modal-custom .invoice-header img {
+    max-height: 40px;
+  }
+}
+
+/* Responsive cho mobile */
+@media (max-width: 768px) {
+  #admin-dashboard {
+    flex-direction: column; /* Xếp dọc để sidebar và content không chồng chéo */
+  }
+
+  .image-section {
+    display: none !important; /* Ẩn hoàn toàn trên mobile */
+  }
+
+  #sidebar-toggle {
+    display: block;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1100;
+    color: #5D4037;
+    background: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: fixed;
+    top: 1rem;
+    left: 0;
+    z-index: 1000;
+    background: #ffffff;
+    display: none;
+  }
+
+  .sidebar.open {
+    display: flex;
+  }
+
+  .sidebar .logo {
+    width: 150px;
+    height: auto;
+  }
+
+  .sidebar nav ul {
+    padding: 10px;
+  }
+  .sidebar nav a {
+    padding: 10px;
+    font-size: 14px;
+  }
+  .logout-btn {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 14px;
+  }
+  .content {
+    padding: 1rem;
+    padding-top: 4rem; 
+    width: 100%; 
+  }
+  #sales.section {
+    padding: 1rem;
+  }
+
+  #sales h3 {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  .item-list.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .item-list .table {
+    font-size: 0.85rem;
+    min-width: 600px; 
+  }
+  .item-list .table th,
+  .item-list .table td {
+    padding: 8px;
+    max-width: 150px;
+    word-break: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .item-list .table .btn-sm {
+    padding: 0.3rem 0.6rem; 
+    font-size: 0.8rem;
+  }
+  .item-list .table img {
+    width: 40px;
+    height: 40px;
+  }
+  .order-detail-modal-custom .modal-dialog {
+    margin: 0.5rem;
+    max-width: 100%;
+  }
+  .order-detail-modal-custom .modal-content.invoice-container {
+    padding: 1rem;
+  }
+  .order-detail-modal-custom .invoice-header {
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+  }
+  .order-detail-modal-custom .invoice-header img {
+    max-height: 50px;
+  }
+  .order-detail-modal-custom .invoice-header h2 {
+    font-size: 1.3rem;
+  }
+  .order-detail-modal-custom .customer-details h5,
+  .order-detail-modal-custom .invoice-details h5 {
+    font-size: 1rem;
+  }
+  .order-detail-modal-custom .customer-details p,
+  .order-detail-modal-custom .invoice-details p {
+    font-size: 0.85rem;
+  }
+  .order-detail-modal-custom .modal-items-table {
+    font-size: 0.8rem;
+    min-width: 500px;
+  }
+  .order-detail-modal-custom .modal-items-table th,
+  .order-detail-modal-custom .modal-items-table td {
+    padding: 6px;
+    max-width: 120px;
+    word-break: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .order-detail-modal-custom .invoice-summary .summary-item {
+    font-size: 0.85rem;
+  }
+
+  .order-detail-modal-custom .invoice-summary .grand-total strong {
+    font-size: 1rem;
+  }
+
+  .order-detail-modal-custom .invoice-summary #modal-grand-total-admin {
+    font-size: 1.1rem;
+  }
+  .order-detail-modal-custom .modal-footer {
+    padding: 0.5rem;
+  }
+  .order-detail-modal-custom .modal-footer .btn {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+@media (max-width: 360px) {
+  .item-list .table {
+    font-size: 0.8rem;
+    min-width: 500px;
+  }
+
+  .item-list .table th,
+  .item-list .table td {
+    padding: 6px;
+    max-width: 100px;
+  }
+
+  .item-list .table .btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  .order-detail-modal-custom .modal-content.invoice-container {
+    padding: 0.75rem;
+  }
+
+  .order-detail-modal-custom .invoice-header h2 {
+    font-size: 1.1rem;
+  }
+
+  .order-detail-modal-custom .modal-items-table {
+    font-size: 0.75rem;
+    min-width: 400px;
+  }
+
+  .order-detail-modal-custom .modal-items-table th,
+  .order-detail-modal-custom .modal-items-table td {
+    padding: 4px;
+    max-width: 100px;
+  }
+  .order-detail-modal-custom .invoice-summary .summary-item {
+    font-size: 0.8rem;
+  }
+}

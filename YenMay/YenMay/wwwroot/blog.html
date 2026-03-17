@@ -1,0 +1,253 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Viết - Yến Sào Yến Mây</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/style-blog.css">
+    <style>
+        /* Có thể thêm style nhỏ ở đây hoặc tốt nhất là trong style-blog.css */
+        .blog-post-card { /* Tái sử dụng hoặc định nghĩa style cho card bài viết */
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: transform .3s ease, box-shadow .3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%; /* Giúp các card đều chiều cao */
+        }
+
+            .blog-post-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            }
+
+            .blog-post-card .card-img-link { /* Link bao ảnh */
+                display: block;
+                overflow: hidden;
+            }
+
+            .blog-post-card .card-img-top {
+                width: 100%;
+                height: 200px; /* Chiều cao cố định cho ảnh */
+                object-fit: cover;
+                transition: transform 0.4s ease;
+            }
+
+            .blog-post-card:hover .card-img-top {
+                transform: scale(1.05); /* Hiệu ứng zoom nhẹ */
+            }
+
+            .blog-post-card .card-body {
+                padding: 1.25rem;
+                flex-grow: 1;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .blog-post-card .card-title {
+                font-size: 1.15rem;
+                font-weight: 600; /* Đậm vừa */
+                color: #613613; /* Màu tiêu đề */
+                margin-bottom: 0.75rem;
+                /* Giới hạn 2 dòng */
+                line-height: 1.4;
+                height: calc(1.4em * 2);
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+            }
+
+                .blog-post-card .card-title a {
+                    color: inherit;
+                    text-decoration: none;
+                }
+
+                    .blog-post-card .card-title a:hover {
+                        color: #d26e4b;
+                    }
+
+            .blog-post-card .card-text { /* Đoạn trích */
+                font-size: 0.9rem;
+                color: #555;
+                margin-bottom: 1rem;
+                flex-grow: 1; /* Đẩy nút xuống dưới */
+                /* Giới hạn 3 dòng */
+                line-height: 1.5;
+                height: calc(1.5em * 3);
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+            }
+
+            .blog-post-card .post-meta {
+                font-size: 0.8rem;
+                color: #888;
+                margin-bottom: 1rem;
+            }
+
+            .blog-post-card .btn-read-more {
+                margin-top: auto; /* Đẩy nút xuống cuối */
+                align-self: flex-start; /* Căn trái nút */
+                font-size: 0.85rem;
+                padding: 0.3rem 0.8rem;
+            }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-container d-flex justify-content-between align-items-center">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="img-sp/logotrongsuot.png" alt="Logo Yến Sào Yến Mây" style="height: 60px;">
+                </a>
+            </div>
+            <nav class="main-nav flex-grow-1 d-none d-lg-flex justify-content-center">
+                <ul class="nav-menu mb-0">
+                    <li><a href="index.html">Trang Chủ</a></li>
+                    <li><a href="blog.html">Bài Viết</a></li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="sanpham.html" id="navbarDropdownProducts" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Sản Phẩm
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownProducts">
+                            <li><a class="dropdown-item" href="sanpham.html">Tất Cả Sản Phẩm</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="sanpham.html?category=yen-chung">Yến Chưng</a></li>
+                            <li><a class="dropdown-item" href="sanpham.html?category=set-qua-tet">Set Quà Tết</a></li>
+                            <li><a class="dropdown-item" href="sanpham.html?category=set-qua-tinh-tuy">Set Quà Tinh Túy</a></li>
+                            <li><a class="dropdown-item" href="sanpham.html?category=yen-tinh-che">Yến Tinh Chế</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="aboutus.html">Về Chúng Tôi</a></li>
+                    <li><a href="contact.html">Liên Hệ</a></li>
+                </ul>
+            </nav>
+            <div class="header-icons d-none d-lg-flex align-items-center">
+                <a href="javascript:void(0);" id="search-icon-desktop" aria-label="Tìm kiếm" class="ms-3"><i class="fas fa-search"></i></a>
+                <li id="account-menu-item" class="account-item has-icon">
+                    <a href="login.html" aria-label="Tài khoản" class="ms-3 nav-top-link nav-top-not-logged-in is-small"><i class="fas fa-user"></i></a>
+                </li>
+                <a href="cart.html" aria-label="Giỏ hàng" class="ms-3 cart-icon-link">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count-icon">0</span>
+                </a>
+            </div>
+
+            <div id="desktop-search-container" class="desktop-search-form ms-auto" style="display: none;">
+                <input type="search" id="desktop-search-input" class="form-control form-control-sm" placeholder="Tìm kiếm sản phẩm...">
+                <button id="close-search-desktop" type="button" class="btn-close btn-sm" aria-label="Close"></button>
+            </div>
+
+
+            <div class="d-lg-none d-flex align-items-center">
+                <a href="javascript:void(0);" id="search-icon-mobile" aria-label="Tìm kiếm" class="ms-3"><i class="fas fa-search"></i></a>
+                <a href="cart.html" aria-label="Giỏ hàng" class="ms-3 cart-icon-link">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count-icon">0</span>
+                </a>
+                <button class="menu-toggle ms-3" aria-label="Toggle menu">☰</button>
+            </div>
+            <nav class="main-nav-mobile w-100 d-lg-none">
+                <ul class="nav-menu">
+                    <li><a href="index.html">Trang Chủ</a></li>
+                    <li><a href="blog.html">Bài Viết</a></li>
+                    <li><a href="sanpham.html">Sản Phẩm</a></li>
+                    <li class="submenu-item"><a href="sanpham.html?category=yen-chung" style="padding-left: 35px;">- Yến Chưng</a></li>
+                    <li class="submenu-item"><a href="sanpham.html?category=set-qua-tet" style="padding-left: 35px;">- Set Quà Tết</a></li>
+                    <li class="submenu-item"><a href="sanpham.html?category=set-qua-tinh-tuy" style="padding-left: 35px;">- Set Quà Tinh Túy</a></li>
+                    <li class="submenu-item"><a href="sanpham.html?category=yen-tinh-che" style="padding-left: 35px;">- Yến Tinh Chế</a></li>
+                    <li><a href="aboutus.html">Về Chúng Tôi</a></li>
+                    <li><a href="contact.html">Liên Hệ</a></li>
+                    <li id="mobile-account-menu-item"><a href="login.html" class="px-3 py-2 d-block">Tài khoản</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="site-main section-padding">
+        <div class="container">
+            <h1 class="page-title text-center mb-5">Tin Tức & Bài Viết</h1>
+
+            <div id="blog-grid-container">
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                </div>
+            </div>
+
+            <div id="no-articles-message" class="alert alert-info mt-4" role="alert" style="display: none;">
+                Hiện chưa có bài viết nào.
+            </div>
+
+            <nav class="blog-pagination mt-5" aria-label="Phân trang bài viết">
+                <ul class="pagination justify-content-center" id="blog-pagination-container">
+                </ul>
+            </nav>
+        </div>
+    </main>
+
+    <footer class="site-footer pt-5 pb-4">
+        <div class="container">
+            <div class="row gy-4 align-items-start">
+                <div class="col-lg-4 col-md-6 footer-column">
+                    <img src="img-sp/logotrongsuot.png" alt="Logo Footer Yến Mây" style="max-height: 120px; margin-bottom: 20px;" class="d-block d-md-inline-block mb-3 mb-md-0">
+                    <h4 class="mt-3">CÔNG TY CỔ PHẦN THƯƠNG MẠI DỊCH VỤ Yến Mây</h4>
+                    <p class="small">
+                        279 Nguyễn Tri Phương, phường Diên Hồng, Quận 10, TP. Hồ Chí Minh
+                    </p>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6 col-6 footer-column">
+                    <h4>Chính Sách</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                        <li><a href="#">Chính sách đổi trả</a></li>
+                        <li><a href="#">Chính sách vận chuyển</a></li>
+                        <li><a href="#">Điều khoản sử dụng</a></li>
+                        <li><a href="#">Chính sách bảo hành</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6 footer-column">
+                    <h4>Hỗ Trợ</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Chính sách đặt hàng - thanh toán</a></li>
+                        <li><a href="#">Chính sách vận chuyển</a></li>
+                        <li><a href="#">Câu hỏi thường gặp</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 footer-column">
+                    <h4>Liên Hệ</h4>
+                    <p class="small">
+                        Hotline: <a href="tel:+84393556866" class="text-white fw-bold">+84 343647074</a><br>
+                        Email: <a href="mailto:yenmay.vn@gmail.com" class="text-white">yenmay.vn@gmail.com</a>
+                    </p>
+                    <div class="d-flex align-items-center mt-3 gap-3 footer-social-bct">
+                        <div class="social-icons">
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" aria-label="Zalo"><i class="fas fa-comment-dots"></i></a>
+                        </div>
+                        <a href="http://online.gov.vn/Home/WebDetails/91809" title="Đã thông báo với bộ công thương" target="_blank" class="ms-auto ms-md-0">
+                            <img src="https://yanyen.vn/wp-content/uploads/2021/11/logo-da-thong-bao-bo-cong-thuong.webp" alt="Đã thông báo Bộ Công Thương" style="max-height: 45px;">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright mt-4">
+            <p>CÔNG TY CỔ PHẦN THƯƠNG MẠI VÀ DỊCH VỤ YẾN MÂY &copy; 2025. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/shared.js"></script>
+    <script src="js/blog.js"></script>
+</body>
+</html>

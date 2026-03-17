@@ -1,0 +1,624 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi Tiết Sản Phẩm - Yến Sào Yến Mây</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/style-product-detail.css">
+    <link rel="stylesheet" href="css/style-sanpham.css">
+
+    <style>
+        /* Các style chung đã có trong style.css */
+        /* Style cơ bản cho trang chi tiết */
+        .product-detail-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-top: 20px;
+        }
+
+        .product-gallery .carousel-item img {
+            max-height: 500px; /* Giới hạn chiều cao ảnh chính */
+            width: 100%;
+            object-fit: contain; /* Hiển thị toàn bộ ảnh, giữ tỷ lệ */
+            border: 1px solid #eee;
+            border-radius: 5px;
+        }
+
+        .carousel-indicators [data-bs-target] {
+            background-color: #8F582A; /* Màu cho indicator */
+        }
+
+        .product-thumbnails {
+            overflow-x: auto; /* Cho phép cuộn ngang nếu nhiều ảnh nhỏ */
+            white-space: nowrap; /* Giữ các ảnh nhỏ trên một hàng */
+        }
+
+            .product-thumbnails img {
+                width: 70px;
+                height: 70px;
+                object-fit: cover;
+                cursor: pointer;
+                border: 2px solid transparent;
+                border-radius: 4px;
+                opacity: 0.7;
+                margin-right: 5px; /* Khoảng cách giữa các ảnh nhỏ */
+                display: inline-block; /* Để các ảnh nhỏ nằm trên hàng */
+            }
+
+                .product-thumbnails img.active,
+                .product-thumbnails img:hover {
+                    border-color: #8F582A;
+                    opacity: 1;
+                }
+
+        .product-detail-info .product-title {
+            color: #613613;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+            font-size: 1.8rem;
+        }
+
+        .product-detail-info .price {
+            color: #d26e4b;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .product-detail-info .short-description {
+            color: #555;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+            .product-detail-info .short-description p {
+                margin-bottom: 0.5rem;
+            }
+
+        .quantity-selector label {
+            margin-right: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .quantity-selector .form-control {
+            max-width: 70px;
+            text-align: center;
+            display: inline-block;
+            border-color: #ced4da;
+        }
+
+        .product-description-title {
+            color: #613613;
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+
+        .product-description-content h1,
+        .product-description-content h2,
+        .product-description-content h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: #613613;
+            font-weight: bold;
+        }
+
+        .product-description-content p,
+        .product-description-content ul li {
+            margin-bottom: 0.75rem;
+            line-height: 1.8;
+            color: #4f4f4f;
+        }
+
+        .product-description-content ul {
+            padding-left: 20px;
+        }
+
+        .breadcrumbs {
+            font-size: 0.9rem;
+            color: #777;
+            margin-bottom: 1.5rem;
+            padding: 10px 0;
+            background-color: #f8f9fa;
+            border-radius: 0.25rem;
+        }
+
+            .breadcrumbs a {
+                color: #613613;
+                text-decoration: none;
+            }
+
+                .breadcrumbs a:hover {
+                    color: #d26e4b;
+                }
+
+            .breadcrumbs span.divider {
+                margin: 0 8px;
+                color: #aaa;
+            }
+
+        .product-meta {
+            font-size: 0.9em;
+            color: #6c757d;
+        }
+
+            .product-meta strong {
+                color: #343a40;
+            }
+
+        .product-tabs {
+            margin-top: 3rem; /* Tăng khoảng cách với phần thông tin sản phẩm phía trên */
+        }
+
+            .product-tabs .nav-tabs {
+                border-bottom: 1px solid #dee2e6; /* Giữ lại đường kẻ ngang mỏng */
+                margin-bottom: 0; /* Bỏ khoảng cách dưới mặc định của nav-tabs */
+            }
+
+            .product-tabs .nav-item {
+                margin-bottom: -1px; /* Quan trọng: Giúp border-bottom của link active đè lên border của nav-tabs */
+            }
+
+            .product-tabs .nav-link {
+                border: none; /* Bỏ border mặc định của các tab */
+                border-bottom: 3px solid transparent; /* Tạo khoảng trống cho border active, mặc định trong suốt */
+                border-top-left-radius: 0; /* Bỏ bo góc */
+                border-top-right-radius: 0;
+                color: #6c757d; /* Màu chữ xám mờ cho tab không active */
+                font-weight: 500; /* Độ đậm vừa phải */
+                padding: 0.8rem 1rem; /* Điều chỉnh padding */
+                margin-right: 1rem; /* Khoảng cách giữa các tab */
+                transition: border-color 0.2s ease-in-out, color 0.2s ease-in-out;
+                font-size: 0.95rem; /* Có thể điều chỉnh font size */
+                text-transform: uppercase; /* Viết hoa tiêu đề tab */
+                letter-spacing: 0.5px; /* Tăng khoảng cách chữ */
+            }
+
+                /* Hover state cho tab không active */
+                .product-tabs .nav-link:hover:not(.active) {
+                    color: #495057; /* Màu chữ đậm hơn khi hover */
+                    border-bottom-color: #e9ecef; /* Hiện border mờ khi hover */
+                }
+
+                /* Active state (Tab đang được chọn) */
+                .product-tabs .nav-link.active {
+                    color: #0d6efd; /* MÀU CHỮ XANH DƯƠNG ĐẬM (Có thể đổi sang màu theme #613613 nếu muốn) */
+                    background-color: transparent; /* Bỏ nền */
+                    border-color: transparent transparent #0d6efd transparent; /* CHỈ HIỆN BORDER DƯỚI MÀU XANH */
+                    font-weight: 600; /* Chữ đậm hơn */
+                }
+            /* Ghi đè màu active mặc định của Bootstrap */
+            .product-tabs .nav-tabs .nav-link.active,
+            .product-tabs .nav-tabs .nav-item.show .nav-link {
+                color: #925b0e; /* Màu chữ active */
+                background-color: transparent;
+                border-color: transparent transparent #c66912 transparent !important; /* Đảm bảo ghi đè */
+            }
+
+
+            /* Nội dung bên trong tab */
+            .product-tabs .tab-content {
+                padding: 2rem 0.5rem; /* Padding cho nội dung bên trong tab */
+                border: none; /* Bỏ border bao quanh nội dung */
+                background-color: transparent; /* Bỏ nền */
+            }
+
+        /* Style cho nội dung article bên trong tab (giữ nguyên hoặc điều chỉnh) */
+        .product-description-content {
+            /* ... các style hiện có của bạn cho font, line-height, h2, p, ul ... */
+        }
+
+        .related-products-section {
+            padding: 40px 0;
+            background-color: #f8f9fa;
+            margin-top: 40px;
+        }
+
+            .related-products-section .section-title {
+                margin-bottom: 2rem;
+                color: #613613;
+            }
+
+        .related-products-grid .product-card { /* Tái sử dụng style product card */
+            margin-bottom: 0; /* Bỏ margin nếu grid tự tạo gap */
+        }
+
+        /* CSS cho Modal xem ảnh */
+        #productImageModal .modal-dialog {
+            max-width: 800px;
+        }
+        /* Kích thước modal */
+        #productImageModal .modal-body {
+            padding: 0;
+        }
+
+        #productImageModal img {
+            max-height: 80vh;
+            width: auto;
+            max-width: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        #productImageModal .btn-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            z-index: 10;
+            background-color: rgba(255,255,255,0.7);
+            border-radius: 50%;
+            padding: 0.5em;
+        }
+
+        .quantity-selector label.col-form-label {
+            padding-top: calc(0.25rem + 1px); /* Điều chỉnh căn chỉnh dọc của label nếu cần */
+            padding-bottom: calc(0.25rem + 1px);
+            margin-bottom: 0;
+            line-height: 1.5;
+        }
+
+        /* Điều chỉnh nút nếu cần (ngoài việc bỏ btn-lg) */
+        .product-detail-info .add-to-cart-button {
+            padding-top: 0.5rem; /* Ví dụ: Giảm padding dọc */
+            padding-bottom: 0.5rem;
+            font-size: 0.9rem; /* Ví dụ: Giảm font-size */
+        }
+
+        .product-excerpt {
+            font-size: 0.85rem;
+            color: #777;
+            margin-bottom: 0.85rem;
+            line-height: 1.5;
+            text-align: left;
+            /* Giới hạn 2 hoặc 3 dòng */
+            height: calc(1.5em * 3); /* Chiều cao cố định cho 2 dòng */
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3; /* Giới hạn 2 dòng */
+            -webkit-box-orient: vertical;
+        }
+    </style>
+</head>
+<body class="product-detail-page">
+    <header class="site-header">
+        <div class="container header-container d-flex justify-content-between align-items-center">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="img-sp/logotrongsuot.png" alt="Logo Yến Sào Yến Mây" style="height: 60px;">
+                </a>
+            </div>
+            <nav class="main-nav flex-grow-1 d-none d-lg-flex justify-content-center">
+                <ul class="nav-menu mb-0">
+                    <li><a href="index.html">Trang Chủ</a></li>
+                    <li><a href="blog.html">Bài Viết</a></li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="sanpham.html" id="navbarDropdownProducts" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Sản Phẩm
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownProducts">
+                            <li><a class="dropdown-item" href="sanpham.html">Tất Cả Sản Phẩm</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="sanpham.html?category=yen-chung">Yến Chưng</a></li>
+                            <li><a class="dropdown-item" href="sanpham.html?category=set-qua-tet">Set Quà Tết</a></li>
+                            <li><a class="dropdown-item" href="sanpham.html?category=set-qua-tinh-tuy">Set Quà Tinh Túy</a></li>
+                            <li><a class="dropdown-item" href="sanpham.html?category=yen-tinh-che">Yến Tinh Chế</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="aboutus.html">Về Chúng Tôi</a></li>
+                    <li><a href="contact.html">Liên Hệ</a></li>
+                </ul>
+            </nav>
+            <div class="header-icons d-none d-lg-flex align-items-center">
+                <a href="javascript:void(0);" id="search-icon-desktop" aria-label="Tìm kiếm" class="ms-3"><i class="fas fa-search"></i></a>
+                <li id="account-menu-item" class="account-item has-icon">
+                    <a href="login.html" aria-label="Tài khoản" class="ms-3 nav-top-link nav-top-not-logged-in is-small"><i class="fas fa-user"></i></a>
+                </li>
+                <a href="cart.html" aria-label="Giỏ hàng" class="ms-3 cart-icon-link">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count-icon">0</span>
+                </a>
+            </div>
+
+            <div id="desktop-search-container" class="desktop-search-form ms-auto" style="display: none;">
+                <input type="search" id="desktop-search-input" class="form-control form-control-sm" placeholder="Tìm kiếm sản phẩm...">
+                <button id="close-search-desktop" type="button" class="btn-close btn-sm" aria-label="Close"></button>
+            </div>
+
+
+            <div class="d-lg-none d-flex align-items-center">
+                <a href="javascript:void(0);" id="search-icon-mobile" aria-label="Tìm kiếm" class="ms-3"><i class="fas fa-search"></i></a>
+                <a href="cart.html" aria-label="Giỏ hàng" class="ms-3 cart-icon-link">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count-icon">0</span>
+                </a>
+                <button class="menu-toggle ms-3" aria-label="Toggle menu">☰</button>
+            </div>
+            <nav class="main-nav-mobile w-100 d-lg-none">
+                <ul class="nav-menu">
+                    <li><a href="index.html">Trang Chủ</a></li>
+                    <li><a href="blog.html">Bài Viết</a></li>
+                    <li><a href="sanpham.html">Sản Phẩm</a></li>
+                    <li class="submenu-item"><a href="sanpham.html?category=yen-chung" style="padding-left: 35px;">- Yến Chưng</a></li>
+                    <li class="submenu-item"><a href="sanpham.html?category=set-qua-tet" style="padding-left: 35px;">- Set Quà Tết</a></li>
+                    <li class="submenu-item"><a href="sanpham.html?category=set-qua-tinh-tuy" style="padding-left: 35px;">- Set Quà Tinh Túy</a></li>
+                    <li class="submenu-item"><a href="sanpham.html?category=yen-tinh-che" style="padding-left: 35px;">- Yến Tinh Chế</a></li>
+                    <li><a href="aboutus.html">Về Chúng Tôi</a></li>
+                    <li><a href="contact.html">Liên Hệ</a></li>
+                    <li id="mobile-account-menu-item"><a href="login.html" class="px-3 py-2 d-block">Tài khoản</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="site-main section-padding">
+        <div class="container">
+            <nav class="woocommerce-breadcrumb breadcrumbs mb-4" style="background-color: #f8f9fa; padding: 10px 15px; border-radius: 0.25rem;">
+                <a href="index.html">Trang chủ</a> <span class="divider">/</span>
+                <a href="sanpham.html">Sản phẩm</a> <span class="divider">/</span>
+                <a href="#" id="breadcrumb-category-link">Đang tải...</a> <span class="divider">/</span>
+                <span id="breadcrumb-product-name">Đang tải...</span>
+            </nav>
+
+            <div class="product-detail-container bg-white p-3 p-md-4 rounded shadow-sm">
+                <div class="row g-4 g-lg-5">
+                    <div class="col-lg-6 product-gallery">
+                        <div id="productImageCarousel" class="carousel slide mb-3" data-bs-ride="false">
+                            <div class="carousel-inner rounded border" id="product-carousel-inner" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#productImageModal">
+                                <div class="carousel-item active">
+                                    <img src="https://placehold.co/600x500/e9bc98/613613?text=Loading+Image..." class="d-block w-100" alt="Đang tải ảnh sản phẩm">
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#productImageCarousel" data-bs-slide="prev" style="display: none;">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#productImageCarousel" data-bs-slide="next" style="display: none;">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                        <div class="product-thumbnails d-flex flex-wrap justify-content-start gap-2" id="product-thumbnails-container">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 product-detail-info" data-id="" data-name="" data-price="" data-img="">
+                        <h1 class="product-title" id="product-detail-name">Đang tải tên sản phẩm...</h1>
+                        <hr class="my-3">
+
+                        <div class="product-rating-summary mb-2" id="product-rating-summary">
+                            <i class="far fa-star text-muted"></i>
+                            <i class="far fa-star text-muted"></i>
+                            <i class="far fa-star text-muted"></i>
+                            <i class="far fa-star text-muted"></i>
+                            <i class="far fa-star text-muted"></i>
+                            <span class="rating-count small text-muted ms-1">(Chưa có đánh giá)</span>
+                        </div>
+
+                        <p class="price mb-3" id="product-detail-price">Đang tải giá...</p>
+
+                        <div class="short-description mb-3" id="product-detail-short-description">
+                            <p>Đang tải mô tả ngắn...</p>
+                        </div>
+
+                        <div class="stock-status mb-3">
+                            <i class="fas fa-check-circle text-success me-1"></i>
+                            <span id="product-stock-status" class="fw-medium text-success">Còn hàng</span>
+                        </div>
+
+                        <div class="quick-policies d-flex flex-wrap gap-3 small text-muted border-top pt-3 mt-3 mb-4">
+                            <span><i class="fas fa-shipping-fast me-1 text-primary"></i> Giao hàng nhanh</span>
+                            <span><i class="fas fa-shield-alt me-1 text-primary"></i> Đảm bảo chất lượng</span>
+                            <span><i class="fas fa-undo me-1 text-primary"></i> Đổi trả dễ dàng</span>
+                        </div>
+
+                        <div class="row g-2 align-items-center mb-3">
+                            <div class="col-auto">
+                                <label for="product-quantity" class="col-form-label fw-bold">Số lượng:</label>
+                            </div>
+                            <div class="col-auto" style="width: 80px;">
+                                <input type="number" id="product-quantity" class="form-control form-control-sm text-center" value="1" min="1">
+                            </div>
+                            <div class="col">
+                                <button type="button" class="btn btn-theme-primary add-to-cart-button w-100">
+                                    <i class="fas fa-cart-plus me-1"></i>Thêm vào giỏ
+                                </button>
+                            </div>
+                            <div class="col-auto">
+                                <button type="button" class="btn btn-outline-secondary btn-sm" id="add-to-wishlist-button" title="Thêm vào yêu thích">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="product-meta small text-muted mt-3">
+                            <span class="sku_wrapper d-block">Mã SKU: <strong id="product-detail-sku">Đang tải...</strong></span>
+                            <span class="posted_in d-block">Danh mục: <a href="#" id="product-detail-category-link">Đang tải...</a></span>
+                        </div>
+
+                    </div>
+                </div> <div class="row product-tabs mt-5">
+                    <div class="col-12">
+                        <ul class="nav nav-tabs" id="productTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description-tab-pane" type="button" role="tab" aria-controls="description-tab-pane" aria-selected="true">Mô tả chi tiết</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="additional-info-tab" data-bs-toggle="tab" data-bs-target="#additional-info-tab-pane" type="button" role="tab" aria-controls="additional-info-tab-pane" aria-selected="false">Thông tin bổ sung</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews-tab-pane" type="button" role="tab" aria-controls="reviews-tab-pane" aria-selected="false">Đánh giá</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="productTabContent">
+                            <div class="tab-pane fade show active" id="description-tab-pane" role="tabpanel" aria-labelledby="description-tab" tabindex="0">
+                                <div class="product-description-content pt-3" id="product-detail-full-description">
+                                    <p>Đang tải mô tả đầy đủ...</p>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="additional-info-tab-pane" role="tabpanel" aria-labelledby="additional-info-tab" tabindex="0">
+                                <div class="pt-3">
+                                    <p>Hiện chưa có thông tin bổ sung cho sản phẩm này.</p>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="reviews-tab-pane" role="tabpanel" aria-labelledby="reviews-tab" tabindex="0">
+                                <div class="pt-3">
+                                    <h4 class="mb-3">Đánh giá sản phẩm</h4>
+
+                                    <div id="existing-reviews-list" class="reviews-list mt-3 mb-4">
+                                        <p>Hiện chưa có đánh giá nào cho sản phẩm này.</p>
+                                    </div>
+
+                                    <hr> <h5 class="mb-3">Viết đánh giá của bạn</h5>
+                                    <form id="new-review-form">
+                                        <div class="mb-3">
+                                            <label for="reviewer-name" class="form-label">Tên của bạn <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="reviewer-name" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Đánh giá của bạn <span class="text-danger">*</span></label>
+                                            <div id="star-rating-input" class="star-rating-input fs-4" style="cursor: pointer;">
+                                                <i class="far fa-star" data-value="1"></i>
+                                                <i class="far fa-star" data-value="2"></i>
+                                                <i class="far fa-star" data-value="3"></i>
+                                                <i class="far fa-star" data-value="4"></i>
+                                                <i class="far fa-star" data-value="5"></i>
+                                            </div>
+                                            <input type="hidden" id="review-rating-value" name="rating" required>
+                                            <div class="invalid-feedback">Vui lòng chọn số sao đánh giá.</div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="reviewer-comment" class="form-label">Nhận xét của bạn <span class="text-danger">*</span></label>
+                                            <textarea class="form-control" id="reviewer-comment" rows="3" required></textarea>
+                                            <div class="invalid-feedback">Vui lòng viết nhận xét.</div>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-theme-primary">Gửi đánh giá</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <section class="related-products-section mt-5">
+                <div class="container">
+                    <h2 class="section-title text-center">Sản Phẩm Liên Quan</h2>
+                    <div id="related-products-grid" class="products-grid">
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="site-footer pt-5 pb-4">
+        <div class="container">
+            <div class="row gy-4 align-items-start">
+                <div class="col-lg-4 col-md-6 footer-column">
+                    <img src="img-sp/logotrongsuot.png" alt="Logo Footer Yến Mây" style="max-height: 120px; margin-bottom: 20px;" class="d-block d-md-inline-block mb-3 mb-md-0">
+                    <h4 class="mt-3">CÔNG TY CỔ PHẦN THƯƠNG MẠI DỊCH VỤ Yến Mây</h4>
+                    <p class="small">
+                        279 Nguyễn Tri Phương, phường Diên Hồng, Quận 10, TP. Hồ Chí Minh
+                    </p>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6 col-6 footer-column">
+                    <h4>Chính Sách</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                        <li><a href="#">Chính sách đổi trả</a></li>
+                        <li><a href="#">Chính sách vận chuyển</a></li>
+                        <li><a href="#">Điều khoản sử dụng</a></li>
+                        <li><a href="#">Chính sách bảo hành</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6 footer-column">
+                    <h4>Hỗ Trợ</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Chính sách đặt hàng - thanh toán</a></li>
+                        <li><a href="#">Chính sách vận chuyển</a></li>
+                        <li><a href="#">Câu hỏi thường gặp</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 footer-column">
+                    <h4>Liên Hệ</h4>
+                    <p class="small">
+                        Hotline: <a href="tel:+84393556866" class="text-white fw-bold">+84 343647074</a><br>
+                        Email: <a href="mailto:yenmay.vn@gmail.com" class="text-white">yenmay.vn@gmail.com</a>
+                    </p>
+                    <div class="d-flex align-items-center mt-3 gap-3 footer-social-bct">
+                        <div class="social-icons">
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" aria-label="Zalo"><i class="fas fa-comment-dots"></i></a>
+                        </div>
+                        <a href="http://online.gov.vn/Home/WebDetails/91809" title="Đã thông báo với bộ công thương" target="_blank" class="ms-auto ms-md-0">
+                            <img src="https://yanyen.vn/wp-content/uploads/2021/11/logo-da-thong-bao-bo-cong-thuong.webp" alt="Đã thông báo Bộ Công Thương" style="max-height: 45px;">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright mt-4">
+            <p>CÔNG TY CỔ PHẦN THƯƠNG MẠI VÀ DỊCH VỤ YẾN MÂY &copy; 2025. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="productImageModal" tabindex="-1" aria-labelledby="productImageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content bg-transparent border-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-body p-0">
+                    <img src="" id="modal-product-image" class="img-fluid" alt="Xem ảnh lớn">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/shared.js"></script>
+    <script src="js/product-detail-page.js"></script>
+</body>
+</html>
+```
+
+<!-- **Những thay đổi chính trong `product-detail.html` này:**
+
+* **Carousel Ảnh:**
+    * `#productImageCarousel`: ID cho carousel chính.
+    * `#product-carousel-indicators`: `div` trống để JS điền các nút chỉ thị slide.
+    * `#product-carousel-inner`: `div` trống để JS điền các ảnh (`carousel-item`).
+    * `#product-thumbnails-container`: `div` trống để JS điền các ảnh thumbnail nhỏ (có thể click để chuyển slide chính).
+* **Thông tin Sản phẩm:**
+    * Các thẻ `h1`, `p`, `div`, `strong`, `a` có các `id` cụ thể (ví dụ: `product-detail-name`, `product-detail-price`, `product-detail-short-description`, `product-detail-full-description`, `product-detail-sku`, `product-detail-category-link`) để JavaScript dễ dàng tìm và cập nhật nội dung.
+    * Thẻ `div` có class `product-detail-info` sẽ được JavaScript cập nhật các thuộc tính `data-id`, `data-name`, `data-price`, `data-img` để logic "Thêm vào giỏ" có thể lấy đúng thông tin sản phẩm đang hiển thị.
+* **Breadcrumbs:** Có các `id` để JavaScript cập nhật đường dẫn danh mục và tên sản phẩm.
+* **Class `product-detail-page`:** Được thêm vào thẻ `<body>` để JavaScript biết đây là trang chi tiết sản phẩm và kích hoạt logic `displayProductDetails()`.
+
+**File `script.js` của bạn (phiên bản bạn đã gửi ở tin nhắn có ID `uploaded:script.js`) đã có sẵn:**
+
+1.  Mảng `allProductsData` (bạn cần tự điền đầy đủ dữ liệu cho tất cả sản phẩm).
+2.  Hàm `displayProductDetails()` (nằm trong khối `if (document.body.classList.contains('product-detail-page'))`) để đọc ID từ URL, tìm sản phẩm trong `allProductsData` và cập nhật nội dung HTML (bao gồm cả việc tạo động carousel và thumbnail).
+3.  Logic "Add to Cart" đã được cập nhật để lấy số lượng từ `input#product-quantity` khi nút được bấm trên trang chi tiết.
+
+**Để hoàn thiện:**
+
+1.  **Điền đầy đủ `allProductsData`:** Đây là bước quan trọng nhất. Bạn cần copy thông tin (ID, tên, giá, mảng URL ảnh, mô tả ngắn HTML, mô tả dài HTML, SKU, tên danh mục, link danh mục) của **tất cả** sản phẩm bạn muốn hiển thị trên trang chi tiết vào mảng này ở đầu file `script.js`.
+2.  **Cập nhật Link sản phẩm:** Trên các trang `index.html` và `sanpham.html`, đảm bảo các link đến trang chi tiết sản phẩm có dạng `href="product-detail.html?id=ID_CUA_SAN_PHAM"`.
+3.  **Kiểm tra CSS:** Đảm bảo CSS trong `style.css` và trong thẻ `<style>` của `product-detail.html` không gây xung đột và hiển thị đẹp.
+
+Sau khi hoàn tất các bước này, trang `product-detail.html` của bạn sẽ có thể hiển thị động thông tin chi tiết của bất kỳ sản phẩm nào dựa trên ID trên URL, với gallery ảnh và nút thêm vào giỏ hàng hoạt động đúng số lượng đã chọn. -->

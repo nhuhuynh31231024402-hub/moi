@@ -1,0 +1,709 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ - Yến Sào Yến Mây (Static Demo)</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/style-index.css">
+
+    <style>
+        body {
+            background-color: #fbf9f8;
+        }
+
+        .btn-theme-primary {
+            background: linear-gradient(96.55deg, #8F582A 12.14%, #E9BC98 105.25%) !important;
+            border: none !important;
+            color: white !important;
+        }
+
+            .btn-theme-primary:hover {
+                background: linear-gradient(96.55deg, #7d4b20 12.14%, #d3a380 105.25%) !important;
+                color: white !important;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            }
+        /* Thêm hiệu ứng hover */
+        .btn-theme-secondary {
+            background-color: #613613 !important;
+            color: white !important;
+            border: none !important;
+        }
+
+            .btn-theme-secondary:hover {
+                background-color: #4d2a0f !important;
+                color: white !important;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            }
+        /* Thêm hiệu ứng hover */
+        .site-footer a {
+            color: #fbf9f8;
+        }
+
+            .site-footer a:hover {
+                color: #e9bc98;
+            }
+
+        .site-footer h4 {
+            color: #e9bc98;
+        }
+
+        .footer-column ul {
+            padding-left: 0;
+            list-style: none;
+        }
+
+            .footer-column ul li {
+                margin-bottom: 0.5rem;
+            }
+
+        .footer-social-bct {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+            .footer-social-bct img {
+                max-height: 45px;
+                width: auto;
+            }
+
+        @media (max-width: 768px) {
+            .footer-column {
+                text-align: center;
+            }
+
+                .footer-column img[alt*="Logo Footer"] {
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+
+            .footer-social-bct {
+                justify-content: center;
+            }
+
+                .footer-social-bct img {
+                    margin-left: 15px;
+                }
+        }
+
+        .product-card .product-title {
+            text-align: center;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #613613;
+            margin-bottom: 0.25rem;
+            min-height: 40px;
+            overflow: hidden;
+        }
+
+            .product-card .product-title a {
+                color: inherit;
+                text-decoration: none;
+            }
+
+                .product-card .product-title a:hover {
+                    color: #d26e4b;
+                }
+
+        .product-card .price {
+            font-weight: bold;
+            color: #d26e4b;
+            margin-top: auto;
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .product-carousel .product-card,
+        .products-grid .product-card {
+            background-color: #fff;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+            padding: 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+            /* Thêm transition */
+            .product-carousel .product-card:hover,
+            .products-grid .product-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            }
+            /* Thêm hiệu ứng hover */
+            .product-carousel .product-card .card-img-top,
+            .products-grid .product-card .card-img-top {
+                width: 100%;
+                height: 250px;
+                object-fit: cover;
+            }
+
+            .product-carousel .product-card .card-body,
+            .products-grid .product-card .card-body {
+                padding: 0.75rem;
+                display: flex;
+                flex-direction: column;
+                flex-grow: 1;
+            }
+
+        .star-rating {
+            font-size: 0.8em;
+            color: #fdd835;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+            .star-rating .rating {
+                display: none;
+            }
+
+        .product-excerpt {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+            text-align: left;
+        }
+
+            .product-excerpt p {
+                margin-bottom: 0.3em;
+            }
+
+                .product-excerpt p strong {
+                    color: #4f4f4f;
+                }
+
+        .add-to-cart-button {
+            font-size: 0.9rem !important;
+            padding: 0.375rem 0.75rem !important;
+            margin-top: auto !important;
+        }
+
+        .product-carousel .carousel-inner {
+            padding: 1em 0;
+        }
+
+        .product-carousel .carousel-control-prev, .product-carousel .carousel-control-next {
+            width: 5%;
+            background-color: transparent !important;
+            transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+            z-index: 10;
+        }
+
+        .product-carousel .carousel-control-prev-icon, .product-carousel .carousel-control-next-icon {
+            background-color: transparent !important;
+            background-size: 50% 50%;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .carousel-item .col {
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }
+
+        .carousel-item .row {
+            margin-left: -0.5rem;
+            margin-right: -0.5rem;
+        }
+
+        .product-carousel .carousel-control-prev-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/%3e%3c/svg%3e");
+        }
+
+        .product-carousel .carousel-control-next-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+        }
+
+        .product-carousel .carousel-control-prev:hover,
+        .product-carousel .carousel-control-next:hover {
+            transform: scale(1.15); /* Phóng to toàn bộ nút lên 15% */
+            /* Bạn có thể thêm lại một chút nền mờ khi hover nếu muốn */
+            /* background-color: rgba(0, 0, 0, 0.05) !important; */
+        }
+        /* Testimonial Carousel */
+        .testimonial-carousel .carousel-item {
+            padding: 0 5%;
+        }
+        /* Thêm padding để nút control không che mất */
+        .testimonial-carousel .carousel-control-prev,
+        .testimonial-carousel .carousel-control-next {
+            filter: invert(1) grayscale(100) brightness(1.5);
+        }
+        /* Làm nút control màu đen */
+        .testimonial-card {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            min-height: 300px; /* Đảm bảo chiều cao tối thiểu */
+        }
+
+            .testimonial-card img {
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+                margin: 0 auto 15px;
+                object-fit: cover;
+            }
+
+            .testimonial-card blockquote {
+                font-style: italic;
+                margin-bottom: 15px;
+                color: #555;
+                min-height: 60px;
+            }
+
+            .testimonial-card .author {
+                font-weight: bold;
+                color: #613613;
+            }
+        /* Blog Preview */
+        .blog-preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .blog-post-card {
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .blog-post-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .blog-post-card img {
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+            }
+
+            .blog-post-card .card-body {
+                padding: 1rem;
+            }
+
+            .blog-post-card .card-title {
+                font-size: 1.1rem;
+                font-weight: bold;
+                color: #613613;
+                margin-bottom: 0.5rem;
+            }
+
+                .blog-post-card .card-title a {
+                    color: inherit;
+                    text-decoration: none;
+                }
+
+                    .blog-post-card .card-title a:hover {
+                        color: #d26e4b;
+                    }
+
+            .blog-post-card .card-text {
+                font-size: 0.9rem;
+                color: #555;
+                margin-bottom: 1rem;
+            }
+
+            .blog-post-card .text-muted {
+                font-size: 0.8rem;
+            }
+
+        .modal-header-custom {
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 10;
+        }
+
+        .product-excerpt {
+            font-size: 0.85rem;
+            color: #777;
+            margin-bottom: 0.85rem;
+            line-height: 1.5;
+            text-align: left;
+            /* Giới hạn 2 hoặc 3 dòng */
+            height: calc(1.5em * 3); /* Chiều cao cố định cho 2 dòng */
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3; /* Giới hạn 2 dòng */
+            -webkit-box-orient: vertical;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container header-container d-flex justify-content-between align-items-center">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="img-sp/logotrongsuot.png" alt="Logo Yến Sào Yến Mây" style="height: 60px;">
+                </a>
+            </div>
+            <nav class="main-nav flex-grow-1 d-none d-lg-flex justify-content-center">
+                <ul class="nav-menu mb-0">
+                    <li><a href="index.html">Trang Chủ</a></li>
+                    <li><a href="blog.html">Bài Viết</a></li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="sanpham.html" id="navbarDropdownProducts" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Sản Phẩm
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownProducts">
+                            <li><a class="dropdown-item" href="sanpham.html">Tất Cả Sản Phẩm</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="sanpham.html?category=yen-chung">Yến Chưng</a></li>
+                            <li><a class="dropdown-item" href="sanpham.html?category=set-qua-tet">Set Quà Tết</a></li>
+                            <li><a class="dropdown-item" href="sanpham.html?category=set-qua-tinh-tuy">Set Quà Tinh Túy</a></li>
+                            <li><a class="dropdown-item" href="sanpham.html?category=yen-tinh-che">Yến Tinh Chế</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="aboutus.html">Về Chúng Tôi</a></li>
+                    <li><a href="contact.html">Liên Hệ</a></li>
+                </ul>
+            </nav>
+            <div class="header-icons d-none d-lg-flex align-items-center">
+                <a href="javascript:void(0);" id="search-icon-desktop" aria-label="Tìm kiếm" class="ms-3"><i class="fas fa-search"></i></a>
+                <li id="account-menu-item" class="account-item has-icon">
+                    <a href="login.html" aria-label="Tài khoản" class="ms-3 nav-top-link nav-top-not-logged-in is-small"><i class="fas fa-user"></i></a>
+                </li>
+                <a href="cart.html" aria-label="Giỏ hàng" class="ms-3 cart-icon-link">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count-icon">0</span>
+                </a>
+            </div>
+
+            <div id="desktop-search-container" class="desktop-search-form ms-auto" style="display: none;">
+                <input type="search" id="desktop-search-input" class="form-control form-control-sm" placeholder="Tìm kiếm sản phẩm...">
+                <button id="close-search-desktop" type="button" class="btn-close btn-sm" aria-label="Close"></button>
+            </div>
+
+
+            <div class="d-lg-none d-flex align-items-center">
+                <a href="javascript:void(0);" id="search-icon-mobile" aria-label="Tìm kiếm" class="ms-3"><i class="fas fa-search"></i></a>
+                <a href="cart.html" aria-label="Giỏ hàng" class="ms-3 cart-icon-link">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count-icon">0</span>
+                </a>
+                <button class="menu-toggle ms-3" aria-label="Toggle menu">☰</button>
+            </div>
+            <nav class="main-nav-mobile w-100 d-lg-none">
+                <ul class="nav-menu">
+                    <li><a href="index.html">Trang Chủ</a></li>
+                    <li><a href="blog.html">Bài Viết</a></li>
+                    <li><a href="sanpham.html">Sản Phẩm</a></li>
+                    <li class="submenu-item"><a href="sanpham.html?category=yen-chung" style="padding-left: 35px;">- Yến Chưng</a></li>
+                    <li class="submenu-item"><a href="sanpham.html?category=set-qua-tet" style="padding-left: 35px;">- Set Quà Tết</a></li>
+                    <li class="submenu-item"><a href="sanpham.html?category=set-qua-tinh-tuy" style="padding-left: 35px;">- Set Quà Tinh Túy</a></li>
+                    <li class="submenu-item"><a href="sanpham.html?category=yen-tinh-che" style="padding-left: 35px;">- Yến Tinh Chế</a></li>
+                    <li><a href="aboutus.html">Về Chúng Tôi</a></li>
+                    <li><a href="contact.html">Liên Hệ</a></li>
+                    <li id="mobile-account-menu-item"><a href="login.html" class="px-3 py-2 d-block">Tài khoản</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="intro-video-section">
+        <div class="container-fluid p-0">
+            <div class="ratio ratio-16x9 video-wrapper">
+                <iframe id="embeddedYoutubeVideo"
+                        src="https://www.youtube.com/embed/d6lvfsdmLpU?autoplay=1&mute=1&enablejsapi=1&loop=1&playlist=d6lvfsdmLpU&controls=0&showinfo=0&rel=0&modestbranding=1"
+                        title="Video giới thiệu Yến Mây"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                </iframe>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="commitments-strip section-padding" style="background-color: #fff; border-bottom: 1px solid #eee;">
+        <div class="container">
+            <div class="row text-center gy-3">
+                <div class="col-md-3 col-6 commitment-item-strip">
+                    <i class="fas fa-award fa-2x mb-2 text-primary"></i>
+                    <h6 class="fw-semibold mb-0">CAM KẾT CHẤT LƯỢNG</h6>
+                    <p class="small text-muted">Yến sào 100% tự nhiên, tinh khiết.</p>
+                </div>
+                <div class="col-md-3 col-6 commitment-item-strip">
+                    <i class="fas fa-shield-alt fa-2x mb-2 text-primary"></i>
+                    <h6 class="fw-semibold mb-0">ĐẢM BẢO VSATTP</h6>
+                    <p class="small text-muted">Quy trình khép kín, đạt chuẩn.</p>
+                </div>
+                <div class="col-md-3 col-6 commitment-item-strip">
+                    <i class="fas fa-exchange-alt fa-2x mb-2 text-primary"></i>
+                    <h6 class="fw-semibold mb-0">ĐỔI TRẢ SẢN PHẨM</h6>
+                    <p class="small text-muted">Linh hoạt trong vòng 24h.</p>
+                </div>
+                <div class="col-md-3 col-6 commitment-item-strip">
+                    <i class="fas fa-shipping-fast fa-2x mb-2 text-primary"></i>
+                    <h6 class="fw-semibold mb-0">GIAO HÀNG</h6>
+                    <p class="small text-muted">Toàn quốc, thanh toán COD.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <main class="site-main">
+
+        <section class="hero-banner" style="background-image: url('img-sp/banner.png');">
+            <div class="banner-content container">
+                <h1>Yến Sào Chất Lượng Cao</h1>
+                <p>Mang đến sức khỏe và sự an tâm cho mọi gia đình.</p>
+                <a href="sanpham.html" class="btn btn-primary">Xem Sản Phẩm</a>
+            </div>
+        </section>
+
+        <section class="about-section section-padding background-alt">
+            <div class="container about-container">
+                <div class="about-image">
+                    <img src="img-sp/3thanhphan.png" alt="Giới thiệu Yến Sào Yến Mây">
+                </div>
+                <div class="about-text">
+                    <h2>Về Chúng Tôi</h2>
+                    <p>Thương hiệu Yến sào cung đình hảo hạng, mang âm hưởng Trung Hoa cổ đại. Yến Mây Bird’s Nest chuyên cung cấp các loại sản phẩm Tổ yến, yến chưng cao cấp.</p>
+                    <a href="aboutus.html" class="btn btn-secondary">Tìm hiểu thêm</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="new-image-section section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="section-title text-center mb-4">Thành phần tự nhiên</h2>
+                        <div class="custom-image-banner">
+                            <img src="img-sp/nguyenlieungangdai.png" alt="Banner sản phẩm đặc trưng" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="featured-products section-padding">
+            <div class="container">
+                <h2 class="section-title">Sản Phẩm Nổi Bật</h2>
+                <div id="featuredProductCarousel" class="carousel slide product-carousel" data-bs-ride="carousel" data-bs-interval="5000">
+                    <div class="carousel-inner" id="featured-product-carousel-inner">
+                        {/* JavaScript sẽ điền các carousel-item vào đây */}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#featuredProductCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#featuredProductCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+        <section class="category-products section-padding background-alt">
+            <div class="container">
+                <h2 class="section-title text-center mb-4">DANH MỤC SẢN PHẨM</h2>
+
+                <ul class="nav nav-tabs justify-content-center category-tabs mb-4" id="categoryTab" role="tablist">
+                </ul>
+
+                <div class="tab-content" id="categoryTabContent">
+                    <div class="tab-pane fade show active" id="category-products-pane" role="tabpanel">
+                        <div class="products-grid">
+                            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4" id="category-product-grid-row">
+                                <p class="col-12 text-center p-5 text-muted">Đang tải sản phẩm...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="new-image-section section-padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="section-title text-center mb-4">Sản Phẩm Đặc Trưng</h2>
+                        <div class="custom-image-banner">
+                            <img src="img-sp/nhieuhuyennho.png" alt="Banner sản phẩm đặc trưng" class="img-fluid">
+                        </div>
+                        <p class="text-center mt-3">Khám phá ngay các dòng sản phẩm yến sào chất lượng cao của chúng tôi.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials section-padding background-alt">
+            <div class="container">
+                <h2 class="section-title">Cảm Nhận Khách Hàng</h2>
+                <div id="testimonialCarousel" class="carousel slide testimonial-carousel" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="carousel-item-content-wrapper">
+                                <div class="testimonial-card">
+                                    <img src="https://yanyen.vn/wp-content/uploads/2022/05/271169866_440479347741752_1719618570084114061_n.jpeg" alt="Hoàng hà trang">
+                                    <blockquote>"Do đặc thù công việc mà mình làm suốt từ sáng đến khuya, cơ thể lúc nào cũng uể oải... yến vừa ngon, chất lượng xuất sắc mà giá thành lại hợp lý."</blockquote>
+                                    <p class="author">- Hoàng Hà Trang -</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="carousel-item-content-wrapper">
+                                <div class="testimonial-card">
+                                    <img src="https://yanyen.vn/wp-content/uploads/2022/05/z3387384314455_a8812fd11d45c52ce80b59175e1a6e47.jpeg" alt="Phan Quỳnh Như">
+                                    <blockquote>"Mình cần mua yến để biếu tặng nên ngoài chất lượng tốt thì bao bì cũng phải đẹp nữa... các bạn nhân viên đều rất dễ thương và tư vấn đầy đủ..."</blockquote>
+                                    <p class="author">- Phan Quỳnh Như -</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="carousel-item-content-wrapper">
+                                <div class="testimonial-card">
+                                    <img src="https://yanyen.vn/wp-content/uploads/2022/05/271724950_2729226840556617_4915876063068601466_n.jpeg" alt="Hồng Anh Lai">
+                                    <blockquote>"Từ ngày biết Yến Mây có Yến chưng tươi thì mình order đều đặn về ăn rất tiện. Sợi yến thật nên ăn vào mình cảm nhận được sức khỏe thật sự tốt lên."</blockquote>
+                                    <p class="author">- Hồng Anh Lai -</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="carousel-item-content-wrapper">
+                                <div class="testimonial-card">
+                                    <img src="https://yanyen.vn/wp-content/uploads/2022/05/273688033_1287889644956000_1465326363414922845_n.jpeg" alt="NSND Trọng Trinh">
+                                    <blockquote>"Yến chưng tươi của thương hiệu Yến Mây được con trai tôi tặng, ăn thấy vị rất ngon, dinh dưỡng thì yến sào đã nổi tiếng từ xưa nay..."</blockquote>
+                                    <p class="author">- NSND Trọng Trinh -</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="blog-preview section-padding">
+            <div class="container">
+                <h2 class="section-title">Tin Tức & Về Chúng Tôi</h2>
+                <div class="blog-preview-grid">
+                    <div class="blog-post-card">
+                        <a href="article-detail.html?id=bv001">
+                            <img src="https://yanyen.vn/wp-content/uploads/2025/04/Artboard-4-copy.jpg" alt="Blog Post 1 Placeholder" class="card-img-top">
+                        </a>
+                        <div class="card-body">
+                            <h3 class="card-title"><a href="article-detail.html?id=bv001" ">Yến sào Yến Mây khai trương showroom thứ 3 tại Hà Nội</a></h3>
+                            <p class="card-text">Trong thời đại mà sức khỏe là tài sản quý giá nhất, người tiêu dùng ngày càng có...</p>
+                            <p class="text-muted small">Ngày đăng: 23/11/2025</p>
+                            <a href="article-detail.html?id=bv001" class="btn btn-sm btn-outline-secondary">Đọc thêm</a>
+                        </div>
+                    </div>
+                    <div class="blog-post-card">
+                        <a href="article-detail.html?id=bv002">
+                            <img src="https://yanyen.vn/wp-content/uploads/2025/03/quoc-khanh.jpg" alt="Blog Post 2 Placeholder" class="card-img-top">
+                        </a>
+                        <div class="card-body">
+                            <h3 class="card-title"><a href="article-detail.html?id=bv002">Yến Mây 30/4 – Chào mừng 50 năm giải phóng miền Nam</a></h3>
+                            <p class="card-text">Kỳ nghỉ lễ 30/4 – 1/5 là dịp lý tưởng để chăm sóc sức khỏe và dành tặng...</p>
+                            <p class="text-muted small">Ngày đăng: 23/11/2025</p>
+                            <a href="article-detail.html?id=bv002" class="btn btn-sm btn-outline-secondary">Đọc thêm</a>
+                        </div>
+                    </div>
+                    <div class="blog-post-card">
+                        <a href="article-detail.html?id=bv003">
+                            <img src="https://yanyen.vn/wp-content/uploads/2024/12/Yen-sao-de-kiem-nhung-an-tam-kho-tim.jpg" alt="Blog Post 3 Placeholder" class="card-img-top">
+                        </a>
+                        <div class="card-body">
+                            <h3 class="card-title"><a href="article-detail.html?id=bv003">Báo Dân Trí đồng hành Yến Mây sức khoẻ người tiêu dùng</a></h3>
+                            <p class="card-text">Sự xuất hiện của Yến sào Yến Mây trên Dân Trí – một trong những trang báo điện...</p>
+                            <p class="text-muted small">Ngày đăng: 23/11/2025</p>
+                            <a href="article-detail.html?id=bv003" class="btn btn-sm btn-outline-secondary">Đọc thêm</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <a href="blog.html" class="btn btn-theme-secondary">Xem tất cả bài viết</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer pt-5 pb-4">
+        <div class="container">
+            <div class="row gy-4 align-items-start">
+                <div class="col-lg-4 col-md-6 footer-column">
+                    <img src="img-sp/logotrongsuot.png" alt="Logo Footer Yến Mây" style="max-height: 120px; margin-bottom: 20px;" class="d-block d-md-inline-block mb-3 mb-md-0">
+                    <h4 class="mt-3">CÔNG TY CỔ PHẦN THƯƠNG MẠI DỊCH VỤ Yến Mây</h4>
+                    <p class="small">
+                        279 Nguyễn Tri Phương, phường Diên Hồng, Quận 10, TP. Hồ Chí Minh
+                    </p>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6 col-6 footer-column">
+                    <h4>Chính Sách</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                        <li><a href="#">Chính sách đổi trả</a></li>
+                        <li><a href="#">Chính sách vận chuyển</a></li>
+                        <li><a href="#">Điều khoản sử dụng</a></li>
+                        <li><a href="#">Chính sách bảo hành</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-6 footer-column">
+                    <h4>Hỗ Trợ</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Chính sách đặt hàng - thanh toán</a></li>
+                        <li><a href="#">Chính sách vận chuyển</a></li>
+                        <li><a href="#">Câu hỏi thường gặp</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 footer-column">
+                    <h4>Liên Hệ</h4>
+                    <p class="small">
+                        Hotline: <a href="tel:+84393556866" class="text-white fw-bold">+84 343647074</a><br>
+                        Email: <a href="mailto:yenmay.vn@gmail.com" class="text-white">yenmay.vn@gmail.com</a>
+                    </p>
+                    <div class="d-flex align-items-center mt-3 gap-3 footer-social-bct">
+                        <div class="social-icons">
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" aria-label="Zalo"><i class="fas fa-comment-dots"></i></a>
+                        </div>
+                        <a href="http://online.gov.vn/Home/WebDetails/91809" title="Đã thông báo với bộ công thương" target="_blank" class="ms-auto ms-md-0">
+                            <img src="https://yanyen.vn/wp-content/uploads/2021/11/logo-da-thong-bao-bo-cong-thuong.webp" alt="Đã thông báo Bộ Công Thương" style="max-height: 45px;">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright mt-4">
+            <p>CÔNG TY CỔ PHẦN THƯƠNG MẠI VÀ DỊCH VỤ YẾN MÂY &copy; 2025. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="js/shared.js"></script>
+    <script src="js/index-page.js"></script>
+</body>
+</html>
